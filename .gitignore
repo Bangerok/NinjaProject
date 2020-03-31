@@ -1,5 +1,5 @@
 # Configure project on machine
-NinjaClient/ninja-client.iml
+/NinjaClient/ninja-client.iml
 NinjaServer/ninja-server.iml
 ninja-project.iml
 .idea/

@@ -43,12 +43,12 @@
                     </execution>
 
                     <execution>
-                        <id>npm run serve</id>
+                        <id>npm run build</id>
                         <goals>
                             <goal>npm</goal>
                         </goals>
                         <configuration>
-                            <arguments>run serve</arguments>
+                            <arguments>run build</arguments>
                         </configuration>
                     </execution>
                 </executions>
