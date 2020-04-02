@@ -1,14 +1,14 @@
 # Configure project on machine
-/NinjaClient/ninja-client.iml
-NinjaServer/ninja-server.iml
-ninja-project.iml
+*.iml
 .idea/
 
 # Target's
-NinjaClient/target/
-NinjaServer/target/
+*/target/
 
 # Node files
 NinjaClient/package-lock.json
 NinjaClient/node_modules/
 NinjaClient/node/
+
+# Resources
+/NinjaServer/src/main/resources/public/
