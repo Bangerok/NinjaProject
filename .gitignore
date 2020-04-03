@@ -9,6 +9,3 @@
 NinjaClient/package-lock.json
 NinjaClient/node_modules/
 NinjaClient/node/
-
-# Resources
-/NinjaServer/src/main/resources/public/
