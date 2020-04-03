@@ -20,25 +20,47 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
+    <name>Parent POM for project modules</name>
 
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+    <description>
+        The main POM file that connects and configures the project modules.
+    </description>
+
+    <url>https://github.com/Bangerok/NinjaProject</url>
+
+    <organization>
+        <name>Vladislav Kuznetsov</name>
+        <url>https://vk.com/vladislav_kuznetsov</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>bangerok</id>
+            <name>Vladislav</name>
+            <email>kuznetsov.v.a.work@gmail.com</email>
+            <timezone>+3</timezone>
+            <roles>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>14</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
+        <node.version>v12.16.1</node.version>
+        <npm.version>6.13.4</npm.version>
+    </properties>
 
     <build>
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-maven-plugin</artifactId>
+                    <groupId>com.github.eirslett</groupId>
+                    <artifactId>frontend-maven-plugin</artifactId>
+                    <version>${frontend-maven-plugin.version}</version>
                 </plugin>
             </plugins>
         </pluginManagement>
