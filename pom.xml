@@ -10,8 +10,8 @@
     </parent>
 
     <modules>
-        <module>NinjaServer</module>
         <module>NinjaClient</module>
+        <module>NinjaServer</module>
     </modules>
 
     <modelVersion>4.0.0</modelVersion>
