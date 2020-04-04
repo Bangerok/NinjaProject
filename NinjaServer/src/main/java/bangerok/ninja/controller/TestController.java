@@ -9,6 +9,6 @@ public class TestController {
 
     @RequestMapping("test")
     public String test() {
-        return "Greetings from Spring Boot! 2";
+        return "Greetings from Spring Boot!";
     }
 }
