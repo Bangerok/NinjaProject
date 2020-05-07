@@ -9,3 +9,4 @@
 NinjaClient/package-lock.json
 NinjaClient/node_modules/
 NinjaClient/node/
+/NinjaClient/dist/
