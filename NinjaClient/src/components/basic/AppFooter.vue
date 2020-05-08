@@ -1,5 +1,5 @@
 <template>
-  <v-footer app inset padless elevation="5">
+  <v-footer app inset padless elevation="5" color="tertiary">
     <v-container>
       <v-row align="center" no-gutters>
         <v-col
@@ -8,10 +8,12 @@
             class="text-center mb-sm-0 mb-5"
             cols="auto"
         >
-          <router-link class="mr-3 grey--text text--darken-3" :to="link.href" v-text="$t(link.text)" />
+          <router-link exact class="mr-3" :to="link.href" style="text-decoration: none">
+            <v-btn text small>{{ $t(link.text) }}</v-btn>
+          </router-link>
         </v-col>
 
-        <v-spacer class="hidden-sm-and-down" />
+        <v-spacer class="hidden-sm-and-down"/>
 
         <v-col cols="12" md="auto">
           <div class="body-1 font-weight-light pt-6 pt-md-0 text-center">

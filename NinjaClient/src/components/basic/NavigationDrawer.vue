@@ -1,8 +1,5 @@
 <template>
-  <v-navigation-drawer dark app
-                       color="teal"
-                       :mini-variant="minVariant"
-  >
+  <v-navigation-drawer app :mini-variant="minVariant" color="primary">
     <v-list dense nav class="py-0">
       <v-list-item two-line>
         <v-list-item-avatar style="margin-left: -10px;">
