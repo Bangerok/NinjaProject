@@ -8,7 +8,6 @@
   >
     {{ text }}
     <v-btn
-        dark
         text
         @click="show = false"
     >

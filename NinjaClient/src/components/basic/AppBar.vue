@@ -1,6 +1,6 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar app elevation="3">
+  <v-app-bar color="secondary" app elevation="0">
     <v-btn
         class="mr-3"
         elevation="1"
@@ -17,13 +17,29 @@
       </v-icon>
     </v-btn>
 
-    <v-toolbar-title class="hidden-sm-and-down font-weight-light" v-text="$t($route.name)"/>
+    <v-toolbar-title>
+      {{ $t($route.name) }}
+    </v-toolbar-title>
+
+    <v-spacer/>
+    <v-icon v-if="nightMode" class="mr-3 mt-n1">
+      mdi-weather-sunny
+    </v-icon>
+    <v-icon v-else class="mr-3 mt-n1">
+      mdi-weather-night
+    </v-icon>
+    <v-switch v-model="nightMode" inset :color="nightMode ? 'white' : ''" class="mt-4"/>
   </v-app-bar>
 </template>
 
 <script>
   export default {
     name: 'AppBar',
+    data: function () {
+      return {
+        nightMode: true,
+      }
+    },
     computed: {
       minVariant() {
         return this.$store.state.navigation.minVariant;
@@ -34,6 +50,11 @@
         this.$store.commit('setMinVariant', minVariant);
       },
     },
+    watch: {
+      nightMode() {
+        this.$vuetify.theme.dark = this.nightMode;
+      }
+    }
   }
 </script>
 
