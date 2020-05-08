@@ -51,7 +51,6 @@
 
 <script>
   import logoIcon from "./../../assets/logo.png"
-  import api from './../../api/actions'
 
   export default {
     name: "NavigationDrawer",
@@ -63,9 +62,7 @@
     },
     computed: {
       minVariant() {
-        const data = api.getProfile(0);
-
-        return data === null ? this.$store.state.navigation.minVariant: false;
+        return this.$store.state.navigation.minVariant;
       },
       links() {
         let links = this.$store.state.navigation.links;
