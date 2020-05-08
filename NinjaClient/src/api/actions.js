@@ -1,9 +1,4 @@
-import Vue from 'vue'
-
-const profile = Vue.resource('/profile{/id}')
-
 const actions = {
-    getProfile: id => profile.get({id}),
     getVacanciesData (context, payload) {
         const vacanciesData = {
             'Java': [
