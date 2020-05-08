@@ -34,7 +34,7 @@
             text: 'navigation.menu.info',
           },
           {
-            href: '/vacancies',
+            href: '/vacancies/language1',
             text: 'navigation.menu.vacancies.title',
           },
         ],
