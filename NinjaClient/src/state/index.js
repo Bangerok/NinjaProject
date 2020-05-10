@@ -1,11 +1,12 @@
-import general from './../pages/General'
-import vacancies from './../pages/Vacancies'
-import technologies from './../pages/Technologies'
-import inDevelopment from './../pages/InDevelopment'
-import executor from './../pages/Executor'
-import customer from './../pages/Customer'
-import aboutUs from './../pages/AboutUs'
-import notFound from './../pages/NotFound'
+import general from './../views/General'
+import vacancies from './../views/Vacancies'
+import technologies from './../views/Technologies'
+import inDevelopment from './../views/InDevelopment'
+import executor from './../views/Executor'
+import customer from './../views/Customer'
+import aboutUs from './../views/AboutUs'
+import login from './../views/Login'
+import notFound from './../views/NotFound'
 import alfrescoLogo from './../assets/technologies/TechIcon_alfresco-logo-ru.png'
 import html5 from './../assets/technologies/TechIcon_html5.png'
 import gwt from './../assets/technologies/TechIcon_GWT.png'
@@ -112,7 +113,6 @@ let state = {
         icon: 'mdi-account-search',
         hasSubmenus: true,
         isSubmenu: false,
-        component: vacancies,
       },
       {
         path: '/vacancies/language1',
@@ -177,6 +177,10 @@ let state = {
         hasSubmenus: false,
         isSubmenu: false,
         component: aboutUs
+      },
+      {
+        path: '/login',
+        component: login
       },
       {
         path: "*",
