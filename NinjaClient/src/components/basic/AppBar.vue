@@ -1,8 +1,8 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar color="secondary" app elevation="0">
+  <v-app-bar color="secondary" app elevation="2" clipped-left >
     <v-btn
-        class="mr-3"
+        class="mr-3 ml-n2"
         elevation="1"
         fab
         small

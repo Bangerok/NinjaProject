@@ -4,7 +4,9 @@
       <notification-msg></notification-msg>
       <app-bar></app-bar>
       <navigation-drawer></navigation-drawer>
-      <router-content></router-content>
+      <v-content>
+        <router-view style="margin: 20px"></router-view>
+      </v-content>
     </v-app>
   </div>
 </template>
@@ -13,10 +15,9 @@
   import NotificationMsg from "./components/basic/NotificationMsg";
   import AppBar from "./components/basic/AppBar";
   import NavigationDrawer from "./components/basic/NavigationDrawer";
-  import RouterContent from "./components/basic/RouterContent";
 
   export default {
-    components: {NotificationMsg, AppBar, NavigationDrawer, RouterContent},
+    components: {NotificationMsg, AppBar, NavigationDrawer},
   }
 </script>
 

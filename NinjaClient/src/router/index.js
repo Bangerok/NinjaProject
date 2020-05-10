@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import index from '../state'
+import stateNavigation from '../state'
 
 Vue.use(VueRouter);
 
-const routes = index.navigation.links;
+const routes = stateNavigation.navigation.links;
 
 const router = new VueRouter({
-    mode: 'hash',
+    mode: 'history',
     base: process.env.BASE_URL,
     routes
 });
