@@ -106,7 +106,7 @@
       },
       reset() {
         this.$refs.form.reset()
-      },
+      }
     },
   }
 </script>

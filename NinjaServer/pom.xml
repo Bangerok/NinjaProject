@@ -3,13 +3,33 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>ninja-project</artifactId>
-    <groupId>bangerok</groupId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.2.6.RELEASE</version>
+    <relativePath/>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ninja-server</artifactId>
-  <packaging>war</packaging>
+  <packaging>jar</packaging>
+
+  <properties>
+    <!-- Compiler -->
+    <java.version>14</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+
+    <!-- Dependencies -->
+    <node.version>v12.16.1</node.version>
+    <npm.version>6.13.4</npm.version>
+    <lombok.version>1.18.12</lombok.version>
+    <jsoup.version>1.13.1</jsoup.version>
+    <spring.version>2.2.6.RELEASE</spring.version>
+    <postgresql.version>42.2.12</postgresql.version>
+
+    <!-- Plugins -->
+    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
+    <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
+  </properties>
 
   <dependencies>
     <!-- Spring utils -->
@@ -49,15 +69,10 @@
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
 
-    <!-- Spring Security -->
-    <dependency>
-      <groupId>org.springframework.security.oauth.boot</groupId>
-      <artifactId>spring-security-oauth2-autoconfigure</artifactId>
-    </dependency>
-
+    <!-- Spring oAuth2 -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-security</artifactId>
+      <artifactId>spring-boot-starter-oauth2-client</artifactId>
     </dependency>
 
     <!-- Database -->
@@ -70,49 +85,22 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
+      <version>${lombok.version}</version>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
     </dependency>
   </dependencies>
 
   <build>
-    <finalName>${project.artifactId}</finalName>
-
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <artifactId>maven-resources-plugin</artifactId>
-        <executions>
-          <execution>
-            <id>Copy Vue.js frontend assets</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>copy-resources</goal>
-            </goals>
-            <configuration>
-              <outputDirectory>${project.parent.basedir}/NinjaServer/target/classes/public
-              </outputDirectory>
-              <overwrite>true</overwrite>
-              <resources>
-                <resource>
-                  <directory>${project.parent.basedir}/NinjaClient/target/dist</directory>
-                  <includes>
-                    <include>static/</include>
-                    <include>index.html</include>
-                    <include>favicon.ico</include>
-                  </includes>
-                </resource>
-              </resources>
-            </configuration>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

@@ -5,7 +5,7 @@ import inDevelopment from './../views/InDevelopment'
 import executor from './../views/Executor'
 import customer from './../views/Customer'
 import aboutUs from './../views/AboutUs'
-import auth from '../views/Auth'
+import login from '../views/Login'
 import notFound from './../views/NotFound'
 import alfrescoLogo from './../assets/technologies/TechIcon_alfresco-logo-ru.png'
 import html5 from './../assets/technologies/TechIcon_html5.png'
@@ -24,6 +24,7 @@ import web20_logo from './../assets/technologies/TechIcon_web20_logo.png'
 import yii from './../assets/technologies/TechIcon_yii.png'
 
 let state = {
+  user: [],
   notification: {
     color: '',
     text: '',
@@ -179,8 +180,8 @@ let state = {
         component: aboutUs
       },
       {
-        path: '/auth',
-        component: auth
+        path: '/login',
+        component: login
       },
       {
         path: "*",
