@@ -1,13 +1,13 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="minVariant" color="primary" floating mobile-break-point="320">
+    <v-navigation-drawer app clipped :mini-variant="minVariant" color="navigation" floating mobile-break-point="320">
       <v-list dense class="py-0">
         <v-list-item two-line>
           <v-list-item-avatar style="margin-left: -10px;">
-            <img :src="logoIcon" alt="">
+            <v-icon large color="orange darken-2">fa-bolt</v-icon>
           </v-list-item-avatar>
 
-          <v-list-item-content>
+          <v-list-item-content class="pl-2">
             <v-list-item-title>{{ $t('navigation.companyName') }}</v-list-item-title>
             <v-list-item-subtitle>{{ $t('navigation.companyDescription') }}</v-list-item-subtitle>
           </v-list-item-content>
@@ -19,14 +19,12 @@
             v-for="item in links"
             :key="item.title"
             :to="item.hasSubmenus ? '' : item.path"
-            link
             v-on:click="item.hasSubmenus ? showSubmenus = !showSubmenus : ''"
-            v-bind:class="{ 'px-5': item.isSubmenu }"
         >
           <v-tooltip right>
             <template v-slot:activator="{ on }">
-              <v-list-item-icon v-on="on">
-                <v-icon>{{ item.icon }}</v-icon>
+              <v-list-item-icon v-on="on" class="justify-center">
+                <v-icon dense>{{ item.icon }}</v-icon>
               </v-list-item-icon>
             </template>
             <span class="overline">{{ $t(item.name) }}</span>

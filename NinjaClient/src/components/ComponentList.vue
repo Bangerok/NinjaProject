@@ -36,6 +36,7 @@
               <v-fade-transition leave-absolute>
                 <v-row
                     no-gutters
+                    class="pr-3"
                 >
                   {{ item.createdDate }}
                 </v-row>

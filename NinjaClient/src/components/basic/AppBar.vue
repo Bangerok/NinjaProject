@@ -1,6 +1,6 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar color="secondary" app elevation="2" clipped-left >
+  <v-app-bar color="appbar" app elevation="2" clipped-left >
     <v-btn
         class="mr-3 ml-n2"
         elevation="1"
@@ -9,24 +9,24 @@
         @click="setMinVariant(!minVariant)"
     >
       <v-icon v-if="minVariant">
-        mdi-view-list
+        fa-bars
       </v-icon>
 
       <v-icon v-else>
-        mdi-dots-vertical
+        fa-ellipsis-v
       </v-icon>
     </v-btn>
 
-    <v-toolbar-title>
+    <v-toolbar-title class="pl-2 font-weight-medium">
       {{ $t($route.name) }}
     </v-toolbar-title>
 
     <v-spacer/>
     <v-icon v-if="nightMode" class="mr-3 mt-n1">
-      mdi-weather-sunny
+      fa-sun
     </v-icon>
     <v-icon v-else class="mr-3 mt-n1">
-      mdi-weather-night
+      fa-moon
     </v-icon>
     <v-switch v-model="nightMode" inset :color="nightMode ? 'white' : ''" class="mt-4"/>
   </v-app-bar>

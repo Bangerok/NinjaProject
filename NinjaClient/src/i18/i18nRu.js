@@ -62,11 +62,15 @@ const messagesRu = {
     },
     components: {
         auth: {
-            name: 'Имя',
+            formName: 'Форма авторизации',
+            username: 'Имя пользователя',
+            password: 'Пароль',
             nameRequired: 'Имя обязательно',
             emailRequired: 'E-mail обязателен',
+            passwordRequired: 'Пароль обязателен',
             isValidNameMsg: 'Поле должно быть меньше чем 50 символов',
             isValidEmailMsg: 'E-mail должен быть корректным: *@*.*',
+            isValidPasswordMsg: 'Пароль должен быть от 8 до 20 символов',
         },
     },
     notification: {
