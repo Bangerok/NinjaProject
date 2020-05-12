@@ -8,7 +8,7 @@
         v-model="name"
         :counter="50"
         :rules="nameRules"
-        :label="$t('components.auth.name')"
+        :label="$t('components.auth.username')"
         required
     ></v-text-field>
 

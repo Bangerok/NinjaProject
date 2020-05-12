@@ -5,7 +5,7 @@ import inDevelopment from './../views/InDevelopment'
 import executor from './../views/Executor'
 import customer from './../views/Customer'
 import aboutUs from './../views/AboutUs'
-import login from './../views/Login'
+import auth from '../views/Auth'
 import notFound from './../views/NotFound'
 import alfrescoLogo from './../assets/technologies/TechIcon_alfresco-logo-ru.png'
 import html5 from './../assets/technologies/TechIcon_html5.png'
@@ -102,7 +102,7 @@ let state = {
       {
         path: '/',
         name: 'navigation.menu.general',
-        icon: 'mdi-view-dashboard',
+        icon: 'fa-home',
         hasSubmenus: false,
         isSubmenu: false,
         component: general
@@ -110,14 +110,14 @@ let state = {
       {
         path: '/vacancies',
         name: 'navigation.menu.vacancies.title',
-        icon: 'mdi-account-search',
+        icon: 'fa-user-plus',
         hasSubmenus: true,
         isSubmenu: false,
       },
       {
         path: '/vacancies/language1',
         name: 'navigation.menu.vacancies.submenu.java',
-        icon: 'mdi-fire',
+        icon: 'fa-check',
         hasSubmenus: false,
         isSubmenu: true,
         component: vacancies
@@ -125,7 +125,7 @@ let state = {
       {
         path: '/vacancies/language2',
         name: 'navigation.menu.vacancies.submenu.cplusplus',
-        icon: 'mdi-fire',
+        icon: 'fa-check',
         hasSubmenus: false,
         isSubmenu: true,
         component: vacancies
@@ -133,7 +133,7 @@ let state = {
       {
         path: '/vacancies/language3',
         name: 'navigation.menu.vacancies.submenu.csharp',
-        icon: 'mdi-fire',
+        icon: 'fa-check',
         hasSubmenus: false,
         isSubmenu: true,
         component: vacancies
@@ -141,7 +141,7 @@ let state = {
       {
         path: '/technologies',
         name: 'navigation.menu.technologies',
-        icon: 'mdi-clipboard',
+        icon: 'fa-clipboard-list',
         hasSubmenus: false,
         isSubmenu: false,
         component: technologies
@@ -149,7 +149,7 @@ let state = {
       {
         path: '/executor',
         name: 'navigation.menu.executor',
-        icon: 'mdi-account-check',
+        icon: 'fa-user-check',
         hasSubmenus: false,
         isSubmenu: false,
         component: executor
@@ -157,7 +157,7 @@ let state = {
       {
         path: '/customer',
         name: 'navigation.menu.customer',
-        icon: 'mdi-account-group',
+        icon: 'fa-users',
         hasSubmenus: false,
         isSubmenu: false,
         component: customer
@@ -165,7 +165,7 @@ let state = {
       {
         path: '/news',
         name: 'navigation.menu.news',
-        icon: 'mdi-alarm-check',
+        icon: 'fa-rss',
         hasSubmenus: false,
         isSubmenu: false,
         component: inDevelopment
@@ -173,14 +173,14 @@ let state = {
       {
         path: '/info',
         name: 'navigation.menu.info',
-        icon: 'mdi-alert-circle',
+        icon: 'fa-info',
         hasSubmenus: false,
         isSubmenu: false,
         component: aboutUs
       },
       {
-        path: '/login',
-        component: login
+        path: '/auth',
+        component: auth
       },
       {
         path: "*",

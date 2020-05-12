@@ -5,7 +5,9 @@
       <app-bar></app-bar>
       <navigation-drawer></navigation-drawer>
       <v-content>
+        <v-container fluid>
         <router-view style="margin: 20px"></router-view>
+        </v-container>
       </v-content>
     </v-app>
   </div>

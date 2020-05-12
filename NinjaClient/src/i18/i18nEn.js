@@ -62,11 +62,15 @@ const messagesEn = {
     },
     components: {
         auth: {
-            name: 'Name',
-            nameRequired: 'Name is required',
+            formName: 'Authorization form',
+            name: 'Username',
+            password: 'Password',
+            nameRequired: 'Username is required',
             emailRequired: 'E-mail is required',
-            isValidNameMsg: 'Name must be less than 10 characters',
+            passwordRequired: 'Password is required',
+            isValidNameMsg: 'Username must be less than 10 characters',
             isValidEmailMsg: 'E-mail must be valid: *@*.*',
+            isValidPasswordMsg: 'Password must be between 8 and 20 characters',
         },
     },
     notification: {

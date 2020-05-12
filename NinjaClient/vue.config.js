@@ -9,7 +9,6 @@ module.exports = {
     "allowedHosts": [
       "localhost:9000"
     ],
-    "proxy": "http://localhost:9000",
     "stats": "errors-only",
     "clientLogLevel": "error"
   },
