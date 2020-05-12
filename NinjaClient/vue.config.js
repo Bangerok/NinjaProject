@@ -6,9 +6,7 @@ module.exports = {
     "contentBase": "./dist",
     "compress": true,
     "port": 8000,
-    "allowedHosts": [
-      "localhost:9000"
-    ],
+    "proxy": 'http://localhost:9000',
     "stats": "errors-only",
     "clientLogLevel": "error"
   },
