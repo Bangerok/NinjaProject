@@ -53,7 +53,7 @@
           <v-card-actions class="justify-center">
             <v-btn color="success" @click="auth">{{ $t('buttons.authBtn') }}</v-btn>
             <v-btn color="error" @click="reset">{{ $t('buttons.clearBtn') }}</v-btn>
-            <v-btn color="primary" href="/login">
+            <v-btn color="primary" @click="authorized">
               <v-icon>
                 mdi-google
               </v-icon>
@@ -66,6 +66,8 @@
 </template>
 
 <script>
+  import service from "./../api/actions";
+
   export default {
     name: "Login",
     data: () => ({
@@ -91,6 +93,9 @@
     methods: {
       getLocalizationMsg: function (name) {
         return this.$t(name);
+      },
+      authorized() {
+        service.authorized();
       },
       auth() {
         const notificationOptions = {};

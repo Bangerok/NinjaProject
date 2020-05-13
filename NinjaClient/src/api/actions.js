@@ -1,18 +1,22 @@
 import Vue from 'vue'
 
-const userService = Vue.resource('/user')
-const authService = Vue.resource('/oauth2/authorization/google')
-const logout = Vue.resource('/logout')
+const userService = Vue.resource('/auth/create-or-get-user')
 
 const actions = {
   authorized() {
-    authService.get();
+    document.location.replace('http://localhost:9000/login/google');
   },
   getUser() {
     return userService.get();
   },
   logout() {
-    logout.post();
+    return Vue.http.post('/logout');
+    //return Vue.http.post('/auth/logout');
+    /*return Vue.http.post('/logout', {}, {
+      headers: {
+        'X-XSRF-TOKEN': 'd018cd7c-bb80-4cb5-aee8-39ae955975e4'
+      }
+    });*/
   },
   getVacanciesData(context, payload) {
     const vacanciesData = {
