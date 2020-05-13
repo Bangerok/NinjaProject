@@ -34,16 +34,15 @@
         this.$store.state.user = await data.json();
       }
     },
-    beforeCreate() {
+    mounted() {
       let currentLocation = document.location.href;
       if (currentLocation.indexOf("#") !== -1) {
         currentLocation = currentLocation.replace("#", "");
         document.location.replace(currentLocation);
+      } else {
+        this.updateProfile();
+        //this.logout();
       }
-    },
-    mounted() {
-      this.logout();
-      this.updateProfile();
     }
   }
 </script>

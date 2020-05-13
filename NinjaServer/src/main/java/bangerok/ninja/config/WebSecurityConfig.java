@@ -27,12 +27,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						.logout(l -> l
 								.deleteCookies("remove")
 								.invalidateHttpSession(false)
+								.logoutSuccessUrl("/auth/logoutSuccess")
 								.permitAll()
 						)
 						.oauth2Login(o -> o
 								.authorizationEndpoint()
 								.baseUri("/login").and()
-								.defaultSuccessUrl("/auth/success")
+								.defaultSuccessUrl("/auth/loginSuccess")
 						);
 		}
 }

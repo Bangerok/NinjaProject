@@ -1,6 +1,19 @@
 <!--suppress HtmlUnknownTag -->
 <template>
   <v-app-bar color="appbar" app elevation="2" clipped-left >
+    <!--<v-list dense>
+      <v-list-item two-line>
+        <v-list-item-avatar style="margin-left: -10px;">
+          <v-icon large color="orange darken-2">fa-bolt</v-icon>
+        </v-list-item-avatar>
+
+        <v-list-item-content class="pl-2">
+          <v-list-item-title>{{ $t('navigation.companyName') }}</v-list-item-title>
+          <v-list-item-subtitle>{{ $t('navigation.companyDescription') }}</v-list-item-subtitle>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>-->
+
     <v-btn
         class="mr-3 ml-n2"
         elevation="1"

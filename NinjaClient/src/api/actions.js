@@ -1,22 +1,21 @@
 import Vue from 'vue'
 
-const userService = Vue.resource('/auth/create-or-get-user')
+const CSRF_TOKEN_OBJECT = document.cookie.match(new RegExp(`XSRF-TOKEN=([^;]+)`));
+const CSRF_TOKEN = CSRF_TOKEN_OBJECT ? CSRF_TOKEN_OBJECT[1] : '';
 
 const actions = {
   authorized() {
     document.location.replace('http://localhost:9000/login/google');
   },
   getUser() {
-    return userService.get();
+    return Vue.http.get('/auth/create-or-get-user');
   },
   logout() {
-    return Vue.http.post('/logout');
-    //return Vue.http.post('/auth/logout');
-    /*return Vue.http.post('/logout', {}, {
+    return Vue.http.post('/logout', {}, {
       headers: {
-        'X-XSRF-TOKEN': 'd018cd7c-bb80-4cb5-aee8-39ae955975e4'
+        'X-XSRF-TOKEN': CSRF_TOKEN
       }
-    });*/
+    });
   },
   getVacanciesData(context, payload) {
     const vacanciesData = {

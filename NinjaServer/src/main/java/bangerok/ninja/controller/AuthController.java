@@ -2,16 +2,13 @@ package bangerok.ninja.controller;
 
 import bangerok.ninja.domain.User;
 import bangerok.ninja.repo.UserDetailsRepo;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import javax.servlet.http.HttpServletResponse;
 import org.jsoup.internal.StringUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
@@ -20,23 +17,22 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("auth")
 public class AuthController {
 
+		private final String CLIENT_URL = "http://localhost:8000/";
+
 		private final UserDetailsRepo userDetailsRepo;
 
 		public AuthController(UserDetailsRepo userDetailsRepo) {
 				this.userDetailsRepo = userDetailsRepo;
 		}
 
-		@GetMapping("success")
+		@GetMapping("loginSuccess")
 		public RedirectView redirectIntoClient() {
-				RedirectView redirectView = new RedirectView();
-				redirectView.setStatusCode(HttpStatus.FOUND);
-				redirectView.setUrl("http://localhost:8000/");
-				return redirectView;
+				return configureRedirectView(HttpStatus.FOUND, CLIENT_URL);
 		}
 
-		@PostMapping("logout")
-		public void redirectIntoLogout(HttpServletResponse response) throws IOException {
-				response.sendRedirect("/logout");
+		@GetMapping("logoutSuccess")
+		public RedirectView redirectIntoLogout() {
+				return configureRedirectView(HttpStatus.FOUND, CLIENT_URL + "login");
 		}
 
 		@GetMapping("create-or-get-user")
@@ -67,5 +63,13 @@ public class AuthController {
 				user.setLastVisit(LocalDateTime.now());
 
 				return userDetailsRepo.save(user);
+		}
+
+		private RedirectView configureRedirectView(HttpStatus httpStatus, String redirectUrl) {
+				RedirectView redirectView = new RedirectView();
+				redirectView.setStatusCode(httpStatus);
+				redirectView.setUrl(redirectUrl);
+
+				return redirectView;
 		}
 }
