@@ -6,7 +6,12 @@ module.exports = {
     "contentBase": "./dist",
     "compress": true,
     "port": 8000,
-    "proxy": 'http://localhost:9000',
+    "proxy": {
+      "/server" : {
+        target: 'http://localhost:9000',
+        changeOrigin: true,
+      }
+    },
     "stats": "errors-only",
     "clientLogLevel": "error"
   },

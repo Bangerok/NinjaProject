@@ -23,11 +23,22 @@
     components: {NotificationMsg, AppBar, NavigationDrawer},
     methods: {
       async logout() {
-        await service.logout();
+        await service.logout().then(response => {
+          console.log(response);
+        }, response => {
+          console.log(response);
+        });
       },
       async updateProfile() {
         const data = await service.getUser();
         this.$store.state.user = await data.json();
+      }
+    },
+    beforeCreate() {
+      let currentLocation = document.location.href;
+      if (currentLocation.indexOf("#") !== -1) {
+        currentLocation = currentLocation.replace("#", "");
+        document.location.replace(currentLocation);
       }
     },
     mounted() {

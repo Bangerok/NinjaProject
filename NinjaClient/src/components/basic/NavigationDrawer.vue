@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="minVariant" color="navigation" floating mobile-break-point="320">
+    <v-navigation-drawer app clipped :mini-variant="minVariant" color="navigation" floating
+                         mobile-break-point="320">
       <v-list dense class="py-0">
         <v-list-item two-line>
           <v-list-item-avatar style="margin-left: -10px;">
@@ -73,7 +74,8 @@
         let filteredLinksList = [];
         for (let i in links) {
           if (Object.prototype.hasOwnProperty.call(links, i)) {
-            if (links[i].path !== '*' && ((links[i].isSubmenu && this.showSubmenus)
+            if (links[i].path !== '*' && links[i].path !== '/login' && ((links[i].isSubmenu
+                && this.showSubmenus)
                 || (!links[i].isSubmenu))) {
               filteredLinksList.push(links[i]);
             }
