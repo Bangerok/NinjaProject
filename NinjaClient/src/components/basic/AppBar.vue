@@ -1,26 +1,20 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar color="appbar" app elevation="2" clipped-left >
-    <!--<v-list dense>
+  <v-app-bar color="appbar" app elevation="2" clipped-left>
+    <v-card flat max-width="295px" max-height="100%" color="appbar" class="mt-n4 ml-n5">
       <v-list-item two-line>
-        <v-list-item-avatar style="margin-left: -10px;">
-          <v-icon large color="orange darken-2">fa-bolt</v-icon>
+        <v-list-item-avatar>
+          <v-icon large color="orange darken-4">fa-bolt</v-icon>
         </v-list-item-avatar>
 
-        <v-list-item-content class="pl-2">
+        <v-list-item-content>
           <v-list-item-title>{{ $t('navigation.companyName') }}</v-list-item-title>
           <v-list-item-subtitle>{{ $t('navigation.companyDescription') }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
-    </v-list>-->
+    </v-card>
 
-    <v-btn
-        class="mr-3 ml-n2"
-        elevation="1"
-        fab
-        small
-        @click="setMinVariant(!minVariant)"
-    >
+    <v-app-bar-nav-icon class="mr-3 ml-n2" @click="setMinVariant(!minVariant)">
       <v-icon v-if="minVariant">
         fa-bars
       </v-icon>
@@ -28,7 +22,7 @@
       <v-icon v-else>
         fa-ellipsis-v
       </v-icon>
-    </v-btn>
+    </v-app-bar-nav-icon>
 
     <v-toolbar-title class="pl-2 font-weight-medium">
       {{ $t($route.name) }}
