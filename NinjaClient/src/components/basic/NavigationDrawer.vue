@@ -4,30 +4,22 @@
                          mobile-break-point="320">
       <v-list dense class="py-0">
         <v-list-item
-            v-for="item in filteredNavigationLinks"
-            :key="item.title"
-            :to="item.hasSubmenus ? '' : item.path"
-            v-on:click="item.hasSubmenus ? showSubmenus = !showSubmenus : ''"
+            v-for="(item, key) in filteredNavigationLinks"
+            :key="key"
+            :to="item.path"
         >
           <v-tooltip :disabled="!navigation.minVariant" right nudge-right="15px">
             <template v-slot:activator="{ on }">
               <v-list-item-icon v-on="on" class="justify-center">
-                <v-icon dense>{{ item.icon }}</v-icon>
+                <v-icon dense>{{ item.meta.icon }}</v-icon>
               </v-list-item-icon>
             </template>
-            <span class="overline">{{ $t(item.name) }}</span>
+            <span class="overline">{{ $t(item.meta.title) }}</span>
           </v-tooltip>
 
           <v-list-item-content>
-            <v-list-item-title class="overline">{{ $t(item.name) }}</v-list-item-title>
+            <v-list-item-title class="overline">{{ $t(item.meta.title) }}</v-list-item-title>
           </v-list-item-content>
-
-          <template v-if="item.hasSubmenus && !item.isSubmenu">
-            <v-list-item-icon>
-              <v-icon v-show="!showSubmenus">mdi-chevron-right</v-icon>
-              <v-icon v-show="showSubmenus">mdi-chevron-down</v-icon>
-            </v-list-item-icon>
-          </template>
         </v-list-item>
       </v-list>
 

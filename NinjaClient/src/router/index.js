@@ -6,49 +6,57 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '/',
-    name: 'navigation.menu.general',
-    icon: 'fa-home',
+    name: 'Home',
     // lazy-loaded
     component: () => import('./../views/General.vue'),
     meta: {
+      icon: 'fa-home',
+      title: 'navigation.menu.general',
       showInMenu: true,
+      requiresAuthorization: true
     }
   },
   {
     path: '/news',
-    name: 'navigation.menu.news',
-    icon: 'fa-rss',
+    name: 'News',
     // lazy-loaded
-    component: () => import('./../views/InDevelopment.vue'),
+    component: () => import('./../views/InDevelopment'),
     meta: {
+      icon: 'fa-rss',
+      title: 'navigation.menu.news',
       showInMenu: true,
+      requiresAuthorization: true
     }
   },
   {
     path: '/info',
-    name: 'navigation.menu.info',
-    icon: 'fa-info',
+    name: 'Info',
     // lazy-loaded
-    component: () => import('./../views/AboutUs.vue'),
+    component: () => import('./../views/AboutUs'),
     meta: {
+      icon: 'fa-info',
+      title: 'navigation.menu.info',
       showInMenu: true,
+      requiresAuthorization: true
     }
   },
   {
     path: '/login',
     // lazy-loaded
-    component: () => import('./../views/Login.vue'),
+    component: () => import('./../views/Login'),
     meta: {
       showInMenu: false,
+      requiresAuthorization: false
     }
   },
   {
     path: "*",
     name: "navigation.menu.notFound",
     // lazy-loaded
-    component: () => import('./../views/NotFound.vue'),
+    component: () => import('./../views/NotFound'),
     meta: {
       showInMenu: false,
+      requiresAuthorization: true
     }
   }
 ];

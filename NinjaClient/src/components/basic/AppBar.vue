@@ -32,7 +32,7 @@
     </v-tooltip>
 
     <v-toolbar-title class="pl-2 font-weight-medium">
-      {{ $t($route.name) }}
+      {{ $t($route.meta.title) }}
     </v-toolbar-title>
 
     <v-spacer/>
