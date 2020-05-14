@@ -1,12 +1,12 @@
 let state = {
-  user: [],
+  user: null,
   notification: {
     color: null,
     text: null,
     show: false,
   },
   navigation: {
-    minVariant: true,
+    minVariant: false,
   },
 }
 

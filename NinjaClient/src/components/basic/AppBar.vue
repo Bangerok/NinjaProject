@@ -15,7 +15,7 @@
     </v-card>
 
     <v-tooltip bottom nudge-right="60px">
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-1">
           <v-app-bar-nav-icon class="mr-3 ml-n2" @click="setMinVariant(!navigation.minVariant)">
             <v-icon v-if="navigation.minVariant">
@@ -37,8 +37,14 @@
 
     <v-spacer/>
 
+    <v-btn text class="mr-3" @click="logout">
+      <v-icon class="mr-1">
+        fa-sign-out-alt
+      </v-icon>
+      Выйти
+    </v-btn>
     <v-tooltip bottom>
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-3">
           <v-card flat max-width="130px" max-height="40px" color="appbar">
             <v-select
@@ -54,7 +60,7 @@
     </v-tooltip>
 
     <v-tooltip bottom nudge-top="10px">
-      <template v-slot:activator="{ on }">
+      <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-0">
           <v-icon v-if="nightMode" class="mr-3 mt-n1">
             fa-sun
@@ -71,7 +77,7 @@
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex';
+  import {mapState, mapActions, mapMutations} from 'vuex';
 
   export default {
     name: 'AppBar',
@@ -91,7 +97,10 @@
       }
     },
     computed: mapState(['navigation']),
-    methods: mapMutations(['setMinVariant']),
+    methods: {
+      ...mapMutations(['setMinVariant']),
+      ...mapActions(['logout']),
+    },
     mounted() {
       let nightMode = localStorage.getItem('nightMode');
       if (nightMode) {

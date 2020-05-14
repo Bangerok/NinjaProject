@@ -11,6 +11,9 @@ const mutations = {
   setNotificationShow(state) {
     state.notification.show = !state.notification.show;
   },
+  setCurrentUser(state, payload) {
+    state.user = payload;
+  },
 }
 
 export default mutations

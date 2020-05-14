@@ -22,7 +22,7 @@ const messagesEn = {
     components: {
         auth: {
             formName: 'Authorization form',
-            name: 'Username',
+            username: 'Username',
             password: 'Password',
             nameRequired: 'Username is required',
             passwordRequired: 'Password is required',
