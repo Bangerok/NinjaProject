@@ -28,7 +28,7 @@
           </v-app-bar-nav-icon>
         </v-list-item-icon>
       </template>
-      <span class="overline">Свернуть / развернуть меню</span>
+      <span class="overline">{{ $t('tooltips.minVariant') }}</span>
     </v-tooltip>
 
     <v-toolbar-title class="pl-2 font-weight-medium">
@@ -36,6 +36,22 @@
     </v-toolbar-title>
 
     <v-spacer/>
+
+    <v-tooltip bottom>
+      <template v-slot:activator="{ on }">
+        <v-list-item-icon v-on="on" class="justify-center mt-3">
+          <v-card flat max-width="130px" max-height="40px" color="appbar">
+            <v-select
+                flat
+                v-model="locale"
+                :items="items"
+                prepend-icon="fa-globe"
+            />
+          </v-card>
+        </v-list-item-icon>
+      </template>
+      <span class="overline">{{ $t('tooltips.changeLanguageSystem') }}</span>
+    </v-tooltip>
 
     <v-tooltip bottom nudge-top="10px">
       <template v-slot:activator="{ on }">
@@ -49,7 +65,7 @@
           <v-switch v-model="nightMode" inset :color="nightMode ? 'white' : ''" class="mt-4"/>
         </v-list-item-icon>
       </template>
-      <span class="overline">Выключить / включить темный режим</span>
+      <span class="overline">{{ $t('tooltips.nightMode') }}</span>
     </v-tooltip>
   </v-app-bar>
 </template>
@@ -62,14 +78,43 @@
     data: function () {
       return {
         nightMode: true,
+        locale: 'ru',
+        items: [
+          {
+            text: 'Русский',
+            value: 'ru'
+          }, {
+            text: 'English',
+            value: 'en'
+          }
+        ]
       }
     },
     computed: mapState(['navigation']),
     methods: mapMutations(['setMinVariant']),
+    mounted() {
+      let nightMode = localStorage.getItem('nightMode');
+      if (nightMode) {
+        nightMode = nightMode === "true";
+        this.$vuetify.theme.dark = nightMode;
+        this.nightMode = nightMode;
+      }
+
+      let locale = localStorage.getItem('locale');
+      if (locale) {
+        this.$i18n.locale = locale;
+        this.locale = locale;
+      }
+    },
     watch: {
       nightMode() {
         this.$vuetify.theme.dark = this.nightMode;
-      }
+        localStorage.setItem('nightMode', this.nightMode);
+      },
+      locale() {
+        this.$i18n.locale = this.locale;
+        localStorage.setItem('locale', this.locale);
+      },
     }
   }
 </script>

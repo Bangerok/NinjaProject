@@ -4,17 +4,6 @@ const messagesEn = {
         companyDescription: 'Outsourcing company',
         menu: {
             general: 'General',
-            vacancies: {
-                title: 'Vacancies',
-                submenu: {
-                    java: 'Java',
-                    cplusplus: 'C++',
-                    csharp: 'C#',
-                },
-            },
-            executor: 'Executor',
-            technologies: 'Technologies',
-            customer: 'Customer',
             news: 'News',
             info: 'About project',
             notFound: 'Page not found',
@@ -29,36 +18,6 @@ const messagesEn = {
             title: 'The page is under construction !!!',
             description: 'Please come back a little later.'
         },
-        vacancies: {
-            dontActive: 'There are currently no open vacancies. Come back later.',
-            data: {
-                titles: {
-                    generalInfo: 'General information',
-                    vacanciesInfo: 'Job Information',
-                    requirements: 'Requirements for a candidate',
-                },
-                subTitles: {
-                    organization: 'Organization',
-                    city: 'City',
-                    address: 'Address',
-                    phone: 'Phone',
-                    contact: 'Contact',
-                    salary: 'Salary (rub)',
-                    workType: 'Nature of work',
-                    workSchedule: 'Schedule',
-                    workWithUser: 'Work with users',
-                    description: 'Description',
-                    education: 'Education',
-                    professional: 'Professional requirements',
-                    comments: 'Comments',
-                },
-            },
-        },
-        technologies: {
-            web: 'WEB technologies',
-            database: 'Databases',
-            programming: 'Programming and frameworks',
-        },
     },
     components: {
         auth: {
@@ -66,10 +25,8 @@ const messagesEn = {
             name: 'Username',
             password: 'Password',
             nameRequired: 'Username is required',
-            emailRequired: 'E-mail is required',
             passwordRequired: 'Password is required',
             isValidNameMsg: 'Username must be less than 10 characters',
-            isValidEmailMsg: 'E-mail must be valid: *@*.*',
             isValidPasswordMsg: 'Password must be between 8 and 20 characters',
         },
     },
@@ -81,12 +38,11 @@ const messagesEn = {
         authBtn: 'Authorization',
         clearBtn: 'Clear',
         closeBtn: 'Close',
-        openAll: 'Open all',
-        closeAll: 'Close all',
     },
-    filters: {
-        title: 'Filter',
-        emptyResults: 'No results with current filtering.',
+    tooltips: {
+        nightMode: 'On/Off night mode',
+        minVariant: 'Collapse/Expand the menu',
+        changeLanguageSystem: 'Change system language',
     },
 }
 

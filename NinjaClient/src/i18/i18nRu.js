@@ -4,17 +4,6 @@ const messagesRu = {
         companyDescription: 'Аутсорсинговая компания',
         menu: {
             general: 'Главная',
-            vacancies: {
-                title: 'Вакансии',
-                submenu: {
-                  java: 'Java',
-                  cplusplus: 'C++',
-                  csharp: 'C#',
-                },
-            },
-            executor: 'Исполнитель',
-            technologies: 'Технологии',
-            customer: 'Заказчик',
             news: 'Новости',
             info: 'О проекте',
             notFound: 'Страница не найдена',
@@ -29,36 +18,6 @@ const messagesRu = {
             title: 'Страница находится в разработке!!!',
             description: 'Пожалуйста, вернитесь немного позже.',
         },
-        vacancies: {
-            dontActive: 'На данный момент нет открытых вакансий. Вернитесь попозже.',
-            data: {
-                titles: {
-                    generalInfo: 'Общая информация',
-                    vacanciesInfo: 'Информация о вакансии',
-                    requirements: 'Требования к кандидату',
-                },
-                subTitles: {
-                    organization: 'Организация',
-                    city: 'Город',
-                    address: 'Адрес',
-                    phone: 'Телефон',
-                    contact: 'Контактное лицо',
-                    salary: 'Заработная плата (руб)',
-                    workType: 'Характер работы',
-                    workSchedule: 'График работы',
-                    workWithUser: 'Работа с пользователями',
-                    description: 'Описание',
-                    education: 'Образование',
-                    professional: 'Профессиональные требования',
-                    comments: 'Комментарии',
-                }
-            },
-        },
-        technologies: {
-            web: 'WEB технологии',
-            database: 'Базы данных',
-            programming: 'Программирование и фреймворки',
-        },
     },
     components: {
         auth: {
@@ -66,10 +25,8 @@ const messagesRu = {
             username: 'Имя пользователя',
             password: 'Пароль',
             nameRequired: 'Имя обязательно',
-            emailRequired: 'E-mail обязателен',
             passwordRequired: 'Пароль обязателен',
             isValidNameMsg: 'Поле должно быть меньше чем 50 символов',
-            isValidEmailMsg: 'E-mail должен быть корректным: *@*.*',
             isValidPasswordMsg: 'Пароль должен быть от 8 до 20 символов',
         },
     },
@@ -81,12 +38,11 @@ const messagesRu = {
         authBtn: 'Авторизация',
         clearBtn: 'Сбросить',
         closeBtn: 'Закрыть',
-        openAll: 'Открыть все',
-        closeAll: 'Закрыть все',
     },
-    filters: {
-        title: 'Фильтр',
-        emptyResults: 'Отсутствуют результаты при текущей фильтрации.',
+    tooltips: {
+        nightMode: 'Включить/Выключить темный режим',
+        minVariant: 'Свернуть/Развернуть меню',
+        changeLanguageSystem: 'Изменить язык системы',
     },
 }
 
