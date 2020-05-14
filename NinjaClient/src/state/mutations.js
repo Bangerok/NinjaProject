@@ -1,6 +1,7 @@
 const mutations = {
   setMinVariant(state, payload) {
-    state.navigation.minVariant = payload
+    localStorage.setItem('minVariant', payload);
+    state.navigation.minVariant = payload;
   },
   setOptionsNotification(state, payload) {
     state.notification.color = payload.color;
