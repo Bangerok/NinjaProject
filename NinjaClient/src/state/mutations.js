@@ -5,13 +5,10 @@ const mutations = {
   setOptionsNotification(state, payload) {
     state.notification.color = payload.color;
     state.notification.text = payload.text;
-    state.notification.show = true;
+    state.notification.show = !state.notification.show;
   },
-  setNotificationShow(state, payload) {
-    state.notification.show = payload;
-  },
-  setVacancies(state, payload) {
-    state.pages.vacancies = payload;
+  setNotificationShow(state) {
+    state.notification.show = !state.notification.show;
   },
 }
 

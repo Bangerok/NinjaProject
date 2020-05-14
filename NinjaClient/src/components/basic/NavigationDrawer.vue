@@ -1,15 +1,15 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="minVariant" color="navigation" floating
+    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="navigation" floating
                          mobile-break-point="320">
       <v-list dense class="py-0">
         <v-list-item
-            v-for="item in links"
+            v-for="item in filteredNavigationLinks"
             :key="item.title"
             :to="item.hasSubmenus ? '' : item.path"
             v-on:click="item.hasSubmenus ? showSubmenus = !showSubmenus : ''"
         >
-          <v-tooltip right>
+          <v-tooltip :disabled="!navigation.minVariant" right nudge-right="15px">
             <template v-slot:activator="{ on }">
               <v-list-item-icon v-on="on" class="justify-center">
                 <v-icon dense>{{ item.icon }}</v-icon>
@@ -32,8 +32,8 @@
       </v-list>
 
       <template v-slot:append>
-        <v-divider v-show="!minVariant"></v-divider>
-        <v-container v-show="!minVariant" class="overline pb-0 mb-n1">
+        <v-divider v-show="!navigation.minVariant"></v-divider>
+        <v-container v-show="!navigation.minVariant" class="overline pb-0 mb-n1">
           <p class="text-center">&copy; Copyright, 2020</p>
         </v-container>
       </template>
@@ -43,6 +43,7 @@
 
 <script>
   import logoIcon from "./../../assets/logo_app_bar.png"
+  import {mapState} from "vuex";
 
   export default {
     name: "NavigationDrawer",
@@ -53,23 +54,9 @@
       }
     },
     computed: {
-      minVariant() {
-        return this.$store.state.navigation.minVariant;
-      },
-      links() {
-        let links = this.$store.state.navigation.links;
-        let filteredLinksList = [];
-        for (let i in links) {
-          if (Object.prototype.hasOwnProperty.call(links, i)) {
-            if (links[i].path !== '*' && links[i].path !== '/login' && ((links[i].isSubmenu
-                && this.showSubmenus)
-                || (!links[i].isSubmenu))) {
-              filteredLinksList.push(links[i]);
-            }
-          }
-        }
-
-        return filteredLinksList;
+      ...mapState(['navigation']),
+      filteredNavigationLinks() {
+        return this.$router.options.routes.filter(route => route.meta.showInMenu);
       },
     }
   }

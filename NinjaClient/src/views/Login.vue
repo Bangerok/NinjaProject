@@ -51,7 +51,9 @@
             </v-form>
           </v-card-text>
           <v-card-actions class="justify-center">
-            <v-btn color="success" @click="auth">{{ $t('buttons.authBtn') }}</v-btn>
+            <v-btn color="success" @click="setOptionsNotification(auth())">
+              {{ $t('buttons.authBtn') }}
+            </v-btn>
             <v-btn color="error" @click="reset">{{ $t('buttons.clearBtn') }}</v-btn>
             <v-btn color="primary" @click="authorized">
               <v-icon>
@@ -66,7 +68,7 @@
 </template>
 
 <script>
-  import service from "./../api/actions";
+  import {mapActions, mapMutations} from "vuex";
 
   export default {
     name: "Login",
@@ -80,34 +82,30 @@
     }),
     created() {
       this.passwordRules = [
-        v => !!v || this.getLocalizationMsg('components.auth.passwordRequired'),
-        v => (v && v.length >= 8 && v.length <= 20) || this.getLocalizationMsg(
+        v => !!v || this.$t('components.auth.passwordRequired'),
+        v => (v && v.length >= 8 && v.length <= 20) || this.$t(
             'components.auth.isValidPasswordMsg'),
       ];
 
       this.nameRules = [
-        v => !!v || this.getLocalizationMsg('components.auth.nameRequired'),
-        v => (v && v.length <= 50) || this.getLocalizationMsg('components.auth.isValidNameMsg'),
+        v => !!v || this.$t('components.auth.nameRequired'),
+        v => (v && v.length <= 50) || this.$t('components.auth.isValidNameMsg'),
       ];
     },
     methods: {
-      getLocalizationMsg: function (name) {
-        return this.$t(name);
-      },
-      authorized() {
-        service.authorized();
-      },
+      ...mapActions(['authorized']),
+      ...mapMutations(['setOptionsNotification']),
       auth() {
         const notificationOptions = {};
         if (this.$refs.form.validate()) {
           notificationOptions.color = 'success';
-          notificationOptions.text = this.getLocalizationMsg('notification.authSuccess');
+          notificationOptions.text = this.$t('notification.authSuccess');
         } else {
           notificationOptions.color = 'error';
-          notificationOptions.text = this.getLocalizationMsg('notification.authError');
+          notificationOptions.text = this.$t('notification.authError');
         }
 
-        this.$store.commit('setOptionsNotification', notificationOptions);
+        return notificationOptions;
       },
       reset() {
         this.$refs.form.reset()

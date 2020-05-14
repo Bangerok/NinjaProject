@@ -1,15 +1,15 @@
 <template>
   <v-snackbar
-      v-model="show"
-      :color="color"
+      v-model="notification.show"
+      :color="notification.color"
       :right="right"
       :top="top"
       :timeout="timeout"
   >
-    {{ text }}
+    {{ notification.text }}
     <v-btn
         text
-        @click="show = false"
+        @click="setNotificationShow"
     >
       {{ $t('buttons.closeBtn') }}
     </v-btn>
@@ -17,31 +17,19 @@
 </template>
 
 <script>
+  import {mapMutations, mapState} from "vuex";
+
   export default {
     name: "NotificationMsg",
-    data () {
+    data() {
       return {
         timeout: 3000,
         top: true,
         right: true,
       }
     },
-    computed: {
-      color() {
-        return this.$store.state.notification.color;
-      },
-      show: {
-        get() {
-          return this.$store.state.notification.show;
-        },
-        set() {
-          this.$store.commit('setNotificationShow', false);
-        }
-      },
-      text() {
-        return this.$store.state.notification.text;
-      },
-    },
+    computed: mapState(['notification']),
+    methods: mapMutations(['setNotificationShow']),
   }
 </script>
 

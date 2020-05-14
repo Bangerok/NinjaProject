@@ -6,7 +6,9 @@
       <navigation-drawer></navigation-drawer>
       <v-content>
         <v-container fluid>
-        <router-view style="margin: 20px"></router-view>
+          <transition appear name="slide-fade">
+            <router-view style="margin: 20px"></router-view>
+          </transition>
         </v-container>
       </v-content>
     </v-app>
@@ -17,7 +19,7 @@
   import NotificationMsg from "./components/basic/NotificationMsg";
   import AppBar from "./components/basic/AppBar";
   import NavigationDrawer from "./components/basic/NavigationDrawer";
-  import service from "./api/actions";
+  import service from "./state/actions";
 
   export default {
     components: {NotificationMsg, AppBar, NavigationDrawer},
@@ -47,6 +49,18 @@
   }
 </script>
 
+<!--suppress CssUnusedSymbol -->
 <style scoped>
+  .slide-fade-enter-active {
+    transition: all .3s ease;
+  }
 
+  .slide-fade-leave-active {
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  }
+
+  .slide-fade-enter, .slide-fade-leave-to {
+    transform: translateX(10px);
+    opacity: 0;
+  }
 </style>

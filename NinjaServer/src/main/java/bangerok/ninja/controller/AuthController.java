@@ -27,12 +27,12 @@ public class AuthController {
 
 		@GetMapping("loginSuccess")
 		public RedirectView redirectIntoClient() {
-				return configureRedirectView(HttpStatus.FOUND, CLIENT_URL);
+				return configureRedirectView(CLIENT_URL);
 		}
 
 		@GetMapping("logoutSuccess")
 		public RedirectView redirectIntoLogout() {
-				return configureRedirectView(HttpStatus.FOUND, CLIENT_URL + "login");
+				return configureRedirectView(CLIENT_URL + "login");
 		}
 
 		@GetMapping("create-or-get-user")
@@ -65,9 +65,9 @@ public class AuthController {
 				return userDetailsRepo.save(user);
 		}
 
-		private RedirectView configureRedirectView(HttpStatus httpStatus, String redirectUrl) {
+		private RedirectView configureRedirectView(String redirectUrl) {
 				RedirectView redirectView = new RedirectView();
-				redirectView.setStatusCode(httpStatus);
+				redirectView.setStatusCode(HttpStatus.FOUND);
 				redirectView.setUrl(redirectUrl);
 
 				return redirectView;
