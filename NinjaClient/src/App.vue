@@ -2,8 +2,8 @@
   <div id="app">
     <v-app>
       <notification-msg></notification-msg>
-      <app-bar></app-bar>
-      <navigation-drawer></navigation-drawer>
+      <app-bar v-if="user !== null"></app-bar>
+      <navigation-drawer v-if="user !== null"></navigation-drawer>
       <v-content>
         <v-container fluid>
           <transition appear name="slide-fade">
@@ -19,33 +19,45 @@
   import NotificationMsg from "./components/basic/NotificationMsg";
   import AppBar from "./components/basic/AppBar";
   import NavigationDrawer from "./components/basic/NavigationDrawer";
-  import service from "./state/actions";
+  import {mapState, mapActions} from 'vuex';
 
   export default {
     components: {NotificationMsg, AppBar, NavigationDrawer},
+    computed: mapState(['user']),
     methods: {
-      async logout() {
-        await service.logout().then(response => {
-          console.log(response);
-        }, response => {
-          console.log(response);
-        });
-      },
-      async updateProfile() {
-        const data = await service.getUser();
-        this.$store.state.user = await data.json();
+      ...mapActions(['getUser']),
+    },
+    watch: {
+      user(newValue) {
+        if (newValue === null) {
+          if (this.$route.path !== 'login') {
+            this.$router.replace('login');
+          }
+        }
       }
     },
-    mounted() {
+    beforeCreate() {
       let currentLocation = document.location.href;
       if (currentLocation.indexOf("#") !== -1) {
         currentLocation = currentLocation.replace("#", "");
         document.location.replace(currentLocation);
-      } else {
-        this.updateProfile();
-        //this.logout();
+        this.$forceUpdate();
       }
-    }
+    },
+    created() {
+      // noinspection JSValidateTypes
+      this.getUser().then(() => {
+        if (this.user != null) {
+          if (this.$route.path !== '/' || window.location.pathname === '/login') {
+            this.$router.replace('/');
+          }
+        } else {
+          if (this.$route.path !== 'login') {
+            this.$router.replace('login');
+          }
+        }
+      });
+    },
   }
 </script>
 

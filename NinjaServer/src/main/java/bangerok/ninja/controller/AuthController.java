@@ -1,7 +1,9 @@
 package bangerok.ninja.controller;
 
 import bangerok.ninja.domain.User;
+import bangerok.ninja.domain.Views;
 import bangerok.ninja.repo.UserDetailsRepo;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import org.jsoup.internal.StringUtil;
@@ -36,7 +38,8 @@ public class AuthController {
 		}
 
 		@GetMapping("create-or-get-user")
-		public User getUser(@AuthenticationPrincipal OAuth2User principal) {
+		@JsonView(Views.IdName.class)
+		public User user(@AuthenticationPrincipal OAuth2User principal) {
 				if (Objects.isNull(principal)) {
 						return null;
 				}

@@ -9,7 +9,7 @@
             :to="item.path"
         >
           <v-tooltip :disabled="!navigation.minVariant" right nudge-right="15px">
-            <template v-slot:activator="{ on }">
+            <template #activator="{ on }">
               <v-list-item-icon v-on="on" class="justify-center">
                 <v-icon dense>{{ item.meta.icon }}</v-icon>
               </v-list-item-icon>
@@ -23,7 +23,7 @@
         </v-list-item>
       </v-list>
 
-      <template v-slot:append>
+      <template #append>
         <v-divider v-show="!navigation.minVariant"></v-divider>
         <v-container v-show="!navigation.minVariant" class="overline pb-0 mb-n1">
           <p class="text-center">&copy; Copyright, 2020</p>

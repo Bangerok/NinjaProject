@@ -1,24 +1,21 @@
-import Vue from 'vue'
-
-let userService = Vue.resource('/auth/create-or-get-user');
-
-const CSRF_TOKEN_OBJECT = document.cookie.match(new RegExp(`XSRF-TOKEN=([^;]+)`));
-const CSRF_TOKEN = CSRF_TOKEN_OBJECT ? CSRF_TOKEN_OBJECT[1] : '';
+import authApi from "./../api/auth";
 
 const actions = {
   authorized() {
-    document.location.replace('http://localhost:9000/login/google');
+    authApi.authorized();
   },
-  getUser() {
-    return userService.get();
-  },
-  logout() {
-    return Vue.http.post('/logout', {}, {
-      headers: {
-        'X-XSRF-TOKEN': CSRF_TOKEN
-      }
+  async getUser({ commit }) {
+    await authApi.getUser().then(data => {
+      commit('setCurrentUser', data.body !== "" ? data.body : null);
     });
-  }
+  },
+  async logout({ commit }) {
+    const functionLogout = () => {
+      commit('setCurrentUser', null);
+    };
+
+    await authApi.logout().then(functionLogout, functionLogout);
+  },
 }
 
 export default actions

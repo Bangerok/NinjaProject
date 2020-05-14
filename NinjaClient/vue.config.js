@@ -7,9 +7,13 @@ module.exports = {
     "compress": true,
     "port": 8000,
     "proxy": {
-      "/server" : {
+      "/api" : {
         target: 'http://localhost:9000',
+        ws: true,
         changeOrigin: true,
+        pathRewrite: {
+          '^/api': '',
+        },
       }
     },
     "stats": "errors-only",

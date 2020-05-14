@@ -15,7 +15,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				http
 						.cors().and()
 						.authorizeRequests(a -> a
-								.antMatchers("/**", "/auth/**", "/js/**", "/error**").permitAll()
+								.antMatchers("/**", "/auth/**").permitAll()
 								.anyRequest().authenticated()
 						)
 						.exceptionHandling(e -> e
@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						)
 						.logout(l -> l
 								.deleteCookies("remove")
-								.invalidateHttpSession(false)
+								.invalidateHttpSession(true)
 								.logoutSuccessUrl("/auth/logoutSuccess")
 								.permitAll()
 						)
