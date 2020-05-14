@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import state from '../state/index'
-import mutations from './../api/mutations'
-import actions from './../api/actions'
-import getters from './../api/getters'
+import mutations from '../state/mutations'
+import actions from '../state/actions'
+import getters from '../state/getters'
 
 Vue.use(Vuex);
 
