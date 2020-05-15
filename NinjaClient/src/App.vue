@@ -4,7 +4,7 @@
       <notification-msg></notification-msg>
       <app-bar v-if="user"></app-bar>
       <navigation-drawer v-if="user"></navigation-drawer>
-      <v-content>
+      <v-content class="content">
         <v-container fluid>
           <transition appear name="slide-fade">
             <router-view style="margin: 20px"></router-view>

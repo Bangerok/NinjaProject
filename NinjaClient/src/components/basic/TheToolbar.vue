@@ -1,6 +1,6 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar color="appbar" app elevation="2" clipped-left>
+  <v-app-bar color="toolbar" app elevation="2" clipped-left>
     <v-card flat max-width="295px" max-height="100%" color="appbar" class="mt-n4 ml-n5">
       <v-list-item two-line>
         <v-list-item-avatar>

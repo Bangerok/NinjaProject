@@ -1,9 +1,9 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="navigation"
+    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="sidebar"
                          floating
                          mobile-break-point="320">
-      <v-list dense class="py-0">
+      <v-list class="py-0">
         <v-list-item
             v-for="(item, key) in filteredNavigationLinks"
             :key="key"
