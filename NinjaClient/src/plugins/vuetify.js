@@ -11,14 +11,14 @@ export default new Vuetify({
   theme: {
     themes: {
       light: {
-        navigation: '#f3f4f7',
-        appbar: '#ffffff',
-        tertiary: '#e5e8ee',
+        sidebar: '#f3f4f7',
+        toolbar: '#ffffff',
+        content: '#e5e8ee',
       },
       dark: {
-        navigation: '#27282a',
-        appbar: '#1c1d1f',
-        tertiary: '#303132'
+        sidebar: '#27282a',
+        toolbar: '#1c1d1f',
+        content: '#303132',
       }
     },
     dark: true
