@@ -55,7 +55,7 @@
               {{ $t('buttons.authBtn') }}
             </v-btn>
             <v-btn color="error" @click="reset">{{ $t('buttons.clearBtn') }}</v-btn>
-            <v-btn color="primary" @click="authorized">
+            <v-btn color="primary" @click="googleAuth">
               <v-icon>
                 mdi-google
               </v-icon>
@@ -93,7 +93,7 @@
       ];
     },
     methods: {
-      ...mapActions(['authorized']),
+      ...mapActions(['googleAuth']),
       ...mapMutations(['setOptionsNotification']),
       auth() {
         const notificationOptions = {};

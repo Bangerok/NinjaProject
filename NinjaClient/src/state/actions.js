@@ -1,20 +1,22 @@
-import authApi from "./../api/auth";
+import authApi from "../api/auth.module";
 
 const actions = {
-  authorized() {
+  googleAuth() {
     authApi.authorized();
   },
-  async getUser({ commit }) {
-    await authApi.getUser().then(data => {
-      commit('setCurrentUser', data.body !== "" ? data.body : null);
-    });
-  },
-  async logout({ commit }) {
+  async googleLogout({commit}) {
     const functionLogout = () => {
-      commit('setCurrentUser', null);
+      authApi.getUser().then(response => {
+        commit('setCurrentUser', response.data !== '' ? response.data : null);
+      })
     };
 
     await authApi.logout().then(functionLogout, functionLogout);
+  },
+  async getCurrentUser({commit}) {
+    await authApi.getUser().then(response => {
+      commit('setCurrentUser', response.data !== '' ? response.data : null);
+    });
   },
 }
 

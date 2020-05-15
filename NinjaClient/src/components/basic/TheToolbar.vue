@@ -37,7 +37,7 @@
 
     <v-spacer/>
 
-    <v-btn text class="mr-3" @click="logout">
+    <v-btn text class="mr-3" @click="googleLogout">
       <v-icon class="mr-1">
         fa-sign-out-alt
       </v-icon>
@@ -99,7 +99,7 @@
     computed: mapState(['navigation']),
     methods: {
       ...mapMutations(['setMinVariant']),
-      ...mapActions(['logout']),
+      ...mapActions(['googleLogout']),
     },
     mounted() {
       let nightMode = localStorage.getItem('nightMode');

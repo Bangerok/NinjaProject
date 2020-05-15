@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="navigation" floating
+    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="navigation"
+                         floating
                          mobile-break-point="320">
       <v-list dense class="py-0">
         <v-list-item

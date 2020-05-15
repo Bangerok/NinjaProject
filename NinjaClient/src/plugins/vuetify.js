@@ -8,7 +8,7 @@ export default new Vuetify({
   icons: {
     iconfont: 'fa',
   },
-  theme:{
+  theme: {
     themes: {
       light: {
         navigation: '#f3f4f7',
