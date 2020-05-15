@@ -32,11 +32,6 @@ public class AuthController {
 				return configureRedirectView(CLIENT_URL);
 		}
 
-		@GetMapping("logoutSuccess")
-		public RedirectView redirectIntoLogout() {
-				return configureRedirectView(CLIENT_URL + "login");
-		}
-
 		@GetMapping("create-or-get-user")
 		@JsonView(Views.IdName.class)
 		public User user(@AuthenticationPrincipal OAuth2User principal) {

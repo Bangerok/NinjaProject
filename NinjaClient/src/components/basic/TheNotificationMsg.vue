@@ -2,9 +2,9 @@
   <v-snackbar
       v-model="notification.show"
       :color="notification.color"
-      :right="right"
-      :top="top"
-      :timeout="timeout"
+      right
+      top
+      :timeout="3000"
   >
     {{ notification.text }}
     <v-btn
@@ -21,13 +21,6 @@
 
   export default {
     name: "NotificationMsg",
-    data() {
-      return {
-        timeout: 3000,
-        top: true,
-        right: true,
-      }
-    },
     computed: mapState(['notification']),
     methods: mapMutations(['setNotificationShow']),
   }

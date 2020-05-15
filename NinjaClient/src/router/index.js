@@ -8,7 +8,7 @@ const routes = [
     path: '/',
     name: 'Home',
     // lazy-loaded
-    component: () => import('./../views/General.vue'),
+    component: () => import('../views/ViewGeneral.vue'),
     meta: {
       icon: 'fa-home',
       title: 'navigation.menu.general',
@@ -20,7 +20,7 @@ const routes = [
     path: '/news',
     name: 'News',
     // lazy-loaded
-    component: () => import('./../views/InDevelopment'),
+    component: () => import('../views/ViewInDevelopment'),
     meta: {
       icon: 'fa-rss',
       title: 'navigation.menu.news',
@@ -32,7 +32,7 @@ const routes = [
     path: '/info',
     name: 'Info',
     // lazy-loaded
-    component: () => import('./../views/AboutUs'),
+    component: () => import('../views/ViewAboutUs'),
     meta: {
       icon: 'fa-info',
       title: 'navigation.menu.info',
@@ -43,7 +43,7 @@ const routes = [
   {
     path: '/login',
     // lazy-loaded
-    component: () => import('./../views/Login'),
+    component: () => import('../views/ViewLogin'),
     meta: {
       showInMenu: false,
       requiresAuthorization: false
@@ -53,7 +53,7 @@ const routes = [
     path: "*",
     name: "navigation.menu.notFound",
     // lazy-loaded
-    component: () => import('./../views/NotFound'),
+    component: () => import('../views/ViewNotFound'),
     meta: {
       showInMenu: false,
       requiresAuthorization: true

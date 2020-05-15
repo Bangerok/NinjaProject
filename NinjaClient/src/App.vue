@@ -2,8 +2,8 @@
   <div id="app">
     <v-app>
       <notification-msg></notification-msg>
-      <app-bar v-if="user !== null"></app-bar>
-      <navigation-drawer v-if="user !== null"></navigation-drawer>
+      <app-bar v-if="user"></app-bar>
+      <navigation-drawer v-if="user"></navigation-drawer>
       <v-content>
         <v-container fluid>
           <transition appear name="slide-fade">
@@ -16,16 +16,16 @@
 </template>
 
 <script>
-  import NotificationMsg from "./components/basic/NotificationMsg";
-  import AppBar from "./components/basic/AppBar";
-  import NavigationDrawer from "./components/basic/NavigationDrawer";
+  import NotificationMsg from "./components/basic/TheNotificationMsg";
+  import AppBar from "./components/basic/TheToolbar";
+  import NavigationDrawer from "./components/basic/TheSidebar";
   import {mapState, mapActions} from 'vuex';
 
   export default {
     components: {NotificationMsg, AppBar, NavigationDrawer},
     computed: mapState(['user']),
     methods: {
-      ...mapActions(['getUser']),
+      ...mapActions(['getCurrentUser']),
     },
     watch: {
       user(newValue) {
@@ -46,13 +46,13 @@
     },
     created() {
       // noinspection JSValidateTypes
-      this.getUser().then(() => {
-        if (this.user != null) {
+      this.getCurrentUser().then(() => {
+        if (this.user) {
           if (this.$route.path !== '/' || window.location.pathname === '/login') {
             this.$router.replace('/');
           }
         } else {
-          if (this.$route.path !== 'login') {
+          if (this.$route.path !== 'login' || window.location.pathname === '/') {
             this.$router.replace('login');
           }
         }

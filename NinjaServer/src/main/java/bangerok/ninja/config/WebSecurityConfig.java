@@ -27,7 +27,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 						.logout(l -> l
 								.deleteCookies("remove")
 								.invalidateHttpSession(true)
-								.logoutSuccessUrl("/auth/logoutSuccess")
 								.permitAll()
 						)
 						.oauth2Login(o -> o
