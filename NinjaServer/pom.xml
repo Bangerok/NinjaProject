@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.2.6.RELEASE</version>
+    <version>2.3.0.RELEASE</version>
     <relativePath/>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -19,32 +19,12 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
     <!-- Dependencies -->
-    <node.version>v12.16.1</node.version>
-    <npm.version>6.13.4</npm.version>
     <lombok.version>1.18.12</lombok.version>
     <jsoup.version>1.13.1</jsoup.version>
-    <spring.version>2.2.6.RELEASE</spring.version>
     <postgresql.version>42.2.12</postgresql.version>
-
-    <!-- Plugins -->
-    <exec-maven-plugin.version>1.6.0</exec-maven-plugin.version>
-    <frontend-maven-plugin.version>1.9.1</frontend-maven-plugin.version>
   </properties>
 
   <dependencies>
-    <!-- Spring utils -->
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-tomcat</artifactId>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-devtools</artifactId>
-      <optional>true</optional>
-    </dependency>
-
     <!-- Spring tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -62,6 +42,12 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-websocket</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-devtools</artifactId>
+      <optional>true</optional>
     </dependency>
 
     <dependency>

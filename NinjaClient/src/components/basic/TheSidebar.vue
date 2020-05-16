@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="sidebar"
-                         floating
                          mobile-break-point="320">
       <v-list class="py-0">
         <v-list-item
@@ -27,7 +26,7 @@
       <template #append>
         <v-divider v-show="!navigation.minVariant"></v-divider>
         <v-container v-show="!navigation.minVariant" class="overline pb-0 mb-n1">
-          <p class="text-center">&copy; Copyright, 2020</p>
+          <p class="text-center text--disabled">&copy; Copyright, 2020</p>
         </v-container>
       </template>
     </v-navigation-drawer>

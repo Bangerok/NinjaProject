@@ -18,7 +18,7 @@ export default new Vuetify({
       dark: {
         sidebar: '#27282a',
         toolbar: '#1c1d1f',
-        content: '#303132',
+        content: '#27292D',
       }
     },
     dark: true
