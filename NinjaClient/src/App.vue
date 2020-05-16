@@ -4,7 +4,7 @@
       <notification-msg></notification-msg>
       <app-bar v-if="user"></app-bar>
       <navigation-drawer v-if="user"></navigation-drawer>
-      <v-content class="content">
+      <v-content class="content text--primary">
         <v-container fluid>
           <transition appear name="slide-fade">
             <router-view style="margin: 20px"></router-view>
@@ -23,9 +23,9 @@
 
   export default {
     components: {NotificationMsg, AppBar, NavigationDrawer},
-    computed: mapState(['user']),
+    computed: mapState('auth', {'user': state => state.user}),
     methods: {
-      ...mapActions(['getCurrentUser']),
+      ...mapActions('auth', ['getCurrentUser']),
     },
     watch: {
       user(newValue) {
@@ -52,7 +52,7 @@
             this.$router.replace('/');
           }
         } else {
-          if (this.$route.path !== 'login' || window.location.pathname === '/') {
+          if (this.$route.path !== '/login' || window.location.pathname === '/') {
             this.$router.replace('login');
           }
         }

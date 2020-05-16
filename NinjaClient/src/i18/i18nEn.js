@@ -44,6 +44,9 @@ const messagesEn = {
     minVariant: 'Collapse/Expand the menu',
     changeLanguageSystem: 'Change system language',
   },
+  errors: {
+    code500: 'Failed to connect to the server! Try again later ...',
+  }
 }
 
 export default messagesEn

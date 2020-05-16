@@ -99,7 +99,7 @@
     computed: mapState(['navigation']),
     methods: {
       ...mapMutations(['setMinVariant']),
-      ...mapActions(['googleLogout']),
+      ...mapActions('auth', ['googleLogout']),
     },
     mounted() {
       let nightMode = localStorage.getItem('nightMode');

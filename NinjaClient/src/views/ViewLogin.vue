@@ -93,7 +93,7 @@
       ];
     },
     methods: {
-      ...mapActions(['googleAuth']),
+      ...mapActions('auth', ['googleAuth']),
       ...mapMutations(['setOptionsNotification']),
       auth() {
         const notificationOptions = {};

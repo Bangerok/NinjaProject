@@ -1,5 +1,4 @@
 let state = {
-  user: null,
   notification: {
     color: null,
     text: null,

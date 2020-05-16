@@ -44,6 +44,9 @@ const messagesRu = {
     minVariant: 'Свернуть/Развернуть меню',
     changeLanguageSystem: 'Изменить язык системы',
   },
+  errors: {
+    code500: 'Не получилось соединиться с сервером! Попробуйте попозже ...',
+  }
 }
 
 export default messagesRu
