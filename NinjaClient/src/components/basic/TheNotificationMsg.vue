@@ -21,8 +21,8 @@
 
   export default {
     name: "NotificationMsg",
-    computed: mapState(['notification']),
-    methods: mapMutations(['setNotificationShow']),
+    computed: mapState('settings', {'notification': state => state.notification}),
+    methods: mapMutations('settings', ['setNotificationShow']),
   }
 </script>
 

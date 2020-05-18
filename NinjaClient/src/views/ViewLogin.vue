@@ -94,7 +94,7 @@
     },
     methods: {
       ...mapActions('auth', ['googleAuth']),
-      ...mapMutations(['setOptionsNotification']),
+      ...mapMutations('settings', ['setOptionsNotification']),
       auth() {
         const notificationOptions = {};
         if (this.$refs.form.validate()) {

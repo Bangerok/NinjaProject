@@ -96,9 +96,9 @@
         ]
       }
     },
-    computed: mapState(['navigation']),
+    computed: mapState('settings', {'navigation': state => state.navigation}),
     methods: {
-      ...mapMutations(['setMinVariant']),
+      ...mapMutations('settings', ['setMinVariant']),
       ...mapActions('auth', ['googleLogout']),
     },
     mounted() {

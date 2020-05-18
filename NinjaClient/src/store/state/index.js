@@ -1,12 +1,3 @@
-let state = {
-  notification: {
-    color: null,
-    text: null,
-    show: false,
-  },
-  navigation: {
-    minVariant: false,
-  },
-}
+let state = {}
 
 export default state
