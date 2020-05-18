@@ -46,7 +46,7 @@
       }
     },
     computed: {
-      ...mapState(['navigation']),
+      ...mapState('settings', {'navigation': state => state.navigation}),
       filteredNavigationLinks() {
         return this.$router.options.routes.filter(route => route.meta.showInMenu);
       },
