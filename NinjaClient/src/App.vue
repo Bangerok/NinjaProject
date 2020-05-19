@@ -1,9 +1,10 @@
 <template>
   <div id="app">
     <v-app>
-      <notification-msg></notification-msg>
-      <app-bar v-if="user"></app-bar>
-      <navigation-drawer v-if="user"></navigation-drawer>
+      <the-notification-msg></the-notification-msg>
+      <the-progress-bar/>
+      <the-app-bar v-if="user"></the-app-bar>
+      <the-navigation-drawer v-if="user"></the-navigation-drawer>
       <v-content class="content text--primary">
         <v-container fluid>
           <transition appear name="slide-fade">
@@ -16,15 +17,17 @@
 </template>
 
 <script>
-  import NotificationMsg from "./components/basic/TheNotificationMsg";
-  import AppBar from "./components/basic/TheToolbar";
-  import NavigationDrawer from "./components/basic/TheSidebar";
-  import {mapState, mapActions} from 'vuex';
+  import TheNotificationMsg from "./components/basic/TheNotificationMsg";
+  import TheProgressBar from "./components/basic/TheProgressBar";
+  import TheAppBar from "./components/basic/TheToolbar";
+  import TheNavigationDrawer from "./components/basic/TheSidebar";
+  import {mapState, mapActions, mapMutations} from 'vuex';
 
   export default {
-    components: {NotificationMsg, AppBar, NavigationDrawer},
+    components: {TheNotificationMsg, TheProgressBar, TheAppBar, TheNavigationDrawer},
     computed: mapState('auth', {'user': state => state.user}),
     methods: {
+      ...mapMutations('settings', ['setOptionsNotification']),
       ...mapActions('auth', ['getCurrentUser']),
     },
     watch: {

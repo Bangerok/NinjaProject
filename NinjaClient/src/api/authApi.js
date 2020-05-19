@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios from './axiosApi'
 
 export default {
   authorized() {
@@ -17,6 +17,6 @@ export default {
       'Access-Control-Allow-Origin': '*'
     }
 
-    return axios.post('/api/logout', headers);
+    return axios.postWithCustomHeaders('/api/logout', headers);
   }
 }
