@@ -11,6 +11,9 @@ const authMutations = {
   setNotificationShow(state) {
     state.notification.show = !state.notification.show;
   },
+  setLoading(state, payload) {
+    state.loading = payload;
+  },
 }
 
 export default authMutations
