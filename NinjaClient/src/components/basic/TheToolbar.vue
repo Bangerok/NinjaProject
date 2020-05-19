@@ -37,7 +37,7 @@
 
     <v-spacer/>
 
-    <v-btn text class="mr-3" @click="googleLogout">
+    <v-btn text class="mr-3" href="/api/logout">
       <v-icon class="mr-1">
         fa-sign-out-alt
       </v-icon>
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import {mapState, mapActions, mapMutations} from 'vuex';
+  import {mapState, mapMutations} from 'vuex';
 
   export default {
     name: 'AppBar',
@@ -99,7 +99,6 @@
     computed: mapState('settings', {'navigation': state => state.navigation}),
     methods: {
       ...mapMutations('settings', ['setMinVariant']),
-      ...mapActions('auth', ['googleLogout']),
     },
     mounted() {
       let nightMode = localStorage.getItem('nightMode');

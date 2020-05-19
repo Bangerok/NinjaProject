@@ -55,7 +55,7 @@
               {{ $t('buttons.authBtn') }}
             </v-btn>
             <v-btn color="error" @click="reset">{{ $t('buttons.clearBtn') }}</v-btn>
-            <v-btn color="primary" @click="googleAuth">
+            <v-btn color="primary" href="/api/login/google">
               <v-icon>
                 mdi-google
               </v-icon>
@@ -68,7 +68,7 @@
 </template>
 
 <script>
-  import {mapActions, mapMutations} from "vuex";
+  import {mapMutations} from "vuex";
 
   export default {
     name: "Login",
@@ -93,7 +93,6 @@
       ];
     },
     methods: {
-      ...mapActions('auth', ['googleAuth']),
       ...mapMutations('settings', ['setOptionsNotification']),
       auth() {
         const notificationOptions = {};

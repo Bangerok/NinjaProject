@@ -7,13 +7,11 @@ import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import org.jsoup.internal.StringUtil;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping("auth")
@@ -25,13 +23,7 @@ public class AuthController {
 				this.userDetailsRepo = userDetailsRepo;
 		}
 
-		@GetMapping("loginSuccess")
-		public RedirectView redirectIntoClient() {
-				String CLIENT_URL = "http://localhost:8000/";
-				return configureRedirectView(CLIENT_URL);
-		}
-
-		@GetMapping("create-or-get-user")
+		@GetMapping("user")
 		@JsonView(Views.IdName.class)
 		public User user(@AuthenticationPrincipal OAuth2User principal) {
 				if (Objects.isNull(principal)) {
@@ -60,13 +52,5 @@ public class AuthController {
 				user.setLastVisit(LocalDateTime.now());
 
 				return userDetailsRepo.save(user);
-		}
-
-		private RedirectView configureRedirectView(String redirectUrl) {
-				RedirectView redirectView = new RedirectView();
-				redirectView.setStatusCode(HttpStatus.FOUND);
-				redirectView.setUrl(redirectUrl);
-
-				return redirectView;
 		}
 }
