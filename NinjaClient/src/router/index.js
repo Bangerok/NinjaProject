@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-//import store from './../store/index'
 
 Vue.use(VueRouter);
 
@@ -69,14 +68,5 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 });
-
-/*router.beforeEach((to, from, next) => {
-  //if (!store.state.auth.user) {
-  if (!router.app.$store.state.auth.user) {
-    next({name: 'Login'});
-  } else {
-    next();
-  }
-})*/
 
 export default router

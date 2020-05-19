@@ -19,8 +19,6 @@ import org.springframework.web.servlet.view.RedirectView;
 @RequestMapping("auth")
 public class AuthController {
 
-		private final String CLIENT_URL = "http://localhost:8000/";
-
 		private final UserDetailsRepo userDetailsRepo;
 
 		public AuthController(UserDetailsRepo userDetailsRepo) {
@@ -29,6 +27,7 @@ public class AuthController {
 
 		@GetMapping("loginSuccess")
 		public RedirectView redirectIntoClient() {
+				String CLIENT_URL = "http://localhost:8000/";
 				return configureRedirectView(CLIENT_URL);
 		}
 
