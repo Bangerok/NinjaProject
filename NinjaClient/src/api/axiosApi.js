@@ -23,10 +23,10 @@ function request(method, url, params, data, headers) {
 
   axios.interceptors.response.use(function (response) {
     store.commit('settings/setLoading', false);
-    return response;
+    return Promise.resolve(response);
   }, function (error) {
     store.commit('settings/setLoading', false);
-    return Promise.reject(error);
+    console.log(error);
   });
 
   return axios(axiosConfig);
