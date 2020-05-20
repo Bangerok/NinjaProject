@@ -6,7 +6,6 @@ import bangerok.ninja.repo.UserDetailsRepo;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import org.jsoup.internal.StringUtil;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,16 +29,11 @@ public class AuthController {
 						return null;
 				}
 
-				String id = principal.getAttribute("sub");
+				String email = principal.getAttribute("email");
 
-				if (StringUtil.isBlank(id)) {
-						return null;
-				}
-
-				User user = userDetailsRepo.findById(id).orElseGet(() -> {
+				User user = userDetailsRepo.findByEmail(email).orElseGet(() -> {
 						User newUser = new User();
 
-						newUser.setId(id);
 						newUser.setName(principal.getAttribute("name"));
 						newUser.setEmail(principal.getAttribute("email"));
 						newUser.setGender(principal.getAttribute("gender"));

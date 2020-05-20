@@ -6,7 +6,10 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -22,17 +25,25 @@ import lombok.ToString;
 public class User {
 
 		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@JsonView(Views.IdName.class)
-		private String id;
+		private long id;
+
 		@JsonView(Views.IdName.class)
 		private String name;
+
 		@JsonView(Views.IdName.class)
 		private String userpic;
+
+		@Column(unique=true)
 		private String email;
+
 		@JsonView(Views.FullProfile.class)
 		private String gender;
+
 		@JsonView(Views.FullProfile.class)
 		private String locale;
+
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@JsonView(Views.FullProfile.class)
 		private LocalDateTime lastVisit;

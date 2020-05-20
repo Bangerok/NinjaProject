@@ -7,7 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserDetailsRepo extends JpaRepository<User, String> {
 
-		@Override
 		@EntityGraph(attributePaths = {"subscriptions", "subscribers"})
-		Optional<User> findById(String s);
+		Optional<User> findById(long id);
+
+		@EntityGraph(attributePaths = {"subscriptions", "subscribers"})
+		Optional<User> findByEmail(String email);
 }
