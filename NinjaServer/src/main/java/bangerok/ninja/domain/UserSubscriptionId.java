@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class UserSubscriptionId implements Serializable {
 
 		@JsonView(Views.Id.class)
-		private String channelId;
+		private long channelId;
 		@JsonView(Views.Id.class)
-		private String subscriberId;
+		private long subscriberId;
 }
