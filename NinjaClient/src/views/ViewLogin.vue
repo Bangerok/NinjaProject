@@ -55,7 +55,7 @@
               {{ $t('buttons.authBtn') }}
             </v-btn>
             <v-btn color="error" @click="reset">{{ $t('buttons.clearBtn') }}</v-btn>
-            <v-btn color="primary" href="/api/login/google">
+            <v-btn color="primary" href="api/login/google?redirect_uri=http://localhost:8000">
               <v-icon>
                 mdi-google
               </v-icon>
