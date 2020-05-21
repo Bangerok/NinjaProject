@@ -1,6 +1,8 @@
 package bangerok.ninja.domain;
 
+import bangerok.ninja.domain.enumeration.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -8,17 +10,24 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 @Entity
-@Table(name = "Usr")
+@Table(name = "Usr", uniqueConstraints = {
+		@UniqueConstraint(columnNames = "email")
+})
 @Data
 @EqualsAndHashCode(of = {"id"})
 @ToString(of = {"id", "name"})
@@ -35,6 +44,7 @@ public class User {
 		@JsonView(Views.IdName.class)
 		private String userpic;
 
+		@Email
 		@Column(unique=true)
 		private String email;
 
@@ -43,6 +53,17 @@ public class User {
 
 		@JsonView(Views.FullProfile.class)
 		private String locale;
+
+		private Boolean emailVerified = false;
+
+		@JsonIgnore
+		private String password;
+
+		@NotNull
+		@Enumerated(EnumType.STRING)
+		private AuthProvider provider;
+
+		private String providerId;
 
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@JsonView(Views.FullProfile.class)

@@ -40,10 +40,12 @@
       }
     },
     beforeCreate() {
-      let currentLocation = document.location.href;
-      if (currentLocation.indexOf("#") !== -1) {
-        currentLocation = currentLocation.replace("#", "");
-        document.location.replace(currentLocation);
+      const uri = new URL(location.href);
+      const jwtToken = uri.searchParams.get('token');
+      if (jwtToken !== null) {
+        localStorage.setItem('jwt-token', jwtToken);
+        localStorage.setItem('oauth2', "true");
+        document.location.replace(uri.origin);
         this.$forceUpdate();
       }
     },

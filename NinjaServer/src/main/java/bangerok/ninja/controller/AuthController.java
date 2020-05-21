@@ -1,14 +1,28 @@
 package bangerok.ninja.controller;
 
 import bangerok.ninja.domain.User;
-import bangerok.ninja.domain.Views;
+import bangerok.ninja.domain.enumeration.AuthProvider;
+import bangerok.ninja.exception.BadRequestException;
+import bangerok.ninja.exception.ResourceNotFoundException;
+import bangerok.ninja.payload.ApiResponse;
+import bangerok.ninja.payload.AuthResponse;
+import bangerok.ninja.payload.LoginRequest;
+import bangerok.ninja.payload.SignUpRequest;
 import bangerok.ninja.repo.UserDetailsRepo;
-import com.fasterxml.jackson.annotation.JsonView;
-import java.time.LocalDateTime;
-import java.util.Objects;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.oauth2.core.user.OAuth2User;
+import bangerok.ninja.security.CurrentUser;
+import bangerok.ninja.security.TokenProvider;
+import bangerok.ninja.security.UserPrincipal;
+import java.net.URI;
+import javax.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,35 +30,62 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("auth")
 public class AuthController {
 
+		private final AuthenticationManager authenticationManager;
+		private final PasswordEncoder passwordEncoder;
+		private final TokenProvider tokenProvider;
 		private final UserDetailsRepo userDetailsRepo;
 
-		public AuthController(UserDetailsRepo userDetailsRepo) {
+		public AuthController(
+				AuthenticationManager authenticationManager,
+				PasswordEncoder passwordEncoder,
+				TokenProvider tokenProvider, UserDetailsRepo userDetailsRepo) {
+				this.authenticationManager = authenticationManager;
+				this.passwordEncoder = passwordEncoder;
+				this.tokenProvider = tokenProvider;
 				this.userDetailsRepo = userDetailsRepo;
 		}
 
-		@GetMapping("user")
-		@JsonView(Views.IdName.class)
-		public User user(@AuthenticationPrincipal OAuth2User principal) {
-				if (Objects.isNull(principal)) {
-						return null;
+		@GetMapping("/user")
+		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
+				return userDetailsRepo.findById(userPrincipal.getId())
+						.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+		}
+
+		@PostMapping("/login")
+		public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+
+				Authentication authentication = authenticationManager.authenticate(
+						new UsernamePasswordAuthenticationToken(
+								loginRequest.getEmail(),
+								loginRequest.getPassword()
+						)
+				);
+
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+
+				String token = tokenProvider.createToken(authentication);
+				return ResponseEntity.ok(new AuthResponse(token));
+		}
+
+		@PostMapping("/signup")
+		public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+				if (userDetailsRepo.existsByEmail(signUpRequest.getEmail())) {
+						throw new BadRequestException("Email address already in use.");
 				}
 
-				String email = principal.getAttribute("email");
+				// Creating user's account
+				User user = new User();
+				user.setName(signUpRequest.getName());
+				user.setEmail(signUpRequest.getEmail());
+				user.setPassword(signUpRequest.getPassword());
+				user.setProvider(AuthProvider.local);
 
-				User user = userDetailsRepo.findByEmail(email).orElseGet(() -> {
-						User newUser = new User();
+				user.setPassword(passwordEncoder.encode(user.getPassword()));
 
-						newUser.setName(principal.getAttribute("name"));
-						newUser.setEmail(principal.getAttribute("email"));
-						newUser.setGender(principal.getAttribute("gender"));
-						newUser.setLocale(principal.getAttribute("locale"));
-						newUser.setUserpic(principal.getAttribute("picture"));
+				User result = userDetailsRepo.save(user);
+				URI location = URI.create("http://localhost:8000");
 
-						return newUser;
-				});
-
-				user.setLastVisit(LocalDateTime.now());
-
-				return userDetailsRepo.save(user);
+				return ResponseEntity.created(location)
+						.body(new ApiResponse(true, "User registered successfully"));
 		}
 }
