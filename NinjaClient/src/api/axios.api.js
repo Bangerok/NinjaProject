@@ -1,5 +1,5 @@
 import axios from 'axios'
-import store from './../store/index'
+import store from '../store/store'
 
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
@@ -11,7 +11,6 @@ function request(method, url, params, data, additionalHeaders) {
     'Content-Type': 'application/json',
   }
 
-
   if (localStorage.getItem("jwt-token")) {
     headers['Authorization'] = 'Bearer ' + localStorage.getItem("jwt-token");
   }
@@ -21,7 +20,6 @@ function request(method, url, params, data, additionalHeaders) {
   }
 
   axiosConfig.headers = Object.assign(headers, additionalHeaders);
-
 
   if (params) {
     axiosConfig.params = params;

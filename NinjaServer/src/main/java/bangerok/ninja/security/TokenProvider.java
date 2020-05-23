@@ -18,53 +18,55 @@ import org.springframework.stereotype.Service;
 @Service
 public class TokenProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
+		private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-    private final WebAppPropertiesConfig appProperties;
+		private final WebAppPropertiesConfig appProperties;
 
-    public TokenProvider(WebAppPropertiesConfig appProperties) {
-        this.appProperties = appProperties;
-    }
+		public TokenProvider(WebAppPropertiesConfig appProperties) {
+				this.appProperties = appProperties;
+		}
 
-    public String createToken(Authentication authentication) {
-        OAuth2User userPrincipal = (OAuth2User) authentication.getPrincipal();
+		public String createToken(Authentication authentication) {
+				OAuth2User userPrincipal = (OAuth2User) authentication.getPrincipal();
 
-        Date now = new Date();
-        Date expiryDate = new Date(now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
+				Date now = new Date();
+				Date expiryDate = new Date(
+						now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
 
-        return Jwts.builder()
-                .setSubject(userPrincipal.getAttribute("sub"))
-                .setIssuedAt(new Date())
-                .setExpiration(expiryDate)
-                .signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
-                .compact();
-    }
+				return Jwts.builder()
+						.setSubject(userPrincipal.getAttribute("sub"))
+						.setIssuedAt(new Date())
+						.setExpiration(expiryDate)
+						.signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
+						.compact();
+		}
 
-    public String getUserIdFromToken(String token) {
-        Claims claims = Jwts.parser()
-                .setSigningKey(appProperties.getAuth().getTokenSecret())
-                .parseClaimsJws(token)
-                .getBody();
+		public String getUserIdFromToken(String token) {
+				Claims claims = Jwts.parser()
+						.setSigningKey(appProperties.getAuth().getTokenSecret())
+						.parseClaimsJws(token)
+						.getBody();
 
-        return claims.getSubject();
-    }
+				return claims.getSubject();
+		}
 
-    public boolean validateToken(String authToken) {
-        try {
-            Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret()).parseClaimsJws(authToken);
-            return true;
-        } catch (SignatureException ex) {
-            logger.error("Invalid JWT signature");
-        } catch (MalformedJwtException ex) {
-            logger.error("Invalid JWT token");
-        } catch (ExpiredJwtException ex) {
-            logger.error("Expired JWT token");
-        } catch (UnsupportedJwtException ex) {
-            logger.error("Unsupported JWT token");
-        } catch (IllegalArgumentException ex) {
-            logger.error("JWT claims string is empty.");
-        }
-        return false;
-    }
+		public boolean validateToken(String authToken) {
+				try {
+						Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret())
+								.parseClaimsJws(authToken);
+						return true;
+				} catch (SignatureException ex) {
+						logger.error("Invalid JWT signature");
+				} catch (MalformedJwtException ex) {
+						logger.error("Invalid JWT token");
+				} catch (ExpiredJwtException ex) {
+						logger.error("Expired JWT token");
+				} catch (UnsupportedJwtException ex) {
+						logger.error("Unsupported JWT token");
+				} catch (IllegalArgumentException ex) {
+						logger.error("JWT claims string is empty.");
+				}
+				return false;
+		}
 
 }

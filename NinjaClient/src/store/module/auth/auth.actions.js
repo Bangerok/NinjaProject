@@ -1,4 +1,4 @@
-import authApi from "./../../../api/authApi";
+import authApi from "../../../api/service/auth.service";
 
 const authActions = {
   async getCurrentUser({commit}) {
@@ -10,8 +10,8 @@ const authActions = {
     await authApi.logout().then(() => {
       localStorage.removeItem("jwt-token");
       localStorage.removeItem("oauth2");
-      const uri = new URL(location.href);
-      document.location.replace(uri.origin);
+
+      document.location.replace(new URL(location.href).origin);
     });
   },
 }

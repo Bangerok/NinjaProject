@@ -1,4 +1,4 @@
-import axios from './axiosApi'
+import axios from '../axios.api'
 
 export default {
   getUser() {

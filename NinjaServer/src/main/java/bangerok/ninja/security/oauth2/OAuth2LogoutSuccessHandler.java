@@ -9,20 +9,21 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
-    LogoutSuccessHandler {
+		LogoutSuccessHandler {
 
-    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
-    public OAuth2LogoutSuccessHandler(
-        HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
-        this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
-    }
+		public OAuth2LogoutSuccessHandler(
+				HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
+				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
+		}
 
-    @Override
-    public void onLogoutSuccess(
-        HttpServletRequest request,
-        HttpServletResponse response,
-        Authentication authentication) {
-        httpCookieOAuth2AuthorizationRequestRepository.removeAuthorizationRequestCookies(request, response);
-    }
+		@Override
+		public void onLogoutSuccess(
+				HttpServletRequest request,
+				HttpServletResponse response,
+				Authentication authentication) {
+				httpCookieOAuth2AuthorizationRequestRepository
+						.removeAuthorizationRequestCookies(request, response);
+		}
 }

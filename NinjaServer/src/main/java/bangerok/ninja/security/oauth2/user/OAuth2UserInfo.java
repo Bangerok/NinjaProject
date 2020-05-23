@@ -3,21 +3,22 @@ package bangerok.ninja.security.oauth2.user;
 import java.util.Map;
 
 public abstract class OAuth2UserInfo {
-    protected final Map<String, Object> attributes;
 
-    public OAuth2UserInfo(Map<String, Object> attributes) {
-        this.attributes = attributes;
-    }
+		protected final Map<String, Object> attributes;
 
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
+		public OAuth2UserInfo(Map<String, Object> attributes) {
+				this.attributes = attributes;
+		}
 
-    public abstract String getId();
+		public Map<String, Object> getAttributes() {
+				return attributes;
+		}
 
-    public abstract String getName();
+		public abstract String getId();
 
-    public abstract String getEmail();
+		public abstract String getName();
 
-    public abstract String getImageUrl();
+		public abstract String getEmail();
+
+		public abstract String getImageUrl();
 }

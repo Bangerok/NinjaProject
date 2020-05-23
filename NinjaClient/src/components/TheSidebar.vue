@@ -34,7 +34,7 @@
 </template>
 
 <script>
-  import logoIcon from "./../../assets/logo_app_bar.png"
+  import logoIcon from "../assets/logo_app_bar.png"
   import {mapState} from "vuex";
 
   export default {

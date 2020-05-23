@@ -3,42 +3,39 @@ package bangerok.ninja.payload;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-/**
- * Created by rajeevkumarsingh on 02/08/17.
- */
-
 public class SignUpRequest {
-    @NotBlank
-    private String name;
 
-    @NotBlank
-    @Email
-    private String email;
+		@NotBlank
+		private String name;
 
-    @NotBlank
-    private String password;
+		@NotBlank
+		@Email
+		private String email;
 
-    public String getName() {
-        return name;
-    }
+		@NotBlank
+		private String password;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+		public String getName() {
+				return name;
+		}
 
-    public String getEmail() {
-        return email;
-    }
+		public void setName(String name) {
+				this.name = name;
+		}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+		public String getEmail() {
+				return email;
+		}
 
-    public String getPassword() {
-        return password;
-    }
+		public void setEmail(String email) {
+				this.email = email;
+		}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+		public String getPassword() {
+				return password;
+		}
+
+		public void setPassword(String password) {
+				this.password = password;
+		}
 }

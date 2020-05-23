@@ -52,8 +52,10 @@ public class AuthController {
 		@JsonView(Views.FullProfile.class)
 		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
 
-				return Objects.isNull(userPrincipal) ? null : userDetailsRepo.findById(userPrincipal.getId())
-						.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
+				return Objects.isNull(userPrincipal) ? null
+						: userDetailsRepo.findById(userPrincipal.getId())
+								.orElseThrow(
+										() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
 		}
 
 		@PostMapping("/login")
