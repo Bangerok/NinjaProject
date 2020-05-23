@@ -37,7 +37,7 @@
 
     <v-spacer/>
 
-    <v-btn text class="mr-3" href="/api/logout">
+    <v-btn text class="mr-3" link @click="callLogout">
       <v-icon class="mr-1">
         fa-sign-out-alt
       </v-icon>
@@ -77,7 +77,7 @@
 </template>
 
 <script>
-  import {mapState, mapMutations} from 'vuex';
+  import {mapState, mapMutations, mapActions} from 'vuex';
 
   export default {
     name: 'AppBar',
@@ -99,6 +99,7 @@
     computed: mapState('settings', {'navigation': state => state.navigation}),
     methods: {
       ...mapMutations('settings', ['setMinVariant']),
+      ...mapActions('auth', ['callLogout']),
     },
     mounted() {
       let nightMode = localStorage.getItem('nightMode');

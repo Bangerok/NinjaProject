@@ -38,6 +38,7 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 								UserDetails userDetails = oauth ?
 										customUserDetailsService.loadUserByProviderId(id) :
 										customUserDetailsService.loadUserById(Long.parseLong(id));
+
 								UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 										userDetails, null, userDetails.getAuthorities());
 								authentication
