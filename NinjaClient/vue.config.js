@@ -1,10 +1,5 @@
 module.exports = {
-  "outputDir": "target/dist",
-  "assetsDir": "static",
-  "publicPath": "./",
   "devServer": {
-    "contentBase": "./dist",
-    "compress": true,
     "port": 8000,
     "proxy": {
       "/api" : {
@@ -19,7 +14,4 @@ module.exports = {
     "stats": "errors-only",
     "clientLogLevel": "error"
   },
-  "transpileDependencies": [
-    "vuetify"
-  ],
 }
