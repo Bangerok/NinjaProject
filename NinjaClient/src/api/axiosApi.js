@@ -4,7 +4,7 @@ import store from './../store/index'
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
     method: method,
-    url: url
+    url: '/api' + url
   }
 
   const headers = {

@@ -2,6 +2,9 @@ import axios from './axiosApi'
 
 export default {
   getUser() {
-    return axios.get('/api/auth/user');
+    return axios.get('/auth/user');
+  },
+  logout() {
+    return axios.post('/logout');
   },
 }

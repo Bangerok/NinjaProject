@@ -7,6 +7,7 @@ import bangerok.ninja.security.oauth2.CustomOAuth2UserService;
 import bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 import bangerok.ninja.security.oauth2.OAuth2AuthenticationFailureHandler;
 import bangerok.ninja.security.oauth2.OAuth2AuthenticationSuccessHandler;
+import bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -30,22 +31,23 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 )
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-		private final String DEFAULT_CLIENT_URL = "http://localhost:8000";
-
 		private final CustomUserDetailsService customUserDetailsService;
 		private final CustomOAuth2UserService customOAuth2UserService;
 		private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 		private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+		private final OAuth2LogoutSuccessHandler oAuth2LogoutSuccessHandler;
 
 		public WebSecurityConfig(
 				CustomUserDetailsService customUserDetailsService,
 				CustomOAuth2UserService customOAuth2UserService,
 				OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler,
-				OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler) {
+				OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler,
+				OAuth2LogoutSuccessHandler oAuth2LogoutSuccessHandler) {
 				this.customUserDetailsService = customUserDetailsService;
 				this.customOAuth2UserService = customOAuth2UserService;
 				this.oAuth2AuthenticationSuccessHandler = oAuth2AuthenticationSuccessHandler;
 				this.oAuth2AuthenticationFailureHandler = oAuth2AuthenticationFailureHandler;
+				this.oAuth2LogoutSuccessHandler = oAuth2LogoutSuccessHandler;
 		}
 
 		@Override
@@ -75,9 +77,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 								.anyRequest().authenticated()
 						)
 						.logout(l -> l
-								.deleteCookies("remove")
+								.deleteCookies("JSESSIONID")
 								.invalidateHttpSession(true)
-								.logoutSuccessUrl(DEFAULT_CLIENT_URL + "/login")
+								.logoutSuccessHandler(oAuth2LogoutSuccessHandler)
 								.permitAll()
 						)
 						.oauth2Login(o -> o
@@ -93,16 +95,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 								.and()
 								.successHandler(oAuth2AuthenticationSuccessHandler)
 								.failureHandler(oAuth2AuthenticationFailureHandler)
-						);
-
-				http.addFilterBefore(tokenAuthenticationFilter(),
-						UsernamePasswordAuthenticationFilter.class);
-
-						/*.oauth2Login(o -> o
-								.authorizationEndpoint()
-								.baseUri("/login").and()
-								.defaultSuccessUrl(DEFAULT_CLIENT_URL)
-						);*/
+						)
+						.addFilterBefore(tokenAuthenticationFilter(),
+								UsernamePasswordAuthenticationFilter.class);
 		}
 
 		@Bean(BeanIds.AUTHENTICATION_MANAGER)

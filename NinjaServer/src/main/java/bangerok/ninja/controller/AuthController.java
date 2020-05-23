@@ -1,6 +1,7 @@
 package bangerok.ninja.controller;
 
 import bangerok.ninja.domain.User;
+import bangerok.ninja.domain.Views;
 import bangerok.ninja.domain.enumeration.AuthProvider;
 import bangerok.ninja.exception.BadRequestException;
 import bangerok.ninja.exception.ResourceNotFoundException;
@@ -12,7 +13,9 @@ import bangerok.ninja.repo.UserDetailsRepo;
 import bangerok.ninja.security.CurrentUser;
 import bangerok.ninja.security.TokenProvider;
 import bangerok.ninja.security.UserPrincipal;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.net.URI;
+import java.util.Objects;
 import javax.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -46,8 +49,10 @@ public class AuthController {
 		}
 
 		@GetMapping("/user")
+		@JsonView(Views.FullProfile.class)
 		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-				return userDetailsRepo.findById(userPrincipal.getId())
+
+				return Objects.isNull(userPrincipal) ? null : userDetailsRepo.findById(userPrincipal.getId())
 						.orElseThrow(() -> new ResourceNotFoundException("User", "id", userPrincipal.getId()));
 		}
 
