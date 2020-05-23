@@ -1,6 +1,6 @@
-import mutations from "./mutations";
-import actions from "./actions";
-import getters from "./getters";
+import mutations from "./auth.mutations";
+import actions from "./auth.actions";
+import getters from "./auth.getters";
 
 let authModule = {
   namespaced: true,

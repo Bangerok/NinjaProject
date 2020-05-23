@@ -17,10 +17,10 @@
 </template>
 
 <script>
-  import TheNotificationMsg from "./components/basic/TheNotificationMsg";
-  import TheProgressBar from "./components/basic/TheProgressBar";
-  import TheAppBar from "./components/basic/TheToolbar";
-  import TheNavigationDrawer from "./components/basic/TheSidebar";
+  import TheNotificationMsg from "./components/TheNotificationMsg";
+  import TheProgressBar from "./components/TheProgressBar";
+  import TheAppBar from "./components/TheToolbar";
+  import TheNavigationDrawer from "./components/TheSidebar";
   import {mapState, mapActions, mapMutations} from 'vuex';
 
   export default {

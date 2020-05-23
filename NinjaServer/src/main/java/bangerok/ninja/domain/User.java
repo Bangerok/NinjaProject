@@ -45,7 +45,7 @@ public class User {
 		private String userpic;
 
 		@Email
-		@Column(unique=true)
+		@Column(unique = true)
 		private String email;
 
 		@JsonView(Views.FullProfile.class)

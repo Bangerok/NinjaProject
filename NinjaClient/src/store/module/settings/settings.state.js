@@ -1,6 +1,6 @@
-import mutations from "./mutations";
-import actions from "./actions";
-import getters from "./getters";
+import mutations from "./settings.mutations";
+import actions from "./settings.actions";
+import getters from "./settings.getters";
 
 let settingsModule = {
   namespaced: true,
