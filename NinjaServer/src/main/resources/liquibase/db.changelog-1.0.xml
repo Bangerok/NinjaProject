@@ -13,7 +13,7 @@
         <constraints nullable="false"/>
       </column>
 
-      <column name="base_updated_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()"/>
+      <column name="base_updated_date" type="TIMESTAMP" />
 
       <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
         <constraints nullable="false"/>
@@ -55,7 +55,7 @@
         <constraints nullable="false"/>
       </column>
 
-      <column name="base_updated_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()"/>
+      <column name="base_updated_date" type="TIMESTAMP" />
 
       <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
         <constraints nullable="false"/>
