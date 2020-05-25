@@ -11,8 +11,8 @@ import bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
 import bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 import java.time.LocalDateTime;
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -92,7 +92,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				Optional<Role> optionalRole = roleRepository.findByName("ROLE_USER");
 
 				if (optionalRole.isPresent()) {
-						List<Role> roles = Collections.singletonList(optionalRole.get());
+						Set<Role> roles = Collections.singleton(optionalRole.get());
 						user.setRoles(roles);
 				}
 
