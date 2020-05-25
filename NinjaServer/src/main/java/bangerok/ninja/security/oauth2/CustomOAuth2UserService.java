@@ -44,7 +44,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				} catch (AuthenticationException ex) {
 						throw ex;
 				} catch (Exception ex) {
-						// Throwing an instance of AuthenticationException will trigger the OAuth2AuthenticationFailureHandler
 						throw new InternalAuthenticationServiceException(ex.getMessage(), ex.getCause());
 				}
 		}
@@ -88,6 +87,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				user.setFullname(oAuth2UserInfo.getName());
 				user.setEmail(oAuth2UserInfo.getEmail());
 				user.setAvatar(oAuth2UserInfo.getImageUrl());
+				user.setLastVisit(LocalDateTime.now());
 
 				Optional<Role> optionalRole = roleRepository.findByName("ROLE_USER");
 
