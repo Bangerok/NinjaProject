@@ -1,4 +1,4 @@
-package bangerok.ninja.domain;
+package bangerok.ninja.domain.view;
 
 public final class Views {
 
