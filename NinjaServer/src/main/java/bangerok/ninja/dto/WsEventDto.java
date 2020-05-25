@@ -1,6 +1,6 @@
 package bangerok.ninja.dto;
 
-import bangerok.ninja.domain.Views;
+import bangerok.ninja.domain.view.Views;
 import com.fasterxml.jackson.annotation.JsonRawValue;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;

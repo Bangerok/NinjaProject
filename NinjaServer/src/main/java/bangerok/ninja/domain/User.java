@@ -10,7 +10,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -23,7 +22,7 @@ import lombok.ToString;
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(of = { "fullname" }, callSuper = true)
+@EqualsAndHashCode(of = { "username" }, callSuper = true)
 @ToString(of = { "fullname" }, callSuper = true)
 public class User extends BaseEntity {
 
@@ -58,7 +57,7 @@ public class User extends BaseEntity {
 		private LocalDateTime lastVisit;
 
 		@JsonIgnore
-		@ManyToMany(fetch = FetchType.EAGER)
+		@ManyToMany
 		@JoinTable(name = "user_roles",
 				joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "base_id")},
 				inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")})
