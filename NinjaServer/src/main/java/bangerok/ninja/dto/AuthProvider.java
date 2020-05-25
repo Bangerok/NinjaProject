@@ -1,4 +1,4 @@
-package bangerok.ninja.domain.enumeration;
+package bangerok.ninja.dto;
 
 public enum AuthProvider {
 		local, google

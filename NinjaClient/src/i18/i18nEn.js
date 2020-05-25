@@ -36,7 +36,7 @@ const messagesEn = {
   },
   buttons: {
     authBtn: 'Authorization',
-    clearBtn: 'Clear',
+    registerBtn: 'Register',
     closeBtn: 'Close',
   },
   tooltips: {

@@ -1,86 +1,66 @@
 package bangerok.ninja.domain;
 
-import bangerok.ninja.domain.enumeration.AuthProvider;
+import bangerok.ninja.domain.base.BaseEntity;
+import bangerok.ninja.dto.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Set;
-import javax.persistence.CascadeType;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-@Entity
-@Table(name = "Usr", uniqueConstraints = {
-		@UniqueConstraint(columnNames = "email")
-})
 @Data
-@EqualsAndHashCode(of = {"id"})
-@ToString(of = {"id", "name"})
-public class User {
+@Entity
+@Table(name = "users")
+@EqualsAndHashCode(of = { "fullname" }, callSuper = true)
+@ToString(of = { "fullname" }, callSuper = true)
+public class User extends BaseEntity {
 
-		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@JsonView(Views.IdName.class)
-		private long id;
+		@Column(name = "full_name")
+		private String fullname;
 
-		@JsonView(Views.IdName.class)
-		private String name;
+		@Column(name = "username")
+		private String username;
 
-		@JsonView(Views.IdName.class)
-		private String userpic;
+		@Column(name = "avatar")
+		private String avatar;
 
 		@Email
-		@Column(unique = true)
+		@Column(name = "email")
 		private String email;
 
-		@JsonView(Views.FullProfile.class)
-		private String gender;
-
-		@JsonView(Views.FullProfile.class)
-		private String locale;
-
+		@Column(name = "email_verified")
 		private Boolean emailVerified = false;
 
-		@JsonIgnore
+		@Column(name = "password")
 		private String password;
 
-		@NotNull
 		@Enumerated(EnumType.STRING)
-		private AuthProvider provider;
+		@Column(name = "auth_provider")
+		private AuthProvider authProvider;
 
+		@Column(name = "auth_provider_id")
 		private String providerId;
 
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
-		@JsonView(Views.FullProfile.class)
+		@Column(name = "last_visit_date")
 		private LocalDateTime lastVisit;
 
-		@JsonView(Views.FullProfile.class)
-		@OneToMany(
-				mappedBy = "subscriber",
-				orphanRemoval = true
-		)
-		private Set<UserSubscription> subscriptions = new HashSet<>();
-
-		@JsonView(Views.FullProfile.class)
-		@OneToMany(
-				mappedBy = "channel",
-				orphanRemoval = true,
-				cascade = CascadeType.ALL
-		)
-		private Set<UserSubscription> subscribers = new HashSet<>();
+		@JsonIgnore
+		@ManyToMany(fetch = FetchType.EAGER)
+		@JoinTable(name = "user_roles",
+				joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "base_id")},
+				inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")})
+		private List<Role> roles;
 }

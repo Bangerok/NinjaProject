@@ -29,10 +29,6 @@ function request(method, url, params, data, additionalHeaders) {
     axiosConfig.data = data;
   }
 
-  if (headers) {
-    axiosConfig.headers = headers;
-  }
-
   store.commit('settings/setLoading', true);
 
   axios.interceptors.response.use(function (response) {

@@ -1,15 +1,17 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/ninja_database
+    url: jdbc:postgresql://localhost/ninja_database?serverTimezone=UTC
     username: ninja
     password: ninja
+    driver-class-name: org.postgresql.Driver
   jpa:
-    generate-ddl: true
-    properties:
-      hibernate:
-        jdbc:
-          lob:
-            non_contextual_creation: true
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.xml
+    url: jdbc:postgresql://localhost/ninja_database?serverTimezone=UTC
+    user: ninja
+    password: ninja
   security:
     oauth2:
       client:

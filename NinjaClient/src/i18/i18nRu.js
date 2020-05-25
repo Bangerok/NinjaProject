@@ -36,7 +36,7 @@ const messagesRu = {
   },
   buttons: {
     authBtn: 'Авторизация',
-    clearBtn: 'Сбросить',
+    registerBtn: 'Регистрация',
     closeBtn: 'Закрыть',
   },
   tooltips: {
