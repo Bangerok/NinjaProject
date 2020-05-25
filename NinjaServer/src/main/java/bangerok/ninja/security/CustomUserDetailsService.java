@@ -3,7 +3,7 @@ package bangerok.ninja.security;
 
 import bangerok.ninja.domain.User;
 import bangerok.ninja.exception.ResourceNotFoundException;
-import bangerok.ninja.repo.UserDetailsRepo;
+import bangerok.ninja.repo.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,17 +13,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-		private final UserDetailsRepo userDetailsRepo;
+		private final UserRepository userRepository;
 
-		public CustomUserDetailsService(UserDetailsRepo userDetailsRepo) {
-				this.userDetailsRepo = userDetailsRepo;
+		public CustomUserDetailsService(UserRepository userRepository) {
+				this.userRepository = userRepository;
 		}
 
 		@Override
 		@Transactional
 		public UserDetails loadUserByUsername(String email)
 				throws UsernameNotFoundException {
-				User user = userDetailsRepo.findByEmail(email)
+				User user = userRepository.findByEmail(email)
 						.orElseThrow(() ->
 								new UsernameNotFoundException("User not found with email : " + email)
 						);
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		@Transactional
 		public UserDetails loadUserById(Long id) {
-				User user = userDetailsRepo.findById(id).orElseThrow(
+				User user = userRepository.findById(id).orElseThrow(
 						() -> new ResourceNotFoundException("User", "id", id)
 				);
 
@@ -42,7 +42,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		@Transactional
 		public UserDetails loadUserByProviderId(String id) {
-				User user = userDetailsRepo.findByProviderId(id).orElseThrow(
+				User user = userRepository.findByProviderId(id).orElseThrow(
 						() -> new ResourceNotFoundException("User", "id", id)
 				);
 

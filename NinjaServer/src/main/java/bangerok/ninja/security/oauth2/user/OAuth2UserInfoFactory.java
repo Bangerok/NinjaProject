@@ -1,7 +1,7 @@
 package bangerok.ninja.security.oauth2.user;
 
 import bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
-import bangerok.ninja.domain.enumeration.AuthProvider;
+import bangerok.ninja.dto.AuthProvider;
 
 import java.util.Map;
 

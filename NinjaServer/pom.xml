@@ -22,9 +22,9 @@
     <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
 
     <!-- Dependencies -->
-    <lombok.version>1.18.12</lombok.version>
     <jsoup.version>1.13.1</jsoup.version>
-    <postgresql.version>42.2.12</postgresql.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
   </properties>
 
   <dependencies>
@@ -87,24 +87,28 @@
     </dependency>
 
     <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-validator</artifactId>
-      <version>6.1.5.Final</version>
+      <version>${hibernate-validator.version}</version>
     </dependency>
 
     <!-- JWT -->
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
-      <version>0.5.1</version>
+      <version>${jjwt.version}</version>
     </dependency>
 
     <!-- Other -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
-      <scope>provided</scope>
+      <optional>true</optional>
     </dependency>
 
     <dependency>

@@ -6,11 +6,9 @@
       <the-app-bar v-if="user"></the-app-bar>
       <the-navigation-drawer v-if="user"></the-navigation-drawer>
       <v-content class="content text--primary">
-        <v-container fluid>
           <transition appear name="slide-fade">
             <router-view style="margin: 20px"></router-view>
           </transition>
-        </v-container>
       </v-content>
     </v-app>
   </div>
