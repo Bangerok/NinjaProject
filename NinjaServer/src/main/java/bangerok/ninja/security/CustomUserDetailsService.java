@@ -43,7 +43,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		@Transactional
 		public UserDetails loadUserByProviderId(String id) {
 				User user = userRepository.findByProviderId(id).orElseThrow(
-						() -> new ResourceNotFoundException("User", "id", id)
+						() -> new ResourceNotFoundException("User not found with provider", "id", id)
 				);
 
 				return UserPrincipal.create(user);

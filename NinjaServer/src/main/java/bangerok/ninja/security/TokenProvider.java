@@ -29,14 +29,11 @@ public class TokenProvider {
 		public String createToken(Authentication authentication) {
 				OAuth2User userPrincipal = (OAuth2User) authentication.getPrincipal();
 
-				Date now = new Date();
-				Date expiryDate = new Date(
-						now.getTime() + appProperties.getAuth().getTokenExpirationMsec());
-
 				return Jwts.builder()
 						.setSubject(userPrincipal.getAttribute("sub"))
 						.setIssuedAt(new Date())
-						.setExpiration(expiryDate)
+						.setExpiration(
+								new Date(new Date().getTime() + appProperties.getAuth().getTokenExpirationMsec()))
 						.signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
 						.compact();
 		}
