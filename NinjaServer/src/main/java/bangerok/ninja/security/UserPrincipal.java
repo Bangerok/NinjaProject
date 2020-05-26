@@ -1,20 +1,20 @@
 package bangerok.ninja.security;
 
 import bangerok.ninja.domain.User;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-
 public class UserPrincipal implements OAuth2User, UserDetails {
 
 		private final Long id;
-		private final String email;
+		private final String username;
 		private final String password;
 		private final Collection<? extends GrantedAuthority> authorities;
 		private Map<String, Object> attributes;
@@ -22,18 +22,19 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		public UserPrincipal(Long id, String email, String password,
 				Collection<? extends GrantedAuthority> authorities) {
 				this.id = id;
-				this.email = email;
+				this.username = email;
 				this.password = password;
 				this.authorities = authorities;
 		}
 
 		public static UserPrincipal create(User user) {
-				List<GrantedAuthority> authorities = Collections.
-						singletonList(new SimpleGrantedAuthority("ROLE_USER"));
+				List<GrantedAuthority> authorities = user.getRoles().stream()
+						.map(r -> new SimpleGrantedAuthority(r.getName())).collect(
+								Collectors.toList());
 
 				return new UserPrincipal(
 						user.getId(),
-						user.getEmail(),
+						Optional.ofNullable(user.getUsername()).orElse(user.getEmail()),
 						user.getPassword(),
 						authorities
 				);
@@ -49,10 +50,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 				return id;
 		}
 
-		public String getEmail() {
-				return email;
-		}
-
 		@Override
 		public String getPassword() {
 				return password;
@@ -60,7 +57,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
 		@Override
 		public String getUsername() {
-				return email;
+				return username;
 		}
 
 		@Override
