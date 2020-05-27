@@ -1,6 +1,10 @@
 import axios from 'axios'
 import store from '../store/store'
 
+const TOKEN_TYPE = "jwt-token"
+const AUTH_TYPE = "oauth2"
+const LOADING = "settings/setLoading"
+
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
     method: method,
@@ -11,12 +15,12 @@ function request(method, url, params, data, additionalHeaders) {
     'Content-Type': 'application/json',
   }
 
-  if (localStorage.getItem("jwt-token")) {
-    headers['Authorization'] = 'Bearer ' + localStorage.getItem("jwt-token");
+  if (localStorage.getItem(TOKEN_TYPE)) {
+    headers['Authorization'] = 'Bearer ' + localStorage.getItem(TOKEN_TYPE);
   }
 
   if (localStorage.getItem("oauth2")) {
-    headers['oauth2'] = localStorage.getItem("oauth2");
+    headers[AUTH_TYPE] = localStorage.getItem(AUTH_TYPE);
   }
 
   axiosConfig.headers = Object.assign(headers, additionalHeaders);
@@ -29,14 +33,17 @@ function request(method, url, params, data, additionalHeaders) {
     axiosConfig.data = data;
   }
 
-  store.commit('settings/setLoading', true);
+  store.commit(LOADING, true);
 
-  axios.interceptors.response.use(function (response) {
-    store.commit('settings/setLoading', false);
+  axios.interceptors.response.use(response => {
+    store.commit(LOADING, false);
     return Promise.resolve(response);
-  }, function (error) {
-    store.commit('settings/setLoading', false);
-    console.log(error);
+  }, error => {
+    store.commit(LOADING, false);
+    if (error.response.status === 401) {
+      console.log('ERROR: Unauthorized, logging out ...');
+      console.log(error.response.data)
+    }
   });
 
   return axios(axiosConfig);
