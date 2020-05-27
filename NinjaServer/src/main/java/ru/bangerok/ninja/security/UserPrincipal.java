@@ -13,6 +13,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
+/**
+ * Класс, который представляет аутентифицированного Spring Security Principal. Он содержит данные
+ * аутентифицированного пользователя.
+ * <p>
+ * Используется, например, здесь: {@link CustomUserDetailsService#loadUserById(Long)}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class UserPrincipal implements OAuth2User, UserDetails {
 
 		private final User user;

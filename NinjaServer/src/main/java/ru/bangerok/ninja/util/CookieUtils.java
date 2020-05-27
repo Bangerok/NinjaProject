@@ -1,12 +1,22 @@
 package ru.bangerok.ninja.util;
 
-import org.springframework.util.SerializationUtils;
+import java.util.Base64;
+import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Base64;
-import java.util.Optional;
+import org.springframework.util.SerializationUtils;
+import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 
+/**
+ * Класс для работы с cookie. Используется перед отправкой запроса авторизации провайдеру и после
+ * получения ответа от него.
+ * <p>
+ * Используется, например, здесь: {@link HttpCookieOAuth2AuthorizationRequestRepository#loadAuthorizationRequest(HttpServletRequest)}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class CookieUtils {
 
 		public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {

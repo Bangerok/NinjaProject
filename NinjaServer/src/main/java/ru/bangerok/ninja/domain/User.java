@@ -1,7 +1,7 @@
 package ru.bangerok.ninja.domain;
 
 import ru.bangerok.ninja.domain.base.BaseEntity;
-import ru.bangerok.ninja.dto.AuthProvider;
+import ru.bangerok.ninja.enumeration.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
@@ -19,11 +19,18 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
+/**
+ * Сущность пользователей. Используется для хранения данных авторизованных пользователей и их
+ * ролей.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Data
 @Entity
 @Table(name = "users")
-@EqualsAndHashCode(of = { "username" }, callSuper = true)
-@ToString(of = { "fullname" }, callSuper = true)
+@EqualsAndHashCode(of = {"username"}, callSuper = true)
+@ToString(of = {"fullname"}, callSuper = true)
 public class User extends BaseEntity {
 
 		@Column(name = "full_name")

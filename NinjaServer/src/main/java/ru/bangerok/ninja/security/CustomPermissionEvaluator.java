@@ -4,7 +4,16 @@ import java.io.Serializable;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import ru.bangerok.ninja.config.MethodSecurityConfig;
 
+/**
+ * Класс, содержащий меторды проверки наличия у пользователя разрешений на какую либо сущность.
+ * <p>
+ * Подключается здесь: {@link MethodSecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 		@Override

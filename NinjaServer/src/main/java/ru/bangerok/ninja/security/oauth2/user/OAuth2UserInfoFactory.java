@@ -1,10 +1,20 @@
 package ru.bangerok.ninja.security.oauth2.user;
 
-import ru.bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
-import ru.bangerok.ninja.dto.AuthProvider;
-
 import java.util.Map;
+import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
+import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
 
+/**
+ * Фабричный класс, который возвращает объект oauth2 авторизации с атрибутами, полученными от
+ * внешнего провайдера. Можно расширить для работы с несколькими внешними провайдерами, а не только
+ * с Google.
+ * <p>
+ * Используется, например, здесь: {@link CustomOAuth2UserService}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class OAuth2UserInfoFactory {
 
 		public static OAuth2UserInfo getOAuth2UserInfo(String registrationId,

@@ -7,6 +7,13 @@ import org.springframework.security.access.expression.method.MethodSecurityExpre
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.method.configuration.GlobalMethodSecurityConfiguration;
 
+/**
+ * Конфигурационный java класс для того, чтобы использовать кастомный класс, в котором определены
+ * методы, которые можно вызывать из @PreAuthorize или @PostAuthorize.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {

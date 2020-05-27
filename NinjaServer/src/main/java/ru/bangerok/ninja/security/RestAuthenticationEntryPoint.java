@@ -7,7 +7,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import ru.bangerok.ninja.config.SecurityConfig;
 
+/**
+ * Класс, который вызывается, когда пользователь пытается получить доступ к защищенному ресурсу без
+ * аутентификации. В этом случае мы просто возвращаем 401 Unauthorized response.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
 		private static final Logger logger = LoggerFactory

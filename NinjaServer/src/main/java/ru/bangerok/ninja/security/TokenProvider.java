@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.security;
 
-import ru.bangerok.ninja.config.AppPropertiesConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -14,7 +13,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+import ru.bangerok.ninja.config.AppPropertiesConfig;
+import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.payload.LoginRequest;
 
+/**
+ * Сервисный класс, который содержит код для генерации и проверки Json Web токенов.
+ * <p>
+ * Используется, например, здесь: {@link AuthController#authenticateUser(LoginRequest)}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Service
 public class TokenProvider {
 

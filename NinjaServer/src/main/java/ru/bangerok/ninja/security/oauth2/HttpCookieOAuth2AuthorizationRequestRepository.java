@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.security.oauth2;
 
+import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.util.CookieUtils;
 import com.nimbusds.oauth2.sdk.util.StringUtils;
 import org.springframework.security.oauth2.client.web.AuthorizationRequestRepository;
@@ -9,6 +10,15 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * Класс, который предоставляет функциональность для хранения запроса авторизации в файлах cookie и
+ * его получение.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		AuthorizationRequestRepository<OAuth2AuthorizationRequest> {

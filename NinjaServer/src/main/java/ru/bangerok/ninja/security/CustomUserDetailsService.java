@@ -1,15 +1,24 @@
 package ru.bangerok.ninja.security;
 
 
-import ru.bangerok.ninja.domain.User;
-import ru.bangerok.ninja.exception.ResourceNotFoundException;
-import ru.bangerok.ninja.repo.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.domain.User;
+import ru.bangerok.ninja.exception.ResourceNotFoundException;
+import ru.bangerok.ninja.repo.UserRepository;
 
+/**
+ * Сервисный класс, который позволяет получить пользователя каким либо образом.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

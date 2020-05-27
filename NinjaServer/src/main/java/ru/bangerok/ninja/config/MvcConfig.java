@@ -4,6 +4,14 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * Конфигурационный java класс для настройки разрешенных хостов запросов,
+ * разрешенных методов rest, разрешенных заголовков в запросах к серверу
+ * и т.д.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
