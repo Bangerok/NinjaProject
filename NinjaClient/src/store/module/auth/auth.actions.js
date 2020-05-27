@@ -3,7 +3,7 @@ import authApi from "../../../api/service/auth.service";
 const authActions = {
   async getCurrentUser({commit}) {
     await authApi.getUser().then(response => {
-      commit('setCurrentUser', response.data !== '' ? response.data : null);
+      commit('setCurrentUser', response && response.data !== '' ? response.data : null);
     });
   },
   async callLogout() {
