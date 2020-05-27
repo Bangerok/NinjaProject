@@ -15,17 +15,13 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 
 public class UserPrincipal implements OAuth2User, UserDetails {
 
-		private final Long id;
-		private final String username;
-		private final String password;
+		private final User user;
 		private final Collection<? extends GrantedAuthority> authorities;
 		private Map<String, Object> attributes;
 
-		public UserPrincipal(Long id, String email, String password,
+		public UserPrincipal(User user,
 				Collection<? extends GrantedAuthority> authorities) {
-				this.id = id;
-				this.username = email;
-				this.password = password;
+				this.user = user;
 				this.authorities = authorities;
 		}
 
@@ -38,12 +34,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 						}
 				}
 
-				return new UserPrincipal(
-						user.getId(),
-						Optional.ofNullable(user.getUsername()).orElse(user.getEmail()),
-						user.getPassword(),
-						authorities
-				);
+				return new UserPrincipal(user, authorities);
 		}
 
 		public static UserPrincipal create(User user, Map<String, Object> attributes) {
@@ -53,17 +44,17 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		}
 
 		public Long getId() {
-				return id;
+				return user.getId();
 		}
 
 		@Override
 		public String getPassword() {
-				return password;
+				return user.getPassword();
 		}
 
 		@Override
 		public String getUsername() {
-				return username;
+				return Optional.ofNullable(user.getUsername()).orElse(user.getEmail());
 		}
 
 		@Override
@@ -102,6 +93,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
 		@Override
 		public String getName() {
-				return String.valueOf(id);
+				return String.valueOf(user.getId());
 		}
 }
