@@ -2,7 +2,7 @@ package bangerok.ninja.security.oauth2;
 
 import static bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
-import bangerok.ninja.config.WebAppPropertiesConfig;
+import bangerok.ninja.config.AppPropertiesConfig;
 import bangerok.ninja.exception.BadRequestException;
 import bangerok.ninja.security.TokenProvider;
 import bangerok.ninja.util.CookieUtils;
@@ -22,12 +22,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 		private final TokenProvider tokenProvider;
-		private final WebAppPropertiesConfig appProperties;
+		private final AppPropertiesConfig appProperties;
 		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
 		@Autowired
 		OAuth2AuthenticationSuccessHandler(TokenProvider tokenProvider,
-				WebAppPropertiesConfig appProperties,
+				AppPropertiesConfig appProperties,
 				HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
 				this.tokenProvider = tokenProvider;
 				this.appProperties = appProperties;

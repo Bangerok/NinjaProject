@@ -1,11 +1,13 @@
 package bangerok.ninja.security;
 
+import bangerok.ninja.domain.Privilege;
+import bangerok.ninja.domain.Role;
 import bangerok.ninja.domain.User;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +30,13 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		}
 
 		public static UserPrincipal create(User user) {
-				List<GrantedAuthority> authorities = user.getRoles().stream()
-						.map(r -> new SimpleGrantedAuthority(r.getName())).collect(
-								Collectors.toList());
+				List<GrantedAuthority> authorities = new ArrayList<>();
+				for (Role role : user.getRoles()) {
+						authorities.add(new SimpleGrantedAuthority(role.getName()));
+						for (Privilege privilege : role.getPrivileges()) {
+								authorities.add(new SimpleGrantedAuthority(privilege.getName()));
+						}
+				}
 
 				return new UserPrincipal(
 						user.getId(),
