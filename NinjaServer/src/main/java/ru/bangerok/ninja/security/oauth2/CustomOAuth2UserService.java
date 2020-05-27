@@ -1,14 +1,5 @@
 package ru.bangerok.ninja.security.oauth2;
 
-import ru.bangerok.ninja.domain.Role;
-import ru.bangerok.ninja.domain.User;
-import ru.bangerok.ninja.dto.AuthProvider;
-import ru.bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
-import ru.bangerok.ninja.repo.RoleRepository;
-import ru.bangerok.ninja.repo.UserRepository;
-import ru.bangerok.ninja.security.UserPrincipal;
-import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
-import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Optional;
@@ -22,7 +13,26 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
+import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.domain.Role;
+import ru.bangerok.ninja.domain.User;
+import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
+import ru.bangerok.ninja.repo.RoleRepository;
+import ru.bangerok.ninja.repo.UserRepository;
+import ru.bangerok.ninja.security.UserPrincipal;
+import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
+import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 
+/**
+ * Сервисный класс, который обновляет или регистрирует нового пользователя, используя полученные
+ * данные с внешнего провайдера авторизации.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
@@ -68,7 +78,8 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 								.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
 								throw new OAuth2AuthenticationProcessingException(
 										"Looks like you're signed up with " +
-												user.getAuthProvider() + " account. Please use your " + user.getAuthProvider() +
+												user.getAuthProvider() + " account. Please use your " + user
+												.getAuthProvider() +
 												" account to login.");
 						}
 						user = updateExistingUser(user, oAuth2UserInfo);

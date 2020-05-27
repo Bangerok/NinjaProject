@@ -17,10 +17,16 @@ import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
+/**
+ * Базовый класс для всех сущностей.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Data
 @MappedSuperclass
-@EqualsAndHashCode(of = { "id" })
-@ToString(of = { "id" })
+@EqualsAndHashCode(of = {"id"})
+@ToString(of = {"id"})
 public class BaseEntity {
 
 		@Id
@@ -41,18 +47,18 @@ public class BaseEntity {
 		private BaseStatus status;
 
 		@PrePersist
-		private void prePersistFunction(){
+		private void prePersistFunction() {
 				created = new Date();
 				status = BaseStatus.ACTIVE;
 		}
 
 		@PreUpdate
-		private void preUpdateFunction(){
+		private void preUpdateFunction() {
 				updated = new Date();
 		}
 
 		@PreRemove
-		private void preRemoveFunction(){
+		private void preRemoveFunction() {
 				status = BaseStatus.DELETED;
 		}
 }

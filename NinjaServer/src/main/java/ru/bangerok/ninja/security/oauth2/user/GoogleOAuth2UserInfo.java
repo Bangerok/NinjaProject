@@ -2,6 +2,14 @@ package ru.bangerok.ninja.security.oauth2.user;
 
 import java.util.Map;
 
+/**
+ * Класс для данных пользователя, полученные через Google провайдер авторизации.
+ * <p>
+ * Используется, например, здесь: {@link OAuth2UserInfoFactory}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
 
 		public GoogleOAuth2UserInfo(Map<String, Object> attributes) {

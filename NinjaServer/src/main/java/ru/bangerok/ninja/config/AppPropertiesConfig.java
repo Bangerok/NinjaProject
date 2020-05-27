@@ -3,7 +3,17 @@ package ru.bangerok.ninja.config;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import ru.bangerok.ninja.NinjaApplication;
 
+/**
+ * Конфигурационный java класс для загрузки настроек spring из файла application.yaml по префиксу -
+ * app.
+ * <p>
+ * Подключается здесь: {@link NinjaApplication}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @ConfigurationProperties(prefix = "app")
 public class AppPropertiesConfig {
 

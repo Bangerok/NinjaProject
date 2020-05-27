@@ -2,7 +2,6 @@ package ru.bangerok.ninja.security.oauth2;
 
 import static ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
-import ru.bangerok.ninja.util.CookieUtils;
 import java.io.IOException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,17 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.util.CookieUtils;
 
+/**
+ * Класс, используемый Spring Security при провальном выполнении аутентификации пользователя.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Component
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 

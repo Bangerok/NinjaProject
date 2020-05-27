@@ -1,6 +1,11 @@
 package ru.bangerok.ninja.security;
 
+import java.io.IOException;
 import java.util.Objects;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +16,24 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+import ru.bangerok.ninja.config.SecurityConfig;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-
+/**
+ * Класс, который используется для чтения токена аутентификации JWT из запроса, его проверки и
+ * установки SecurityContext Spring Security, если токен действителен.
+ * <p>
+ * Подключается здесь: {@link SecurityConfig}.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
 		private static final Logger logger = LoggerFactory.getLogger(TokenAuthenticationFilter.class);
+
 		@Autowired
 		private TokenProvider tokenProvider;
+
 		@Autowired
 		private CustomUserDetailsService customUserDetailsService;
 

@@ -13,11 +13,18 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.minidev.json.annotate.JsonIgnore;
 
+/**
+ * Сущность ролей. Используется для глобальных прав сервера. Например, на отдельный контроллер или
+ * запрос. Так же у каждой роли есть свой список привилегий.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @Data
 @Entity
 @Table(name = "roles")
-@EqualsAndHashCode(of = { "name" }, callSuper = true)
-@ToString(of = { "name" }, callSuper = true)
+@EqualsAndHashCode(of = {"name"}, callSuper = true)
+@ToString(of = {"name"}, callSuper = true)
 public class Role extends BaseEntity {
 
 		@Column(name = "name")

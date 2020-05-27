@@ -1,17 +1,5 @@
 package ru.bangerok.ninja.controller;
 
-import ru.bangerok.ninja.domain.User;
-import ru.bangerok.ninja.dto.AuthProvider;
-import ru.bangerok.ninja.exception.BadRequestException;
-import ru.bangerok.ninja.payload.ApiResponse;
-import ru.bangerok.ninja.payload.AuthResponse;
-import ru.bangerok.ninja.payload.LoginRequest;
-import ru.bangerok.ninja.payload.SignUpRequest;
-import ru.bangerok.ninja.repo.RoleRepository;
-import ru.bangerok.ninja.repo.UserRepository;
-import ru.bangerok.ninja.security.CurrentUser;
-import ru.bangerok.ninja.security.TokenProvider;
-import ru.bangerok.ninja.security.UserPrincipal;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -29,7 +17,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bangerok.ninja.domain.User;
+import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.exception.BadRequestException;
+import ru.bangerok.ninja.payload.ApiResponse;
+import ru.bangerok.ninja.payload.AuthResponse;
+import ru.bangerok.ninja.payload.LoginRequest;
+import ru.bangerok.ninja.payload.SignUpRequest;
+import ru.bangerok.ninja.repo.RoleRepository;
+import ru.bangerok.ninja.repo.UserRepository;
+import ru.bangerok.ninja.security.CurrentUser;
+import ru.bangerok.ninja.security.TokenProvider;
+import ru.bangerok.ninja.security.UserPrincipal;
 
+/**
+ * Контроллер для получения запросов с клиента, связанные с авторизацией/аутентификацией
+ * пользователей.
+ *
+ * @author v.kuznetsov
+ * @version 1.0
+ */
 @RestController
 @RequestMapping("auth")
 public class AuthController {
@@ -103,6 +110,7 @@ public class AuthController {
 
 				URI location = URI.create("http://localhost:8000");
 				return ResponseEntity.created(location)
-						.body(new ApiResponse(true, "User " + savedUser.getUsername() + " registered successfully"));
+						.body(new ApiResponse(true,
+								"User " + savedUser.getUsername() + " registered successfully"));
 		}
 }
