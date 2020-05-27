@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "app")
-public class WebAppPropertiesConfig {
+public class AppPropertiesConfig {
 
 		private final Auth auth = new Auth();
 		private final OAuth2 oauth2 = new OAuth2();

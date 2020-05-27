@@ -31,5 +31,5 @@ public class Role extends BaseEntity {
 		@JoinTable(name = "role_privileges",
 				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},
 				inverseJoinColumns = {@JoinColumn(name = "privilege_id", referencedColumnName = "base_id")})
-		private Set<Role> privileges;
+		private Set<Privilege> privileges;
 }

@@ -1,6 +1,6 @@
 package bangerok.ninja.security;
 
-import bangerok.ninja.config.WebAppPropertiesConfig;
+import bangerok.ninja.config.AppPropertiesConfig;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -20,9 +20,9 @@ public class TokenProvider {
 
 		private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-		private final WebAppPropertiesConfig appProperties;
+		private final AppPropertiesConfig appProperties;
 
-		public TokenProvider(WebAppPropertiesConfig appProperties) {
+		public TokenProvider(AppPropertiesConfig appProperties) {
 				this.appProperties = appProperties;
 		}
 

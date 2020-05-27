@@ -151,11 +151,11 @@
 
   <changeSet id="1.0.8" author="vladislav.kuznetsov">
     <insert tableName="privileges">
-      <column name="name" value="PRIVILEGE_READ"/>
+      <column name="name" value="USER_READ_PRIVILEGE"/>
     </insert>
 
     <insert tableName="privileges">
-      <column name="name" value="PRIVILEGE_WRITE"/>
+      <column name="name" value="USER_WRITE_PRIVILEGE"/>
     </insert>
   </changeSet>
 
