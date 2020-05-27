@@ -94,9 +94,8 @@ public class AuthController {
 				User user = new User();
 				user.setUsername(signUpRequest.getUsername());
 				user.setEmail(signUpRequest.getEmail());
-				user.setPassword(signUpRequest.getPassword());
 				user.setAuthProvider(AuthProvider.local);
-				user.setPassword(passwordEncoder.encode(user.getPassword()));
+				user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
 				roleRepository.findByName("ROLE_USER").ifPresent(role -> user.getRoles().add(role));
 
