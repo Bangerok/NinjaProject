@@ -24,8 +24,19 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
  */
 public class UserPrincipal implements OAuth2User, UserDetails {
 
+		/**
+		 * Private поле, хранящее в себе сущность аутентифицированного пользователя.
+		 */
 		private final User user;
+
+		/**
+		 * Private поле, хранящее в себе список прав аутентифицированного пользователя.
+		 */
 		private final Collection<? extends GrantedAuthority> authorities;
+
+		/**
+		 * Private поле, хранящее в себе список атрибутов, полученных с внешного провайдера.
+		 */
 		private Map<String, Object> attributes;
 
 		public UserPrincipal(User user,
@@ -34,6 +45,13 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 				this.authorities = authorities;
 		}
 
+		/**
+		 * Static метод для создания и заполнения аутентифицированного пользователя, созданного обычным
+		 * способом.
+		 *
+		 * @param user авторизующийся пользователь.
+		 * @return аутентифицированный пользователь.
+		 */
 		public static UserPrincipal create(User user) {
 				List<GrantedAuthority> authorities = new ArrayList<>();
 				for (Role role : user.getRoles()) {
@@ -46,6 +64,13 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 				return new UserPrincipal(user, authorities);
 		}
 
+		/**
+		 * Static метод для создания и заполнения аутентифицированного пользователя, созданного после
+		 * авторизации через внешнего провайдера.
+		 *
+		 * @param user авторизующийся пользователь.
+		 * @return аутентифицированный пользователь.
+		 */
 		public static UserPrincipal create(User user, Map<String, Object> attributes) {
 				UserPrincipal userPrincipal = UserPrincipal.create(user);
 				userPrincipal.setAttributes(attributes);

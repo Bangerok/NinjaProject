@@ -13,21 +13,42 @@ import java.util.Map;
  */
 public abstract class OAuth2UserInfo {
 
+		/**
+		 * Protected поле, в котором хранятся атрибуты пользователя с внешнего провайдера авторизации.
+		 */
 		protected final Map<String, Object> attributes;
 
 		public OAuth2UserInfo(Map<String, Object> attributes) {
 				this.attributes = attributes;
 		}
 
-		public Map<String, Object> getAttributes() {
-				return attributes;
-		}
-
+		/**
+		 * Абстрактный метод для получения идентификатора пользователя во внешнем провайдере
+		 * авторизации.
+		 *
+		 * @return идентификатор пользователя во внешнем провайдере авторизации.
+		 */
 		public abstract String getId();
 
+		/**
+		 * Абстрактный метод для получения имени пользователя во внешнем провайдере авторизации.
+		 *
+		 * @return имя пользователя во внешнем провайдере авторизации.
+		 */
 		public abstract String getName();
 
+		/**
+		 * Абстрактный метод для получения электронной почты пользователя во внешнем провайдере
+		 * авторизации.
+		 *
+		 * @return электронная почта пользователя во внешнем провайдере авторизации.
+		 */
 		public abstract String getEmail();
 
+		/**
+		 * Абстрактный метод для получения аватарки пользователя во внешнем провайдере авторизации.
+		 *
+		 * @return ссылка на аватарку пользователя во внешнем провайдере авторизации.
+		 */
 		public abstract String getImageUrl();
 }

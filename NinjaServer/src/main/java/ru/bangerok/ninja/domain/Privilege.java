@@ -23,9 +23,15 @@ import lombok.ToString;
 @ToString(of = {"name"}, callSuper = true)
 public class Privilege extends BaseEntity {
 
+		/**
+		 * Private поле, в котором хранится наименование привилегии в базе данных.
+		 */
 		@Column(name = "name")
 		private String name;
 
+		/**
+		 * Private поле, в котором хранится список ролей, которым доступна данная привилегия.
+		 */
 		@ManyToMany(mappedBy = "privileges")
 		private List<Role> roles;
 }

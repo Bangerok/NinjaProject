@@ -16,6 +16,13 @@ import ru.bangerok.ninja.controller.AuthController;
 @RequiredArgsConstructor
 public class ApiResponse {
 
+		/**
+		 * Private поле, говорящее об успешности выполненного запроса.
+		 */
 		private final boolean success;
+
+		/**
+		 * Private поле, содержащее сообщение о конечном результате выполнения запроса.
+		 */
 		private final String message;
 }

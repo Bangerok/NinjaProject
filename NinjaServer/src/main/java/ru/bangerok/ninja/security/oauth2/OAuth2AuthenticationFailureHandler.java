@@ -31,6 +31,12 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
 		}
 
+		/**
+		 * Метод, вызывающийся при ошибке аутентификации пользователя, и перенаправляет на клиент.
+		 *
+		 * @param request  запрос.
+		 * @param response ответ запроса.
+		 */
 		@Override
 		public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
 				AuthenticationException exception) throws IOException {

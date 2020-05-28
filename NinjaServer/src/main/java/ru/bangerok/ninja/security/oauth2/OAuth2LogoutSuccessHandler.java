@@ -27,6 +27,14 @@ public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
 				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
 		}
 
+		/**
+		 * Метод, вызывающийся при успешном logout пользователя, предназначенный для удаления cookie
+		 * авторизации из ответа.
+		 *
+		 * @param request        запрос.
+		 * @param response       ответ запроса.
+		 * @param authentication аутентификация.
+		 */
 		@Override
 		public void onLogoutSuccess(
 				HttpServletRequest request,

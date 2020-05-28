@@ -21,6 +21,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		@Autowired
 		private UserRepository userRepository;
 
+		/**
+		 * Метод для тестирования поиска пользователя в базе данных по id.
+		 */
 		@Test
 		void checkingUserFindById() {
 				User newUser = userRepository.save(factory.getNewUser());
@@ -30,6 +33,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 				userRepository.delete(userFoundById);
 		}
 
+		/**
+		 * Метод для тестирования поиска пользователя в базе данных по электронной почте.
+		 */
 		@Test
 		void checkingUserFindByEmail() {
 				User newUser = userRepository.save(factory.getNewUser());
@@ -39,6 +45,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 				userRepository.delete(userFoundByEmail);
 		}
 
+		/**
+		 * Метод для тестирования поиска пользователя в базе данных по providerId.
+		 */
 		@Test
 		void checkingUserFindByProviderId() {
 				User newUser = userRepository.save(factory.getNewUser());
@@ -48,6 +57,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 				userRepository.delete(userFoundByProviderId);
 		}
 
+		/**
+		 * Метод для тестирования проверки доступности электронной почты в базе данных.
+		 */
 		@Test
 		void checkingUserExistByEmail() {
 				User newUser = userRepository.save(factory.getNewUser());

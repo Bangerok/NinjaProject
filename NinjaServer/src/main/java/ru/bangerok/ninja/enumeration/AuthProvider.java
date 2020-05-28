@@ -11,5 +11,13 @@ import ru.bangerok.ninja.domain.User;
  * @version 1.0
  */
 public enum AuthProvider {
-		local, google
+		/**
+		 * Локальный тип провайдера, который устанавливается при стандартной регистрации.
+		 */
+		local,
+
+		/**
+		 * Тип внешнего провайдер, который устанавливается при oauth2 авторизации через Google.
+		 */
+		google
 }

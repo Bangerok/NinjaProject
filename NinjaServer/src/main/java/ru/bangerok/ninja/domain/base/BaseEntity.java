@@ -9,7 +9,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.PrePersist;
-import javax.persistence.PreRemove;
 import javax.persistence.PreUpdate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -29,36 +28,53 @@ import org.springframework.data.annotation.LastModifiedDate;
 @ToString(of = {"id"})
 public class BaseEntity {
 
+		/**
+		 * Private поле, в котором хранится информация об id записи в базе данных. Аавтоматически
+		 * генерируется при сохранении в базу данных. Предварительно назначать не нужно.
+		 */
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		@Column(name = "base_id")
 		private Long id;
 
+		/**
+		 * Private поле, в котором хранится информация о дате сохранения записи в базе данных.
+		 * Предварительно назначать не нужно.
+		 */
 		@CreatedDate
 		@Column(name = "base_created_date")
 		private Date created;
 
+		/**
+		 * Private поле, в котором хранится информация о дате обновления записи в базе данных.
+		 * Предварительно назначать не нужно.
+		 */
 		@LastModifiedDate
 		@Column(name = "base_updated_date")
 		private Date updated;
 
+		/**
+		 * Private поле, в котором хранится информация о статусе записи в базе данных. Предварительно
+		 * назначать не нужно.
+		 */
 		@Enumerated(EnumType.STRING)
 		@Column(name = "base_status")
 		private BaseStatus status;
 
+		/**
+		 * Private метод, который выполняется перед сохранением записи в базу данных.
+		 */
 		@PrePersist
 		private void prePersistFunction() {
 				created = new Date();
 				status = BaseStatus.ACTIVE;
 		}
 
+		/**
+		 * Private метод, который выполняется перед обновлением записи в базе данных.
+		 */
 		@PreUpdate
 		private void preUpdateFunction() {
 				updated = new Date();
-		}
-
-		@PreRemove
-		private void preRemoveFunction() {
-				status = BaseStatus.DELETED;
 		}
 }
