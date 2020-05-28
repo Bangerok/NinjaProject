@@ -9,5 +9,13 @@ package ru.bangerok.ninja.domain.base;
  * @version 1.0
  */
 public enum BaseStatus {
-		ACTIVE, DELETED
+		/**
+		 * Статус, сигнализирующий об активности записи в базе данных.
+		 */
+		ACTIVE,
+
+		/**
+		 * Статус, сигнализирующий об неактивности записи в базе данных.
+		 */
+		DELETED
 }

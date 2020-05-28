@@ -17,5 +17,11 @@ import ru.bangerok.ninja.domain.Role;
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
+		/**
+		 * Метод для поиска роли по ее имени в базе данных.
+		 *
+		 * @param name наименование роли.
+		 * @return Optional с найденной ролью.
+		 */
 		Optional<Role> findByName(String name);
 }

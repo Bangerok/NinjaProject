@@ -16,10 +16,16 @@ import ru.bangerok.ninja.controller.AuthController;
 @Data
 public class LoginRequest {
 
+		/**
+		 * Private поле, содержащее электронную почту пользователя при авторизации с клиента.
+		 */
 		@NotBlank
 		@Email
 		private String email;
 
+		/**
+		 * Private поле, содержащее пароль пользователя при авторизации с клиента.
+		 */
 		@NotBlank
 		private String password;
 }

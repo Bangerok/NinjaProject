@@ -15,6 +15,11 @@ import ru.bangerok.ninja.repository.AbstractRepositoryTest;
  */
 public class EntitiesFactory {
 
+  /**
+   * Метод для генерации пользователя для дальнейшего его удаления.
+   *
+   * @return сгенерированный пользователь.
+   */
   public User getNewUser() {
     User user = new User();
     user.setPassword("TestUserPassword");

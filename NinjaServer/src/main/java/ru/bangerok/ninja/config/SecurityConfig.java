@@ -50,6 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				this.oAuth2LogoutSuccessHandler = oAuth2LogoutSuccessHandler;
 		}
 
+		/**
+		 * Метод для настройки аутентификации на использование кастомного UserDetailService вместе с
+		 * шифрованием пароля.
+		 *
+		 * @param authenticationManagerBuilder authBuilder для настройки.
+		 */
 		@Override
 		public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
 				throws Exception {
@@ -58,6 +64,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.passwordEncoder(passwordEncoder());
 		}
 
+		/**
+		 * Метод для настройки связи клиента с сервером, разрешений и подключение кастомных сервисов.
+		 *
+		 * @param http конфигурация соединения клиента с сервером.
+		 */
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 				http

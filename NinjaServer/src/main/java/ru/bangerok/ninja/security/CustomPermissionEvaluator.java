@@ -16,6 +16,14 @@ import ru.bangerok.ninja.config.MethodSecurityConfig;
  */
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
+		/**
+		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 *
+		 * @param auth               данные аутентификации.
+		 * @param targetDomainObject объект, доступ к которому запрашивается.
+		 * @param permission         наименование разрешения.
+		 * @return true, если права доступа есть, иначе false.
+		 */
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
 				Object permission) {
@@ -26,6 +34,15 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				return hasPrivilege(auth, targetType, permission.toString().toUpperCase());
 		}
 
+		/**
+		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 *
+		 * @param auth       данные аутентификации.
+		 * @param targetId   идентификатор целевого объекта доступа.
+		 * @param targetType тип целевого объекта доступа.
+		 * @param permission наименование разрешения.
+		 * @return true, если права доступа есть, иначе false.
+		 */
 		@Override
 		public boolean hasPermission(Authentication auth, Serializable targetId, String targetType,
 				Object permission) {
@@ -35,6 +52,14 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				return hasPrivilege(auth, targetType.toUpperCase(), permission.toString().toUpperCase());
 		}
 
+		/**
+		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 *
+		 * @param auth       данные аутентификации.
+		 * @param targetType тип целевого объекта доступа.
+		 * @param permission наименование разрешения.
+		 * @return true, если права на объект найдены, иначе false.
+		 */
 		private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
 				for (final GrantedAuthority grantedAuth : auth.getAuthorities()) {
 						System.out.println("here " + grantedAuth);

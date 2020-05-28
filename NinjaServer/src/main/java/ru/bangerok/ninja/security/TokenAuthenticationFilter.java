@@ -37,6 +37,14 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		@Autowired
 		private CustomUserDetailsService customUserDetailsService;
 
+		/**
+		 * Метод для предварительной проверки аутентификационных данных в запросе перед пропуском его
+		 * дальше.
+		 *
+		 * @param request     данные запроса.
+		 * @param response    данные ответа.
+		 * @param filterChain цепочка запросов.
+		 */
 		@Transactional
 		@Override
 		protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -66,6 +74,12 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 				filterChain.doFilter(request, response);
 		}
 
+		/**
+		 * Метод для получения из заголовков запроса токена аутентификации.
+		 *
+		 * @param request данные запроса.
+		 * @return строка с токеном, если он есть, иначе null
+		 */
 		private String getJwtFromRequest(HttpServletRequest request) {
 				String bearerToken = request.getHeader("Authorization");
 				if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {

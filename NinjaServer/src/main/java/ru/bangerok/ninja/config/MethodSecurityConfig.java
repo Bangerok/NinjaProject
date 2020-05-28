@@ -18,6 +18,12 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
+		/**
+		 * Метод для создания и настройки handler, который вызывается при использовании выражений
+		 * в @PreAuthorize или в @PostAuthorize.
+		 *
+		 * @return настроенный handler с кастомным сервисным классом внутри.
+		 */
 		@Override
 		protected MethodSecurityExpressionHandler createExpressionHandler() {
 				DefaultMethodSecurityExpressionHandler expressionHandler =

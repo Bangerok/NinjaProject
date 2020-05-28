@@ -17,6 +17,13 @@ import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
  */
 public class OAuth2UserInfoFactory {
 
+		/**
+		 * Static метод объекта с данными пользователя при oauth2 авторизации.
+		 *
+		 * @param registrationId тип провайдера авторизации.
+		 * @param attributes     атрибуты пользователя, полученные с внешнего провайдера авторизации
+		 * @return данные пользователя, полученные после oauth2 авторизации.
+		 */
 		public static OAuth2UserInfo getOAuth2UserInfo(String registrationId,
 				Map<String, Object> attributes) {
 				if (registrationId.equalsIgnoreCase(AuthProvider.google.toString())) {

@@ -17,6 +17,13 @@ import ru.bangerok.ninja.controller.AuthController;
 @RequiredArgsConstructor
 public class AuthResponse {
 
+		/**
+		 * Private поле, содержащее токен аутентификации пользователя.
+		 */
 		private final String accessToken;
+
+		/**
+		 * Private поле, содержащее тип токена аутентификации пользователя.
+		 */
 		private String tokenType = "Bearer";
 }

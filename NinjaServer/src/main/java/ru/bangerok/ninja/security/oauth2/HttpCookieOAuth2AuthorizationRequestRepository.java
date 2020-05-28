@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Класс, который предоставляет функциональность для хранения запроса авторизации в файлах cookie и
- * его получение.
+ * Класс, который предоставляет функциональность для хранения запроса авторизации в файлах cookie,
+ * его получение и удаление.
  * <p>
  * Подключается здесь: {@link SecurityConfig}.
  *
@@ -27,6 +27,12 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		public static final String REDIRECT_URI_PARAM_COOKIE_NAME = "redirect_uri";
 		private static final int cookieExpireSeconds = 180;
 
+		/**
+		 * Метод для получения запроса авторизации из cookie обычного запроса.
+		 *
+		 * @param request запрос.
+		 * @return запрос авторизации.
+		 */
 		@Override
 		public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
 				return CookieUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
@@ -34,6 +40,12 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 						.orElse(null);
 		}
 
+		/**
+		 * Метод для сохранения запроса авторизации.
+		 *
+		 * @param request запрос.
+		 * @param response ответ запроса.
+		 */
 		@Override
 		public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest,
 				HttpServletRequest request, HttpServletResponse response) {
@@ -52,11 +64,23 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 				}
 		}
 
+		/**
+		 * Метод для удаления запроса авторизации.
+		 *
+		 * @param request запрос.
+		 * @return запрос авторизации после удаления.
+		 */
 		@Override
 		public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request) {
 				return this.loadAuthorizationRequest(request);
 		}
 
+		/**
+		 * Метод для удаления cookies авторизации.
+		 *
+		 * @param request  запрос.
+		 * @param response ответ.
+		 */
 		public void removeAuthorizationRequestCookies(HttpServletRequest request,
 				HttpServletResponse response) {
 				CookieUtils.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);

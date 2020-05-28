@@ -28,6 +28,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 				this.userRepository = userRepository;
 		}
 
+		/**
+		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
+		 * полученного из базы даннных по электронной почте.
+		 *
+		 * @param email электронная почта.
+		 * @return аутентифицированный пользователь.
+		 */
 		@Override
 		@Transactional
 		public UserDetails loadUserByUsername(String email)
@@ -40,6 +47,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 				return UserPrincipal.create(user);
 		}
 
+		/**
+		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
+		 * полученного из базы даннных по идентификатору.
+		 *
+		 * @param id идентификатор пользователя.
+		 * @return аутентифицированный пользователь.
+		 */
 		@Transactional
 		public UserDetails loadUserById(Long id) {
 				User user = userRepository.findById(id).orElseThrow(
@@ -49,10 +63,17 @@ public class CustomUserDetailsService implements UserDetailsService {
 				return UserPrincipal.create(user);
 		}
 
+		/**
+		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
+		 * полученного из базы даннных по идентификатору во внешнем провайдере авторизации.
+		 *
+		 * @param providerId идентификатор пользователя.
+		 * @return аутентифицированный пользователь.
+		 */
 		@Transactional
-		public UserDetails loadUserByProviderId(String id) {
-				User user = userRepository.findByProviderId(id).orElseThrow(
-						() -> new ResourceNotFoundException("User not found with provider", "id", id)
+		public UserDetails loadUserByProviderId(String providerId) {
+				User user = userRepository.findByProviderId(providerId).orElseThrow(
+						() -> new ResourceNotFoundException("User not found with provider", "id", providerId)
 				);
 
 				return UserPrincipal.create(user);

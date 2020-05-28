@@ -33,36 +33,67 @@ import lombok.ToString;
 @ToString(of = {"fullname"}, callSuper = true)
 public class User extends BaseEntity {
 
+		/**
+		 * Private поле, в котором хранится полное имя пользователя.
+		 */
 		@Column(name = "full_name")
 		private String fullname;
 
+		/**
+		 * Private поле, в котором хранится логин пользователя.
+		 */
 		@Column(name = "username")
 		private String username;
 
+		/**
+		 * Private поле, в котором хранится ссылка на аватарку пользователя.
+		 */
 		@Column(name = "avatar")
 		private String avatar;
 
+		/**
+		 * Private поле, в котором хранится электронная почта пользователя.
+		 */
 		@Email
 		@Column(name = "email")
 		private String email;
 
+		/**
+		 * Private поле, в котором хранится о подтверждении электронной почты пользователя.
+		 */
 		@Column(name = "email_verified")
 		private Boolean emailVerified = false;
 
+		/**
+		 * Private поле, в котором хранится, если есть, зашифрованный пароль пользователя.
+		 */
 		@Column(name = "password")
 		private String password;
 
+		/**
+		 * Private поле, в котором хранится тип провайдера авторизации пользователя.
+		 */
 		@Enumerated(EnumType.STRING)
 		@Column(name = "auth_provider")
 		private AuthProvider authProvider;
 
+		/**
+		 * Private поле, в котором хранится id пользователя, который хранится в базе данных провайдера
+		 * авторизации.
+		 */
 		@Column(name = "auth_provider_id")
 		private String providerId;
 
+		/**
+		 * Private поле, в котором хранится дата последнего визита пользователя.
+		 */
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@Column(name = "last_visit_date")
 		private LocalDateTime lastVisit;
 
+		/**
+		 * Private поле, в котором хранится список ролей, доступных данному пользователю.
+		 */
 		@JsonIgnore
 		@ManyToMany
 		@JoinTable(name = "user_roles",

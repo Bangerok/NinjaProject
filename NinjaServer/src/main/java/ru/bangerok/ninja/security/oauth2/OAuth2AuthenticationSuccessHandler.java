@@ -43,6 +43,14 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
 		}
 
+		/**
+		 * Метод, вызывающийся при успешной аутентификации пользователя, предназначенный для очистки
+		 * ответа от лишних данных и делающий redirect на клиент.
+		 *
+		 * @param request        запрос.
+		 * @param response       ответ запроса.
+		 * @param authentication аутентификация.
+		 */
 		@Override
 		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 				Authentication authentication) throws IOException {
@@ -57,6 +65,14 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 				getRedirectStrategy().sendRedirect(request, response, targetUrl);
 		}
 
+		/**
+		 * Метод для получения целового redirect url.
+		 *
+		 * @param request        запрос.
+		 * @param response       ответ запроса.
+		 * @param authentication аутентификация.
+		 * @return redirect ссылка.
+		 */
 		@Override
 		protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
 				Authentication authentication) {
@@ -78,6 +94,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 						.build().toUriString();
 		}
 
+		/**
+		 * Метод для очистки запроса/ответа от лишних данных.
+		 *
+		 * @param request  запрос.
+		 * @param response ответ запроса.
+		 */
 		protected void clearAuthenticationAttributes(HttpServletRequest request,
 				HttpServletResponse response) {
 				super.clearAuthenticationAttributes(request);
@@ -85,6 +107,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 						.removeAuthorizationRequestCookies(request, response);
 		}
 
+		/**
+		 * Метод для проверки целового redirect url на действительность.
+		 *
+		 * @param uri проверяемая ссылка.
+		 * @return true, если ссылка действительная, иначе false.
+		 */
 		private boolean isAuthorizedRedirectUri(String uri) {
 				URI clientRedirectUri = URI.create(uri);
 

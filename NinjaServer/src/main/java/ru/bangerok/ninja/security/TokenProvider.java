@@ -36,6 +36,12 @@ public class TokenProvider {
 				this.appProperties = appProperties;
 		}
 
+		/**
+		 * Метод для генерации токена аутентификации из имеющихся данных пользователя.
+		 *
+		 * @param authentication информация об аутентификации пользователя.
+		 * @return строка с токеном аутентификации.
+		 */
 		public String createToken(Authentication authentication) {
 				OAuth2User userPrincipal = (OAuth2User) authentication.getPrincipal();
 
@@ -48,6 +54,12 @@ public class TokenProvider {
 						.compact();
 		}
 
+		/**
+		 * Метод для расшифровки токена для получения его данных.
+		 *
+		 * @param token токен с зашифрованными данными пользователя.
+		 * @return идентификатор пользователя или идентификатор пользователя во внешнем провайдере.
+		 */
 		public String getUserIdFromToken(String token) {
 				Claims claims = Jwts.parser()
 						.setSigningKey(appProperties.getAuth().getTokenSecret())
@@ -57,6 +69,12 @@ public class TokenProvider {
 				return claims.getSubject();
 		}
 
+		/**
+		 * Метод для проверки токена аутентификации для проверки на валидность.
+		 *
+		 * @param authToken строка с токеном для проверки.
+		 * @return true, если токен валиден, иначе false.
+		 */
 		public boolean validateToken(String authToken) {
 				try {
 						Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret())

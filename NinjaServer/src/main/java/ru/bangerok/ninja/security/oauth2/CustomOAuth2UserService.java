@@ -45,6 +45,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				this.roleRepository = roleRepository;
 		}
 
+		/**
+		 * Метод для получения пользователя аутентификации после успешной авторизации с внешнего
+		 * провайдера.
+		 *
+		 * @param oAuth2UserRequest запрос авторизации oauth2.
+		 * @return аутентифицированный пользователь после успешной авторизации.
+		 */
 		@Override
 		@Transactional
 		public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest)
@@ -60,6 +67,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				}
 		}
 
+		/**
+		 * Метод для создания пользователя аутентификации после успешной авторизации с внешнего
+		 * провайдера.
+		 *
+		 * @param oAuth2UserRequest запрос авторизации oauth2.
+		 * @param oAuth2User        пользователь oauth2 с данными после авторизации.
+		 * @return аутентифицированный пользователь после его создания.
+		 */
 		private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest,
 				OAuth2User oAuth2User) {
 				OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
@@ -90,6 +105,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				return UserPrincipal.create(user, oAuth2User.getAttributes());
 		}
 
+		/**
+		 * Метод для сохранения нового пользователя в базу данных.
+		 *
+		 * @param oAuth2UserRequest запрос авторизации oauth2.
+		 * @param oAuth2UserInfo    данные пользователя oauth2.
+		 * @return пользователь.
+		 */
 		private User registerNewUser(OAuth2UserRequest oAuth2UserRequest,
 				OAuth2UserInfo oAuth2UserInfo) {
 				User user = new User();
@@ -112,6 +134,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				return userRepository.save(user);
 		}
 
+		/**
+		 * Метод для обновления пользователя в базе данных.
+		 *
+		 * @param existingUser   существующий пользователь.
+		 * @param oAuth2UserInfo данные пользователя oauth2.
+		 * @return пользователь.
+		 */
 		private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
 				existingUser.setFullname(oAuth2UserInfo.getName());
 				existingUser.setAvatar(oAuth2UserInfo.getImageUrl());

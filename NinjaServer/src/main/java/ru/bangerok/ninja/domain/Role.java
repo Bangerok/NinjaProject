@@ -27,12 +27,21 @@ import net.minidev.json.annotate.JsonIgnore;
 @ToString(of = {"name"}, callSuper = true)
 public class Role extends BaseEntity {
 
+		/**
+		 * Private поле, в котором хранится наименование роли в базе данных.
+		 */
 		@Column(name = "name")
 		private String name;
 
+		/**
+		 * Private поле, в котором хранится список пользователей, которым доступна данная роль.
+		 */
 		@ManyToMany(mappedBy = "roles")
 		private Set<User> users;
 
+		/**
+		 * Private поле, в котором хранится список привилегий, доступных данной роли в базе данных.
+		 */
 		@JsonIgnore
 		@ManyToMany
 		@JoinTable(name = "role_privileges",

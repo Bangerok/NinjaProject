@@ -23,6 +23,12 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 		private static final Logger logger = LoggerFactory
 				.getLogger(RestAuthenticationEntryPoint.class);
 
+		/**
+		 * Метод для отправки ошибки авторизации на клиент.
+		 *
+		 * @param httpServletRequest  запрос.
+		 * @param httpServletResponse ответ запроса.
+		 */
 		@Override
 		public void commence(HttpServletRequest httpServletRequest,
 				HttpServletResponse httpServletResponse,
