@@ -15,11 +15,9 @@ const messagesEn = {
       description: 'Oops! This page does not seem to exist.',
     },
     inDevelopment: {
-      title: 'The page is under construction !!!',
+      title: 'The page is under construction!',
       description: 'Please come back a little later.'
     },
-  },
-  components: {
     auth: {
       formName: 'Authorization form',
       username: 'Username',
@@ -29,15 +27,28 @@ const messagesEn = {
       isValidNameMsg: 'Username must be less than 10 characters',
       isValidPasswordMsg: 'Password must be between 8 and 20 characters',
     },
+    register: {
+      formName: 'Register',
+      email: 'Email',
+      username: 'User name',
+      password: 'Password',
+      passwordRepeat: 'Password repeat',
+      nameRequired: 'Username is required',
+      passwordRequired: 'Password is required',
+      emailRequired: 'Email is required',
+      isValidNameMsg: 'Username must be less than 10 characters',
+      isValidPasswordMsg: 'Password must be between 8 and 20 characters',
+    },
   },
   notification: {
     authSuccess: 'Login successful.',
-    authError: 'Authorisation Error!!!',
+    authError: 'Authorization Error!',
   },
   buttons: {
     authBtn: 'Authorization',
     registerBtn: 'Register',
     closeBtn: 'Close',
+    backBtn: 'Back',
   },
   tooltips: {
     nightMode: 'On/Off night mode',
