@@ -5,12 +5,6 @@ import getters from "./settings.getters";
 let settingsModule = {
   namespaced: true,
   state: () => ({
-    loading: false,
-    notification: {
-      color: null,
-      text: null,
-      show: false,
-    },
     navigation: {
       minVariant: false,
     },

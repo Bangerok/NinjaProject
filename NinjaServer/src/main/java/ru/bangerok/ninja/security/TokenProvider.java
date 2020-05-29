@@ -11,7 +11,6 @@ import java.util.Date;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.config.AppPropertiesConfig;
 import ru.bangerok.ninja.controller.AuthController;
@@ -43,10 +42,10 @@ public class TokenProvider {
 		 * @return строка с токеном аутентификации.
 		 */
 		public String createToken(Authentication authentication) {
-				OAuth2User userPrincipal = (OAuth2User) authentication.getPrincipal();
+				UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
 				return Jwts.builder()
-						.setSubject(userPrincipal.getAttribute("sub"))
+						.setSubject(String.valueOf(userPrincipal.getId()))
 						.setIssuedAt(new Date())
 						.setExpiration(
 								new Date(new Date().getTime() + appProperties.getAuth().getTokenExpirationMsec()))

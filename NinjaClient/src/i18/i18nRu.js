@@ -15,29 +15,38 @@ const messagesRu = {
       description: 'К сожалению! Кажется, что эта страница не существует.',
     },
     inDevelopment: {
-      title: 'Страница находится в разработке!!!',
+      title: 'Страница находится в разработке!',
       description: 'Пожалуйста, вернитесь немного позже.',
     },
-  },
-  components: {
-    auth: {
+    login: {
       formName: 'Форма авторизации',
       username: 'Имя пользователя',
       password: 'Пароль',
       nameRequired: 'Имя обязательно',
       passwordRequired: 'Пароль обязателен',
+    },
+    register: {
+      formName: 'Регистрация',
+      email: 'Электронная почта',
+      username: 'Имя пользователя',
+      password: 'Пароль',
+      passwordRepeat: 'Повторение пароля',
+      nameRequired: 'Имя обязательно',
+      passwordRequired: 'Пароль обязателен',
+      emailRequired: 'Email обязателен',
       isValidNameMsg: 'Поле должно быть меньше чем 50 символов',
       isValidPasswordMsg: 'Пароль должен быть от 8 до 20 символов',
     },
   },
   notification: {
     authSuccess: 'Авторизация пройдена успешно.',
-    authError: 'Ошибка авторизации!!!',
+    authError: 'Ошибка авторизации!',
   },
   buttons: {
     authBtn: 'Авторизация',
     registerBtn: 'Регистрация',
     closeBtn: 'Закрыть',
+    backBtn: 'Назад',
   },
   tooltips: {
     nightMode: 'Включить/Выключить темный режим',

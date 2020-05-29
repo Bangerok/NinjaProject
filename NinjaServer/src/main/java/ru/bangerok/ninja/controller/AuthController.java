@@ -1,7 +1,7 @@
 package ru.bangerok.ninja.controller;
 
-import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.bangerok.ninja.domain.Role;
 import ru.bangerok.ninja.domain.User;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.exception.BadRequestException;
@@ -115,7 +116,7 @@ public class AuthController {
 		 * @return ApiResponse с информацией об успешной регистрации.
 		 */
 		@PostMapping("/signup")
-		public ResponseEntity<?> registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
+		public ApiResponse registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
 				if (userRepository.existsByEmail(signUpRequest.getEmail())) {
 						throw new BadRequestException("Email address already in use.");
 				}
@@ -126,13 +127,16 @@ public class AuthController {
 				user.setAuthProvider(AuthProvider.local);
 				user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
 
-				roleRepository.findByName("ROLE_USER").ifPresent(role -> user.getRoles().add(role));
+				Role userRole = roleRepository.findByName("ROLE_USER").orElse(null);
+				if (Objects.nonNull(userRole)) {
+						user.setRoles(Collections.singleton(userRole));
+				}
 
 				User savedUser = userRepository.save(user);
 
-				URI location = URI.create("http://localhost:8000");
-				return ResponseEntity.created(location)
-						.body(new ApiResponse(true,
-								"User " + savedUser.getUsername() + " registered successfully"));
+				return new ApiResponse(
+						true,
+						"User " + savedUser.getUsername() + " registered successfully"
+				);
 		}
 }

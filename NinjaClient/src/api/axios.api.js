@@ -3,7 +3,7 @@ import store from '../store/store'
 
 const TOKEN_TYPE = "jwt-token"
 const AUTH_TYPE = "oauth2"
-const LOADING = "settings/setLoading"
+const LOADING = "setLoading"
 
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
@@ -44,6 +44,8 @@ function request(method, url, params, data, additionalHeaders) {
       console.log('ERROR: Unauthorized, logging out ...');
       console.log(error.response.data)
     }
+
+    return Promise.reject(error);
   });
 
   return axios(axiosConfig);

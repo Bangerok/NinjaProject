@@ -21,24 +21,45 @@
                 flat
             >
               <v-spacer/>
-              <v-toolbar-title>{{$t('pages.login.formName')}}</v-toolbar-title>
+              <v-toolbar-title>{{$t('pages.register.formName')}}</v-toolbar-title>
               <v-spacer/>
             </v-toolbar>
             <v-card-text>
               <v-form>
                 <v-text-field
-                    :label="$t('pages.login.username')"
-                    name="login"
-                    prepend-icon="fa-user"
+                    :label="$t('pages.register.email')"
+                    name="email"
+                    prepend-icon="fa-at"
                     type="text"
-                    v-model="username"
+                    v-model="email"
+                    :rules="nameRules"
                 ></v-text-field>
 
                 <v-text-field
-                    :label="$t('pages.login.password')"
-                    id="password"
+                    :label="$t('pages.register.username')"
+                    name="username"
+                    prepend-icon="fa-user"
+                    type="text"
+                    v-model="username"
+                    :rules="nameRules"
+                ></v-text-field>
+
+                <v-text-field
+                    :label="$t('pages.register.password')"
                     name="password"
                     v-model="password"
+                    :rules="passwordRules"
+                    prepend-icon="fa-lock"
+                    :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                    :type="isShowPassword ? 'text' : 'password'"
+                    @click:append="isShowPassword = !isShowPassword"
+                ></v-text-field>
+
+                <v-text-field
+                    :label="$t('pages.register.passwordRepeat')"
+                    name="password"
+                    v-model="passwordRepeat"
+                    :rules="passwordRules"
                     prepend-icon="fa-lock"
                     :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                     :type="isShowPassword ? 'text' : 'password'"
@@ -50,11 +71,11 @@
               <v-col class="text-center">
                 <v-row class="flex-column">
                   <v-col>
-                    <v-btn @click="auth" text color="primary">
-                      {{ $t('buttons.authBtn') }}
-                    </v-btn>
-                    <v-btn to="/register" text color="teal" >
+                    <v-btn text color="primary" @click="register">
                       {{ $t('buttons.registerBtn') }}
+                    </v-btn>
+                    <v-btn to="/login" text color="teal">
+                      {{ $t('buttons.backBtn') }}
                     </v-btn>
                   </v-col>
                   <v-col class="mb-n7 mt-n5">
@@ -64,7 +85,7 @@
                       <v-icon color="error" class="mr-2">
                         mdi-google
                       </v-icon>
-                      Войдите через Google
+                      Зарегистрируйтесь через Google
                     </v-btn>
                   </v-col>
                 </v-row>
@@ -78,26 +99,41 @@
 </template>
 
 <script>
-  import authApi from "../api/service/auth.service";
+  import {mapActions, mapMutations} from "vuex";
 
   export default {
-    name: "Login",
+    name: "Register",
     data: () => ({
+      valid: true,
       isShowPassword: false,
+      email: '',
       username: '',
       password: '',
+      passwordRepeat: '',
+      nameRules: [],
+      passwordRules: [],
     }),
-    methods: {
-      auth() {
-        // noinspection JSValidateTypes
-        const payload = {
-          email: this.username,
-          password: this.password
-        };
+    created() {
+      this.passwordRules = [
+        v => !!v || this.$t('pages.register.passwordRequired'),
+        v => (v && v.length >= 8 && v.length <= 20) || this.$t(
+            'pages.register.isValidPasswordMsg'),
+      ];
 
-        authApi.login(payload).then(response => {
-          localStorage.setItem("jwt-token", response.data.accessToken);
-          document.location.replace(new URL(location.href).origin);
+      this.nameRules = [
+        v => !!v || this.$t('pages.register.nameRequired'),
+        v => (v && v.length <= 50) || this.$t('pages.register.isValidNameMsg'),
+      ];
+    },
+    methods: {
+      ...mapMutations('settings', ['setOptionsNotification']),
+      ...mapActions('auth', ['signUp']),
+      register() {
+        // noinspection JSValidateTypes
+        this.signUp({
+          email: this.email,
+          username: this.username,
+          password: this.password
         });
       },
     },

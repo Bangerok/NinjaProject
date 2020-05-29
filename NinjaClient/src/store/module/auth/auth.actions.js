@@ -9,11 +9,23 @@ const authActions = {
       );
     });
   },
+  async signUp({commit}, payload) {
+    await authApi.signUp(payload).then(response => {
+      commit(
+          'setOptionsNotification', {
+            color: 'success',
+            text: response.data.message
+          }, {
+            root: true
+          }
+      );
+      console.log(response.data)
+    });
+  },
   async callLogout() {
     await authApi.logout().then(() => {
       localStorage.removeItem("jwt-token");
       localStorage.removeItem("oauth2");
-
       document.location.replace(new URL(location.href).origin);
     });
   },

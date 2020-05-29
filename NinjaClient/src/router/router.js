@@ -51,6 +51,16 @@ const routes = [
     }
   },
   {
+    path: '/register',
+    name: 'Register',
+    // lazy-loaded
+    component: () => import('../views/ViewRegister'),
+    meta: {
+      showInMenu: false,
+      requiresAuthorization: false
+    }
+  },
+  {
     path: "*",
     name: "NotFound",
     // lazy-loaded
