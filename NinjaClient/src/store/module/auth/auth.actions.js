@@ -1,4 +1,5 @@
 import authApi from "../../../api/service/auth.service";
+import i18n from "./../../../i18/i18n";
 
 const authActions = {
   async getCurrentUser({commit}) {
@@ -10,17 +11,27 @@ const authActions = {
     });
   },
   async register({commit}, payload) {
+    let notificationSettings = null;
+
     await authApi.register(payload).then(response => {
-      commit(
-          'setOptionsNotification', {
-            color: 'success',
-            text: response.data.message
-          }, {
-            root: true
-          }
-      );
-      console.log(response.data)
+      notificationSettings = {
+        color: 'success',
+        text: i18n.tc(response.data.message),
+      }
+    }).catch(({response}) => {
+      if (response.data.errors) {
+        return Promise.reject(response.data.errors);
+      } else {
+        notificationSettings = {
+          color: 'error',
+          text: i18n.tc(response.data.message),
+        }
+      }
     });
+
+    if (notificationSettings) {
+      commit('setOptionsNotification', notificationSettings, {root: true});
+    }
   },
   async callLogout() {
     await authApi.logout().then(() => {

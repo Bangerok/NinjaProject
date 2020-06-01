@@ -19,25 +19,22 @@ const messagesEn = {
       description: 'Please come back a little later.'
     },
     auth: {
-      formName: 'Authorization form',
-      username: 'Username',
-      password: 'Password',
-      nameRequired: 'Username is required',
-      passwordRequired: 'Password is required',
-      isValidNameMsg: 'Username must be less than 10 characters',
-      isValidPasswordMsg: 'Password must be between 8 and 20 characters',
-    },
-    register: {
-      formName: 'Register',
-      email: 'Email',
-      username: 'User name',
-      password: 'Password',
-      matchingPassword: 'Password repeat',
-      nameRequired: 'Username is required',
-      passwordRequired: 'Password is required',
-      emailRequired: 'Email is required',
-      isValidNameMsg: 'Username must be less than 10 characters',
-      isValidPasswordMsg: 'Password must be between 8 and 20 characters',
+      login: {
+        formName: 'Authorization form',
+      },
+      register: {
+        formName: 'Register',
+        email: 'Email',
+        matchingPassword: 'Matching password',
+        emailRequired: 'Email is required',
+        google: 'Sign up with Google',
+      },
+      general: {
+        username: 'Username',
+        password: 'Password',
+        nameRequired: 'Username is required',
+        passwordRequired: 'Password is required',
+      },
     },
   },
   notification: {
@@ -56,8 +53,23 @@ const messagesEn = {
     changeLanguageSystem: 'Change system language',
   },
   errors: {
-    code500: 'Failed to connect to the server! Try again later ...',
-  }
+    invalid: {
+      empty: {
+        username: 'Username must be filled',
+        email: 'Email must be filled',
+        password: 'Password must be filled',
+        matchingPassword: 'Re-password must be filled',
+      },
+      matchingPassword: 'The entered passwords do not match',
+      email: 'Invalid mail format. Is required - *@*.*',
+    },
+    exists: {
+      email: 'A user with this email already exists',
+    },
+  },
+  success: {
+    registerUser: 'Registration completed successfully',
+  },
 }
 
 export default messagesEn

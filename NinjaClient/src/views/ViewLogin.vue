@@ -21,13 +21,13 @@
                 flat
             >
               <v-spacer/>
-              <v-toolbar-title>{{$t('pages.login.formName')}}</v-toolbar-title>
+              <v-toolbar-title>{{$t('pages.auth.login.formName')}}</v-toolbar-title>
               <v-spacer/>
             </v-toolbar>
             <v-card-text>
               <v-form>
                 <v-text-field
-                    :label="$t('pages.login.username')"
+                    :label="$t('pages.auth.general.username')"
                     name="login"
                     prepend-icon="fa-user"
                     type="text"
@@ -35,7 +35,7 @@
                 ></v-text-field>
 
                 <v-text-field
-                    :label="$t('pages.login.password')"
+                    :label="$t('pages.auth.general.password')"
                     id="password"
                     name="password"
                     v-model="password"

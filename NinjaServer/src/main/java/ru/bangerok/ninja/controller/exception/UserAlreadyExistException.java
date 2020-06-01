@@ -14,7 +14,7 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  * @author v.kuznetsov
  * @version 1.0
  */
-@ResponseStatus(HttpStatus.BAD_REQUEST)
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
 public final class UserAlreadyExistException extends RuntimeException {
 
 		public UserAlreadyExistException(final String message) {

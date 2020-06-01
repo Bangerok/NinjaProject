@@ -27,7 +27,7 @@ import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 @Documented
 public @interface PasswordMatches {
 
-		String message() default "Passwords don't match";
+		String message() default "errors.invalid.matchingPassword";
 
 		Class<?>[] groups() default {};
 
