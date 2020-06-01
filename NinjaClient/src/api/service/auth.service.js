@@ -7,8 +7,8 @@ export default {
   login(payload) {
     return axios.post('/auth/login', payload);
   },
-  signUp(payload) {
-    return axios.post('/auth/signup', payload);
+  register(payload) {
+    return axios.post('/auth/register', payload);
   },
   logout() {
     return axios.post('/logout');

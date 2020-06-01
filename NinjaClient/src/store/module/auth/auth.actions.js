@@ -9,8 +9,8 @@ const authActions = {
       );
     });
   },
-  async signUp({commit}, payload) {
-    await authApi.signUp(payload).then(response => {
+  async register({commit}, payload) {
+    await authApi.register(payload).then(response => {
       commit(
           'setOptionsNotification', {
             color: 'success',

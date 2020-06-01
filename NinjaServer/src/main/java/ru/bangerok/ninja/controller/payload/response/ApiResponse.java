@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.payload;
+package ru.bangerok.ninja.controller.payload.response;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

@@ -32,7 +32,6 @@
                     prepend-icon="fa-at"
                     type="text"
                     v-model="email"
-                    :rules="nameRules"
                 ></v-text-field>
 
                 <v-text-field
@@ -41,14 +40,12 @@
                     prepend-icon="fa-user"
                     type="text"
                     v-model="username"
-                    :rules="nameRules"
                 ></v-text-field>
 
                 <v-text-field
                     :label="$t('pages.register.password')"
                     name="password"
                     v-model="password"
-                    :rules="passwordRules"
                     prepend-icon="fa-lock"
                     :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                     :type="isShowPassword ? 'text' : 'password'"
@@ -56,10 +53,9 @@
                 ></v-text-field>
 
                 <v-text-field
-                    :label="$t('pages.register.passwordRepeat')"
-                    name="password"
-                    v-model="passwordRepeat"
-                    :rules="passwordRules"
+                    :label="$t('pages.register.matchingPassword')"
+                    name="matchingPassword"
+                    v-model="matchingPassword"
                     prepend-icon="fa-lock"
                     :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                     :type="isShowPassword ? 'text' : 'password'"
@@ -71,7 +67,7 @@
               <v-col class="text-center">
                 <v-row class="flex-column">
                   <v-col>
-                    <v-btn text color="primary" @click="register">
+                    <v-btn text color="primary" @click="submit">
                       {{ $t('buttons.registerBtn') }}
                     </v-btn>
                     <v-btn to="/login" text color="teal">
@@ -99,41 +95,26 @@
 </template>
 
 <script>
-  import {mapActions, mapMutations} from "vuex";
+  import {mapActions} from "vuex";
 
   export default {
     name: "Register",
     data: () => ({
-      valid: true,
       isShowPassword: false,
       email: '',
       username: '',
       password: '',
-      passwordRepeat: '',
-      nameRules: [],
-      passwordRules: [],
+      matchingPassword: '',
     }),
-    created() {
-      this.passwordRules = [
-        v => !!v || this.$t('pages.register.passwordRequired'),
-        v => (v && v.length >= 8 && v.length <= 20) || this.$t(
-            'pages.register.isValidPasswordMsg'),
-      ];
-
-      this.nameRules = [
-        v => !!v || this.$t('pages.register.nameRequired'),
-        v => (v && v.length <= 50) || this.$t('pages.register.isValidNameMsg'),
-      ];
-    },
     methods: {
-      ...mapMutations('settings', ['setOptionsNotification']),
-      ...mapActions('auth', ['signUp']),
-      register() {
+      ...mapActions('auth', ['register']),
+      submit() {
         // noinspection JSValidateTypes
-        this.signUp({
-          email: this.email,
+        this.register({
           username: this.username,
-          password: this.password
+          email: this.email,
+          password: this.password,
+          matchingPassword: this.matchingPassword
         });
       },
     },

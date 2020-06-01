@@ -30,7 +30,7 @@ const messagesRu = {
       email: 'Электронная почта',
       username: 'Имя пользователя',
       password: 'Пароль',
-      passwordRepeat: 'Повторение пароля',
+      matchingPassword: 'Повторение пароля',
       nameRequired: 'Имя обязательно',
       passwordRequired: 'Пароль обязателен',
       emailRequired: 'Email обязателен',

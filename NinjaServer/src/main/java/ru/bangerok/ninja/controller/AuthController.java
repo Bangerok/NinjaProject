@@ -1,35 +1,20 @@
 package ru.bangerok.ninja.controller;
 
-import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Optional;
 import javax.validation.Valid;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bangerok.ninja.domain.Role;
-import ru.bangerok.ninja.domain.User;
-import ru.bangerok.ninja.enumeration.AuthProvider;
-import ru.bangerok.ninja.exception.BadRequestException;
-import ru.bangerok.ninja.payload.ApiResponse;
-import ru.bangerok.ninja.payload.AuthResponse;
-import ru.bangerok.ninja.payload.LoginRequest;
-import ru.bangerok.ninja.payload.SignUpRequest;
-import ru.bangerok.ninja.repo.RoleRepository;
-import ru.bangerok.ninja.repo.UserRepository;
+import ru.bangerok.ninja.controller.payload.request.LoginRequest;
+import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.controller.payload.response.ApiResponse;
+import ru.bangerok.ninja.controller.payload.response.AuthResponse;
+import ru.bangerok.ninja.persistence.model.User;
 import ru.bangerok.ninja.security.CurrentUser;
-import ru.bangerok.ninja.security.TokenProvider;
 import ru.bangerok.ninja.security.UserPrincipal;
+import ru.bangerok.ninja.service.UserService;
 
 /**
  * Контроллер для получения запросов с клиента, связанные с авторизацией/аутентификацией
@@ -42,21 +27,10 @@ import ru.bangerok.ninja.security.UserPrincipal;
 @RequestMapping("auth")
 public class AuthController {
 
-		private final AuthenticationManager authenticationManager;
-		private final PasswordEncoder passwordEncoder;
-		private final TokenProvider tokenProvider;
-		private final UserRepository userRepository;
-		private final RoleRepository roleRepository;
+		private final UserService userService;
 
-		public AuthController(
-				AuthenticationManager authenticationManager,
-				PasswordEncoder passwordEncoder,
-				TokenProvider tokenProvider, UserRepository userRepository, RoleRepository roleRepository) {
-				this.authenticationManager = authenticationManager;
-				this.passwordEncoder = passwordEncoder;
-				this.tokenProvider = tokenProvider;
-				this.userRepository = userRepository;
-				this.roleRepository = roleRepository;
+		public AuthController(UserService userService) {
+				this.userService = userService;
 		}
 
 		/**
@@ -70,12 +44,7 @@ public class AuthController {
 		@PostAuthorize("hasPermission(returnObject, 'READ')")
 		@GetMapping("/user")
 		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-				if (Objects.isNull(userPrincipal)) {
-						return null;
-				}
-
-				return userRepository.findById(userPrincipal.getId()).orElse(null);
-
+				return userService.getCurrentUser(userPrincipal);
 		}
 
 		/**
@@ -86,53 +55,21 @@ public class AuthController {
 		 * @return AuthResponse с токеном аутентификации.
 		 */
 		@PostMapping("/login")
-		public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
-				Authentication authentication = authenticationManager.authenticate(
-						new UsernamePasswordAuthenticationToken(
-								loginRequest.getEmail(),
-								loginRequest.getPassword()
-						)
-				);
-
-				Optional<User> optionalUser = userRepository.findByEmail(loginRequest.getEmail());
-				if (optionalUser.isPresent()) {
-						User user = optionalUser.get();
-						user.setLastVisit(LocalDateTime.now());
-						userRepository.save(user);
-				}
-
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-
-				String token = tokenProvider.createToken(authentication);
-				return ResponseEntity.ok(new AuthResponse(token));
+		public AuthResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+				String token = userService.creatingTokenForAuthenticateUser(loginRequest);
+				return new AuthResponse(token);
 		}
 
 		/**
 		 * Rest метод-запрос, вызывающийся с клиента для регистрации пользователя и сохранении его в
 		 * базу данных.
 		 *
-		 * @param signUpRequest данные необходимые для регистрации пользователя.
+		 * @param registerRequest данные необходимые для регистрации пользователя.
 		 * @return ApiResponse с информацией об успешной регистрации.
 		 */
-		@PostMapping("/signup")
-		public ApiResponse registerUser(@Valid @RequestBody SignUpRequest signUpRequest) {
-				if (userRepository.existsByEmail(signUpRequest.getEmail())) {
-						throw new BadRequestException("Email address already in use.");
-				}
-
-				User user = new User();
-				user.setUsername(signUpRequest.getUsername());
-				user.setEmail(signUpRequest.getEmail());
-				user.setAuthProvider(AuthProvider.local);
-				user.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
-
-				Role userRole = roleRepository.findByName("ROLE_USER").orElse(null);
-				if (Objects.nonNull(userRole)) {
-						user.setRoles(Collections.singleton(userRole));
-				}
-
-				User savedUser = userRepository.save(user);
+		@PostMapping("/register")
+		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+				User savedUser = userService.registerNewUserAccount(registerRequest);
 
 				return new ApiResponse(
 						true,

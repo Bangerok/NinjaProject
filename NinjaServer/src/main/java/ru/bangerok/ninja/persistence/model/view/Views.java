@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.domain.view;
+package ru.bangerok.ninja.persistence.model.view;
 
 /**
  * Класс-маркер для определения того, какие поля сущностей нужны в какой то момент, а какие нет.

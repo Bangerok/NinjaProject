@@ -6,9 +6,9 @@
       <the-app-bar v-if="user"></the-app-bar>
       <the-navigation-drawer v-if="user"></the-navigation-drawer>
       <v-content class="content text--primary">
-          <transition appear name="slide-fade">
-            <router-view style="margin: 20px"></router-view>
-          </transition>
+        <transition appear name="slide-fade">
+          <router-view style="margin: 20px"></router-view>
+        </transition>
       </v-content>
     </v-app>
   </div>
@@ -23,41 +23,35 @@
 
   export default {
     components: {TheNotificationMsg, TheProgressBar, TheAppBar, TheNavigationDrawer},
-    computed: mapState('auth', {'user': state => state.user}),
+    computed: mapState("auth", {"user": state => state.user}),
     methods: {
-      ...mapMutations('settings', ['setOptionsNotification']),
-      ...mapActions('auth', ['getCurrentUser']),
-    },
-    watch: {
-      user(newValue) {
-        if (newValue === null) {
-          if (this.$route.path !== 'login') {
-            this.$router.replace('login');
-          }
-        }
-      }
+      ...mapMutations(["setOptionsNotification"]),
+      ...mapActions("auth", ["getCurrentUser"]),
     },
     beforeCreate() {
       const uri = new URL(location.href);
-      const jwtToken = uri.searchParams.get('token');
+      const jwtToken = uri.searchParams.get("token");
       if (jwtToken !== null) {
-        localStorage.setItem('jwt-token', jwtToken);
-        localStorage.setItem('oauth2', "true");
+        localStorage.setItem("jwt-token", jwtToken);
         document.location.replace(uri.origin);
         this.$forceUpdate();
       }
     },
-    created() {
+    mounted() {
+      // TODO: здесь this.$route.path всегда равен "/". Нужно найти место,
+      // TODO: где будет правильное значение. 
       // noinspection JSValidateTypes
       this.getCurrentUser().then(() => {
-        if (this.user) {
-          if (this.$route.path !== '/' || window.location.pathname === '/login') {
-            this.$router.replace('/');
-          }
-        } else {
-          if (this.$route.path !== '/login' || window.location.pathname === '/') {
-            this.$router.replace('login');
-          }
+        if (this.$route.path === "/login" ||
+            this.$route.path === "/register" ||
+            this.$route.path === "/") {
+          this.$router.replace("/");
+        }
+      }).catch(() => {
+        if (this.$route.path !== "/login" ||
+            this.$route.path !== "/register" ||
+            this.$route.path !== "/") {
+          this.$router.replace("login");
         }
       });
     },

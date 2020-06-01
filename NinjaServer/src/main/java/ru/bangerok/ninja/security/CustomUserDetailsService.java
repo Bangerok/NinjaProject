@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.domain.User;
-import ru.bangerok.ninja.exception.ResourceNotFoundException;
-import ru.bangerok.ninja.repo.UserRepository;
+import ru.bangerok.ninja.persistence.model.User;
+import ru.bangerok.ninja.controller.exception.ResourceNotFoundException;
+import ru.bangerok.ninja.persistence.dao.UserRepository;
 
 /**
  * Сервисный класс, который позволяет получить пользователя каким либо образом.
@@ -58,22 +58,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		public UserDetails loadUserById(Long id) {
 				User user = userRepository.findById(id).orElseThrow(
 						() -> new ResourceNotFoundException("User", "id", id)
-				);
-
-				return UserPrincipal.create(user);
-		}
-
-		/**
-		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
-		 * полученного из базы даннных по идентификатору во внешнем провайдере авторизации.
-		 *
-		 * @param providerId идентификатор пользователя.
-		 * @return аутентифицированный пользователь.
-		 */
-		@Transactional
-		public UserDetails loadUserByProviderId(String providerId) {
-				User user = userRepository.findByProviderId(providerId).orElseThrow(
-						() -> new ResourceNotFoundException("User not found with provider", "id", providerId)
 				);
 
 				return UserPrincipal.create(user);
