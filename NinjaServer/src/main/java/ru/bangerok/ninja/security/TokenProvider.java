@@ -14,7 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.config.AppPropertiesConfig;
 import ru.bangerok.ninja.controller.AuthController;
-import ru.bangerok.ninja.payload.LoginRequest;
+import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 
 /**
  * Сервисный класс, который содержит код для генерации и проверки Json Web токенов.
@@ -59,13 +59,13 @@ public class TokenProvider {
 		 * @param token токен с зашифрованными данными пользователя.
 		 * @return идентификатор пользователя или идентификатор пользователя во внешнем провайдере.
 		 */
-		public String getUserIdFromToken(String token) {
+		public long getUserIdFromToken(String token) {
 				Claims claims = Jwts.parser()
 						.setSigningKey(appProperties.getAuth().getTokenSecret())
 						.parseClaimsJws(token)
 						.getBody();
 
-				return claims.getSubject();
+				return Long.parseLong(claims.getSubject());
 		}
 
 		/**

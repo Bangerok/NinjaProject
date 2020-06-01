@@ -40,11 +40,6 @@ function request(method, url, params, data, additionalHeaders) {
     return Promise.resolve(response);
   }, error => {
     store.commit(LOADING, false);
-    if (error.response.status === 401) {
-      console.log('ERROR: Unauthorized, logging out ...');
-      console.log(error.response.data)
-    }
-
     return Promise.reject(error);
   });
 

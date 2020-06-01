@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.domain.base;
+package ru.bangerok.ninja.persistence.model.base;
 
 import java.util.Date;
 import javax.persistence.Column;

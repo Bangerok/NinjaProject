@@ -2,7 +2,7 @@ package ru.bangerok.ninja.security.oauth2.user;
 
 import java.util.Map;
 import ru.bangerok.ninja.enumeration.AuthProvider;
-import ru.bangerok.ninja.exception.OAuth2AuthenticationProcessingException;
+import ru.bangerok.ninja.controller.exception.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
 
 /**

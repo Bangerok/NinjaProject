@@ -3,7 +3,6 @@ package ru.bangerok.ninja.security;
 import java.io.Serializable;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
 
 /**
@@ -61,15 +60,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		 * @return true, если права на объект найдены, иначе false.
 		 */
 		private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
-				for (final GrantedAuthority grantedAuth : auth.getAuthorities()) {
-						System.out.println("here " + grantedAuth);
-						if (grantedAuth.getAuthority().startsWith(targetType)) {
-								if (grantedAuth.getAuthority().contains(permission)) {
-										return true;
-								}
-						}
-				}
-				return false;
+				return auth.getAuthorities().parallelStream().anyMatch(
+						a -> a.getAuthority().startsWith(targetType) && a.getAuthority().contains(permission));
 		}
-
 }

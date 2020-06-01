@@ -1,10 +1,10 @@
-package ru.bangerok.ninja.repo;
+package ru.bangerok.ninja.persistence.dao;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ru.bangerok.ninja.controller.AuthController;
-import ru.bangerok.ninja.domain.User;
+import ru.bangerok.ninja.persistence.model.User;
 
 /**
  * Repository java класс для связи с базой данных и работой с сущностью пользователя.

@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.payload;
+package ru.bangerok.ninja.controller.payload.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

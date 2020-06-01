@@ -4,7 +4,7 @@ import static ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationReq
 
 import ru.bangerok.ninja.config.AppPropertiesConfig;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.exception.BadRequestException;
+import ru.bangerok.ninja.controller.exception.BadRequestException;
 import ru.bangerok.ninja.security.TokenProvider;
 import ru.bangerok.ninja.util.CookieUtils;
 import java.io.IOException;

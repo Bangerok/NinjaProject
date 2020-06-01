@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.enumeration;
 
-import ru.bangerok.ninja.domain.User;
+import ru.bangerok.ninja.persistence.model.User;
 
 /**
  * Класс перечисления для провайдеров авторизаций пользователей.

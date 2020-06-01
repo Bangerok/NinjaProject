@@ -1,6 +1,6 @@
-package ru.bangerok.ninja.domain;
+package ru.bangerok.ninja.persistence.model;
 
-import ru.bangerok.ninja.domain.base.BaseEntity;
+import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

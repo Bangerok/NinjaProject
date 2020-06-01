@@ -1,7 +1,6 @@
 package ru.bangerok.ninja.security;
 
 import java.io.IOException;
-import java.util.Objects;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -53,12 +52,9 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 						String jwt = getJwtFromRequest(request);
 
 						if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-								boolean oauth = !Objects.isNull(request.getHeader("oauth2"));
-								String id = tokenProvider.getUserIdFromToken(jwt);
+								long id = tokenProvider.getUserIdFromToken(jwt);
 
-								UserDetails userDetails = oauth ?
-										customUserDetailsService.loadUserByProviderId(id) :
-										customUserDetailsService.loadUserById(Long.parseLong(id));
+								UserDetails userDetails = customUserDetailsService.loadUserById(id);
 
 								UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 										userDetails, null, userDetails.getAuthorities());

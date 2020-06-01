@@ -1,6 +1,6 @@
-package ru.bangerok.ninja.domain;
+package ru.bangerok.ninja.persistence.model;
 
-import ru.bangerok.ninja.domain.base.BaseEntity;
+import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;

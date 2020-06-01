@@ -32,7 +32,7 @@ const messagesEn = {
       email: 'Email',
       username: 'User name',
       password: 'Password',
-      passwordRepeat: 'Password repeat',
+      matchingPassword: 'Password repeat',
       nameRequired: 'Username is required',
       passwordRequired: 'Password is required',
       emailRequired: 'Email is required',
