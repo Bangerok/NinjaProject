@@ -18,24 +18,23 @@ const messagesRu = {
       title: 'Страница находится в разработке!',
       description: 'Пожалуйста, вернитесь немного позже.',
     },
-    login: {
-      formName: 'Форма авторизации',
-      username: 'Имя пользователя',
-      password: 'Пароль',
-      nameRequired: 'Имя обязательно',
-      passwordRequired: 'Пароль обязателен',
-    },
-    register: {
-      formName: 'Регистрация',
-      email: 'Электронная почта',
-      username: 'Имя пользователя',
-      password: 'Пароль',
-      matchingPassword: 'Повторение пароля',
-      nameRequired: 'Имя обязательно',
-      passwordRequired: 'Пароль обязателен',
-      emailRequired: 'Email обязателен',
-      isValidNameMsg: 'Поле должно быть меньше чем 50 символов',
-      isValidPasswordMsg: 'Пароль должен быть от 8 до 20 символов',
+    auth: {
+      login: {
+        formName: 'Форма авторизации',
+      },
+      register: {
+        formName: 'Регистрация',
+        email: 'Электронная почта',
+        matchingPassword: 'Повторение пароля',
+        emailRequired: 'Email обязателен',
+        google: 'Зарегистрируйтесь через Google',
+      },
+      general: {
+        username: 'Имя пользователя',
+        password: 'Пароль',
+        nameRequired: 'Имя обязательно',
+        passwordRequired: 'Пароль обязателен',
+      }
     },
   },
   notification: {
@@ -54,8 +53,23 @@ const messagesRu = {
     changeLanguageSystem: 'Изменить язык системы',
   },
   errors: {
-    code500: 'Не получилось соединиться с сервером! Попробуйте попозже ...',
-  }
+    invalid: {
+      empty: {
+        username: 'Имя пользователя должно быть заполнено',
+        email: 'Email должен быть заполнен',
+        password: 'Пароль должен быть заполнен',
+        matchingPassword: 'Повторный пароль должен быть заполнен',
+      },
+      matchingPassword: 'Введенные пароли не совпадают',
+      email: 'Не верный формат почты. Требуется *@*.*',
+    },
+    exists: {
+      email: 'Пользователь с таким email уже существует',
+    },
+  },
+  success: {
+    registerUser: 'Регистрация прошла успешно',
+  },
 }
 
 export default messagesRu

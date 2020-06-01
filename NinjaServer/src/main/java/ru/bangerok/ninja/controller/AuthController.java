@@ -73,7 +73,7 @@ public class AuthController {
 
 				return new ApiResponse(
 						true,
-						"User " + savedUser.getUsername() + " registered successfully"
+						"success.registerUser"
 				);
 		}
 }

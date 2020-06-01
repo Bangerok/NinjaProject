@@ -49,9 +49,7 @@ public class UserServiceImpl implements UserService {
 		public User registerNewUserAccount(RegisterRequest registerData)
 				throws UserAlreadyExistException {
 				if (userRepository.existsByEmail(registerData.getEmail())) {
-						throw new UserAlreadyExistException(
-								"There is an account with that email address: "
-										+ registerData.getEmail());
+						throw new UserAlreadyExistException("errors.exists.email");
 				}
 
 				User user = new User();

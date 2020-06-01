@@ -29,17 +29,22 @@ public class RegisterRequest {
 		/**
 		 * Private поле, содержащее электронную почту пользователя при регистрации с клиента.
 		 */
-		@ValidEmail
 		@NotNull
 		@NotEmpty
+		@ValidEmail
 		private String email;
 
 		/**
-		 * Private поле, содержащее пароль пользователя при регистрации с клиента. Второе поле делает то
-		 * же самое - повторение пароля.
+		 * Private поле, содержащее пароль пользователя при регистрации с клиента.
 		 */
 		@NotNull
 		@NotEmpty
 		private String password;
+
+		/**
+		 * Private поле, содержащее повторный ввод пароля пользователя при регистрации с клиента.
+		 */
+		@NotNull
+		@NotEmpty
 		private String matchingPassword;
 }
