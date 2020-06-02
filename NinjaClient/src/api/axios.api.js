@@ -40,7 +40,9 @@ function request(method, url, params, data, additionalHeaders) {
     return Promise.resolve(response);
   }, error => {
     store.commit(LOADING, false);
-    return Promise.reject(error);
+    if (!(error.status && error.status === 400) && error.response.status !== 401) {
+      return Promise.reject(error);
+    }
   });
 
   return axios(axiosConfig);

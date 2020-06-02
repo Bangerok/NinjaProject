@@ -18,13 +18,13 @@ const authActions = {
         color: 'success',
         text: i18n.tc(response.data.message),
       }
-    }).catch(({response}) => {
-      if (response.data.errors) {
-        return Promise.reject(response.data.errors);
+    }).catch((error) => {
+      if (error.response.data.errors) {
+        return Promise.reject(error);
       } else {
         notificationSettings = {
           color: 'error',
-          text: i18n.tc(response.data.message),
+          text: i18n.tc(error.response.data.message),
         }
       }
     });
