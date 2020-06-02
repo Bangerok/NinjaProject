@@ -6,8 +6,11 @@
 </template>
 
 <script>
+  /**
+   * Страница с информацией о том, что она находится в разработке.
+   */
   export default {
-    name: "InDevelopment"
+    name: "ViewInDevelopment"
   }
 </script>
 

@@ -1,3 +1,4 @@
-const actions = {}
-
-export default actions
+/**
+ * Список основных действий.
+ */
+export default {}

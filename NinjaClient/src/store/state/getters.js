@@ -1,3 +1,4 @@
-const getters = {}
-
-export default getters
+/**
+ * Список основных геттеров.
+ */
+export default {}

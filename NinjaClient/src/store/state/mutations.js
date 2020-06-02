@@ -1,4 +1,7 @@
-const mutations = {
+/**
+ * Список основных мутаций.
+ */
+export default {
   setOptionsNotification(state, payload) {
     state.notification.color = payload.color;
     state.notification.text = payload.text;
@@ -11,5 +14,3 @@ const mutations = {
     state.loading = payload;
   },
 }
-
-export default mutations

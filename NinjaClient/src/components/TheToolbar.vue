@@ -79,12 +79,24 @@
 <script>
   import {mapState, mapMutations, mapActions} from 'vuex';
 
+  /**
+   * Компонент для показа верхнего информационного меню.
+   */
   export default {
-    name: 'AppBar',
+    name: 'TheToolbar',
     data: function () {
       return {
+        /**
+         * Включен/выключен ночной режим оформления системы
+         */
         nightMode: true,
+        /**
+         * Выбранный язык локализации системы
+         */
         locale: 'ru',
+        /**
+         * Список доступных локалей системы для переключения между ними
+         */
         items: [
           {
             text: 'Русский',
@@ -101,6 +113,9 @@
       ...mapMutations('settings', ['setMinVariant']),
       ...mapActions('auth', ['callLogout']),
     },
+    /**
+     * Настраиваем систему после монтирования компонента
+     */
     mounted() {
       let nightMode = localStorage.getItem('nightMode');
       if (nightMode) {
@@ -116,10 +131,16 @@
       }
     },
     watch: {
+      /**
+       * Сохраняем выбранный режим оформления системы в localStorage
+       */
       nightMode() {
         this.$vuetify.theme.dark = this.nightMode;
         localStorage.setItem('nightMode', this.nightMode);
       },
+      /**
+       * Сохраняем выбранный язык системы в localStorage
+       */
       locale() {
         this.$i18n.locale = this.locale;
         localStorage.setItem('locale', this.locale);

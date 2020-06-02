@@ -1,7 +1,8 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped :mini-variant="navigation.minVariant" color="sidebar"
-                         mobile-break-point="320">
+    <v-navigation-drawer app clipped color="sidebar" mobile-break-point="320"
+                         :mini-variant="navigation.minVariant"
+    >
       <v-list class="py-0">
         <v-list-item
             v-for="(item, key) in filteredNavigationLinks"
@@ -37,16 +38,28 @@
   import logoIcon from "../assets/logo_app_bar.png"
   import {mapState} from "vuex";
 
+  /**
+   * Компонент для показа меню-навигации по системе.
+   */
   export default {
-    name: "NavigationDrawer",
+    name: "TheSidebar",
     data: function () {
       return {
-        showSubmenus: false,
+        /**
+         * Иконка-логотип системы
+         */
         logoIcon: logoIcon
       }
     },
     computed: {
       ...mapState('settings', {'navigation': state => state.navigation}),
+
+      /**
+       * Метод для получения списка routes, у которых в мета данных есть информация о том,
+       * что их нужно отобразить.
+       *
+       * @return отфильтрованный список routes
+       */
       filteredNavigationLinks() {
         return this.$router.options.routes.filter(route => route.meta.showInMenu);
       },

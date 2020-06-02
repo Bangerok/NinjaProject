@@ -5,14 +5,18 @@ import messagesRu from "./i18nRu"
 
 Vue.use(VueI18n);
 
+/**
+ * Объект для хранения данных локализации для различных языков.
+ */
 const messages = {
   en: messagesEn,
   ru: messagesRu
 }
 
-const i18 = new VueI18n({
+/**
+ * Конфигурационный объект, используемый для локализации системы.
+ */
+export default new VueI18n({
   locale: 'ru',
   messages,
 })
-
-export default i18

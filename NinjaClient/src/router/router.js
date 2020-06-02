@@ -3,6 +3,11 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
+/**
+ * Объект, используемый для хранения доступных страниц системы
+ * и используемых для их отображения компонентов, которые подклюачется
+ * динамически.
+ */
 const routes = [
   {
     path: '/',
@@ -73,12 +78,19 @@ const routes = [
   }
 ];
 
+/**
+ * Конфигурационный объект для настройки роутинга в системе.
+ */
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
 });
 
+/**
+ * Проверка перед переходом наличия токена и если его нет -
+ * перенаправление на страницу авторизации.
+ */
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem('jwt-token')) {
     if (to.path === '/login' || to.path === '/register') {

@@ -4,6 +4,11 @@ import Vuetify from 'vuetify/lib';
 
 Vue.use(Vuetify);
 
+/**
+ * Конфигурационный объект, используемый для настройки отображения
+ * компонентов в системе (режим отображения, настройка цветов).
+ * Подключение нужных иконок.
+ */
 export default new Vuetify({
   icons: {
     iconfont: 'fa',

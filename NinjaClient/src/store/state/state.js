@@ -1,4 +1,7 @@
-let state = {
+/**
+ * Конфигурация основного состояния.
+ */
+export default {
   loading: false,
   notification: {
     color: null,
@@ -6,5 +9,3 @@ let state = {
     show: false,
   },
 }
-
-export default state

@@ -5,6 +5,11 @@ const TOKEN_TYPE = "jwt-token"
 const AUTH_TYPE = "oauth2"
 const LOADING = "setLoading"
 
+/**
+ * Конфигурация axios.
+ *
+ * @return promise Axios
+ */
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
     method: method,
@@ -46,22 +51,23 @@ function request(method, url, params, data, additionalHeaders) {
   return axios(axiosConfig);
 }
 
+/**
+ * Настройка метода GET для отправки на сервер.
+ *
+ * @return promise Axios
+ */
 function get(url) {
   return request('get', url, null, null, null)
 }
 
+/**
+ * Настройка метода POST для отправки на сервер.
+ *
+ * @return promise Axios
+ */
 function post(url, data) {
   data = data || {}
   return request('post', url, null, data, null)
 }
 
-function put(url, data) {
-  data = data || {}
-  return request('put', url, null, data, null)
-}
-
-function remove(url) {
-  return request('delete', url, null, null, null)
-}
-
-export default {get, post, put, remove, request}
+export default {get, post}

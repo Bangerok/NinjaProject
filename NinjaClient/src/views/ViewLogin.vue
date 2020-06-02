@@ -39,8 +39,7 @@
                   </v-col>
                   <v-col class="mb-n7 mt-n5">
                     <v-divider class="mb-1"/>
-                    <v-btn text
-                           href="api/login/google?redirect_uri=http://localhost:8000">
+                    <v-btn text href="api/login/google?redirect_uri=http://localhost:8000">
                       <v-icon color="error" class="mr-2">
                         mdi-google
                       </v-icon>
@@ -60,16 +59,31 @@
 <script>
   import {mapActions} from "vuex";
 
+  /**
+   * Страница для авторизации пользователя.
+   */
   export default {
-    name: "Login",
+    name: "ViewLogin",
     data: () => ({
+      /**
+       * Флаг скрытия/отображения вводимого пароля пользователя.
+       */
       isShowPassword: false,
+      /**
+       * Значение электронной почты при авторизации пользователя.
+       */
       email: '',
+      /**
+       * Значение пароля при авторизации пользователя.
+       */
       password: '',
-      errors: [],
     }),
     methods: {
       ...mapActions('auth', ['login']),
+
+      /**
+       * Запуск авторизации пользователя.
+       */
       auth() {
         const payload = {
           email: this.email,

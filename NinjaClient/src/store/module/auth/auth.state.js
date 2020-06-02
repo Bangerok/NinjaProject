@@ -2,7 +2,10 @@ import mutations from "./auth.mutations";
 import actions from "./auth.actions";
 import getters from "./auth.getters";
 
-let authModule = {
+/**
+ * Конфигурация состояния для модуля Auth.
+ */
+export default {
   namespaced: true,
   state: () => ({
     user: null,
@@ -11,5 +14,3 @@ let authModule = {
   actions,
   getters,
 }
-
-export default authModule

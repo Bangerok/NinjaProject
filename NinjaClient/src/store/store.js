@@ -9,7 +9,10 @@ import settingsModule from "./module/settings/settings.state";
 
 Vue.use(Vuex);
 
-let store = new Vuex.Store({
+/**
+ * Конфигурация внутреннего хранилища системы.
+ */
+export default new Vuex.Store({
   state,
   mutations,
   actions,
@@ -19,5 +22,3 @@ let store = new Vuex.Store({
     settings: settingsModule,
   }
 })
-
-export default store

@@ -6,8 +6,11 @@
 </template>
 
 <script>
+  /**
+   * Страница с информацией о том, что текущая страница не существует.
+   */
   export default {
-    name: "NotFound"
+    name: "ViewNotFound"
   }
 </script>
 

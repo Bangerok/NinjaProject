@@ -3,8 +3,8 @@
     <v-app>
       <the-notification-msg></the-notification-msg>
       <the-progress-bar/>
-      <the-app-bar v-if="user"></the-app-bar>
-      <the-navigation-drawer v-if="user"></the-navigation-drawer>
+      <the-toolbar v-if="user"></the-toolbar>
+      <the-sidebar v-if="user"></the-sidebar>
       <v-content class="content text--primary">
         <transition appear name="slide-fade">
           <router-view style="margin: 20px"></router-view>
@@ -17,12 +17,15 @@
 <script>
   import TheNotificationMsg from "./components/TheNotificationMsg";
   import TheProgressBar from "./components/TheProgressBar";
-  import TheAppBar from "./components/TheToolbar";
-  import TheNavigationDrawer from "./components/TheSidebar";
+  import TheToolbar from "./components/TheToolbar";
+  import TheSidebar from "./components/TheSidebar";
   import {mapState, mapActions} from 'vuex';
 
+  /**
+   * Построение скелета страниц системы.
+   */
   export default {
-    components: {TheNotificationMsg, TheProgressBar, TheAppBar, TheNavigationDrawer},
+    components: {TheNotificationMsg, TheProgressBar, TheToolbar, TheSidebar},
     computed: mapState("auth", {"user": state => state.user}),
     methods: mapActions("auth", ["getCurrentUser"]),
     beforeCreate() {
