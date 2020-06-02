@@ -85,18 +85,42 @@
 <script>
   import {mapActions} from "vuex";
 
+  /**
+   * Страница для регистрации пользователя.
+   */
   export default {
-    name: "Register",
+    name: "ViewRegister",
     data: () => ({
+      /**
+       * Флаг скрытия/отображения вводимых паролей пользователя.
+       */
       isShowPassword: false,
+      /**
+       * Значение электронной почты для регистрации.
+       */
       email: '',
+      /**
+       * Значение имени пользователя для регистрации.
+       */
       username: '',
+      /**
+       * Значение пароля для регистрации.
+       */
       password: '',
+      /**
+       * Значение повторно набранного пароля для регистрации.
+       */
       matchingPassword: '',
+      /**
+       * Список ошибок валидации введенных данных регистрации.
+       */
       errors: [],
     }),
     methods: {
       ...mapActions('auth', ['register']),
+      /**
+       * Отправка данных на сервер для валидации и завершения регистрации.
+       */
       submit() {
         // noinspection JSValidateTypes
         this.register({
@@ -127,9 +151,16 @@
           })
         });
       },
+      /**
+       * Проверка поля на наличие ошибок, полученных после валидации данных регистрации.
+       */
       isError(fieldName) {
         return this.errors.filter(e => e.field === fieldName).length > 0;
       },
+      /**
+       * Получение значения для локализации ошибки для поля, полученной после валидации
+       * данных регистрации. Возвращается значение самой весомой ошибки.
+       */
       errorMessage(fieldName) {
         const filteringErrors = this.errors.filter(e => e.field === fieldName);
         if (!filteringErrors.length) {

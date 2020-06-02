@@ -1,3 +1,4 @@
-const authActions = {}
-
-export default authActions
+/**
+ * Список действий модуля Settings.
+ */
+export default {}

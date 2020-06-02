@@ -1,14 +1,15 @@
 <template>
-  <v-progress-linear
-      indeterminate
-      color="teal"
+  <v-progress-linear indeterminate color="teal"
       v-show="loading"
-  ></v-progress-linear>
+  />
 </template>
 
 <script>
   import {mapState} from "vuex";
 
+  /**
+   * Компонент для показа строки состояния выполнения запросов к серверу.
+   */
   export default {
     name: "TheProgressBar",
     computed: mapState('settings', {'loading': state => state.loading})

@@ -1,3 +1,6 @@
+/**
+ * Файл локализации системы на английском языке.
+ */
 const messagesEn = {
   navigation: {
     companyName: 'SmartLight',

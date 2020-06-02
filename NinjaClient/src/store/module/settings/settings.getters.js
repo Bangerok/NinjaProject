@@ -1,3 +1,4 @@
-const authGetters = {}
-
-export default authGetters
+/**
+ * Список геттеров модуля Settings.
+ */
+export default {}

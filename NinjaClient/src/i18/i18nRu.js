@@ -1,3 +1,6 @@
+/**
+ * Файл локализации системы на русском языке (default).
+ */
 const messagesRu = {
   navigation: {
     companyName: 'СмартЛайт',

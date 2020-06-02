@@ -7,6 +7,9 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
+/**
+ * Конфигурация настроек всей системы.
+ */
 new Vue({
   i18n,
   router,

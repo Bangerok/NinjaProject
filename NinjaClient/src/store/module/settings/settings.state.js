@@ -2,7 +2,10 @@ import mutations from "./settings.mutations";
 import actions from "./settings.actions";
 import getters from "./settings.getters";
 
-let settingsModule = {
+/**
+ * Конфигурация состояния для модуля Settings.
+ */
+export default {
   namespaced: true,
   state: () => ({
     navigation: {
@@ -13,5 +16,3 @@ let settingsModule = {
   actions,
   getters,
 }
-
-export default settingsModule
