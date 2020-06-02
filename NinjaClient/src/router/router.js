@@ -79,4 +79,20 @@ const router = new VueRouter({
   routes
 });
 
+router.beforeEach((to, from, next) => {
+  if (localStorage.getItem('jwt-token')) {
+    if (to.path === '/login' || to.path === '/register') {
+      next({path: '/'});
+      return;
+    }
+  } else {
+    if (to.path !== '/login' && to.path !== '/register') {
+      next({path: '/login'});
+      return;
+    }
+  }
+
+  next();
+})
+
 export default router
