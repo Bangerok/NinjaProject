@@ -20,6 +20,7 @@ import ru.bangerok.ninja.persistence.dao.UserRepository;
  * @version 1.0
  */
 @Service
+@Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
 		private final UserRepository userRepository;
@@ -36,7 +37,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 * @return аутентифицированный пользователь.
 		 */
 		@Override
-		@Transactional
 		public UserDetails loadUserByUsername(String email)
 				throws UsernameNotFoundException {
 				User user = userRepository.findByEmail(email)
@@ -54,7 +54,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 * @param id идентификатор пользователя.
 		 * @return аутентифицированный пользователь.
 		 */
-		@Transactional
 		public UserDetails loadUserById(Long id) {
 				User user = userRepository.findById(id).orElseThrow(
 						() -> new ResourceNotFoundException("User", "id", id)

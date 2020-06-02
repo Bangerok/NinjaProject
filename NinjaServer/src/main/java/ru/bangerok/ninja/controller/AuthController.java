@@ -69,7 +69,7 @@ public class AuthController {
 		 */
 		@PostMapping("/register")
 		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
-				User savedUser = userService.registerNewUserAccount(registerRequest);
+				userService.registerNewUserAccount(registerRequest);
 
 				return new ApiResponse(
 						true,

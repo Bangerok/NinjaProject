@@ -104,7 +104,9 @@
           email: this.email,
           password: this.password,
           matchingPassword: this.matchingPassword
-        }).catch(errors => {
+        }).catch(({response}) => {
+          const errors = response.data.errors;
+
           this.errors = errors.map(e => {
             let weight;
             let message;

@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.persistence.model.Role;
-import ru.bangerok.ninja.persistence.model.User;
-import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.controller.exception.OAuth2AuthenticationProcessingException;
+import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.dao.RoleRepository;
 import ru.bangerok.ninja.persistence.dao.UserRepository;
+import ru.bangerok.ninja.persistence.model.Role;
+import ru.bangerok.ninja.persistence.model.User;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
@@ -34,6 +34,7 @@ import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
  * @version 1.0
  */
 @Service
+@Transactional
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 		private final UserRepository userRepository;
@@ -53,7 +54,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		 * @return аутентифицированный пользователь после успешной авторизации.
 		 */
 		@Override
-		@Transactional
 		public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest)
 				throws OAuth2AuthenticationException {
 				OAuth2User oAuth2User = super.loadUser(oAuth2UserRequest);
@@ -147,5 +147,4 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				existingUser.setLastVisit(LocalDateTime.now());
 				return userRepository.save(existingUser);
 		}
-
 }
