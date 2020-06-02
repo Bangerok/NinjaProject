@@ -19,15 +19,12 @@
   import TheProgressBar from "./components/TheProgressBar";
   import TheAppBar from "./components/TheToolbar";
   import TheNavigationDrawer from "./components/TheSidebar";
-  import {mapState, mapActions, mapMutations} from 'vuex';
+  import {mapState, mapActions} from 'vuex';
 
   export default {
     components: {TheNotificationMsg, TheProgressBar, TheAppBar, TheNavigationDrawer},
     computed: mapState("auth", {"user": state => state.user}),
-    methods: {
-      ...mapMutations(["setOptionsNotification"]),
-      ...mapActions("auth", ["getCurrentUser"]),
-    },
+    methods: mapActions("auth", ["getCurrentUser"]),
     beforeCreate() {
       const uri = new URL(location.href);
       const jwtToken = uri.searchParams.get("token");
