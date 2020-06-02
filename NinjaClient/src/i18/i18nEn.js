@@ -21,16 +21,17 @@ const messagesEn = {
     auth: {
       login: {
         formName: 'Authorization form',
+        google: 'Sign in with Google',
       },
       register: {
         formName: 'Register',
-        email: 'Email',
+        username: 'Username',
         matchingPassword: 'Matching password',
         emailRequired: 'Email is required',
         google: 'Sign up with Google',
       },
       general: {
-        username: 'Username',
+        email: 'Email',
         password: 'Password',
         nameRequired: 'Username is required',
         passwordRequired: 'Password is required',
@@ -62,6 +63,7 @@ const messagesEn = {
       },
       matchingPassword: 'The entered passwords do not match',
       email: 'Invalid mail format. Is required - *@*.*',
+      credential: 'Invalid credentials used',
     },
     exists: {
       email: 'A user with this email already exists',

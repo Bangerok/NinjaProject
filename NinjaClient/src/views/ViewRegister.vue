@@ -14,7 +14,7 @@
               <v-form>
                 <v-text-field
                     v-model="email"
-                    :label="$t('pages.auth.register.email')"
+                    :label="$t('pages.auth.general.email')"
                     :error="isError('email')"
                     :error-messages="errorMessage('email')"
                     prepend-icon="fa-at"
@@ -22,7 +22,7 @@
 
                 <v-text-field
                     v-model="username"
-                    :label="$t('pages.auth.general.username')"
+                    :label="$t('pages.auth.register.username')"
                     :error="isError('username')"
                     :error-messages="errorMessage('username')"
                     prepend-icon="fa-user"

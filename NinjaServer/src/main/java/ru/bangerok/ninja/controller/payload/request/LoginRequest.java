@@ -4,7 +4,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import ru.bangerok.ninja.controller.AuthController;
-import ru.bangerok.ninja.validation.annotation.ValidEmail;
 
 /**
  * Payload java класс для парсинга данных запроса авторизации в параметры rest метода.
@@ -22,7 +21,6 @@ public class LoginRequest {
 		 */
 		@NotNull
 		@NotEmpty
-		@ValidEmail
 		private String email;
 
 		/**
