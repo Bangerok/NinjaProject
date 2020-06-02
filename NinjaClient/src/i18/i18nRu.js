@@ -21,16 +21,17 @@ const messagesRu = {
     auth: {
       login: {
         formName: 'Форма авторизации',
+        google: 'Войдите через Google',
       },
       register: {
         formName: 'Регистрация',
-        email: 'Электронная почта',
+        username: 'Имя пользователя',
         matchingPassword: 'Повторение пароля',
         emailRequired: 'Email обязателен',
         google: 'Зарегистрируйтесь через Google',
       },
       general: {
-        username: 'Имя пользователя',
+        email: 'Электронная почта',
         password: 'Пароль',
         nameRequired: 'Имя обязательно',
         passwordRequired: 'Пароль обязателен',
@@ -62,6 +63,7 @@ const messagesRu = {
       },
       matchingPassword: 'Введенные пароли не совпадают',
       email: 'Не верный формат почты. Требуется *@*.*',
+      credential: 'Используются неверные данные для авторизации',
     },
     exists: {
       email: 'Пользователь с таким email уже существует',

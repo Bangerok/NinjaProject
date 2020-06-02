@@ -35,8 +35,10 @@
       }
     },
     mounted() {
-      // noinspection JSValidateTypes
-      this.getCurrentUser();
+      if (localStorage.getItem("jwt-token")) {
+        // noinspection JSValidateTypes
+        this.getCurrentUser();
+      }
     },
   }
 </script>

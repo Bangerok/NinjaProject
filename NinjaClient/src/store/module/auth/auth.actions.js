@@ -10,6 +10,18 @@ const authActions = {
       );
     });
   },
+  async login({commit}, payload) {
+    await authApi.login(payload).then(response => {
+      localStorage.setItem("jwt-token", response.data.accessToken);
+      document.location.replace(new URL(location.href).origin);
+    }).catch(() => {
+      let notificationSettings = {
+        color: 'error',
+        text: i18n.tc('errors.invalid.credential'),
+      }
+      commit('setOptionsNotification', notificationSettings, {root: true});
+    });
+  },
   async register({commit}, payload) {
     let notificationSettings = null;
 

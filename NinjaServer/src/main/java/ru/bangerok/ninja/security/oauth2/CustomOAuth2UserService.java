@@ -123,6 +123,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				user.setEmail(oAuth2UserInfo.getEmail());
 				user.setAvatar(oAuth2UserInfo.getImageUrl());
 				user.setLastVisit(LocalDateTime.now());
+				user.setEmailVerified(true);
 
 				Optional<Role> optionalRole = roleRepository.findByName("ROLE_USER");
 
