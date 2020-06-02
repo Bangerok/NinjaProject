@@ -38,22 +38,8 @@
       }
     },
     mounted() {
-      // TODO: здесь this.$route.path всегда равен "/". Нужно найти место,
-      // TODO: где будет правильное значение. 
       // noinspection JSValidateTypes
-      this.getCurrentUser().then(() => {
-        if (this.$route.path === "/login" ||
-            this.$route.path === "/register" ||
-            this.$route.path === "/") {
-          this.$router.replace("/");
-        }
-      }).catch(() => {
-        if (this.$route.path !== "/login" ||
-            this.$route.path !== "/register" ||
-            this.$route.path !== "/") {
-          this.$router.replace("login");
-        }
-      });
+      this.getCurrentUser();
     },
   }
 </script>
