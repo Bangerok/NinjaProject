@@ -6,7 +6,7 @@ const authActions = {
     await authApi.getUser().then(response => {
       commit(
           'setCurrentUser',
-          response && response.data !== '' ? response.data : null
+          response.data
       );
     });
   },
@@ -33,12 +33,13 @@ const authActions = {
       commit('setOptionsNotification', notificationSettings, {root: true});
     }
   },
-  async callLogout() {
-    await authApi.logout().then(() => {
-      localStorage.removeItem("jwt-token");
-      localStorage.removeItem("oauth2");
-      document.location.replace(new URL(location.href).origin);
-    });
+  async callLogout({commit}) {
+    localStorage.removeItem("jwt-token");
+    commit(
+        'setCurrentUser',
+        null
+    );
+    document.location.replace(new URL(location.href).origin);
   },
 }
 
