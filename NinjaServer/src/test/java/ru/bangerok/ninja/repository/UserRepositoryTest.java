@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.bangerok.ninja.persistence.model.User;
-import ru.bangerok.ninja.persistence.dao.UserRepository;
+import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
+import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * Класс для тестирования репозитория, работающего с сущностью User.
@@ -19,18 +19,18 @@ import ru.bangerok.ninja.persistence.dao.UserRepository;
 public class UserRepositoryTest extends AbstractRepositoryTest {
 
 		@Autowired
-		private UserRepository userRepository;
+		private RepositoryLocator repositoryLocator;
 
 		/**
 		 * Метод для тестирования поиска пользователя в базе данных по id.
 		 */
 		@Test
 		void checkingUserFindById() {
-				User newUser = userRepository.save(factory.getNewUser());
+				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundById = userRepository.findById(newUser.getId()).orElse(null);
+				User userFoundById = repositoryLocator.getUserRepository().findById(newUser.getId()).orElse(null);
 				assertNotNull(userFoundById);
-				userRepository.delete(userFoundById);
+				repositoryLocator.getUserRepository().delete(userFoundById);
 		}
 
 		/**
@@ -38,11 +38,11 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		 */
 		@Test
 		void checkingUserFindByEmail() {
-				User newUser = userRepository.save(factory.getNewUser());
+				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundByEmail = userRepository.findByEmail(newUser.getEmail()).orElse(null);
+				User userFoundByEmail = repositoryLocator.getUserRepository().findByEmail(newUser.getEmail()).orElse(null);
 				assertNotNull(userFoundByEmail);
-				userRepository.delete(userFoundByEmail);
+				repositoryLocator.getUserRepository().delete(userFoundByEmail);
 		}
 
 		/**
@@ -50,11 +50,11 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		 */
 		@Test
 		void checkingUserFindByProviderId() {
-				User newUser = userRepository.save(factory.getNewUser());
+				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundByProviderId = userRepository.findByProviderId(newUser.getProviderId()).orElse(null);
+				User userFoundByProviderId = repositoryLocator.getUserRepository().findByProviderId(newUser.getProviderId()).orElse(null);
 				assertNotNull(userFoundByProviderId);
-				userRepository.delete(userFoundByProviderId);
+				repositoryLocator.getUserRepository().delete(userFoundByProviderId);
 		}
 
 		/**
@@ -62,10 +62,10 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		 */
 		@Test
 		void checkingUserExistByEmail() {
-				User newUser = userRepository.save(factory.getNewUser());
+				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				boolean existsByEmail = userRepository.existsByEmail(newUser.getEmail());
+				boolean existsByEmail = repositoryLocator.getUserRepository().existsByEmail(newUser.getEmail());
 				assertTrue(existsByEmail);
-				userRepository.delete(newUser);
+				repositoryLocator.getUserRepository().delete(newUser);
 		}
 }

@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.security;
 
-import ru.bangerok.ninja.persistence.model.Privilege;
-import ru.bangerok.ninja.persistence.model.Role;
-import ru.bangerok.ninja.persistence.model.User;
+import ru.bangerok.ninja.persistence.model.user.Privilege;
+import ru.bangerok.ninja.persistence.model.user.Role;
+import ru.bangerok.ninja.persistence.model.user.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;

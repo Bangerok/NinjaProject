@@ -16,10 +16,9 @@ import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.controller.exception.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.enumeration.AuthProvider;
-import ru.bangerok.ninja.persistence.dao.RoleRepository;
-import ru.bangerok.ninja.persistence.dao.UserRepository;
-import ru.bangerok.ninja.persistence.model.Role;
-import ru.bangerok.ninja.persistence.model.User;
+import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
+import ru.bangerok.ninja.persistence.model.user.Role;
+import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
@@ -37,13 +36,11 @@ import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 @Transactional
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
-		private final UserRepository userRepository;
-		private final RoleRepository roleRepository;
+		private final RepositoryLocator repositoryLocator;
 
 		public CustomOAuth2UserService(
-				UserRepository userRepository, RoleRepository roleRepository) {
-				this.userRepository = userRepository;
-				this.roleRepository = roleRepository;
+				RepositoryLocator repositoryLocator) {
+				this.repositoryLocator = repositoryLocator;
 		}
 
 		/**
@@ -85,22 +82,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 								"Email not found from OAuth2 provider");
 				}
 
-				Optional<User> userOptional = userRepository.findByEmail(oAuth2UserInfo.getEmail());
-				User user;
-				if (userOptional.isPresent()) {
-						user = userOptional.get();
-						if (!user.getAuthProvider().equals(AuthProvider
-								.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
-								throw new OAuth2AuthenticationProcessingException(
-										"Looks like you're signed up with " +
-												user.getAuthProvider() + " account. Please use your " + user
-												.getAuthProvider() +
-												" account to login.");
-						}
-						user = updateExistingUser(user, oAuth2UserInfo);
-				} else {
-						user = registerNewUser(oAuth2UserRequest, oAuth2UserInfo);
-				}
+				User user = repositoryLocator.getUserRepository().findByEmail(oAuth2UserInfo.getEmail()).map(
+						value -> updateExistingUser(value, oAuth2UserInfo)
+				).orElseGet(
+						() -> registerNewUser(oAuth2UserRequest, oAuth2UserInfo)
+				);
 
 				return UserPrincipal.create(user, oAuth2User.getAttributes());
 		}
@@ -125,14 +111,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				user.setLastVisit(LocalDateTime.now());
 				user.setEmailVerified(true);
 
-				Optional<Role> optionalRole = roleRepository.findByName("ROLE_USER");
+				Optional<Role> optionalRole = repositoryLocator.getRoleRepository().findByName("ROLE_USER");
 
 				if (optionalRole.isPresent()) {
 						Set<Role> roles = Collections.singleton(optionalRole.get());
 						user.setRoles(roles);
 				}
 
-				return userRepository.save(user);
+				return repositoryLocator.getUserRepository().save(user);
 		}
 
 		/**
@@ -146,6 +132,6 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				existingUser.setFullname(oAuth2UserInfo.getName());
 				existingUser.setAvatar(oAuth2UserInfo.getImageUrl());
 				existingUser.setLastVisit(LocalDateTime.now());
-				return userRepository.save(existingUser);
+				return repositoryLocator.getUserRepository().save(existingUser);
 		}
 }
