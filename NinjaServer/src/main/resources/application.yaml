@@ -28,6 +28,19 @@ spring:
       initialize-schema: always
       table-name: SPRING_SESSION
       schema: classpath:session_tables.sql
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kuznetsov.v.a.work@gmail.com
+    password: fnqpszkbagabpirg
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+support:
+  email: kuznetsov.v.a.work@gmail.com
 server:
   port: 9000
 app:

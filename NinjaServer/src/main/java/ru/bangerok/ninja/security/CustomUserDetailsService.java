@@ -7,9 +7,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.persistence.model.User;
+import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
+import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.controller.exception.ResourceNotFoundException;
-import ru.bangerok.ninja.persistence.dao.UserRepository;
 
 /**
  * Сервисный класс, который позволяет получить пользователя каким либо образом.
@@ -23,10 +23,11 @@ import ru.bangerok.ninja.persistence.dao.UserRepository;
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
-		private final UserRepository userRepository;
+		private final RepositoryLocator repositoryLocator;
 
-		public CustomUserDetailsService(UserRepository userRepository) {
-				this.userRepository = userRepository;
+		public CustomUserDetailsService(
+				RepositoryLocator repositoryLocator) {
+				this.repositoryLocator = repositoryLocator;
 		}
 
 		/**
@@ -39,7 +40,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		@Override
 		public UserDetails loadUserByUsername(String email)
 				throws UsernameNotFoundException {
-				User user = userRepository.findByEmail(email)
+				User user = repositoryLocator.getUserRepository().findByEmail(email)
 						.orElseThrow(() ->
 								new UsernameNotFoundException("User not found with email : " + email)
 						);
@@ -55,7 +56,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 * @return аутентифицированный пользователь.
 		 */
 		public UserDetails loadUserById(Long id) {
-				User user = userRepository.findById(id).orElseThrow(
+				User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
 						() -> new ResourceNotFoundException("User", "id", id)
 				);
 

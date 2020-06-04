@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.persistence.model;
+package ru.bangerok.ninja.persistence.model.user;
 
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import java.util.List;

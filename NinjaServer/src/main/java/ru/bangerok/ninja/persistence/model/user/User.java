@@ -1,5 +1,6 @@
-package ru.bangerok.ninja.persistence.model;
+package ru.bangerok.ninja.persistence.model.user;
 
+import javax.persistence.OneToOne;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -59,16 +60,10 @@ public class User extends BaseEntity {
 		private String email;
 
 		/**
-		 * Private поле, в котором хранится о подтверждении электронной почты пользователя.
+		 * Private поле, в котором хранится информация о подтверждении электронной почты пользователя.
 		 */
 		@Column(name = "email_verified")
 		private Boolean emailVerified = false;
-
-		/**
-		 * Private поле, в котором хранится, если есть, зашифрованный пароль пользователя.
-		 */
-		@Column(name = "password")
-		private String password;
 
 		/**
 		 * Private поле, в котором хранится тип провайдера авторизации пользователя.
@@ -90,6 +85,20 @@ public class User extends BaseEntity {
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@Column(name = "last_visit_date")
 		private LocalDateTime lastVisit;
+
+		/**
+		 * Private поле, в котором хранится, если есть, зашифрованный пароль пользователя.
+		 */
+		@JsonIgnore
+		@Column(name = "password")
+		private String password;
+
+		/**
+		 * Private поле, в котором хранится токен для верификации электронной почты.
+		 */
+		@JsonIgnore
+		@OneToOne(mappedBy = "user")
+		private VerificationToken verificationToken;
 
 		/**
 		 * Private поле, в котором хранится список ролей, доступных данному пользователю.
