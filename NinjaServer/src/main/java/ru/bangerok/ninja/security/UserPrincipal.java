@@ -108,7 +108,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
 		@Override
 		public boolean isEnabled() {
-				return true;
+				return user.getEmailVerified();
 		}
 
 		@Override

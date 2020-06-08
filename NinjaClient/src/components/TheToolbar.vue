@@ -41,17 +41,15 @@
       <v-icon class="mr-1">
         fa-sign-out-alt
       </v-icon>
-      Выйти
+      {{ $t('buttons.exitBtn') }}
     </v-btn>
     <v-tooltip bottom>
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-3">
           <v-card flat max-width="130px" max-height="40px" color="appbar">
-            <v-select
-                flat
-                v-model="locale"
-                :items="items"
-                prepend-icon="fa-globe"
+            <v-select flat prepend-icon="fa-globe"
+                      v-model="locale"
+                      :items="items"
             />
           </v-card>
         </v-list-item-icon>

@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.service.MailService;
+import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
 /**
@@ -22,4 +23,5 @@ public class ServiceLocator {
 
 		private final UserService userService;
 		private final MailService mailService;
+		private final MessageService messageService;
 }

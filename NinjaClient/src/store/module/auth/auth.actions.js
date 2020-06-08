@@ -1,5 +1,6 @@
 import authApi from "../../../api/service/auth.service";
 import i18n from "./../../../i18/i18n";
+import router from './../../../router/router'
 
 /**
  * Список действий модуля Auth.
@@ -11,10 +12,7 @@ export default {
    */
   async getCurrentUser({commit}) {
     await authApi.getUser().then(response => {
-      commit(
-          'setCurrentUser',
-          response.data
-      );
+      commit('setCurrentUser', response.data);
     });
   },
   /**
@@ -23,15 +21,15 @@ export default {
    * в localStorage. Если авторизация не получилась, то вывод окна с ошибкой.
    */
   async login({commit}, payload) {
-    await authApi.login(payload).then(response => {
-      localStorage.setItem("jwt-token", response.data.accessToken);
-      document.location.replace(new URL(location.href).origin);
+    await authApi.login(payload).then(({data}) => {
+      localStorage.setItem("jwt-token", data.accessToken);
+      router.go(0);
     }).catch(() => {
-      let notificationSettings = {
-        color: 'error',
-        text: i18n.tc('errors.invalid.credential'),
-      }
-      commit('setOptionsNotification', notificationSettings, {root: true});
+      commit(
+          'setOptionsNotification',
+          {color: 'error', text: i18n.tc('errors.invalid.credential')},
+          {root: true}
+      );
     });
   },
   /**
@@ -40,38 +38,48 @@ export default {
    * окна с ошибкой.
    */
   async register({commit}, payload) {
-    let notificationSettings = null;
-
     await authApi.register(payload).then(response => {
-      notificationSettings = {
-        color: 'success',
-        text: i18n.tc(response.data.message),
-      }
+      commit(
+          'setOptionsNotification',
+          {color: 'success', text: response.data.message},
+          {root: true}
+      );
+
+      return Promise.resolve(response);
     }).catch((error) => {
       if (error.response.data.errors) {
         return Promise.reject(error);
       } else {
-        notificationSettings = {
-          color: 'error',
-          text: i18n.tc(error.response.data.message),
-        }
+        commit(
+            'setOptionsNotification',
+            {color: 'error', text: error.response.data.message},
+            {root: true}
+        );
       }
     });
-
-    if (notificationSettings) {
-      commit('setOptionsNotification', notificationSettings, {root: true});
-    }
+  },
+  /**
+   * Действие для выполнения проверки указанной пользователем при регистрации
+   * электронной почты путем отправки токена подтверждения на сервер для
+   * проверки.
+   */
+  async confirmEmail({commit}, payload) {
+    await authApi.confirmEmail(payload).then(({data}) => {
+      commit(
+          'setOptionsNotification',
+          {color: data.success ? 'success' : 'error', text: data.message},
+          {root: true}
+      );
+    });
   },
   /**
    * Действие для выполнения logout пользователя системы и перенаправление
    * на страницу с авторизацией.
    */
-  async callLogout({commit}) {
+  callLogout({commit}) {
+    commit('setCurrentUser', null);
+
     localStorage.removeItem("jwt-token");
-    commit(
-        'setCurrentUser',
-        null
-    );
-    document.location.replace(new URL(location.href).origin);
+    router.go(0);
   },
 }

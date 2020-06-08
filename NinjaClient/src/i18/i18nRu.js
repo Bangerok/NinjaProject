@@ -30,8 +30,8 @@ const messagesRu = {
         formName: 'Регистрация',
         username: 'Имя пользователя',
         matchingPassword: 'Повторение пароля',
-        emailRequired: 'Email обязателен',
         google: 'Зарегистрируйтесь через Google',
+        emailRequired: 'Email обязателен',
       },
       general: {
         email: 'Электронная почта',
@@ -41,15 +41,12 @@ const messagesRu = {
       }
     },
   },
-  notification: {
-    authSuccess: 'Авторизация пройдена успешно.',
-    authError: 'Ошибка авторизации!',
-  },
   buttons: {
     authBtn: 'Авторизация',
     registerBtn: 'Регистрация',
     closeBtn: 'Закрыть',
     backBtn: 'Назад',
+    exitBtn: 'Выход',
   },
   tooltips: {
     nightMode: 'Включить/Выключить темный режим',
@@ -68,12 +65,6 @@ const messagesRu = {
       email: 'Не верный формат почты. Требуется *@*.*',
       credential: 'Используются неверные данные для авторизации',
     },
-    exists: {
-      email: 'Пользователь с таким email уже существует',
-    },
-  },
-  success: {
-    registerUser: 'Регистрация прошла успешно',
   },
 }
 

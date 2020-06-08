@@ -1,7 +1,8 @@
 <template>
-  <v-snackbar right top timeout="3000"
-      v-model="notification.show"
-      :color="notification.color"
+  <v-snackbar right top
+              :timeout="3000"
+              v-model="notification.show"
+              :color="notification.color"
   >
     {{ notification.text }}
     <v-btn text @click="setNotificationShow">

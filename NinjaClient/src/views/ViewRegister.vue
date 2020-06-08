@@ -128,7 +128,9 @@
           email: this.email,
           password: this.password,
           matchingPassword: this.matchingPassword
-        }).catch(({response}) => {
+        }).then(() => {
+          this.$router.push("/login");
+        }).catch((response) => {
           const errors = response.data.errors;
 
           this.errors = errors.map(e => {

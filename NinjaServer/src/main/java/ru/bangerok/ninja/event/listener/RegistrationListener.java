@@ -43,7 +43,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 						.getToken();
 
 				SimpleMailMessage emailMessage = serviceLocator.getMailService()
-						.constructEmailMessage(user.getEmail(), null);
+						.constructEmailMessage(user.getEmail(), null, null);
 				emailMessage = serviceLocator.getMailService()
 						.configureVerifiedMessage(emailMessage, token);
 

@@ -2,6 +2,7 @@ package ru.bangerok.ninja.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import ru.bangerok.ninja.NinjaApplication;
 import ru.bangerok.ninja.security.TokenProvider;
@@ -17,7 +18,8 @@ import ru.bangerok.ninja.security.TokenProvider;
  * @author v.kuznetsov
  * @version 1.0
  */
-@ConfigurationProperties(prefix = "app")
+@Data
+@ConfigurationProperties("app")
 public class AppPropertiesConfig {
 
 		/**
@@ -30,14 +32,7 @@ public class AppPropertiesConfig {
 		 */
 		private final OAuth2 oauth2 = new OAuth2();
 
-		public Auth getAuth() {
-				return auth;
-		}
-
-		public OAuth2 getOauth2() {
-				return oauth2;
-		}
-
+		@Data
 		public static class Auth {
 
 				/**
@@ -49,24 +44,9 @@ public class AppPropertiesConfig {
 				 * Private поле, в котором хранится длительность действия токена.
 				 */
 				private long tokenExpirationMsec;
-
-				public String getTokenSecret() {
-						return tokenSecret;
-				}
-
-				public void setTokenSecret(String tokenSecret) {
-						this.tokenSecret = tokenSecret;
-				}
-
-				public long getTokenExpirationMsec() {
-						return tokenExpirationMsec;
-				}
-
-				public void setTokenExpirationMsec(long tokenExpirationMsec) {
-						this.tokenExpirationMsec = tokenExpirationMsec;
-				}
 		}
 
+		@Data
 		public static final class OAuth2 {
 
 				/**
@@ -74,10 +54,6 @@ public class AppPropertiesConfig {
 				 * авторизации.
 				 */
 				private List<String> authorizedRedirectUris = new ArrayList<>();
-
-				public List<String> getAuthorizedRedirectUris() {
-						return authorizedRedirectUris;
-				}
 
 				public OAuth2 authorizedRedirectUris(List<String> authorizedRedirectUris) {
 						this.authorizedRedirectUris = authorizedRedirectUris;
