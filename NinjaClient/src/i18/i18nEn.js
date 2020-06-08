@@ -41,15 +41,12 @@ const messagesEn = {
       },
     },
   },
-  notification: {
-    authSuccess: 'Login successful.',
-    authError: 'Authorization Error!',
-  },
   buttons: {
     authBtn: 'Authorization',
     registerBtn: 'Register',
     closeBtn: 'Close',
     backBtn: 'Back',
+    exitBtn: 'Exit',
   },
   tooltips: {
     nightMode: 'On/Off night mode',
@@ -68,12 +65,6 @@ const messagesEn = {
       email: 'Invalid mail format. Is required - *@*.*',
       credential: 'Invalid credentials used',
     },
-    exists: {
-      email: 'A user with this email already exists',
-    },
-  },
-  success: {
-    registerUser: 'Registration completed successfully',
   },
 }
 

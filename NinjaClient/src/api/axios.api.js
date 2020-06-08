@@ -2,7 +2,6 @@ import axios from 'axios'
 import store from '../store/store'
 
 const TOKEN_TYPE = "jwt-token"
-const AUTH_TYPE = "oauth2"
 const LOADING = "setLoading"
 
 /**
@@ -24,10 +23,6 @@ function request(method, url, params, data, additionalHeaders) {
     headers['Authorization'] = 'Bearer ' + localStorage.getItem(TOKEN_TYPE);
   }
 
-  if (localStorage.getItem("oauth2")) {
-    headers[AUTH_TYPE] = localStorage.getItem(AUTH_TYPE);
-  }
-
   axiosConfig.headers = Object.assign(headers, additionalHeaders);
 
   if (params) {
@@ -38,7 +33,15 @@ function request(method, url, params, data, additionalHeaders) {
     axiosConfig.data = data;
   }
 
-  store.commit(LOADING, true);
+
+
+  axios.interceptors.request.use(config => {
+    store.commit(LOADING, true);
+    return config;
+  }, error => {
+    store.commit(LOADING, false);
+    return Promise.reject(error);
+  });
 
   axios.interceptors.response.use(response => {
     store.commit(LOADING, false);
@@ -57,7 +60,16 @@ function request(method, url, params, data, additionalHeaders) {
  * @return promise Axios
  */
 function get(url) {
-  return request('get', url, null, null, null)
+  return getWithParams(url, null)
+}
+
+/**
+ * Настройка метода GET с параметрами для отправки на сервер.
+ *
+ * @return promise Axios
+ */
+function getWithParams(url, params) {
+  return request('get', url, params, null, null)
 }
 
 /**
@@ -70,4 +82,4 @@ function post(url, data) {
   return request('post', url, null, data, null)
 }
 
-export default {get, post}
+export default {get, getWithParams, post}

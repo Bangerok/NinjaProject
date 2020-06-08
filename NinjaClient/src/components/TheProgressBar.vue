@@ -1,6 +1,6 @@
 <template>
   <v-progress-linear indeterminate color="teal"
-      v-show="loading"
+                     v-show="loading"
   />
 </template>
 
@@ -12,7 +12,7 @@
    */
   export default {
     name: "TheProgressBar",
-    computed: mapState('settings', {'loading': state => state.loading})
+    computed: mapState({'loading': state => state.loading})
   }
 </script>
 

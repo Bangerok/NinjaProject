@@ -27,14 +27,21 @@
   export default {
     components: {TheNotificationMsg, TheProgressBar, TheToolbar, TheSidebar},
     computed: mapState("auth", {"user": state => state.user}),
-    methods: mapActions("auth", ["getCurrentUser"]),
-    beforeCreate() {
+    methods: mapActions("auth", ["getCurrentUser", "confirmEmail"]),
+    created() {
       const uri = new URL(location.href);
       const jwtToken = uri.searchParams.get("token");
-      if (jwtToken !== null) {
+      if (jwtToken) {
         localStorage.setItem("jwt-token", jwtToken);
         document.location.replace(uri.origin);
         this.$forceUpdate();
+      }
+
+      const confirmEmailToken = uri.searchParams.get("confirmEmailToken")
+      if (confirmEmailToken) {
+        // noinspection JSValidateTypes
+        this.confirmEmail(confirmEmailToken);
+        console.log("Confirmation email token: " + confirmEmailToken);
       }
     },
     mounted() {

@@ -24,7 +24,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 				.getLogger(RestAuthenticationEntryPoint.class);
 
 		/**
-		 * Метод для отправки ошибки авторизации на клиент.
+		 * Метод для отправки ошибки аутентификации на клиент.
 		 *
 		 * @param httpServletRequest  запрос.
 		 * @param httpServletResponse ответ запроса.

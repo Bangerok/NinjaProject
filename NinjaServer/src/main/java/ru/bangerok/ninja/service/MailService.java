@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.service;
 
+import javax.validation.constraints.NotNull;
 import org.springframework.mail.SimpleMailMessage;
 import ru.bangerok.ninja.event.listener.RegistrationListener;
 
@@ -17,19 +18,20 @@ public interface MailService {
 		 * Метод для генерации сообщения перед отправкой его на электронную почту.
 		 *
 		 * @param toEmail куда отправляем.
+		 * @param subject тема сообщения
 		 * @param message текст сообщения.
 		 * @return объект сообщения для отправки на электронную почту.
 		 */
-		SimpleMailMessage constructEmailMessage(String toEmail, String message);
+		SimpleMailMessage constructEmailMessage(String toEmail, String subject, String message);
 
 		/**
 		 * Метод для генерации сообщения перед отправкой его на электронную почту.
 		 *
-		 * @param emailMessage сформированный объект письма для отправки.
+		 * @param emailMessage сформированный объект письма для отправки. Не null.
 		 * @param token токен верификации, выданный пользователю для проверки электронной почты.
 		 * @return обновленный объект сообщения для отправки на электронную почту.
 		 */
-		SimpleMailMessage configureVerifiedMessage(SimpleMailMessage emailMessage, String token);
+		SimpleMailMessage configureVerifiedMessage(@NotNull SimpleMailMessage emailMessage, String token);
 
 		/**
 		 * Метод для отправки письма на электронную почту.

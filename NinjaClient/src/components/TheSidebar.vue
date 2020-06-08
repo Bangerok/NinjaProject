@@ -35,7 +35,6 @@
 </template>
 
 <script>
-  import logoIcon from "../assets/logo_app_bar.png"
   import {mapState} from "vuex";
 
   /**
@@ -43,17 +42,8 @@
    */
   export default {
     name: "TheSidebar",
-    data: function () {
-      return {
-        /**
-         * Иконка-логотип системы
-         */
-        logoIcon: logoIcon
-      }
-    },
     computed: {
       ...mapState('settings', {'navigation': state => state.navigation}),
-
       /**
        * Метод для получения списка routes, у которых в мета данных есть информация о том,
        * что их нужно отобразить.

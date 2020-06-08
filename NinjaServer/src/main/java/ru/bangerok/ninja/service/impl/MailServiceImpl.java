@@ -6,35 +6,44 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.service.MailService;
+import ru.bangerok.ninja.service.MessageService;
 
 @Service
 public class MailServiceImpl implements MailService {
 
+		private final MessageService messageService;
 		private final JavaMailSender mailSender;
 		private final Environment env;
 
-		public MailServiceImpl(JavaMailSender mailSender, Environment env) {
+		public MailServiceImpl(MessageService messageService, JavaMailSender mailSender,
+				Environment env) {
+				this.messageService = messageService;
 				this.mailSender = mailSender;
 				this.env = env;
 		}
 
 		@Override
-		public SimpleMailMessage constructEmailMessage(String toEmail, String message) {
+		public SimpleMailMessage constructEmailMessage(String toEmail, String subject, String message) {
 				SimpleMailMessage emailMsg = new SimpleMailMessage();
-				emailMsg.setTo(toEmail);
-				emailMsg.setSubject("Test subject");
+				if (Objects.nonNull(subject)) {
+						emailMsg.setSubject(message);
+				}
+
 				if (Objects.nonNull(message)) {
 						emailMsg.setText(message);
 				}
+
+				emailMsg.setTo(toEmail);
 				emailMsg.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
 				return emailMsg;
 		}
 
 		@Override
 		public SimpleMailMessage configureVerifiedMessage(SimpleMailMessage emailMsg, String token) {
-				emailMsg.setSubject("Registration Confirmation");
-				String confirmationUrl = "/registrationConfirm.html?token=" + token;
-				String message = "You registered successfully. We will send you a confirmation message to your email account.";
+				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
+				String message = messageService.getMessage("register.email.confirmation.text");
+				String confirmationUrl =
+						"<a href='localhost:8000/?confirmEmailToken=" + token + "'> url </a>";
 				emailMsg.setText(message + "\n" + confirmationUrl);
 				return emailMsg;
 		}

@@ -22,6 +22,7 @@ import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.security.TokenProvider;
 import ru.bangerok.ninja.security.UserPrincipal;
+import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
 @Service
@@ -29,16 +30,18 @@ import ru.bangerok.ninja.service.UserService;
 public class UserServiceImpl implements UserService {
 
 		private final RepositoryLocator repositoryLocator;
+		private final MessageService messageService;
 		private final PasswordEncoder passwordEncoder;
 		private final AuthenticationManager authenticationManager;
 		private final TokenProvider tokenProvider;
 
 		public UserServiceImpl(
 				RepositoryLocator repositoryLocator,
-				PasswordEncoder passwordEncoder,
+				MessageService messageService, PasswordEncoder passwordEncoder,
 				AuthenticationManager authenticationManager,
 				TokenProvider tokenProvider) {
 				this.repositoryLocator = repositoryLocator;
+				this.messageService = messageService;
 				this.passwordEncoder = passwordEncoder;
 				this.authenticationManager = authenticationManager;
 				this.tokenProvider = tokenProvider;
@@ -48,7 +51,14 @@ public class UserServiceImpl implements UserService {
 		public User registerNewUserAccount(RegisterRequest registerData)
 				throws UserAlreadyExistException {
 				if (repositoryLocator.getUserRepository().existsByEmail(registerData.getEmail())) {
-						throw new UserAlreadyExistException("errors.exists.email");
+						throw new UserAlreadyExistException(
+								messageService.getMessageWithArgs(
+										"user.error.exist.email",
+										new Object[] {
+												registerData.getEmail()
+										}
+								)
+						);
 				}
 
 				User user = new User();
@@ -74,7 +84,8 @@ public class UserServiceImpl implements UserService {
 						)
 				);
 
-				Optional<User> optionalUser = repositoryLocator.getUserRepository().findByEmail(loginData.getEmail());
+				Optional<User> optionalUser = repositoryLocator.getUserRepository()
+						.findByEmail(loginData.getEmail());
 				if (optionalUser.isPresent()) {
 						User user = optionalUser.get();
 						user.setLastVisit(LocalDateTime.now());

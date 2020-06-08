@@ -17,15 +17,25 @@ export default {
    *
    * @return promise
    */
-  login(payload) {
-    return axios.post('/auth/login', payload);
+  login(loginData) {
+    return axios.post('/auth/login', loginData);
   },
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/register'.
+   * Отправка запроса в rest-метод по адресу '/auth/registrationConfirm'.
    *
    * @return promise
    */
-  register(payload) {
-    return axios.post('/auth/register', payload);
+  register(registerData) {
+    return axios.post('/auth/register', registerData);
+  },
+  /**
+   * Отправка запроса в rest-метод по адресу '/auth/registrationConfirm'.
+   *
+   * @return promise
+   */
+  confirmEmail(token) {
+    return axios.getWithParams('/auth/registrationConfirm', {
+      token: token
+    });
   },
 }

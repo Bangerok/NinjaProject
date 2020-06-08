@@ -29,6 +29,12 @@
   </properties>
 
   <dependencies>
+    <!-- Spring configuration -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+    </dependency>
+
     <!-- Spring tests -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

@@ -35,8 +35,7 @@ public class AuthController {
 		private final ServiceLocator serviceLocator;
 		private final ApplicationEventPublisher eventPublisher;
 
-		public AuthController(ServiceLocator serviceLocator,
-				ApplicationEventPublisher eventPublisher) {
+		public AuthController(ServiceLocator serviceLocator, ApplicationEventPublisher eventPublisher) {
 				this.serviceLocator = serviceLocator;
 				this.eventPublisher = eventPublisher;
 		}
@@ -79,12 +78,11 @@ public class AuthController {
 		@PostMapping("/register")
 		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
 				User registered = serviceLocator.getUserService().registerNewUserAccount(registerRequest);
-				String appUrl = "";
-				eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, appUrl));
+				eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, ""));
 
 				return new ApiResponse(
 						true,
-						"success.registerUser"
+						serviceLocator.getMessageService().getMessage("register.success.ended")
 				);
 		}
 
@@ -102,14 +100,14 @@ public class AuthController {
 				if (verificationToken == null) {
 						return new ApiResponse(
 								false,
-								"InvalidToken"
+								serviceLocator.getMessageService().getMessage("register.error.token.invalid")
 						);
 				}
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
 						return new ApiResponse(
 								false,
-								"ExpiredToken"
+								serviceLocator.getMessageService().getMessage("register.error.token.expired")
 						);
 				}
 
@@ -118,7 +116,7 @@ public class AuthController {
 				serviceLocator.getUserService().saveRegisteredUser(user);
 				return new ApiResponse(
 						true,
-						"Veryfied user email success"
+						serviceLocator.getMessageService().getMessage("register.success.verified.email")
 				);
 		}
 }
