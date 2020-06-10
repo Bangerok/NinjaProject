@@ -41,12 +41,22 @@ const messagesEn = {
       },
     },
   },
+  dialogs: {
+    title: {
+      confirmation: 'Confirmation'
+    },
+    content: {
+      confirmation: 'Are you sure you want to do this?',
+      resendToken: 'Verification token for email confirmation expired. To complete the registration you need to get a new one. Do you agree?'
+    }
+  },
   buttons: {
     authBtn: 'Authorization',
     registerBtn: 'Register',
     closeBtn: 'Close',
     backBtn: 'Back',
     exitBtn: 'Exit',
+    yesBtn: 'Yes',
   },
   tooltips: {
     nightMode: 'On/Off night mode',

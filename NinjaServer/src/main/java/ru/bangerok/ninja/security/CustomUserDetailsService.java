@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.User;
-import ru.bangerok.ninja.controller.exception.ResourceNotFoundException;
+import ru.bangerok.ninja.security.error.ResourceNotFoundException;
 
 /**
  * Сервисный класс, который позволяет получить пользователя каким либо образом.

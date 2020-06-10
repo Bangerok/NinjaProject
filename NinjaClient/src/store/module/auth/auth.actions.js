@@ -20,9 +20,9 @@ export default {
    * по email и паролю. Получение токена аутентификации и запись его
    * в localStorage. Если авторизация не получилась, то вывод окна с ошибкой.
    */
-  async login({commit}, payload) {
-    await authApi.login(payload).then(({data}) => {
-      localStorage.setItem("jwt-token", data.accessToken);
+  async login({commit}, loginRequestData) {
+    await authApi.login(loginRequestData).then(({data}) => {
+      localStorage.setItem("jwt-token", data.message);
       router.go(0);
     }).catch(() => {
       commit(
@@ -37,8 +37,8 @@ export default {
    * по переданным в метод данных. Если регистрация не удалась, то вывод
    * окна с ошибкой.
    */
-  async register({commit}, payload) {
-    await authApi.register(payload).then(response => {
+  async register({commit}, registerRequestData) {
+    await authApi.register(registerRequestData).then(response => {
       commit(
           'setOptionsNotification',
           {color: 'success', text: response.data.message},
@@ -63,11 +63,28 @@ export default {
    * электронной почты путем отправки токена подтверждения на сервер для
    * проверки.
    */
-  async confirmEmail({commit}, payload) {
-    await authApi.confirmEmail(payload).then(({data}) => {
+  async confirmEmail({commit}, verifyToken) {
+    await authApi.confirmEmail(verifyToken).then(({data}) => {
+      if (!data.data) {
+        commit(
+            'setOptionsNotification',
+            {color: 'success', text: data.message},
+            {root: true}
+        );
+      } else {
+        return Promise.reject(data);
+      }
+    });
+  },
+  /**
+   * Действие для отправки на почту нового токена верификации электронной почты
+   * взамен истекшего.
+   */
+  async reSendVeryficationTokenEmail({commit}, expiredVerifyToken) {
+    await authApi.reSendVeryficationTokenEmail(expiredVerifyToken).then(({data}) => {
       commit(
           'setOptionsNotification',
-          {color: data.success ? 'success' : 'error', text: data.message},
+          {color: 'success', text: data.message},
           {root: true}
       );
     });

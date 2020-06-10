@@ -33,8 +33,6 @@ function request(method, url, params, data, additionalHeaders) {
     axiosConfig.data = data;
   }
 
-
-
   axios.interceptors.request.use(config => {
     store.commit(LOADING, true);
     return config;

@@ -38,4 +38,14 @@ export default {
       token: token
     });
   },
+  /**
+   * Отправка запроса в rest-метод по адресу '/auth/resendRegistrationToken'.
+   *
+   * @return promise
+   */
+  reSendVeryficationTokenEmail(oldToken) {
+    return axios.getWithParams('/auth/resendRegistrationToken', {
+      oldToken: oldToken
+    });
+  },
 }

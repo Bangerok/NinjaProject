@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller.exception;
+package ru.bangerok.ninja.security.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

@@ -26,6 +26,8 @@
     <jsoup.version>1.13.1</jsoup.version>
     <jjwt.version>0.9.1</jjwt.version>
     <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+    <passay.version>1.0</passay.version>
+    <guava.version>r05</guava.version>
   </properties>
 
   <dependencies>
@@ -111,6 +113,13 @@
       <version>${jjwt.version}</version>
     </dependency>
 
+    <!-- Password Validation -->
+    <dependency>
+      <groupId>org.passay</groupId>
+      <artifactId>passay</artifactId>
+      <version>${passay.version}</version>
+    </dependency>
+
     <!-- Other -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -122,6 +131,12 @@
       <groupId>org.jsoup</groupId>
       <artifactId>jsoup</artifactId>
       <version>${jsoup.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>${guava.version}</version>
     </dependency>
   </dependencies>
 

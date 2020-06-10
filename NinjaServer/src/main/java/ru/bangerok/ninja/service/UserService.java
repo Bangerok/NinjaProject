@@ -42,12 +42,28 @@ public interface UserService {
 		User getCurrentUser(UserPrincipal currentUser);
 
 		/**
+		 * Метод для получения пользователя, которому был выдан токен верификации электронной почты.
+		 *
+		 * @param verificationToken токен верификации почты.
+		 * @return пользователь, для которого был выдан токен верификации почты.
+		 */
+		User getUser(String verificationToken);
+
+		/**
 		 * Метод для создания и сохранения токена для верификации электронной почты.
 		 *
 		 * @param user регистрирующийся пользователь.
 		 * @return токен верификации.
 		 */
 		VerificationToken createVerificationTokenForUser(User user);
+
+		/**
+		 * Метод для обновления токена верификации с новым значением токена.
+		 *
+		 * @param existingVerificationToken существующие значение токена верификации.
+		 * @return обновленный токен верификации.
+		 */
+		VerificationToken generateNewVerificationToken(String existingVerificationToken);
 
 		/**
 		 * Метод для получения токена верификации из базы данных по его значению токена.
