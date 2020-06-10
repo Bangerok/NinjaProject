@@ -33,7 +33,7 @@
                     <v-btn @click="auth" :disabled="email === '' || password === ''" text color="primary">
                       {{ $t('buttons.authBtn') }}
                     </v-btn>
-                    <v-btn to="/register" text color="teal" >
+                    <v-btn to="/register" text color="green darken-1" >
                       {{ $t('buttons.registerBtn') }}
                     </v-btn>
                   </v-col>

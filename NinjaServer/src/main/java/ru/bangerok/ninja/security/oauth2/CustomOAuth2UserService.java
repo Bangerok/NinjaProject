@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.controller.exception.OAuth2AuthenticationProcessingException;
+import ru.bangerok.ninja.security.error.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.Role;

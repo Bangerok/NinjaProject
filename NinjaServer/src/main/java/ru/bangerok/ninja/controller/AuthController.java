@@ -3,6 +3,7 @@ package ru.bangerok.ninja.controller;
 import java.time.LocalDateTime;
 import javax.validation.Valid;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
-import ru.bangerok.ninja.controller.payload.response.ApiResponse;
-import ru.bangerok.ninja.controller.payload.response.AuthResponse;
+import ru.bangerok.ninja.controller.payload.response.GenericResponse;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
@@ -62,10 +62,10 @@ public class AuthController {
 		 * @return AuthResponse с токеном аутентификации.
 		 */
 		@PostMapping("/login")
-		public AuthResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+		public GenericResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 				String token = serviceLocator.getUserService()
 						.creatingTokenForAuthentificateUser(loginRequest);
-				return new AuthResponse(token);
+				return new GenericResponse(token);
 		}
 
 		/**
@@ -76,12 +76,11 @@ public class AuthController {
 		 * @return ApiResponse с информацией об успешной регистрации.
 		 */
 		@PostMapping("/register")
-		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+		public GenericResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
 				User registered = serviceLocator.getUserService().registerNewUserAccount(registerRequest);
 				eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, ""));
 
-				return new ApiResponse(
-						true,
+				return new GenericResponse(
 						serviceLocator.getMessageService().getMessage("register.success.ended")
 				);
 		}
@@ -94,29 +93,50 @@ public class AuthController {
 		 * @return ApiResponse с информацией об успешной верификации или об ошибке.
 		 */
 		@GetMapping("/registrationConfirm")
-		public ApiResponse confirmRegistration(@RequestParam("token") String token) {
+		public GenericResponse confirmRegistration(@RequestParam("token") String token) {
 				VerificationToken verificationToken = serviceLocator.getUserService()
 						.getVerificationToken(token);
 				if (verificationToken == null) {
-						return new ApiResponse(
-								false,
+						return new GenericResponse(
 								serviceLocator.getMessageService().getMessage("register.error.token.invalid")
 						);
 				}
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-						return new ApiResponse(
-								false,
-								serviceLocator.getMessageService().getMessage("register.error.token.expired")
-						);
+						GenericResponse genericResponse = new GenericResponse();
+						genericResponse.setData(verificationToken.getToken());
+						return genericResponse;
 				}
 
 				User user = verificationToken.getUser();
 				user.setEmailVerified(true);
 				serviceLocator.getUserService().saveRegisteredUser(user);
-				return new ApiResponse(
-						true,
+				return new GenericResponse(
 						serviceLocator.getMessageService().getMessage("register.success.verified.email")
+				);
+		}
+
+		/**
+		 * Rest метод-запрос, отправляющий на электронную почту пользователя новый токен верификации.
+		 *
+		 * @param existingToken истекший токен верификации пользователя.
+		 * @return GenericResponse с информацией об отправке нового токена на почту пользователя.
+		 */
+		@GetMapping("/resendRegistrationToken")
+		public GenericResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
+				VerificationToken newToken = serviceLocator.getUserService()
+						.generateNewVerificationToken(existingToken);
+
+				User user = serviceLocator.getUserService().getUser(newToken.getToken());
+
+				SimpleMailMessage emailMessageTemplate = serviceLocator.getMailService()
+						.constructEmailMessage(user.getEmail(), null, null);
+				SimpleMailMessage emailMessage = serviceLocator.getMailService()
+						.configureResendVerifiedMessage(emailMessageTemplate, newToken.getToken());
+				serviceLocator.getMailService().send(emailMessage);
+
+				return new GenericResponse(
+						serviceLocator.getMessageService().getMessage("register.success.resend.token")
 				);
 		}
 }

@@ -49,6 +49,17 @@ public class MailServiceImpl implements MailService {
 		}
 
 		@Override
+		public SimpleMailMessage configureResendVerifiedMessage(SimpleMailMessage emailMsg,
+				String newToken) {
+				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
+				String message = messageService.getMessage("register.email.confirmation.text");
+				String confirmationUrl =
+						"<a href='localhost:8000/?confirmEmailToken=" + newToken + "'> url </a>";
+				emailMsg.setText(message + "\n" + confirmationUrl);
+				return emailMsg;
+		}
+
+		@Override
 		public void send(SimpleMailMessage emailMessage) {
 				mailSender.send(emailMessage);
 		}

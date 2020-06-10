@@ -27,7 +27,7 @@ import ru.bangerok.ninja.validation.impl.EmailValidator;
 @Documented
 public @interface ValidEmail {
 
-		String message() default "errors.invalid.email";
+		String message() default "Invalid email";
 
 		Class<?>[] groups() default {};
 

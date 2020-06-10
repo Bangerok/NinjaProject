@@ -41,12 +41,22 @@ const messagesRu = {
       }
     },
   },
+  dialogs: {
+    title: {
+      confirmation: 'Подтверждение'
+    },
+    content: {
+      confirmation: 'Вы уверены, что хотите это сделать?',
+      resendToken: 'Токен верификации для подтверждения электронной почты просрочен. Для окончания регистрации нужно получить новый. Вы согласны?'
+    }
+  },
   buttons: {
     authBtn: 'Авторизация',
     registerBtn: 'Регистрация',
     closeBtn: 'Закрыть',
     backBtn: 'Назад',
     exitBtn: 'Выход',
+    yesBtn: 'Да',
   },
   tooltips: {
     nightMode: 'Включить/Выключить темный режим',

@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.controller.exception.UserAlreadyExistException;
+import ru.bangerok.ninja.controller.exception.UserNotFoundException;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.enumeration.AuthProvider;
@@ -54,7 +55,7 @@ public class UserServiceImpl implements UserService {
 						throw new UserAlreadyExistException(
 								messageService.getMessageWithArgs(
 										"user.error.exist.email",
-										new Object[] {
+										new Object[]{
 												registerData.getEmail()
 										}
 								)
@@ -100,10 +101,33 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public User getCurrentUser(UserPrincipal currentUser) {
 				if (Objects.isNull(currentUser)) {
-						return null;
+						throw new UserNotFoundException(
+								messageService.getMessage(
+										"user.error.not_found"
+								)
+						);
 				}
 
-				return repositoryLocator.getUserRepository().findById(currentUser.getId()).orElse(null);
+				Optional<User> userOptional = repositoryLocator.getUserRepository()
+						.findById(currentUser.getId());
+				if (userOptional.isEmpty()) {
+						throw new UserNotFoundException(
+								messageService.getMessage(
+										"user.error.not_found"
+								)
+						);
+				}
+
+				return userOptional.get();
+		}
+
+		@Override
+		public User getUser(String verificationToken) {
+				Optional<VerificationToken> tokenOptional = repositoryLocator.getTokenRepository()
+						.findByToken(verificationToken);
+
+				return tokenOptional.map(VerificationToken::getUser).orElse(null);
+
 		}
 
 		@Override
@@ -114,6 +138,20 @@ public class UserServiceImpl implements UserService {
 				myToken.setExpiryDate(LocalDateTime.now().plusDays(1));
 
 				return repositoryLocator.getTokenRepository().save(myToken);
+		}
+
+		@Override
+		public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
+				Optional<VerificationToken> tokenOptional = repositoryLocator.getTokenRepository()
+						.findByToken(existingVerificationToken);
+				if (tokenOptional.isPresent()) {
+						VerificationToken token = tokenOptional.get();
+						token.setToken(UUID.randomUUID().toString());
+						token.setExpiryDate(LocalDateTime.now().plusDays(1));
+						return repositoryLocator.getTokenRepository().save(token);
+				}
+
+				return null;
 		}
 
 		@Override
