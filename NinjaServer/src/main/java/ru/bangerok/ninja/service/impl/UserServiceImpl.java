@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 				if (Objects.isNull(currentUser)) {
 						throw new UserNotFoundException(
 								messageService.getMessage(
-										"user.error.not_found"
+										"user.error.not.found.auth"
 								)
 						);
 				}
@@ -113,7 +113,7 @@ public class UserServiceImpl implements UserService {
 				if (userOptional.isEmpty()) {
 						throw new UserNotFoundException(
 								messageService.getMessage(
-										"user.error.not_found"
+										"user.error.not.found"
 								)
 						);
 				}
