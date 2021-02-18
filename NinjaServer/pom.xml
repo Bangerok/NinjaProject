@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.3.0.RELEASE</version>
+    <version>2.4.2</version>
     <relativePath/>
   </parent>
   <modelVersion>4.0.0</modelVersion>
@@ -15,7 +15,7 @@
 
   <properties>
     <!-- Compiler -->
-    <java.version>14</java.version>
+    <java.version>15</java.version>
     <encoding>UTF-8</encoding>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -25,9 +25,9 @@
     <!-- Dependencies -->
     <jsoup.version>1.13.1</jsoup.version>
     <jjwt.version>0.9.1</jjwt.version>
-    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-    <passay.version>1.0</passay.version>
-    <guava.version>r05</guava.version>
+    <hibernate-validator.version>7.0.1.Final</hibernate-validator.version>
+    <passay.version>1.6.0</passay.version>
+    <guava.version>30.1-jre</guava.version>
   </properties>
 
   <dependencies>
@@ -65,6 +65,11 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-thymeleaf</artifactId>
     </dependency>
 
     <!-- Spring oAuth2 -->
