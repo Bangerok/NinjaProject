@@ -1,10 +1,17 @@
 package ru.bangerok.ninja.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import ru.bangerok.ninja.service.MailService;
 import ru.bangerok.ninja.service.MessageService;
 
@@ -14,12 +21,14 @@ public class MailServiceImpl implements MailService {
 		private final MessageService messageService;
 		private final JavaMailSender mailSender;
 		private final Environment env;
+		private final SpringTemplateEngine thymeleafTemplateEngine;
 
 		public MailServiceImpl(MessageService messageService, JavaMailSender mailSender,
-				Environment env) {
+				Environment env, SpringTemplateEngine thymeleafTemplateEngine) {
 				this.messageService = messageService;
 				this.mailSender = mailSender;
 				this.env = env;
+				this.thymeleafTemplateEngine = thymeleafTemplateEngine;
 		}
 
 		@Override
@@ -39,28 +48,36 @@ public class MailServiceImpl implements MailService {
 		}
 
 		@Override
-		public SimpleMailMessage configureVerifiedMessage(SimpleMailMessage emailMsg, String token) {
-				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
-				String message = messageService.getMessage("register.email.confirmation.text");
-				String confirmationUrl =
-						"<a href='localhost:8000/?confirmEmailToken=" + token + "'> url </a>";
-				emailMsg.setText(message + "\n" + confirmationUrl);
-				return emailMsg;
+		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
+				Map<String, Object> templateModel = new HashMap<>();
+				templateModel.put("text", messageService.getMessage("register.email.confirmation.text"));
+				templateModel.put("url", "localhost:8000/?confirmEmailToken=" + token);
+
+				send(
+						toEmail,
+						messageService.getMessage("register.email.confirmation.subject"),
+						"confirmation-email",
+						templateModel
+				);
 		}
 
 		@Override
-		public SimpleMailMessage configureResendVerifiedMessage(SimpleMailMessage emailMsg,
-				String newToken) {
-				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
-				String message = messageService.getMessage("register.email.confirmation.text");
-				String confirmationUrl =
-						"<a href='localhost:8000/?confirmEmailToken=" + newToken + "'> url </a>";
-				emailMsg.setText(message + "\n" + confirmationUrl);
-				return emailMsg;
-		}
+		public void send(String to, String subject, String templateName,
+				Map<String, Object> templateModel) throws MessagingException {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+				helper.setTo(to);
 
-		@Override
-		public void send(SimpleMailMessage emailMessage) {
-				mailSender.send(emailMessage);
+				if (subject.isEmpty()) {
+						helper.setSubject(subject);
+				}
+
+				Context thymeleafContext = new Context();
+				thymeleafContext.setVariables(templateModel);
+				String htmlBodyTest = thymeleafTemplateEngine
+						.process(templateName + ".html", thymeleafContext);
+				helper.setText(htmlBodyTest, true);
+
+				mailSender.send(message);
 		}
 }

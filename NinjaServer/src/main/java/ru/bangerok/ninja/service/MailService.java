@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.service;
 
-import javax.validation.constraints.NotNull;
+import java.util.Map;
+import javax.mail.MessagingException;
 import org.springframework.mail.SimpleMailMessage;
 import ru.bangerok.ninja.event.listener.RegistrationListener;
 
@@ -27,29 +28,19 @@ public interface MailService {
 		/**
 		 * Метод для генерации верификационного сообщения перед отправкой его на электронную почту.
 		 *
-		 * @param emailMessage сформированный объект письма для отправки. Не null.
-		 * @param token        токен верификации, выданный пользователю для проверки электронной почты.
-		 * @return обновленный объект сообщения для отправки на электронную почту.
+		 * @param toEmail сформированный объект письма для отправки. Не null.
+		 * @param token   токен верификации, выданный пользователю для проверки электронной почты.
 		 */
-		SimpleMailMessage configureVerifiedMessage(@NotNull SimpleMailMessage emailMessage,
-				String token);
-
-		/**
-		 * Метод для генерации повторного верификационного сообщения перед отправкой его на электронную
-		 * почту.
-		 *
-		 * @param emailMessage сформированный объект письма для отправки. Не null.
-		 * @param newToken     повторный токен верификации, выданный пользователю для проверки
-		 *                     электронной почты.
-		 * @return обновленный объект сообщения для отправки на электронную почту.
-		 */
-		SimpleMailMessage configureResendVerifiedMessage(@NotNull SimpleMailMessage emailMessage,
-				String newToken);
+		void sendVerifiedMessage(String toEmail, String token) throws MessagingException;
 
 		/**
 		 * Метод для отправки письма на электронную почту.
 		 *
-		 * @param emailMessage сформированный объект письма для отправки.
+		 * @param to            кому отправляем.
+		 * @param subject       тема сообщения.
+		 * @param templateName  имя шаблона.
+		 * @param templateModel данные для шаблона.
 		 */
-		void send(SimpleMailMessage emailMessage);
+		void send(String to, String subject, String templateName, Map<String, Object> templateModel)
+				throws MessagingException;
 }
