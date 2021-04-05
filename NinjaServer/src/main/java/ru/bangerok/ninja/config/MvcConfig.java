@@ -24,7 +24,7 @@ public class MvcConfig implements WebMvcConfigurer {
 				long MAX_AGE_SECS = 3600;
 
 				registry.addMapping("/**")
-						.allowedOrigins("*")
+						.allowedOriginPatterns("*")
 						.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
 						.allowedHeaders("*")
 						.allowCredentials(true)
