@@ -32,19 +32,17 @@
       TheNotificationMsg, TheProgressBar, TheToolbar, TheSidebar, TheRouterView,
       BaseDialog,
     },
-    data: function () {
-      return {
-        /**
-         * Флаг скрытия/отображения диалога подтверждения запроса нового токена верификации
-         * электронной почты.
-         */
-        showConfirmResendTokenDialog: false,
-        /**
-         * Истекший токен верификации.
-         */
-        expiredVerifyToken: '',
-      }
-    },
+    data: () => ({
+      /**
+       * Флаг скрытия/отображения диалога подтверждения запроса нового токена верификации
+       * электронной почты.
+       */
+      showConfirmResendTokenDialog: false,
+      /**
+       * Истекший токен верификации.
+       */
+      expiredVerifyToken: '',
+    }),
     computed: mapState("auth", {"user": state => state.user}),
     methods: {
       ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVeryficationTokenEmail"]),

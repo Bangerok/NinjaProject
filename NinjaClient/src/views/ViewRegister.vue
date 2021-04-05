@@ -65,9 +65,9 @@
                     </v-btn>
                   </v-col>
 
-                  <v-col class="mb-n7 mt-n5">
+                  <v-col class="mb-n4 mt-n5">
                     <v-divider class="mb-1"/>
-                    <v-btn text href="api/login/google?redirect_uri=http://localhost:8000">
+                    <v-btn text href="api/login/google?redirect_uri=http://localhost:3000">
                       <v-icon color="error" class="mr-2">mdi-google</v-icon>
                       {{ $t('pages.auth.register.google') }}
                     </v-btn>
@@ -169,7 +169,7 @@
           return '';
         }
 
-        const sortWeightFilteringErrors = filteringErrors.sort(function (a, b) {
+        const sortWeightFilteringErrors = filteringErrors.sort((a, b) => {
           if (a.weight < b.weight) {
             return 1;
           }
