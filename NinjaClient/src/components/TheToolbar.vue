@@ -82,30 +82,28 @@
    */
   export default {
     name: 'TheToolbar',
-    data: function () {
-      return {
-        /**
-         * Включен/выключен ночной режим оформления системы
-         */
-        nightMode: true,
-        /**
-         * Выбранный язык локализации системы
-         */
-        locale: 'ru',
-        /**
-         * Список доступных локалей системы для переключения между ними
-         */
-        items: [
-          {
-            text: 'Русский',
-            value: 'ru'
-          }, {
-            text: 'English',
-            value: 'en'
-          }
-        ]
-      }
-    },
+    data: () => ({
+      /**
+       * Включен/выключен ночной режим оформления системы
+       */
+      nightMode: true,
+      /**
+       * Выбранный язык локализации системы
+       */
+      locale: 'ru',
+      /**
+       * Список доступных локалей системы для переключения между ними
+       */
+      items: [
+        {
+          text: 'Русский',
+          value: 'ru'
+        }, {
+          text: 'English',
+          value: 'en'
+        }
+      ]
+    }),
     computed: mapState('settings', {'navigation': state => state.navigation}),
     methods: {
       ...mapMutations('settings', ['setMinVariant']),
