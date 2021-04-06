@@ -6,7 +6,6 @@ import java.util.Objects;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import ru.bangerok.ninja.service.MessageService;
 
 @Service
 public class MailServiceImpl implements MailService {
-
 		private final MessageService messageService;
 		private final JavaMailSender mailSender;
 		private final Environment env;
@@ -32,52 +30,38 @@ public class MailServiceImpl implements MailService {
 		}
 
 		@Override
-		public SimpleMailMessage constructEmailMessage(String toEmail, String subject, String message) {
-				SimpleMailMessage emailMsg = new SimpleMailMessage();
-				if (Objects.nonNull(subject)) {
-						emailMsg.setSubject(message);
-				}
-
-				if (Objects.nonNull(message)) {
-						emailMsg.setText(message);
-				}
-
-				emailMsg.setTo(toEmail);
-				emailMsg.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
-				return emailMsg;
-		}
-
-		@Override
 		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
 				Map<String, Object> templateModel = new HashMap<>();
 				templateModel.put("text", messageService.getMessage("register.email.confirmation.text"));
-				templateModel.put("url", "localhost:3000/?confirmEmailToken=" + token);
+				templateModel.put("test", "http://localhost:3000/?confirmEmailToken=" + token);
 
-				send(
+				sendMessageUsingThymeleafTemplate(
 						toEmail,
 						messageService.getMessage("register.email.confirmation.subject"),
-						"confirmation-email",
-						templateModel
+						templateModel,
+						"email/confirmation-email"
 				);
 		}
 
-		@Override
-		public void send(String to, String subject, String templateName,
-				Map<String, Object> templateModel) throws MessagingException {
-				MimeMessage message = mailSender.createMimeMessage();
-				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-				helper.setTo(to);
-
-				if (subject.isEmpty()) {
-						helper.setSubject(subject);
-				}
+		public void sendMessageUsingThymeleafTemplate(
+				String to, String subject, Map<String, Object> templateModel, String templateName)
+				throws MessagingException {
 
 				Context thymeleafContext = new Context();
 				thymeleafContext.setVariables(templateModel);
-				String htmlBodyTest = thymeleafTemplateEngine
-						.process(templateName + ".html", thymeleafContext);
-				helper.setText(htmlBodyTest, true);
 
+				String htmlBody = thymeleafTemplateEngine.process(templateName, thymeleafContext);
+
+				sendHtmlMessage(to, subject, htmlBody);
+		}
+
+		private void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+				helper.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
+				helper.setTo(to);
+				helper.setSubject(subject);
+				helper.setText(htmlBody, true);
 				mailSender.send(message);
 		}
 }

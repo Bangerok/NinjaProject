@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost/ninja_db?serverTimezone=UTC
+    url: jdbc:postgresql://localhost/ninja_database?serverTimezone=UTC
     username: ninja
     password: ninja
     driver-class-name: org.postgresql.Driver
@@ -9,7 +9,7 @@ spring:
       ddl-auto: none
   liquibase:
     change-log: classpath:liquibase/db.changelog-master.xml
-    url: jdbc:postgresql://localhost/ninja_db?serverTimezone=UTC
+    url: jdbc:postgresql://localhost/ninja_database?serverTimezone=UTC
     user: ninja
     password: ninja
   security:
@@ -31,8 +31,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: kuznetsov.v.a.work@gmail.com
-    password: fnqpszkbagabpirg
+    username: kuznetsov.w.a@gmail.com
+    password: 123qweasdZxc123qweasdZxc
     properties:
       mail:
         smtp:
@@ -40,7 +40,7 @@ spring:
           starttls:
             enable: true
 support:
-  email: kuznetsov.v.a.work@gmail.com
+  email: kuznetsov.w.a@gmail.com
 server:
   port: 9000
 app:

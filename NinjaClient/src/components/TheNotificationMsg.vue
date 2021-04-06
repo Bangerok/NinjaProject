@@ -4,7 +4,7 @@
               v-model="notification.show"
               :color="notification.color"
   >
-    {{ notification.text }}
+    {{ $t(notification.text) }}
     <v-btn text @click="setNotificationShow">
       {{ $t('buttons.closeBtn') }}
     </v-btn>
