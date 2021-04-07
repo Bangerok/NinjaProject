@@ -1,66 +1,68 @@
 package ru.bangerok.ninja.service.impl;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import org.springframework.core.env.Environment;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.context.Context;
+import org.thymeleaf.spring5.SpringTemplateEngine;
 import ru.bangerok.ninja.service.MailService;
 import ru.bangerok.ninja.service.MessageService;
 
 @Service
 public class MailServiceImpl implements MailService {
-
 		private final MessageService messageService;
 		private final JavaMailSender mailSender;
 		private final Environment env;
+		private final SpringTemplateEngine thymeleafTemplateEngine;
 
 		public MailServiceImpl(MessageService messageService, JavaMailSender mailSender,
-				Environment env) {
+				Environment env, SpringTemplateEngine thymeleafTemplateEngine) {
 				this.messageService = messageService;
 				this.mailSender = mailSender;
 				this.env = env;
+				this.thymeleafTemplateEngine = thymeleafTemplateEngine;
 		}
 
 		@Override
-		public SimpleMailMessage constructEmailMessage(String toEmail, String subject, String message) {
-				SimpleMailMessage emailMsg = new SimpleMailMessage();
-				if (Objects.nonNull(subject)) {
-						emailMsg.setSubject(message);
-				}
+		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
+				Map<String, Object> templateModel = new HashMap<>();
+				templateModel.put("text", messageService.getMessage("register.email.confirmation.text"));
+				templateModel.put("urlName", messageService.getMessage("register.email.confirmation.url.name"));
+				templateModel.put("token", token);
 
-				if (Objects.nonNull(message)) {
-						emailMsg.setText(message);
-				}
-
-				emailMsg.setTo(toEmail);
-				emailMsg.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
-				return emailMsg;
+				sendMessageUsingThymeleafTemplate(
+						toEmail,
+						messageService.getMessage("register.email.confirmation.subject"),
+						templateModel,
+						"email/confirmation-email"
+				);
 		}
 
-		@Override
-		public SimpleMailMessage configureVerifiedMessage(SimpleMailMessage emailMsg, String token) {
-				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
-				String message = messageService.getMessage("register.email.confirmation.text");
-				String confirmationUrl =
-						"<a href='localhost:3000/?confirmEmailToken=" + token + "'> url </a>";
-				emailMsg.setText(message + "\n" + confirmationUrl);
-				return emailMsg;
+		private void sendMessageUsingThymeleafTemplate(
+				String to, String subject, Map<String, Object> templateModel, String templateName)
+				throws MessagingException {
+
+				Context thymeleafContext = new Context();
+				thymeleafContext.setVariables(templateModel);
+
+				String htmlBody = thymeleafTemplateEngine.process(templateName, thymeleafContext);
+
+				sendHtmlMessage(to, subject, htmlBody);
 		}
 
-		@Override
-		public SimpleMailMessage configureResendVerifiedMessage(SimpleMailMessage emailMsg,
-				String newToken) {
-				emailMsg.setSubject(messageService.getMessage("register.email.confirmation.subject"));
-				String message = messageService.getMessage("register.email.confirmation.text");
-				String confirmationUrl =
-						"<a href='localhost:3000/?confirmEmailToken=" + newToken + "'> url </a>";
-				emailMsg.setText(message + "\n" + confirmationUrl);
-				return emailMsg;
-		}
-
-		@Override
-		public void send(SimpleMailMessage emailMessage) {
-				mailSender.send(emailMessage);
+		private void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
+				MimeMessage message = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+				helper.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
+				helper.setTo(to);
+				helper.setSubject(subject);
+				helper.setText(htmlBody, true);
+				mailSender.send(message);
 		}
 }

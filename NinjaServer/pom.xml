@@ -28,6 +28,7 @@
     <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
     <passay.version>1.0</passay.version>
     <guava.version>r05</guava.version>
+    <org.thymeleaf-version>3.0.11.RELEASE</org.thymeleaf-version>
   </properties>
 
   <dependencies>
@@ -118,6 +119,13 @@
       <groupId>org.passay</groupId>
       <artifactId>passay</artifactId>
       <version>${passay.version}</version>
+    </dependency>
+
+    <!-- thymeleaf dependencies -->
+    <dependency>
+      <groupId>org.thymeleaf</groupId>
+      <artifactId>thymeleaf-spring5</artifactId>
+      <version>${org.thymeleaf-version}</version>
     </dependency>
 
     <!-- Other -->
