@@ -16,12 +16,20 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
+		/**
+		 * Конфигурация брокера сообщений
+		 * @param config объект брокера для конфигурации
+		 */
 		@Override
 		public void configureMessageBroker(MessageBrokerRegistry config) {
 				config.enableSimpleBroker("/topic");
 				config.setApplicationDestinationPrefixes("/app");
 		}
 
+		/**
+		 * Регистрация конечных точек для подписки на них в будущем.
+		 * @param registry объект с информацией об этих точках.
+		 */
 		@Override
 		public void registerStompEndpoints(StompEndpointRegistry registry) {
 				registry.addEndpoint("/gs-guide-websocket").withSockJS();

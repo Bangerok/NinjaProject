@@ -1,11 +1,9 @@
 package ru.bangerok.ninja.config;
 
 import java.nio.charset.StandardCharsets;
-import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 /**
  * Конфигурационный java класс объявления и настройки бина для локализации обычных и валидационных
@@ -17,6 +15,10 @@ import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 @Configuration
 public class MessagesConfig {
 
+		/**
+		 * Получение и конфигурация ResourceBundle для локализации сообщений по ключу.
+		 * @return конфигурационный объект с настройками для получения сообщений.
+		 */
 		@Bean
 		public ResourceBundleMessageSource messages() {
 				var source = new ResourceBundleMessageSource();
@@ -25,12 +27,5 @@ public class MessagesConfig {
 				source.setUseCodeAsDefaultMessage(true);
 
 				return source;
-		}
-
-		@Bean
-		public LocalValidatorFactoryBean validator(MessageSource messageSource) {
-				LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-				bean.setValidationMessageSource(messageSource);
-				return bean;
 		}
 }

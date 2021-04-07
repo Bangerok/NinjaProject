@@ -1,9 +1,9 @@
 package ru.bangerok.ninja.controller;
 
 import java.time.LocalDateTime;
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -123,17 +123,13 @@ public class AuthController {
 		 * @return GenericResponse с информацией об отправке нового токена на почту пользователя.
 		 */
 		@GetMapping("/resendRegistrationToken")
-		public GenericResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
+		public GenericResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken)
+				throws MessagingException {
 				VerificationToken newToken = serviceLocator.getUserService()
 						.generateNewVerificationToken(existingToken);
 
 				User user = serviceLocator.getUserService().getUser(newToken.getToken());
-
-				SimpleMailMessage emailMessageTemplate = serviceLocator.getMailService()
-						.constructEmailMessage(user.getEmail(), null, null);
-				SimpleMailMessage emailMessage = serviceLocator.getMailService()
-						.configureResendVerifiedMessage(emailMessageTemplate, newToken.getToken());
-				serviceLocator.getMailService().send(emailMessage);
+				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), newToken.getToken());
 
 				return new GenericResponse(
 						serviceLocator.getMessageService().getMessage("register.success.resend.token")
