@@ -33,7 +33,8 @@ public class MailServiceImpl implements MailService {
 		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
 				Map<String, Object> templateModel = new HashMap<>();
 				templateModel.put("text", messageService.getMessage("register.email.confirmation.text"));
-				templateModel.put("test", "http://localhost:3000/?confirmEmailToken=" + token);
+				templateModel.put("urlName", messageService.getMessage("register.email.confirmation.url.name"));
+				templateModel.put("token", token);
 
 				sendMessageUsingThymeleafTemplate(
 						toEmail,
@@ -43,7 +44,7 @@ public class MailServiceImpl implements MailService {
 				);
 		}
 
-		public void sendMessageUsingThymeleafTemplate(
+		private void sendMessageUsingThymeleafTemplate(
 				String to, String subject, Map<String, Object> templateModel, String templateName)
 				throws MessagingException {
 
