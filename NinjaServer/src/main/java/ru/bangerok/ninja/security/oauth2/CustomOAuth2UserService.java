@@ -14,12 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.security.error.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.security.UserPrincipal;
+import ru.bangerok.ninja.security.error.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 
@@ -77,7 +77,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				OAuth2UserInfo oAuth2UserInfo = OAuth2UserInfoFactory
 						.getOAuth2UserInfo(oAuth2UserRequest.getClientRegistration().getRegistrationId(),
 								oAuth2User.getAttributes());
-				if (StringUtils.isEmpty(oAuth2UserInfo.getEmail())) {
+				if (StringUtils.hasText(oAuth2UserInfo.getEmail())) {
 						throw new OAuth2AuthenticationProcessingException(
 								"Email not found from OAuth2 provider");
 				}

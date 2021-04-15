@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.5.0-SNAPSHOT</version>
+    <relativePath/>
+  </parent>
+
+  <modules>
+    <module>NinjaClient</module>
+    <module>NinjaServer</module>
+  </modules>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>bangerok</groupId>
+  <artifactId>ninja-project</artifactId>
+  <version>0.4.12</version>
+  <packaging>pom</packaging>
+
+  <name>Parent POM for project modules</name>
+
+  <description>
+    The main POM file that connects and configures the project modules.
+  </description>
+
+  <url>https://github.com/Bangerok/NinjaProject</url>
+
+  <organization>
+    <name>Vladislav Kuznetsov</name>
+    <url>https://vk.com/vladislav_kuznetsov</url>
+  </organization>
+
+  <developers>
+    <developer>
+      <id>bangerok</id>
+      <name>Vladislav</name>
+      <email>kuznetsov.v.a.work@gmail.com</email>
+      <timezone>+3</timezone>
+      <roles>
+        <role>developer</role>
+      </roles>
+    </developer>
+  </developers>
+
+  <properties>
+    <!-- Compiler -->
+    <java.version>16</java.version>
+    <encoding>UTF-8</encoding>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.build.sourceEncoding>${java.version}</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+
+    <!-- Dependencies -->
+    <jsoup.version>1.13.1</jsoup.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+    <passay.version>1.0</passay.version>
+    <guava.version>r05</guava.version>
+    <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+    <lombok.version>1.18.20</lombok.version>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+    </plugins>
+  </build>
+
+  <repositories>
+    <repository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </repository>
+
+    <repository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+  </repositories>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>spring-milestones</id>
+      <name>Spring Milestones</name>
+      <url>https://repo.spring.io/milestone</url>
+    </pluginRepository>
+
+    <pluginRepository>
+      <id>spring-snapshots</id>
+      <name>Spring Snapshots</name>
+      <url>https://repo.spring.io/snapshot</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </pluginRepository>
+  </pluginRepositories>
+</project>
