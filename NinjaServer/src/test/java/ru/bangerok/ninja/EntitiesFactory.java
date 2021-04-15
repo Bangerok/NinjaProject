@@ -1,8 +1,8 @@
 package ru.bangerok.ninja;
 
 import java.util.Random;
-import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.repository.AbstractRepositoryTest;
 
 /**
