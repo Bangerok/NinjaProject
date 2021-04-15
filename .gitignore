@@ -1,12 +1,10 @@
-# Configure project on machine
-*.iml
+# Indellij Idea
+**.iml
 .idea/
 
-# Target's
-*/target/
+# Maven
+**/target/
 
 # Node files
-NinjaClient/package-lock.json
-NinjaClient/node_modules/
-NinjaClient/node/
-/NinjaClient/dist/
+package-lock.json
+NinjaClient/node_modules
