@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer app clipped color="sidebar" mobile-break-point="320"
+    <v-navigation-drawer app clipped color="sidebar" mobile-breakpoint="320"
                          :mini-variant="navigation.minVariant"
     >
       <v-list class="py-0">
