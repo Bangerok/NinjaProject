@@ -1,0 +1,178 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="1.0.0" author="vladislav.kuznetsov">
+    <createTable tableName="users">
+      <column name="base_id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="base_created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="base_updated_date" type="TIMESTAMP" />
+
+      <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="full_name" type="VARCHAR(255)"/>
+
+      <column name="username" type="VARCHAR(255)"/>
+
+      <column name="avatar" type="VARCHAR(255)"/>
+
+      <column name="email" type="VARCHAR(255)">
+        <constraints unique="true"/>
+      </column>
+
+      <column name="email_verified" type="BOOLEAN" defaultValue="false"/>
+
+      <column name="password" type="VARCHAR(255)"/>
+
+      <column name="auth_provider" type="VARCHAR(255)">
+        <constraints nullable="false" unique="false"/>
+      </column>
+
+      <column name="auth_provider_id" type="VARCHAR(255)">
+        <constraints unique="true"/>
+      </column>
+
+      <column name="last_visit_date" type="TIMESTAMP"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.0.1" author="vladislav.kuznetsov">
+    <createTable tableName="roles">
+      <column name="base_id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="base_created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="base_updated_date" type="TIMESTAMP" />
+
+      <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.0.2" author="vladislav.kuznetsov">
+    <createTable tableName="privileges">
+      <column name="base_id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="base_created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="base_updated_date" type="TIMESTAMP" />
+
+      <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="name" type="VARCHAR(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.0.3" author="vladislav.kuznetsov">
+    <createTable tableName="user_roles">
+      <column name="user_id" type="BIGINT"/>
+      <column name="role_id" type="BIGINT"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.0.4" author="vladislav.kuznetsov">
+    <createTable tableName="role_privileges">
+      <column name="role_id" type="BIGINT"/>
+      <column name="privilege_id" type="BIGINT"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.0.5" author="vladislav.kuznetsov">
+    <addForeignKeyConstraint baseColumnNames="user_id"
+      baseTableName="user_roles"
+      constraintName="fk_user_roles_user"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="users"/>
+
+    <addForeignKeyConstraint baseColumnNames="role_id"
+      baseTableName="user_roles"
+      constraintName="fk_user_roles_roles"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="roles"/>
+  </changeSet>
+
+  <changeSet id="1.0.6" author="vladislav.kuznetsov">
+    <addForeignKeyConstraint baseColumnNames="role_id"
+      baseTableName="role_privileges"
+      constraintName="fk_role_privileges_role"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="roles"/>
+
+    <addForeignKeyConstraint baseColumnNames="privilege_id"
+      baseTableName="role_privileges"
+      constraintName="fk_role_privileges_privileges"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="privileges"/>
+  </changeSet>
+
+  <changeSet id="1.0.7" author="vladislav.kuznetsov">
+    <insert tableName="roles">
+      <column name="name" value="ROLE_USER"/>
+    </insert>
+
+    <insert tableName="roles">
+      <column name="name" value="ROLE_ADMIN"/>
+    </insert>
+  </changeSet>
+
+  <changeSet id="1.0.8" author="vladislav.kuznetsov">
+    <insert tableName="privileges">
+      <column name="name" value="USER_READ_PRIVILEGE"/>
+    </insert>
+
+    <insert tableName="privileges">
+      <column name="name" value="USER_WRITE_PRIVILEGE"/>
+    </insert>
+  </changeSet>
+
+  <changeSet id="1.0.9" author="vladislav.kuznetsov">
+    <insert tableName="role_privileges">
+      <column name="role_id" value="1"/>
+      <column name="privilege_id" value="1"/>
+    </insert>
+
+    <insert tableName="role_privileges">
+      <column name="role_id" value="2"/>
+      <column name="privilege_id" value="1"/>
+    </insert>
+
+    <insert tableName="role_privileges">
+      <column name="role_id" value="2"/>
+      <column name="privilege_id" value="2"/>
+    </insert>
+  </changeSet>
+</databaseChangeLog>

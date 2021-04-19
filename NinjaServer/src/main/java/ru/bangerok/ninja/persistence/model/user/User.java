@@ -56,14 +56,14 @@ public class User extends BaseEntity {
 		 * Private поле, в котором хранится электронная почта пользователя.
 		 */
 		@Email
-		@Column(name = "email", unique = true)
+		@Column(name = "email")
 		private String email;
 
 		/**
 		 * Private поле, в котором хранится информация о подтверждении электронной почты пользователя.
 		 */
 		@Column(name = "email_verified")
-		private Boolean emailVerified;
+		private Boolean emailVerified = false;
 
 		/**
 		 * Private поле, в котором хранится тип провайдера авторизации пользователя.
@@ -76,7 +76,7 @@ public class User extends BaseEntity {
 		 * Private поле, в котором хранится id пользователя, который хранится в базе данных провайдера
 		 * авторизации.
 		 */
-		@Column(name = "auth_provider_id", unique = true)
+		@Column(name = "auth_provider_id")
 		private String providerId;
 
 		/**

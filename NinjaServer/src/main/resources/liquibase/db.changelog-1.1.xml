@@ -1,0 +1,56 @@
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet id="1.1.0" author="vladislav.kuznetsov">
+    <createTable tableName="verification_tokens">
+      <column name="base_id" type="BIGINT" autoIncrement="true">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+
+      <column name="base_created_date" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP()">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="base_updated_date" type="TIMESTAMP" />
+
+      <column name="base_status" type="VARCHAR(255)" defaultValue="ACTIVE">
+        <constraints nullable="false"/>
+      </column>
+
+      <column name="token" type="VARCHAR(255)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+
+      <column name="expiry_date" type="TIMESTAMP">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.1.1" author="vladislav.kuznetsov">
+    <createTable tableName="user_token">
+      <column name="user_id" type="BIGINT"/>
+      <column name="token_id" type="BIGINT"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="1.1.2" author="vladislav.kuznetsov">
+    <addForeignKeyConstraint baseColumnNames="user_id"
+      baseTableName="user_token"
+      constraintName="fk_user_token_user"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="users"/>
+
+    <addForeignKeyConstraint baseColumnNames="token_id"
+      baseTableName="user_token"
+      constraintName="fk_user_token_token"
+      onDelete="CASCADE"
+      onUpdate="RESTRICT"
+      referencedColumnNames="base_id"
+      referencedTableName="verification_tokens"/>
+  </changeSet>
+</databaseChangeLog>

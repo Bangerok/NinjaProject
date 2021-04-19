@@ -26,7 +26,7 @@ public class Privilege extends BaseEntity {
 		/**
 		 * Private поле, в котором хранится наименование привилегии в базе данных.
 		 */
-		@Column(name = "name", unique = true)
+		@Column(name = "name")
 		private String name;
 
 		/**
