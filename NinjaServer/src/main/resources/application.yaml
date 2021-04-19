@@ -8,10 +8,7 @@ spring:
     hibernate:
       ddl-auto: none
   liquibase:
-    change-log: classpath:liquibase/db.changelog-master.xml
-    url: jdbc:postgresql://localhost/ninja_database?serverTimezone=UTC
-    user: ninja
-    password: ninja
+    change-log: classpath:liquibase/db.changelog-master.yaml
   security:
     oauth2:
       client:
@@ -23,11 +20,6 @@ spring:
             scope:
               - email
               - profile
-  session:
-    jdbc:
-      initialize-schema: always
-      table-name: SPRING_SESSION
-      schema: classpath:session_tables.sql
   mail:
     host: smtp.gmail.com
     port: 587
