@@ -1,0 +1,341 @@
+databaseChangeLog:
+  - changeSet:
+      id: db_1.0.0
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: users_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  name: full_name
+                  type: VARCHAR(255)
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: avatar
+                  type: VARCHAR(255)
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  defaultValueBoolean: false
+                  name: email_verified
+                  type: BOOLEAN
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: auth_provider
+                  type: VARCHAR(255)
+              - column:
+                  name: auth_provider_id
+                  type: VARCHAR(255)
+              - column:
+                  name: last_visit_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+            tableName: users
+  - changeSet:
+      id: db_1.0.1
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: verification_tokens_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: token
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: expiry_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+            tableName: verification_tokens
+  - changeSet:
+      id: db_1.0.2
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: roles_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: roles
+  - changeSet:
+      id: db_1.0.3
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: privileges_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+            tableName: privileges
+  - changeSet:
+      id: db_1.0.4
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: role_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: db_1.0.5
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: token_id
+                  type: BIGINT
+            tableName: user_token
+  - changeSet:
+      id: db_1.0.6
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  name: privilege_id
+                  type: BIGINT
+            tableName: role_privileges
+  - changeSet:
+      id: db_1.0.7
+      author: v.kuznetsov
+      changes:
+        - addUniqueConstraint:
+            columnNames: auth_provider_id
+            constraintName: users_auth_provider_id_key
+            tableName: users
+  - changeSet:
+      id: db_1.0.8
+      author: v.kuznetsov
+      changes:
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: users_email_key
+            tableName: users
+  - changeSet:
+      id: db_1.0.9
+      author: v.kuznetsov
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: roles_name_key
+            tableName: roles
+  - changeSet:
+      id: db_1.0.10
+      author: v.kuznetsov
+      changes:
+        - addUniqueConstraint:
+            columnNames: name
+            constraintName: privileges_name_key
+            tableName: privileges
+  - changeSet:
+      id: db_1.0.11
+      author: v.kuznetsov
+      changes:
+        - addUniqueConstraint:
+            columnNames: token
+            constraintName: verification_tokens_token_key
+            tableName: verification_tokens
+  - changeSet:
+      id: db_1.0.12
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: privilege_id
+            baseTableName: role_privileges
+            constraintName: fk_role_privileges_privileges
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: privileges
+            validate: true
+  - changeSet:
+      id: db_1.0.13
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: role_privileges
+            constraintName: fk_role_privileges_role
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: roles
+            validate: true
+  - changeSet:
+      id: db_1.0.14
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_roles
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: roles
+            validate: true
+  - changeSet:
+      id: db_1.0.15
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: users
+            validate: true
+  - changeSet:
+      id: db_1.0.16
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: token_id
+            baseTableName: user_token
+            constraintName: fk_user_token_token
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: verification_tokens
+            validate: true
+  - changeSet:
+      id: db_1.0.17
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_token
+            constraintName: fk_user_token_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: users
+            validate: true
+

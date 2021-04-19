@@ -29,7 +29,7 @@ public class VerificationToken extends BaseEntity {
 		/**
 		 * Private поле, в котором хранится токен для верификации электронной почты.
 		 */
-		@Column(name = "token")
+		@Column(name = "token", unique = true)
 		private String token;
 
 		/**
