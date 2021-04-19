@@ -30,7 +30,7 @@ public class Role extends BaseEntity {
 		/**
 		 * Private поле, в котором хранится наименование роли в базе данных.
 		 */
-		@Column(name = "name")
+		@Column(name = "name", unique = true)
 		private String name;
 
 		/**
