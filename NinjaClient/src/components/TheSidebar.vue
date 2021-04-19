@@ -27,7 +27,7 @@
       <template #append>
         <v-divider v-show="!navigation.minVariant"></v-divider>
         <v-container v-show="!navigation.minVariant" class="overline pb-0 mb-n1">
-          <p class="text-center text--disabled">&copy; Copyright, 2020</p>
+          <p class="text-center text--disabled">&copy; Copyright, {{ getCurrentYear() }}</p>
         </v-container>
       </template>
     </v-navigation-drawer>
@@ -53,6 +53,11 @@
       filteredNavigationLinks() {
         return this.$router.options.routes.filter(route => route.meta.showInMenu);
       },
+    },
+    methods:{
+      getCurrentYear: () => {
+        return new Date().getFullYear();
+      }
     }
   }
 </script>
