@@ -6,12 +6,12 @@
 </template>
 
 <script>
-  /**
-   * Страница с информацией о том, что текущая страница не существует.
-   */
-  export default {
-    name: "ViewNotFound"
-  }
+/**
+ * Страница с информацией о том, что текущая страница не существует.
+ */
+export default {
+  name: "ViewNotFound"
+}
 </script>
 
 <style scoped>

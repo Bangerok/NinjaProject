@@ -49,13 +49,13 @@
 </template>
 
 <script>
-  export default {
-    name: "BaseDialog",
-    props: {
-      confirm: Function,
-      show: Boolean
-    },
-  }
+export default {
+  name: "BaseDialog",
+  props: {
+    confirm: Function,
+    show: Boolean
+  },
+}
 </script>
 
 <style scoped>

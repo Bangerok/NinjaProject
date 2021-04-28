@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <!--suppress HtmlRequiredLangAttribute, CheckEmptyScriptTag -->
 <html xmlns:th="http://www.thymeleaf.org">
-  <!--suppress HtmlRequiredTitleElement -->
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  </head>
-  <body>
-    <!--/*@thymesVar id="text" type="java.lang.String"*/-->
-    <span th:text="${text}"/>
-    <!--/*@thymesVar id="token" type="java.lang.String"*/-->
-    <a th:href="@{http://localhost:3000(confirmEmailToken=${token})}">
-      <!--/*@thymesVar id="urlName" type="java.lang.String"*/-->
-      <span th:text="${urlName}"/>
-    </a>
-  </body>
+<!--suppress HtmlRequiredTitleElement -->
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<!--/*@thymesVar id="text" type="java.lang.String"*/-->
+<span th:text="${text}"/>
+<!--/*@thymesVar id="token" type="java.lang.String"*/-->
+<a th:href="@{http://localhost:3000(confirmEmailToken=${token})}">
+  <!--/*@thymesVar id="urlName" type="java.lang.String"*/-->
+  <span th:text="${urlName}"/>
+</a>
+</body>
 </html>

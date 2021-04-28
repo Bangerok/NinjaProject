@@ -6,12 +6,12 @@
 </template>
 
 <script>
-  /**
-   * Страница с информацией о том, что она находится в разработке.
-   */
-  export default {
-    name: "ViewInDevelopment"
-  }
+/**
+ * Страница с информацией о том, что она находится в разработке.
+ */
+export default {
+  name: "ViewInDevelopment"
+}
 </script>
 
 <style scoped>

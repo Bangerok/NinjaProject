@@ -48,6 +48,7 @@ public class AppPropertiesConfig {
 
 		@Data
 		public static final class OAuth2 {
+
 				/**
 				 * Private поле, в котором хранится список redirect ссылок, используемых после oauth2
 				 * авторизации.

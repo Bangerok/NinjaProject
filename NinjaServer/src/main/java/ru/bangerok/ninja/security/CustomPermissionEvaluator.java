@@ -6,7 +6,7 @@ import org.springframework.security.core.Authentication;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
 
 /**
- * Класс, содержащий меторды проверки наличия у пользователя разрешений на какую либо сущность.
+ * Класс, содержащий методы проверки наличия у пользователя разрешений на какую либо сущность.
  * <p>
  * Подключается здесь: {@link MethodSecurityConfig}.
  *

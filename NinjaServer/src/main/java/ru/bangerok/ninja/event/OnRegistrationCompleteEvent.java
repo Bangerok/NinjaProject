@@ -9,7 +9,7 @@ import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * Событие-класс, который запускается после успешной регистрации пользователя.
- *
+ * <p>
  * Используется, например, здесь: {@link AuthController#registerUser(RegisterRequest)}
  *
  * @author v.kuznetsov

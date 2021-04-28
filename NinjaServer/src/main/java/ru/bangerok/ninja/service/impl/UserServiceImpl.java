@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 		}
 
 		@Override
-		public String creatingTokenForAuthentificateUser(LoginRequest loginData) {
+		public String creatingTokenForAuthUser(LoginRequest loginData) {
 				Authentication authentication = authenticationManager.authenticate(
 						new UsernamePasswordAuthenticationToken(
 								loginData.getEmail(),

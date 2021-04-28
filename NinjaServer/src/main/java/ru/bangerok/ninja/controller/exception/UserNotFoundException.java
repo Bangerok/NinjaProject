@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.controller.exception;
 
+import java.io.Serial;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
@@ -13,22 +14,10 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  */
 public final class UserNotFoundException extends RuntimeException {
 
+		@Serial
 		private static final long serialVersionUID = 5861310537366287163L;
-
-		public UserNotFoundException() {
-				super();
-		}
-
-		public UserNotFoundException(final String message, final Throwable cause) {
-				super(message, cause);
-		}
 
 		public UserNotFoundException(final String message) {
 				super(message);
 		}
-
-		public UserNotFoundException(final Throwable cause) {
-				super(cause);
-		}
-
 }

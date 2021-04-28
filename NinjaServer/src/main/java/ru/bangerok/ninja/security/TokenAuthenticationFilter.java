@@ -47,7 +47,8 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		 */
 		@Transactional
 		@Override
-		protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
+		protected void doFilterInternal(@NonNull HttpServletRequest request,
+				@NonNull HttpServletResponse response,
 				@NonNull FilterChain filterChain) throws ServletException, IOException {
 				try {
 						String jwt = getJwtFromRequest(request);
