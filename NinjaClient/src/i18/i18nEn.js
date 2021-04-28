@@ -14,7 +14,7 @@ const messagesEn = {
   },
   pages: {
     notFound: {
-      title: '404 - not found',
+      title: 'Error 404',
       description: 'Oops! This page does not seem to exist.',
     },
     inDevelopment: {
@@ -68,8 +68,6 @@ const messagesEn = {
       empty: {
         username: 'Username must be filled',
         email: 'Email must be filled',
-        password: 'Password must be filled',
-        matchingPassword: 'Re-password must be filled',
       },
       matchingPassword: 'The entered passwords do not match',
       email: 'Invalid mail format. Is required - *@*.*',

@@ -14,7 +14,8 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.EmailValidator;
 
 /**
- * Мета-аннотация, которая может быть использована для валидации электронной почты.
+ * Мета-аннотация с имплементацией, которая может быть использована для валидации электронной
+ * почты.
  * <p>
  * Используется, например, здесь: {@link RegisterRequest#getEmail()}.
  *

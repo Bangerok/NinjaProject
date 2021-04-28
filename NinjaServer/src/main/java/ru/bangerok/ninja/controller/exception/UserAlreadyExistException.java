@@ -4,8 +4,8 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Класс исключения для обработки ошибок регистрации и изменения данных пользователя, если даные уже
- * заняты.
+ * Класс исключения для обработки ошибок регистрации и изменения данных пользователя, если данные
+ * уже заняты.
  * <p>
  * Используется, например, здесь: {@link UserServiceImpl#registerNewUserAccount(RegisterRequest)}
  *

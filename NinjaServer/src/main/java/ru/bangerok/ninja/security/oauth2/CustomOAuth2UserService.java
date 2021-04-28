@@ -82,11 +82,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 								"Email not found from OAuth2 provider");
 				}
 
-				User user = repositoryLocator.getUserRepository().findByEmail(oAuth2UserInfo.getEmail()).map(
-						value -> updateExistingUser(value, oAuth2UserInfo)
-				).orElseGet(
-						() -> registerNewUser(oAuth2UserRequest, oAuth2UserInfo)
-				);
+				User user = repositoryLocator.getUserRepository().findByEmail(oAuth2UserInfo.getEmail())
+						.map(
+								value -> updateExistingUser(value, oAuth2UserInfo)
+						).orElseGet(
+								() -> registerNewUser(oAuth2UserRequest, oAuth2UserInfo)
+						);
 
 				return UserPrincipal.create(user, oAuth2User.getAttributes());
 		}

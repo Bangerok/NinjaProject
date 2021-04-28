@@ -31,7 +31,7 @@ public interface UserService {
 		 * @param loginData данные для аутентификации пользователя.
 		 * @return токен аутентификации.
 		 */
-		String creatingTokenForAuthentificateUser(LoginRequest loginData);
+		String creatingTokenForAuthUser(LoginRequest loginData);
 
 		/**
 		 * Метод для получения данных текущего аутентифицированного пользователя.

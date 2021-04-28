@@ -8,15 +8,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-
 import javax.validation.Constraint;
 import javax.validation.Payload;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.PasswordConstraintValidator;
 
 /**
- * Мета-аннотация, которая может быть использована для валидации пароля при регистрации на
- * совпадение с правилами заполнения.
+ * Мета-аннотация с имплементацией, которая может быть использована для валидации пароля при
+ * регистрации на совпадение с правилами заполнения.
  * <p>
  * Используется, например, здесь: {@link RegisterRequest}.
  *
@@ -34,5 +33,4 @@ public @interface ValidPassword {
 		Class<?>[] groups() default {};
 
 		Class<? extends Payload>[] payload() default {};
-
 }
