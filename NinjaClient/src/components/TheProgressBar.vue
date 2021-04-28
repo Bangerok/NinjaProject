@@ -5,15 +5,15 @@
 </template>
 
 <script>
-  import {mapState} from "vuex";
+import {mapState} from "vuex";
 
-  /**
-   * Компонент для показа строки состояния выполнения запросов к серверу.
-   */
-  export default {
-    name: "TheProgressBar",
-    computed: mapState({'loading': state => state.loading})
-  }
+/**
+ * Компонент для показа строки состояния выполнения запросов к серверу.
+ */
+export default {
+  name: "TheProgressBar",
+  computed: mapState({'loading': state => state.loading})
+}
 </script>
 
 <style scoped>

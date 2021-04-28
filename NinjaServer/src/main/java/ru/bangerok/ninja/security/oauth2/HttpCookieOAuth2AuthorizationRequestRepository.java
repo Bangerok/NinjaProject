@@ -42,7 +42,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		/**
 		 * Метод для сохранения запроса авторизации.
 		 *
-		 * @param request запрос.
+		 * @param request  запрос.
 		 * @param response ответ запроса.
 		 */
 		@Override

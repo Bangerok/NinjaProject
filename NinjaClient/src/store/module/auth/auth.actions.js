@@ -47,7 +47,7 @@ export default {
 
       return Promise.resolve(response);
     }).catch((error) => {
-      if (error.response.data.errors) {
+      if (error.response.data.error) {
         return Promise.reject(error);
       } else {
         commit(
@@ -81,13 +81,14 @@ export default {
    * взамен истекшего.
    */
   async reSendVeryficationTokenEmail({commit}, expiredVerifyToken) {
-    await authApi.reSendVeryficationTokenEmail(expiredVerifyToken).then(({data}) => {
-      commit(
-          'setOptionsNotification',
-          {color: 'success', text: data.message},
-          {root: true}
-      );
-    });
+    await authApi.reSendVeryficationTokenEmail(expiredVerifyToken).then(
+        ({data}) => {
+          commit(
+              'setOptionsNotification',
+              {color: 'success', text: data.message},
+              {root: true}
+          );
+        });
   },
   /**
    * Действие для выполнения logout пользователя системы и перенаправление

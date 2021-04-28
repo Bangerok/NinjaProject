@@ -1,13 +1,5 @@
 package ru.bangerok.ninja.config;
 
-import ru.bangerok.ninja.security.CustomUserDetailsService;
-import ru.bangerok.ninja.security.RestAuthenticationEntryPoint;
-import ru.bangerok.ninja.security.TokenAuthenticationFilter;
-import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
-import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationFailureHandler;
-import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationSuccessHandler;
-import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,6 +12,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.bangerok.ninja.security.CustomUserDetailsService;
+import ru.bangerok.ninja.security.RestAuthenticationEntryPoint;
+import ru.bangerok.ninja.security.TokenAuthenticationFilter;
+import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
+import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationFailureHandler;
+import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationSuccessHandler;
+import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
 
 /**
  * Конфигурационный java класс для настройки авторизации и ее безопасности.

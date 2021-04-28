@@ -12,16 +12,16 @@
 </template>
 
 <script>
-  import {mapMutations, mapState} from "vuex";
+import {mapMutations, mapState} from "vuex";
 
-  /**
-   * Компонент для показа окна уведомлений о различных событий в системе.
-   */
-  export default {
-    name: "NotificationMsg",
-    computed: mapState({'notification': state => state.notification}),
-    methods: mapMutations(['setNotificationShow']),
-  }
+/**
+ * Компонент для показа окна уведомлений о различных событий в системе.
+ */
+export default {
+  name: "NotificationMsg",
+  computed: mapState({'notification': state => state.notification}),
+  methods: mapMutations(['setNotificationShow']),
+}
 </script>
 
 <style scoped>

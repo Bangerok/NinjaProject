@@ -64,7 +64,7 @@ public class AuthController {
 		@PostMapping("/login")
 		public GenericResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 				String token = serviceLocator.getUserService()
-						.creatingTokenForAuthentificateUser(loginRequest);
+						.creatingTokenForAuthUser(loginRequest);
 				return new GenericResponse(token);
 		}
 

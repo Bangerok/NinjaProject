@@ -16,6 +16,7 @@ import ru.bangerok.ninja.service.MessageService;
 
 @Service
 public class MailServiceImpl implements MailService {
+
 		private final MessageService messageService;
 		private final JavaMailSender mailSender;
 		private final Environment env;
@@ -33,7 +34,8 @@ public class MailServiceImpl implements MailService {
 		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
 				Map<String, Object> templateModel = new HashMap<>();
 				templateModel.put("text", messageService.getMessage("register.email.confirmation.text"));
-				templateModel.put("urlName", messageService.getMessage("register.email.confirmation.url.name"));
+				templateModel
+						.put("urlName", messageService.getMessage("register.email.confirmation.url.name"));
 				templateModel.put("token", token);
 
 				sendMessageUsingThymeleafTemplate(
@@ -56,7 +58,8 @@ public class MailServiceImpl implements MailService {
 				sendHtmlMessage(to, subject, htmlBody);
 		}
 
-		private void sendHtmlMessage(String to, String subject, String htmlBody) throws MessagingException {
+		private void sendHtmlMessage(String to, String subject, String htmlBody)
+				throws MessagingException {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 				helper.setFrom(Objects.requireNonNull(env.getProperty("support.email")));

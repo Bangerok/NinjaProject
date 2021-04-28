@@ -4,7 +4,7 @@ import ru.bangerok.ninja.controller.AuthController;
 
 /**
  * Сервисный класс для работы с локализацией сообщений на сервере.
- *
+ * <p>
  * Используется, например, здесь: {@link AuthController}
  *
  * @author v.kuznetsov

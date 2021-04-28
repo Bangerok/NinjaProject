@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +8,7 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
  * Сущность привилегий. Используется для точечных прав сервера. Например, на отдельную сущность.
