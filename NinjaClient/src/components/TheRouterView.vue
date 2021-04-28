@@ -7,9 +7,9 @@
 </template>
 
 <script>
-  export default {
-    name: "TheRouterView"
-  }
+export default {
+  name: "TheRouterView"
+}
 </script>
 
 <style scoped>

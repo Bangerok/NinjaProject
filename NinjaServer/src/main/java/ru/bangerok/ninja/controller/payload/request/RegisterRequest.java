@@ -1,12 +1,12 @@
 package ru.bangerok.ninja.controller.payload.request;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import lombok.Data;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 import ru.bangerok.ninja.validation.annotation.ValidPassword;
+import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
 
 /**
  * Payload java класс для парсинга данных запроса регистрации в параметры rest метода.
@@ -17,22 +17,20 @@ import ru.bangerok.ninja.validation.annotation.ValidPassword;
  * @version 1.0
  */
 @Data
-@PasswordMatches(message = "{errors.invalid.matchingPassword}")
+@PasswordMatches()
 public class RegisterRequest {
 
 		/**
 		 * Private поле, содержащее имя пользователя при регистрации с клиента.
 		 */
-		@NotNull
-		@Size(min = 1, message = "{size.userDto.firstName}")
+		@NotNull(message = "errors.invalid.empty.username")
 		private String username;
 
 		/**
 		 * Private поле, содержащее электронную почту пользователя при регистрации с клиента.
 		 */
-		@NotNull
-		@Size(min = 1, message = "{size.userDto.email}")
-		@ValidEmail(message = "{errors.invalid.email}")
+		@NotNull(message = "errors.invalid.empty.email")
+		@ValidEmail(message = "errors.invalid.email")
 		private String email;
 
 		/**
@@ -44,7 +42,6 @@ public class RegisterRequest {
 		/**
 		 * Private поле, содержащее повторный ввод пароля пользователя при регистрации с клиента.
 		 */
-		@NotNull
-		@Size(min = 1)
+		@Match(message = "errors.invalid.matchingPassword")
 		private String matchingPassword;
 }

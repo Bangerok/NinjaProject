@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +11,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import net.minidev.json.annotate.JsonIgnore;
+import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
  * Сущность ролей. Используется для глобальных прав сервера. Например, на отдельный контроллер или

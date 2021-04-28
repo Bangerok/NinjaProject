@@ -35,31 +35,31 @@
 </template>
 
 <script>
-  import {mapState} from "vuex";
+import {mapState} from "vuex";
 
-  /**
-   * Компонент для показа меню-навигации по системе.
-   */
-  export default {
-    name: "TheSidebar",
-    computed: {
-      ...mapState('settings', {'navigation': state => state.navigation}),
-      /**
-       * Метод для получения списка routes, у которых в мета данных есть информация о том,
-       * что их нужно отобразить.
-       *
-       * @return отфильтрованный список routes
-       */
-      filteredNavigationLinks() {
-        return this.$router.options.routes.filter(route => route.meta.showInMenu);
-      },
+/**
+ * Компонент для показа меню-навигации по системе.
+ */
+export default {
+  name: "TheSidebar",
+  computed: {
+    ...mapState('settings', {'navigation': state => state.navigation}),
+    /**
+     * Метод для получения списка routes, у которых в мета данных есть информация о том,
+     * что их нужно отобразить.
+     *
+     * @return отфильтрованный список routes
+     */
+    filteredNavigationLinks() {
+      return this.$router.options.routes.filter(route => route.meta.showInMenu);
     },
-    methods:{
-      getCurrentYear: () => {
-        return new Date().getFullYear();
-      }
+  },
+  methods: {
+    getCurrentYear: () => {
+      return new Date().getFullYear();
     }
   }
+}
 </script>
 
 <style scoped>

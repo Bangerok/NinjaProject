@@ -53,7 +53,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 		}
 
 		/**
-		 * Exception handle метод для обработки 400 ошибки - Bad request, связанной с непрохождением
+		 * Exception handle метод для обработки 400 ошибки - Bad request, связанной с не прохождением
 		 * валидации передающихся данных на сервер.
 		 *
 		 * @param ex      связанное с методом исключение.
@@ -69,7 +69,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 				logger.error("Bad request. 400 Status Code", ex);
 				BindingResult result = ex.getBindingResult();
 				GenericResponse bodyOfResponse = new GenericResponse(result.getAllErrors(),
-						"Invalid" + result.getObjectName());
+						result.getObjectName());
 
 				return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(),
 						HttpStatus.BAD_REQUEST, request);

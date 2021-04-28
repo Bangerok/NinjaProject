@@ -14,7 +14,7 @@ const messagesRu = {
   },
   pages: {
     notFound: {
-      title: '404 - не найдена',
+      title: 'Ошибка 404',
       description: 'К сожалению! Кажется, что эта страница не существует.',
     },
     inDevelopment: {
@@ -68,8 +68,6 @@ const messagesRu = {
       empty: {
         username: 'Имя пользователя должно быть заполнено',
         email: 'Email должен быть заполнен',
-        password: 'Пароль должен быть заполнен',
-        matchingPassword: 'Повторный пароль должен быть заполнен',
       },
       matchingPassword: 'Введенные пароли не совпадают',
       email: 'Не верный формат почты. Требуется *@*.*',

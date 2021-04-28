@@ -13,18 +13,18 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 
 /**
- * Мета-аннотация, которая может быть использована для валидации пароля при регистрации на
- * совпадение с повторным вводом пароля.
+ * Мета-аннотация с имплементацией, которая может быть использована для валидации пароля при
+ * регистрации на совпадение с повторным вводом пароля.
  * <p>
  * Используется, например, здесь: {@link RegisterRequest}.
  *
  * @author v.kuznetsov
  * @version 1.0
  */
+@Documented
+@Constraint(validatedBy = PasswordMatchesValidator.class)
 @Target({TYPE, ANNOTATION_TYPE})
 @Retention(RUNTIME)
-@Constraint(validatedBy = PasswordMatchesValidator.class)
-@Documented
 public @interface PasswordMatches {
 
 		String message() default "Matching error";
@@ -33,4 +33,3 @@ public @interface PasswordMatches {
 
 		Class<? extends Payload>[] payload() default {};
 }
-

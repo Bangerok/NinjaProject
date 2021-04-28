@@ -19,6 +19,7 @@ public class ThymeleafConfiguration {
 
 		/**
 		 * Получение движка шаблонов, который будет использоваться для загрузки и заполнения шаблонов
+		 *
 		 * @return конечный объект - SpringTemplateEngine
 		 */
 		@Bean
@@ -30,6 +31,7 @@ public class ThymeleafConfiguration {
 
 		/**
 		 * Конфигурация путей до шаблонов и формирования названия файлов с ними.
+		 *
 		 * @return конфигурационный объект с настройками.
 		 */
 		@Bean

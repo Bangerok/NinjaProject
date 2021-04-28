@@ -1,8 +1,5 @@
 package ru.bangerok.ninja.security;
 
-import ru.bangerok.ninja.persistence.model.user.Privilege;
-import ru.bangerok.ninja.persistence.model.user.Role;
-import ru.bangerok.ninja.persistence.model.user.User;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -12,6 +9,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import ru.bangerok.ninja.persistence.model.user.Privilege;
+import ru.bangerok.ninja.persistence.model.user.Role;
+import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * Класс, который представляет аутентифицированного Spring Security Principal. Он содержит данные
@@ -35,7 +35,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		private final Collection<? extends GrantedAuthority> authorities;
 
 		/**
-		 * Private поле, хранящее в себе список атрибутов, полученных с внешного провайдера.
+		 * Private поле, хранящее в себе список атрибутов, полученных с внешнего провайдера.
 		 */
 		private Map<String, Object> attributes;
 
