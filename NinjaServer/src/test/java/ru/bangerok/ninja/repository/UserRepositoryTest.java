@@ -28,7 +28,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		void checkingUserFindById() {
 				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundById = repositoryLocator.getUserRepository().findById(newUser.getId()).orElse(null);
+				User userFoundById = repositoryLocator.getUserRepository().findById(newUser.getId())
+						.orElse(null);
 				assertNotNull(userFoundById);
 				repositoryLocator.getUserRepository().delete(userFoundById);
 		}
@@ -40,7 +41,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		void checkingUserFindByEmail() {
 				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundByEmail = repositoryLocator.getUserRepository().findByEmail(newUser.getEmail()).orElse(null);
+				User userFoundByEmail = repositoryLocator.getUserRepository()
+						.findByEmail(newUser.getEmail()).orElse(null);
 				assertNotNull(userFoundByEmail);
 				repositoryLocator.getUserRepository().delete(userFoundByEmail);
 		}
@@ -52,7 +54,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		void checkingUserFindByProviderId() {
 				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				User userFoundByProviderId = repositoryLocator.getUserRepository().findByProviderId(newUser.getProviderId()).orElse(null);
+				User userFoundByProviderId = repositoryLocator.getUserRepository()
+						.findByProviderId(newUser.getProviderId()).orElse(null);
 				assertNotNull(userFoundByProviderId);
 				repositoryLocator.getUserRepository().delete(userFoundByProviderId);
 		}
@@ -64,7 +67,8 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		void checkingUserExistByEmail() {
 				User newUser = repositoryLocator.getUserRepository().save(factory.getNewUser());
 
-				boolean existsByEmail = repositoryLocator.getUserRepository().existsByEmail(newUser.getEmail());
+				boolean existsByEmail = repositoryLocator.getUserRepository()
+						.existsByEmail(newUser.getEmail());
 				assertTrue(existsByEmail);
 				repositoryLocator.getUserRepository().delete(newUser);
 		}

@@ -1,9 +1,11 @@
 package ru.bangerok.ninja.validation.impl;
 
+import java.lang.reflect.Field;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
+import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
 
 /**
  * Валидирующий класс для аннотации - проверки введенных паролей при регистрации пользователем.
@@ -20,7 +22,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 		}
 
 		/**
-		 * Метод-валидатор введенных паролей пользователем.
+		 * Метод-валидатор введенных паролей пользователем на совпадение.
 		 *
 		 * @param obj     объект регистрации для валидации.
 		 * @param context контекст валидатора.
@@ -29,6 +31,20 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 		@Override
 		public boolean isValid(Object obj, ConstraintValidatorContext context) {
 				RegisterRequest registerRequest = (RegisterRequest) obj;
-				return registerRequest.getPassword().equals(registerRequest.getMatchingPassword());
+				boolean result = registerRequest.getPassword()
+						.equals(registerRequest.getMatchingPassword());
+				if (!result) {
+						for (Field field : obj.getClass().getDeclaredFields()) {
+								if (field.isAnnotationPresent(Match.class)) {
+										context.disableDefaultConstraintViolation();
+										context.buildConstraintViolationWithTemplate(
+												field.getAnnotation(Match.class).message()
+										).addPropertyNode(field.getName()).addConstraintViolation();
+										break;
+								}
+						}
+				}
+
+				return result;
 		}
 }

@@ -2,11 +2,6 @@ package ru.bangerok.ninja.security.oauth2;
 
 import static ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
-import ru.bangerok.ninja.config.AppPropertiesConfig;
-import ru.bangerok.ninja.config.SecurityConfig;
-import ru.bangerok.ninja.security.error.BadRequestException;
-import ru.bangerok.ninja.security.TokenProvider;
-import ru.bangerok.ninja.util.CookieUtils;
 import java.io.IOException;
 import java.net.URI;
 import java.util.Optional;
@@ -18,6 +13,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
+import ru.bangerok.ninja.config.AppPropertiesConfig;
+import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.security.TokenProvider;
+import ru.bangerok.ninja.security.error.BadRequestException;
+import ru.bangerok.ninja.util.CookieUtils;
 
 /**
  * Класс, используемый Spring Security при успешном выполнении аутентификации пользователя.

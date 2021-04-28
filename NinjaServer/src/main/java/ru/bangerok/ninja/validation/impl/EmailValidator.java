@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
+import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 
 /**
@@ -45,6 +46,10 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 		 * @return true, если электронная почта прошла проверку, иначе false.
 		 */
 		private boolean validateEmail(String email) {
+				if (!StringUtils.hasText(email)) {
+						return true;
+				}
+
 				Pattern pattern = Pattern.compile(EMAIL_PATTERN);
 				Matcher matcher = pattern.matcher(email);
 				return matcher.matches();

@@ -6,7 +6,7 @@
           <v-card height="100%" class="elevation-12">
             <v-toolbar flat>
               <v-spacer/>
-              <v-toolbar-title>{{$t('pages.auth.register.formName')}}</v-toolbar-title>
+              <v-toolbar-title>{{ $t('pages.auth.register.formName') }}</v-toolbar-title>
               <v-spacer/>
             </v-toolbar>
 
@@ -33,6 +33,7 @@
                     :label="$t('pages.auth.general.password')"
                     :error="isError('password')"
                     :error-messages="errorMessage('password')"
+                    :error-count="5"
                     :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                     :type="isShowPassword ? 'text' : 'password'"
                     @click:append="isShowPassword = !isShowPassword"
@@ -43,7 +44,7 @@
                     v-model="matchingPassword"
                     :label="$t('pages.auth.register.matchingPassword')"
                     :error="isError('PasswordMatches')"
-                    :error-messages="errorMessage('PasswordMatches')"
+                    :error-messages="errorMessage('matchingPassword')"
                     :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
                     :type="isShowPassword ? 'text' : 'password'"
                     @click:append="isShowPassword = !isShowPassword"
@@ -83,108 +84,85 @@
 </template>
 
 <script>
-  import {mapActions} from "vuex";
+import {mapActions} from "vuex";
 
-  /**
-   * Страница для регистрации пользователя.
-   */
-  export default {
-    name: "ViewRegister",
-    data: () => ({
-      /**
-       * Флаг скрытия/отображения вводимых паролей пользователя.
-       */
-      isShowPassword: false,
-      /**
-       * Значение электронной почты для регистрации.
-       */
-      email: '',
-      /**
-       * Значение имени пользователя для регистрации.
-       */
-      username: '',
-      /**
-       * Значение пароля для регистрации.
-       */
-      password: '',
-      /**
-       * Значение повторно набранного пароля для регистрации.
-       */
-      matchingPassword: '',
-      /**
-       * Список ошибок валидации введенных данных регистрации.
-       */
-      errors: [],
-    }),
-    methods: {
-      ...mapActions('auth', ['register']),
-      /**
-       * Отправка данных на сервер для валидации и завершения регистрации.
-       */
-      submit() {
-        // noinspection JSValidateTypes
-        this.register({
-          username: this.username,
-          email: this.email,
-          password: this.password,
-          matchingPassword: this.matchingPassword
-        }).then(() => {
-          this.$router.push("/login");
-        }).catch((response) => {
-          const errors = response.data.errors;
-
-          this.errors = errors.map(e => {
-            let weight;
-            let message;
-            if (e.code.includes('Empty') || e.code.includes('Null')) {
-              weight = 2;
-              message = "errors.invalid.empty." + e.field;
-            } else {
-              weight = 1;
-              // noinspection JSUnresolvedVariable
-              message = e.defaultMessage;
-            }
-
-            return {
-              field: e.field ? e.field : e.code,
-              weight: weight,
-              message: message,
-            }
-          })
-        });
-      },
-      /**
-       * Проверка поля на наличие ошибок, полученных после валидации данных регистрации.
-       */
-      isError(fieldName) {
-        return this.errors.filter(e => e.field === fieldName).length > 0;
-      },
-      /**
-       * Получение значения для локализации ошибки для поля, полученной после валидации
-       * данных регистрации. Возвращается значение самой весомой ошибки.
-       */
-      errorMessage(fieldName) {
-        const filteringErrors = this.errors.filter(e => e.field === fieldName);
-        if (!filteringErrors.length) {
-          return '';
-        }
-
-        const sortWeightFilteringErrors = filteringErrors.sort((a, b) => {
-          if (a.weight < b.weight) {
-            return 1;
+/**
+ * Страница для регистрации пользователя.
+ */
+export default {
+  name: "ViewRegister",
+  data: () => ({
+    /**
+     * Флаг скрытия/отображения вводимых паролей пользователя.
+     */
+    isShowPassword: false,
+    /**
+     * Значение электронной почты для регистрации.
+     */
+    email: null,
+    /**
+     * Значение имени пользователя для регистрации.
+     */
+    username: null,
+    /**
+     * Значение пароля для регистрации.
+     */
+    password: '',
+    /**
+     * Значение повторно набранного пароля для регистрации.
+     */
+    matchingPassword: '',
+    /**
+     * Список ошибок валидации введенных данных регистрации.
+     */
+    errors: [],
+  }),
+  methods: {
+    ...mapActions('auth', ['register']),
+    /**
+     * Отправка данных на сервер для валидации и завершения регистрации.
+     */
+    submit() {
+      // noinspection JSValidateTypes
+      this.register({
+        username: this.username,
+        email: this.email,
+        password: this.password,
+        matchingPassword: this.matchingPassword
+      }).then(() => {
+        this.$router.push("/login");
+      }).catch((error) => {
+        const errorsData = JSON.parse(error.response.data.message);
+        this.errors = errorsData.map(e => {
+          return {
+            field: e.field,
+            message: e['defaultMessage'],
           }
-
-          if (a.weight > b.weight) {
-            return -1;
-          }
-
-          return 0;
-        });
-
-        return this.$t(sortWeightFilteringErrors[0].message);
-      },
+        })
+      });
     },
-  }
+    /**
+     * Проверка поля на наличие ошибок, полученных после валидации данных регистрации.
+     */
+    isError(fieldName) {
+      return this.errors.filter(e => e.field === fieldName).length > 0;
+    },
+    /**
+     * Получение значения для локализации ошибки для поля, полученной после валидации
+     * данных регистрации. Возвращается значение самой весомой ошибки.
+     */
+    errorMessage(fieldName) {
+      const filteringErrorObjects = this.errors.filter(e => e.field === fieldName);
+      if (!filteringErrorObjects.length) {
+        return '';
+      }
+
+      return filteringErrorObjects.map(e => {
+        return fieldName === 'password' ? e.message : this.$t(e.message);
+      });
+    },
+  },
+}
 </script>
 
 <style scoped>

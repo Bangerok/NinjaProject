@@ -14,7 +14,7 @@
       </v-list-item>
     </v-card>
 
-    <v-tooltip bottom nudge-right="60px">
+    <v-tooltip bottom nudge-right="75px">
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-1">
           <v-app-bar-nav-icon class="mr-3 ml-n2" @click="setMinVariant(!navigation.minVariant)">
@@ -75,74 +75,74 @@
 </template>
 
 <script>
-  import {mapState, mapMutations, mapActions} from 'vuex';
+import {mapActions, mapMutations, mapState} from 'vuex';
 
+/**
+ * Компонент для показа верхнего информационного меню.
+ */
+export default {
+  name: 'TheToolbar',
+  data: () => ({
+    /**
+     * Включен/выключен ночной режим оформления системы
+     */
+    nightMode: true,
+    /**
+     * Выбранный язык локализации системы
+     */
+    locale: 'ru',
+    /**
+     * Список доступных локалей системы для переключения между ними
+     */
+    items: [
+      {
+        text: 'Русский',
+        value: 'ru'
+      }, {
+        text: 'English',
+        value: 'en'
+      }
+    ]
+  }),
+  computed: mapState('settings', {'navigation': state => state.navigation}),
+  methods: {
+    ...mapMutations('settings', ['setMinVariant']),
+    ...mapActions('auth', ['callLogout']),
+  },
   /**
-   * Компонент для показа верхнего информационного меню.
+   * Настраиваем систему после монтирования компонента
    */
-  export default {
-    name: 'TheToolbar',
-    data: () => ({
-      /**
-       * Включен/выключен ночной режим оформления системы
-       */
-      nightMode: true,
-      /**
-       * Выбранный язык локализации системы
-       */
-      locale: 'ru',
-      /**
-       * Список доступных локалей системы для переключения между ними
-       */
-      items: [
-        {
-          text: 'Русский',
-          value: 'ru'
-        }, {
-          text: 'English',
-          value: 'en'
-        }
-      ]
-    }),
-    computed: mapState('settings', {'navigation': state => state.navigation}),
-    methods: {
-      ...mapMutations('settings', ['setMinVariant']),
-      ...mapActions('auth', ['callLogout']),
+  mounted() {
+    let nightMode = localStorage.getItem('nightMode');
+    if (nightMode) {
+      nightMode = nightMode === "true";
+      this.$vuetify.theme.dark = nightMode;
+      this.nightMode = nightMode;
+    }
+
+    let locale = localStorage.getItem('locale');
+    if (locale) {
+      this.$i18n.locale = locale;
+      this.locale = locale;
+    }
+  },
+  watch: {
+    /**
+     * Сохраняем выбранный режим оформления системы в localStorage
+     */
+    nightMode() {
+      this.$vuetify.theme.dark = this.nightMode;
+      localStorage.setItem('nightMode', this.nightMode);
     },
     /**
-     * Настраиваем систему после монтирования компонента
+     * Сохраняем выбранный язык системы в localStorage
      */
-    mounted() {
-      let nightMode = localStorage.getItem('nightMode');
-      if (nightMode) {
-        nightMode = nightMode === "true";
-        this.$vuetify.theme.dark = nightMode;
-        this.nightMode = nightMode;
-      }
-
-      let locale = localStorage.getItem('locale');
-      if (locale) {
-        this.$i18n.locale = locale;
-        this.locale = locale;
-      }
+    locale() {
+      this.$i18n.locale = this.locale;
+      localStorage.setItem('locale', this.locale);
     },
-    watch: {
-      /**
-       * Сохраняем выбранный режим оформления системы в localStorage
-       */
-      nightMode() {
-        this.$vuetify.theme.dark = this.nightMode;
-        localStorage.setItem('nightMode', this.nightMode);
-      },
-      /**
-       * Сохраняем выбранный язык системы в localStorage
-       */
-      locale() {
-        this.$i18n.locale = this.locale;
-        localStorage.setItem('locale', this.locale);
-      },
-    }
   }
+}
 </script>
 
 <style scoped>

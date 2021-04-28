@@ -1,8 +1,5 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import javax.persistence.OneToOne;
-import ru.bangerok.ninja.persistence.model.base.BaseEntity;
-import ru.bangerok.ninja.enumeration.AuthProvider;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
@@ -14,11 +11,14 @@ import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
  * Сущность пользователей. Используется для хранения данных авторизованных пользователей и их
