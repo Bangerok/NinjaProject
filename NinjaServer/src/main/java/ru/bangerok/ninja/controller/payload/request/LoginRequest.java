@@ -1,7 +1,5 @@
 package ru.bangerok.ninja.controller.payload.request;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import lombok.Data;
 import ru.bangerok.ninja.controller.AuthController;
 
@@ -19,14 +17,10 @@ public class LoginRequest {
 		/**
 		 * Private поле, содержащее электронную почту пользователя при авторизации с клиента.
 		 */
-		@NotNull
-		@NotEmpty
 		private String email;
 
 		/**
 		 * Private поле, содержащее пароль пользователя при авторизации с клиента.
 		 */
-		@NotNull
-		@NotEmpty
 		private String password;
 }

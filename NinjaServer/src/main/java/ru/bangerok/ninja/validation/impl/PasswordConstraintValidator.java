@@ -32,7 +32,7 @@ import ru.bangerok.ninja.validation.annotation.ValidPassword;
  */
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
-		private static final Logger LOGGER = LoggerFactory.getLogger(PasswordConstraintValidator.class);
+		private static final Logger logger = LoggerFactory.getLogger(PasswordConstraintValidator.class);
 
 		@Override
 		public void initialize(ValidPassword arg0) {
@@ -76,7 +76,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 				try {
 						props.load(inputStream);
 				} catch (IOException e) {
-						LOGGER.error("Error load password properties file", e);
+						logger.error("Error load password properties file", e);
 				}
 
 				return new PropertiesMessageResolver(props);

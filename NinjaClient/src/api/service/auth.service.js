@@ -43,7 +43,7 @@ export default {
    *
    * @return promise
    */
-  reSendVeryficationTokenEmail(oldToken) {
+  reSendVerificationTokenEmail(oldToken) {
     return axios.getWithParams('/auth/resendRegistrationToken', {
       oldToken: oldToken
     });

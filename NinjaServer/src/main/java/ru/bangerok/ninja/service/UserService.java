@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.service;
 
-import ru.bangerok.ninja.controller.exception.UserAlreadyExistException;
+import ru.bangerok.ninja.controller.exception.user.UserAlreadyExistException;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.persistence.model.user.User;
