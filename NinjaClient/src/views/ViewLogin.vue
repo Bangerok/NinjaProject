@@ -31,7 +31,8 @@
               <v-col class="text-center">
                 <v-row class="flex-column">
                   <v-col>
-                    <v-btn @click="auth" :disabled="email === '' || password === ''" text
+                    <v-btn @click="auth"
+                           :disabled="!isValidStrValue(email) || !isValidStrValue(password)" text
                            color="primary">
                       {{ $t('buttons.authBtn') }}
                     </v-btn>
@@ -74,11 +75,11 @@ export default {
     /**
      * Значение электронной почты при авторизации пользователя.
      */
-    email: '',
+    email: null,
     /**
      * Значение пароля при авторизации пользователя.
      */
-    password: '',
+    password: null,
   }),
   methods: {
     ...mapActions('auth', ['login']),
@@ -94,6 +95,9 @@ export default {
 
       // noinspection JSValidateTypes
       this.login(payload);
+    },
+    isValidStrValue: (value) => {
+      return value && value.trim().length > 0;
     },
   },
 }
