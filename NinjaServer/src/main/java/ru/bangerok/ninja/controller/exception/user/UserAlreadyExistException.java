@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller.exception;
+package ru.bangerok.ninja.controller.exception.user;
 
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;

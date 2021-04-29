@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller.exception;
+package ru.bangerok.ninja.controller.exception.user;
 
 import java.io.Serial;
 import ru.bangerok.ninja.security.UserPrincipal;
