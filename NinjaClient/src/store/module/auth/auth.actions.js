@@ -80,8 +80,8 @@ export default {
    * Действие для отправки на почту нового токена верификации электронной почты
    * взамен истекшего.
    */
-  async reSendVeryficationTokenEmail({commit}, expiredVerifyToken) {
-    await authApi.reSendVeryficationTokenEmail(expiredVerifyToken).then(
+  async reSendVerificationTokenEmail({commit}, expiredVerifyToken) {
+    await authApi.reSendVerificationTokenEmail(expiredVerifyToken).then(
         ({data}) => {
           commit(
               'setOptionsNotification',

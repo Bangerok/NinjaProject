@@ -45,14 +45,14 @@ export default {
   }),
   computed: mapState("auth", {"user": state => state.user}),
   methods: {
-    ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVeryficationTokenEmail"]),
+    ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail"]),
     /**
      * Метод для отправки запроса на сервер для отправки на почту нового токена верификации
      * электронной почты.
      */
     confirmDialog() {
       // noinspection JSValidateTypes
-      this.reSendVeryficationTokenEmail(this.expiredVerifyToken);
+      this.reSendVerificationTokenEmail(this.expiredVerifyToken);
       this.showConfirmResendTokenDialog = false;
     }
   },

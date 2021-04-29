@@ -12,8 +12,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bangerok.ninja.controller.exception.UserAlreadyExistException;
-import ru.bangerok.ninja.controller.exception.UserNotFoundException;
+import ru.bangerok.ninja.controller.exception.user.UserAlreadyExistException;
+import ru.bangerok.ninja.controller.exception.user.UserNotFoundException;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.enumeration.AuthProvider;
@@ -85,14 +85,15 @@ public class UserServiceImpl implements UserService {
 						)
 				);
 
-				Optional<User> optionalUser = repositoryLocator.getUserRepository()
-						.findByEmail(loginData.getEmail());
-				if (optionalUser.isPresent()) {
-						User user = optionalUser.get();
-						user.setLastVisit(LocalDateTime.now());
-						repositoryLocator.getUserRepository().save(user);
-				}
+				User user = repositoryLocator.getUserRepository()
+						.findByEmail(loginData.getEmail()).orElseThrow(() -> new UserNotFoundException(
+								messageService.getMessage(
+										"user.error.not.found"
+								)
+						));
 
+				user.setLastVisit(LocalDateTime.now());
+				repositoryLocator.getUserRepository().save(user);
 				SecurityContextHolder.getContext().setAuthentication(authentication);
 
 				return tokenProvider.createToken(authentication);
@@ -100,25 +101,19 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public User getCurrentUser(UserPrincipal currentUser) {
-				if (Objects.isNull(currentUser)) {
-						throw new UserNotFoundException(
+				long currentUserId = Optional.ofNullable(currentUser)
+						.orElseThrow(() -> new UserNotFoundException(
 								messageService.getMessage(
 										"user.error.not.found.auth"
 								)
-						);
-				}
+						)).getId();
 
-				Optional<User> userOptional = repositoryLocator.getUserRepository()
-						.findById(currentUser.getId());
-				if (userOptional.isEmpty()) {
-						throw new UserNotFoundException(
+				return repositoryLocator.getUserRepository()
+						.findById(currentUserId).orElseThrow(() -> new UserNotFoundException(
 								messageService.getMessage(
 										"user.error.not.found"
 								)
-						);
-				}
-
-				return userOptional.get();
+						));
 		}
 
 		@Override
