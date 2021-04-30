@@ -10,13 +10,13 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import ru.bangerok.ninja.config.SecurityConfig;
 
 /**
- * Класс, который вызывается, когда пользователь пытается получить доступ к защищенному ресурсу без
- * аутентификации. В этом случае мы просто возвращаем 401 Unauthorized response.
+ * The class that is called when a user tries to access a protected resource without authentication.
+ * In this case, we just return 401 Unauthorized response.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
@@ -24,10 +24,10 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 				.getLogger(RestAuthenticationEntryPoint.class);
 
 		/**
-		 * Метод для отправки ошибки аутентификации на клиент.
+		 * Method for sending authentication error to client.
 		 *
-		 * @param httpServletRequest  запрос.
-		 * @param httpServletResponse ответ запроса.
+		 * @param httpServletRequest  request.
+		 * @param httpServletResponse response.
 		 */
 		@Override
 		public void commence(HttpServletRequest httpServletRequest,

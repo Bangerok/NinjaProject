@@ -19,10 +19,10 @@ import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.validation.impl.PasswordConstraintValidator;
 
 /**
- * Exception java класс для для отлавливания и обработки всех ошибок, бросаемых контроллерами.
+ * Exception java class for catching and handling all errors thrown by controllers.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.5
  */
 @ControllerAdvice
 @RequiredArgsConstructor
@@ -32,11 +32,11 @@ public class RestResponseEntityExceptionHandler {
 		private final MessageService messageService;
 
 		/**
-		 * Exception handle метод для обработки 400 ошибки - Bad request, связанной с не прохождением
-		 * валидации передающихся данных на сервер.
+		 * Exception handle method for handling 400 error - Bad request, associated with not passing the
+		 * validation of the transmitted data to the server.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибками.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({MethodArgumentNotValidException.class})
 		public ResponseEntity<GenericResponse> handleBadRequest(MethodArgumentNotValidException ex) {
@@ -50,11 +50,11 @@ public class RestResponseEntityExceptionHandler {
 		}
 
 		/**
-		 * Exception handle метод для обработки 401 ошибки - Unauthorized, когда пользователь использует
-		 * неверные данные для авторизации.
+		 * Exception handle method for handling 401 errors - Unauthorized when the user uses invalid
+		 * credentials.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибкой.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({AuthenticationException.class})
 		public ResponseEntity<Object> handleAuthentication(RuntimeException ex) {
@@ -67,11 +67,11 @@ public class RestResponseEntityExceptionHandler {
 		}
 
 		/**
-		 * Exception handle метод для обработки 404 ошибки - Not found, связанной с тем, что не найден
-		 * пользователь при каких-либо обстоятельствах.
+		 * Exception handle method for handling 404 error - Not found, related to the fact that the user
+		 * was not found under any circumstances.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибкой.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({UserNotFoundException.class})
 		public ResponseEntity<Object> handleUserNotFound(RuntimeException ex) {
@@ -84,12 +84,12 @@ public class RestResponseEntityExceptionHandler {
 		}
 
 		/**
-		 * Exception handle метод для обработки 409 ошибки - Conflict, связанной с конфликтом указанной
-		 * электронной почты пользователем при регистрации с уже существующей в базе данных у другого
-		 * пользователя.
+		 * Exception handle method for handling 409 error - Conflict related to the conflict of the
+		 * specified email by the user when registering with another user that already exists in the
+		 * database.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибкой.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({UserAlreadyExistException.class})
 		public ResponseEntity<Object> handleUserAlreadyExist(RuntimeException ex) {
@@ -102,11 +102,11 @@ public class RestResponseEntityExceptionHandler {
 		}
 
 		/**
-		 * Exception handle метод для обработки 500 ошибки - Internal Server Error, с некорректной
-		 * аутентификацией email провайдера при отправке уведомлений пользователям.
+		 * Exception handle method for handling 500 error - Internal Server Error, with incorrect
+		 * authentication of the email provider when sending notifications to users.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибкой.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({MailAuthenticationException.class})
 		public ResponseEntity<GenericResponse> handleMailAuth(RuntimeException ex) {
@@ -119,11 +119,10 @@ public class RestResponseEntityExceptionHandler {
 		}
 
 		/**
-		 * Exception handle метод для обработки всех остальных серверных ошибок - Internal Server
-		 * Error.
+		 * Exception handle method for handling all other server errors - Internal Server Error.
 		 *
-		 * @param ex связанное с методом исключение.
-		 * @return ответ от сервера с ошибкой.
+		 * @param ex method-related exception.
+		 * @return error response from the server.
 		 */
 		@ExceptionHandler({Exception.class})
 		public ResponseEntity<GenericResponse> handleInternal(RuntimeException ex) {

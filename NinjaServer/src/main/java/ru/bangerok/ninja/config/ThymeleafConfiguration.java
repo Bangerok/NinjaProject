@@ -8,19 +8,19 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
 /**
- * Конфигурационный java класс для настройки использования шаблонов thymeleaf.
+ * Java config class to customize thymeleaf template usage.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.11
  */
 @Configuration
 @EnableWebMvc
 public class ThymeleafConfiguration {
 
 		/**
-		 * Получение движка шаблонов, который будет использоваться для загрузки и заполнения шаблонов
+		 * Getting a template engine to be used to load and populate templates.
 		 *
-		 * @return конечный объект - SpringTemplateEngine
+		 * @return end object - SpringTemplateEngine.
 		 */
 		@Bean
 		public SpringTemplateEngine templateEngine() {
@@ -30,9 +30,9 @@ public class ThymeleafConfiguration {
 		}
 
 		/**
-		 * Конфигурация путей до шаблонов и формирования названия файлов с ними.
+		 * Configuration of paths to templates and the formation of the name of files with them.
 		 *
-		 * @return конфигурационный объект с настройками.
+		 * @return configuration object with settings.
 		 */
 		@Bean
 		public ITemplateResolver thymeleafTemplateResolver() {

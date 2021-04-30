@@ -6,23 +6,22 @@ import ru.bangerok.ninja.security.error.OAuth2AuthenticationProcessingException;
 import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
 
 /**
- * Фабричный класс, который возвращает объект oauth2 авторизации с атрибутами, полученными от
- * внешнего провайдера. Можно расширить для работы с несколькими внешними провайдерами, а не только
- * с Google.
+ * A factory class that returns an oauth2 authorization object with attributes obtained from an
+ * external provider. Extensible to work with multiple external providers, not just Google.
  * <p>
- * Используется, например, здесь: {@link CustomOAuth2UserService}.
+ * Used for example here: {@link CustomOAuth2UserService}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class OAuth2UserInfoFactory {
 
 		/**
-		 * Static метод объекта с данными пользователя при oauth2 авторизации.
+		 * Static object method with user data for oauth2 authorization.
 		 *
-		 * @param registrationId тип провайдера авторизации.
-		 * @param attributes     атрибуты пользователя, полученные с внешнего провайдера авторизации
-		 * @return данные пользователя, полученные после oauth2 авторизации.
+		 * @param registrationId authorization provider type.
+		 * @param attributes     user attributes obtained from an external authorization provider
+		 * @return user data obtained after oauth2 authorization.
 		 */
 		public static OAuth2UserInfo getOAuth2UserInfo(String registrationId,
 				Map<String, Object> attributes) {

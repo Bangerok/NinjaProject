@@ -9,12 +9,12 @@ import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
 /**
- * Сервисный класс для получения нужных сервисов.
+ * Service class to get the services you want.
  * <p>
- * Используется, например, здесь: {@link AuthController}
+ * Used for example here: {@link AuthController}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.3
  */
 @Service
 @Data

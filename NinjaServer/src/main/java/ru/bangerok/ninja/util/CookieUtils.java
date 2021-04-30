@@ -9,21 +9,21 @@ import org.springframework.util.SerializationUtils;
 import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
 
 /**
- * Класс для работы с cookie. Используется перед отправкой запроса авторизации провайдеру и после
- * получения ответа от него.
+ * Class for working with cookies. Used before sending an authorization request to the provider and
+ * after receiving a response from him.
  * <p>
- * Используется, например, здесь: {@link HttpCookieOAuth2AuthorizationRequestRepository#loadAuthorizationRequest(HttpServletRequest)}.
+ * Used for example here: {@link HttpCookieOAuth2AuthorizationRequestRepository#loadAuthorizationRequest(HttpServletRequest)}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class CookieUtils {
 
 		/**
-		 * Static метод для получения cookie из запроса.
+		 * Static method for getting cookie from request.
 		 *
-		 * @param request запрос.
-		 * @param name    наименование cookie.
+		 * @param request request.
+		 * @param name    cookie name.
 		 * @return Optional с cookie.
 		 */
 		public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
@@ -41,11 +41,11 @@ public class CookieUtils {
 		}
 
 		/**
-		 * Static метод для добавления нового cookie в ответ запроса.
+		 * Static method for adding a new cookie to the request response.
 		 *
-		 * @param response ответ запроса.
-		 * @param name     наименование нового cookie.
-		 * @param value    значение нового cookie.
+		 * @param response response.
+		 * @param name     the name of the new cookie.
+		 * @param value    the value of the new cookie.
 		 */
 		public static void addCookie(HttpServletResponse response, String name, String value,
 				int maxAge) {
@@ -57,11 +57,11 @@ public class CookieUtils {
 		}
 
 		/**
-		 * Static метод для удаления cookie из ответа запроса.
+		 * Static method to remove cookie from request response.
 		 *
-		 * @param request  запрос.
-		 * @param response ответ запроса.
-		 * @param name     наименование нового cookie.
+		 * @param request  request.
+		 * @param response response.
+		 * @param name     the name of the old cookie.
 		 */
 		public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
 				String name) {
@@ -79,10 +79,10 @@ public class CookieUtils {
 		}
 
 		/**
-		 * Static метод для сериализации cookie.
+		 * Static method for serializing cookie.
 		 *
 		 * @param object cookie.
-		 * @return строковое представление cookie.
+		 * @return the string representation of the cookie.
 		 */
 		public static String serialize(Object object) {
 				return Base64.getUrlEncoder()
@@ -90,11 +90,11 @@ public class CookieUtils {
 		}
 
 		/**
-		 * Static метод для десериализации строкового представления cookie.
+		 * Static method to deserialize the string representation of the cookie.
 		 *
 		 * @param cookie cookie.
-		 * @param cls    класс для значения в cookie.
-		 * @return объектное представление cookie.
+		 * @param cls    the class for the value in the cookie.
+		 * @return cookie object representation.
 		 */
 		public static <T> T deserialize(Cookie cookie, Class<T> cls) {
 				return cls.cast(SerializationUtils.deserialize(

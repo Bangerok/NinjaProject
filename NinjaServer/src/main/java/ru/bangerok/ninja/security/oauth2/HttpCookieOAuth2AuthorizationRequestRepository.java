@@ -10,13 +10,13 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * Класс, который предоставляет функциональность для хранения запроса авторизации в файлах cookie,
- * его получение и удаление.
+ * A class that provides functionality for storing an authorization request in cookies, getting it,
+ * and deleting it.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Component
 public class HttpCookieOAuth2AuthorizationRequestRepository implements
@@ -27,10 +27,10 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		private static final int cookieExpireSeconds = 180;
 
 		/**
-		 * Метод для получения запроса авторизации из cookie обычного запроса.
+		 * Method for getting authorization request from regular request cookie.
 		 *
-		 * @param request запрос.
-		 * @return запрос авторизации.
+		 * @param request request.
+		 * @return authorization request.
 		 */
 		@Override
 		public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
@@ -40,10 +40,10 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		}
 
 		/**
-		 * Метод для сохранения запроса авторизации.
+		 * Method for saving authorization request.
 		 *
-		 * @param request  запрос.
-		 * @param response ответ запроса.
+		 * @param request  request.
+		 * @param response request response.
 		 */
 		@Override
 		public void saveAuthorizationRequest(OAuth2AuthorizationRequest authorizationRequest,
@@ -64,10 +64,10 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		}
 
 		/**
-		 * Метод для удаления запроса авторизации.
+		 * Method for deleting an authorization request.
 		 *
-		 * @param request запрос.
-		 * @return запрос авторизации после удаления.
+		 * @param request request.
+		 * @return authorization request after deletion.
 		 */
 		@Override
 		public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request) {
@@ -75,10 +75,10 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		}
 
 		/**
-		 * Метод для удаления cookies авторизации.
+		 * Method for removing authorization cookies.
 		 *
-		 * @param request  запрос.
-		 * @param response ответ.
+		 * @param request  request.
+		 * @param response response.
 		 */
 		public void removeAuthorizationRequestCookies(HttpServletRequest request,
 				HttpServletResponse response) {

@@ -8,12 +8,12 @@ import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
 
 /**
- * Валидирующий класс для аннотации - проверки введенных паролей при регистрации пользователем.
+ * Validating class for annotation - validation of entered passwords during user registration.
  * <p>
- * Подключается здесь: {@link PasswordMatches}.
+ * Connects here: {@link PasswordMatches}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 
@@ -22,11 +22,11 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 		}
 
 		/**
-		 * Метод-валидатор введенных паролей пользователем на совпадение.
+		 * Method-validator of passwords entered by the user for a match.
 		 *
-		 * @param obj     объект регистрации для валидации.
-		 * @param context контекст валидатора.
-		 * @return true, если пароли совпадают, иначе false.
+		 * @param obj     registration object for validation.
+		 * @param context validator context.
+		 * @return true if the passwords match, otherwise false.
 		 */
 		@Override
 		public boolean isValid(Object obj, ConstraintValidatorContext context) {

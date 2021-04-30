@@ -20,12 +20,12 @@ import ru.bangerok.ninja.security.error.BadRequestException;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * Класс, используемый Spring Security при успешном выполнении аутентификации пользователя.
+ * Class used by Spring Security when user authentication succeeds.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
@@ -44,12 +44,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		}
 
 		/**
-		 * Метод, вызывающийся при успешной аутентификации пользователя, предназначенный для очистки
-		 * ответа от лишних данных и делающий redirect на клиент.
+		 * The method called upon successful user authentication, designed to clear the response from
+		 * unnecessary data and redirect to the client.
 		 *
-		 * @param request        запрос.
-		 * @param response       ответ запроса.
-		 * @param authentication аутентификация.
+		 * @param request        request.
+		 * @param response       response.
+		 * @param authentication authentication.
 		 */
 		@Override
 		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
@@ -66,12 +66,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		}
 
 		/**
-		 * Метод для получения целового redirect url.
+		 * Method for getting the target redirect url.
 		 *
-		 * @param request        запрос.
-		 * @param response       ответ запроса.
-		 * @param authentication аутентификация.
-		 * @return redirect ссылка.
+		 * @param request        request.
+		 * @param response       response.
+		 * @param authentication authentication.
+		 * @return redirect url.
 		 */
 		@Override
 		protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
@@ -95,10 +95,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		}
 
 		/**
-		 * Метод для очистки запроса/ответа от лишних данных.
+		 * Method for clearing a request/response from unnecessary data.
 		 *
-		 * @param request  запрос.
-		 * @param response ответ запроса.
+		 * @param request  request.
+		 * @param response response.
 		 */
 		protected void clearAuthenticationAttributes(HttpServletRequest request,
 				HttpServletResponse response) {
@@ -108,10 +108,10 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		}
 
 		/**
-		 * Метод для проверки целового redirect url на действительность.
+		 * Method for checking the target redirect url for validity.
 		 *
-		 * @param uri проверяемая ссылка.
-		 * @return true, если ссылка действительная, иначе false.
+		 * @param uri verified link.
+		 * @return true if the link is valid, otherwise false.
 		 */
 		private boolean isAuthorizedRedirectUri(String uri) {
 				URI clientRedirectUri = URI.create(uri);
