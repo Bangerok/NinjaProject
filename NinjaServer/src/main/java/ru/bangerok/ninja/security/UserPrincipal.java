@@ -14,28 +14,28 @@ import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * Класс, который представляет аутентифицированного Spring Security Principal. Он содержит данные
- * аутентифицированного пользователя.
+ * A class that represents an authenticated Spring Security Principal. It contains the data of the
+ * authenticated user.
  * <p>
- * Используется, например, здесь: {@link CustomUserDetailsService#loadUserById(Long)}.
+ * Used for example here: {@link CustomUserDetailsService#loadUserById(Long)}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class UserPrincipal implements OAuth2User, UserDetails {
 
 		/**
-		 * Private поле, хранящее в себе сущность аутентифицированного пользователя.
+		 * Private field that stores the essence of the authenticated user.
 		 */
 		private final User user;
 
 		/**
-		 * Private поле, хранящее в себе список прав аутентифицированного пользователя.
+		 * Private field that stores the list of the authenticated user's rights.
 		 */
 		private final Collection<? extends GrantedAuthority> authorities;
 
 		/**
-		 * Private поле, хранящее в себе список атрибутов, полученных с внешнего провайдера.
+		 * Private field that stores a list of attributes received from an external provider.
 		 */
 		private Map<String, Object> attributes;
 
@@ -46,11 +46,10 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		}
 
 		/**
-		 * Static метод для создания и заполнения аутентифицированного пользователя, созданного обычным
-		 * способом.
+		 * Static method to create and populate an authenticated user created in the usual way.
 		 *
-		 * @param user авторизующийся пользователь.
-		 * @return аутентифицированный пользователь.
+		 * @param user logged in user.
+		 * @return authenticated user.
 		 */
 		public static UserPrincipal create(User user) {
 				List<GrantedAuthority> authorities = new ArrayList<>();
@@ -65,11 +64,11 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		}
 
 		/**
-		 * Static метод для создания и заполнения аутентифицированного пользователя, созданного после
-		 * авторизации через внешнего провайдера.
+		 * Static method to create and populate an authenticated user created after authorization
+		 * through an external provider.
 		 *
-		 * @param user авторизующийся пользователь.
-		 * @return аутентифицированный пользователь.
+		 * @param user logged in user.
+		 * @return authenticated user.
 		 */
 		public static UserPrincipal create(User user, Map<String, Object> attributes) {
 				UserPrincipal userPrincipal = UserPrincipal.create(user);

@@ -4,23 +4,23 @@ import lombok.Data;
 import ru.bangerok.ninja.controller.AuthController;
 
 /**
- * Payload java класс для парсинга данных запроса авторизации в параметры rest метода.
+ * Payload java class for parsing authorization request data into rest method parameters.
  * <p>
- * Используется, например, здесь: {@link AuthController#authenticateUser}.
+ * Used for example here: {@link AuthController#authenticateUser}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Data
 public class LoginRequest {
 
 		/**
-		 * Private поле, содержащее электронную почту пользователя при авторизации с клиента.
+		 * Private field containing the user's email when authorizing from the client.
 		 */
 		private String email;
 
 		/**
-		 * Private поле, содержащее пароль пользователя при авторизации с клиента.
+		 * Private field containing the user's password when authorizing from the client.
 		 */
 		private String password;
 }

@@ -11,10 +11,10 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.config.ThymeleafConfiguration;
 
 /**
- * Класс для запуска всего spring приложения. Для запуска просто используй команду - mvn
- * spring-boot:run.
+ * A class to run the entire spring application. To run, just use the command - mvn spring-boot:
+ * run.
  * <p>
- * Конфигурация приложения представлена этими классами:
+ * Application configuration is represented by these classes:
  * <p> - {@link AppPropertiesConfig},
  * <p> - {@link MessagesConfig},
  * <p> - {@link MethodSecurityConfig},
@@ -23,7 +23,7 @@ import ru.bangerok.ninja.config.ThymeleafConfiguration;
  * <p> - {@link ThymeleafConfiguration}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.0.0
  */
 @SpringBootApplication
 @EnableConfigurationProperties(AppPropertiesConfig.class)

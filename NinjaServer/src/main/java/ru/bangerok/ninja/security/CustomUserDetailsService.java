@@ -12,12 +12,12 @@ import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.security.error.ResourceNotFoundException;
 
 /**
- * Сервисный класс, который позволяет получить пользователя каким либо образом.
+ * A service class that allows you to get a user in some way.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Service
 @Transactional
@@ -31,11 +31,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 
 		/**
-		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
-		 * полученного из базы данных по электронной почте.
+		 * Method to get create authenticated user based on user retrieved from database via email.
 		 *
-		 * @param email электронная почта.
-		 * @return аутентифицированный пользователь.
+		 * @param email email.
+		 * @return authenticated user.
 		 */
 		@Override
 		public UserDetails loadUserByUsername(String email)
@@ -49,11 +48,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 		}
 
 		/**
-		 * Метод для получения создания аутентифицированного пользователя на основе пользователя,
-		 * полученного из базы данных по идентификатору.
+		 * Method to get create authenticated user based on user retrieved from database by id.
 		 *
-		 * @param id идентификатор пользователя.
-		 * @return аутентифицированный пользователь.
+		 * @param id user ID.
+		 * @return authenticated user.
 		 */
 		public UserDetails loadUserById(Long id) {
 				User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(

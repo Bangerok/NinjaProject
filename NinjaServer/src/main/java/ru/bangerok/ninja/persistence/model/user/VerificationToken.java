@@ -13,11 +13,10 @@ import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * Сущность токена верификации. Используется для хранения выданных токенов для верификации
- * электронной почты пользователей.
+ * The essence of the verification token. Used to store issued tokens for user email verification.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.3
  */
 @Data
 @Entity
@@ -27,20 +26,19 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 public class VerificationToken extends BaseEntity {
 
 		/**
-		 * Private поле, в котором хранится токен для верификации электронной почты.
+		 * Private field that stores the email verification token.
 		 */
 		@Column(name = "token", unique = true)
 		private String token;
 
 		/**
-		 * Private поле, в котором хранится дата, после которой действие токена верификации
-		 * прекращается.
+		 * Private field that stores the date after which the verification token expires.
 		 */
 		@Column(name = "expiry_date")
 		private LocalDateTime expiryDate;
 
 		/**
-		 * Private поле, в котором пользователь, для которого был выдан токен верификации.
+		 * Private field, in which the user for whom the verification token was issued.
 		 */
 		@OneToOne
 		@JoinTable(name = "user_token",

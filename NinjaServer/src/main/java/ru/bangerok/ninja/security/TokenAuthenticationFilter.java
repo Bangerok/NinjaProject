@@ -17,13 +17,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import ru.bangerok.ninja.config.SecurityConfig;
 
 /**
- * Класс, который используется для чтения токена аутентификации JWT из запроса, его проверки и
- * установки SecurityContext Spring Security, если токен действителен.
+ * The class that is used to read the JWT authentication token from the request, validate it and set
+ * the SecurityContext Spring Security if the token is valid.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
@@ -34,12 +34,11 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		private CustomUserDetailsService customUserDetailsService;
 
 		/**
-		 * Метод для предварительной проверки аутентификационных данных в запросе перед пропуском его
-		 * дальше.
+		 * Method for pre-checking the authentication data in the request before passing it further.
 		 *
-		 * @param request     данные запроса.
-		 * @param response    данные ответа.
-		 * @param filterChain цепочка запросов.
+		 * @param request     request data.
+		 * @param response    response data.
+		 * @param filterChain chain of requests.
 		 */
 		@Transactional
 		@Override
@@ -69,10 +68,10 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 		}
 
 		/**
-		 * Метод для получения из заголовков запроса токена аутентификации.
+		 * Method for getting an authentication token from request headers.
 		 *
-		 * @param request данные запроса.
-		 * @return строка с токеном, если он есть, иначе null
+		 * @param request request data.
+		 * @return a string with a token, if any, otherwise null.
 		 */
 		private String getJwtFromRequest(HttpServletRequest request) {
 				String bearerToken = request.getHeader("Authorization");

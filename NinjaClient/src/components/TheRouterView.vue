@@ -7,9 +7,12 @@
 </template>
 
 <script>
+/**
+ * Component for routing (navigating through pages defined for various URLs) of a web application.
+ */
 export default {
-  name: "TheRouterView"
-}
+  name: "TheRouterView",
+};
 </script>
 
 <style scoped>

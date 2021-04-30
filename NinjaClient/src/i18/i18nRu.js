@@ -1,5 +1,5 @@
 /**
- * Файл локализации системы на русском языке (default).
+ * System localization file in Russian (default).
  */
 const messagesRu = {
   navigation: {
@@ -10,7 +10,7 @@ const messagesRu = {
       news: 'Новости',
       info: 'О проекте',
       notFound: 'Страница не найдена',
-    }
+    },
   },
   pages: {
     notFound: {
@@ -38,17 +38,17 @@ const messagesRu = {
         password: 'Пароль',
         nameRequired: 'Имя обязательно',
         passwordRequired: 'Пароль обязателен',
-      }
+      },
     },
   },
   dialogs: {
     title: {
-      confirmation: 'Подтверждение'
+      confirmation: 'Подтверждение',
     },
     content: {
       confirmation: 'Вы уверены, что хотите это сделать?',
-      resendToken: 'Токен верификации для подтверждения электронной почты просрочен. Для окончания регистрации нужно получить новый. Вы согласны?'
-    }
+      resendToken: 'Токен верификации для подтверждения электронной почты просрочен. Для окончания регистрации нужно получить новый. Вы согласны?',
+    },
   },
   buttons: {
     authBtn: 'Авторизация',
@@ -74,6 +74,6 @@ const messagesRu = {
       credential: 'Используются неверные данные для авторизации',
     },
   },
-}
+};
 
-export default messagesRu
+export default messagesRu;

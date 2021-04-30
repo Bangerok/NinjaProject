@@ -8,17 +8,17 @@ import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 
 /**
- * Валидирующий класс для аннотации - проверки электронной почты по паттерну.
+ * Validating class for annotation - pattern-based email validation.
  * <p>
- * Подключается здесь: {@link ValidEmail}.
+ * Connects here: {@link ValidEmail}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
 		/**
-		 * Паттерн для проверки электронной почты.
+		 * Pattern for checking email.
 		 */
 		private static final String EMAIL_PATTERN =
 				"^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
@@ -28,11 +28,11 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 		}
 
 		/**
-		 * Метод-валидатор электронной почты.
+		 * Email validator method.
 		 *
-		 * @param email   электронная почта для валидации.
-		 * @param context контекст валидатора.
-		 * @return true, если электронная почта валидна, иначе false.
+		 * @param email   email for validation.
+		 * @param context validator context.
+		 * @return true if the email is valid, otherwise false.
 		 */
 		@Override
 		public boolean isValid(String email, ConstraintValidatorContext context) {
@@ -40,10 +40,10 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 		}
 
 		/**
-		 * Метод для проверки электронной почты по reg-exp паттерну.
+		 * Method for checking email using reg-exp pattern.
 		 *
-		 * @param email электронная почта для проверки.
-		 * @return true, если электронная почта прошла проверку, иначе false.
+		 * @param email email for validation.
+		 * @return true if the email passed validation, otherwise false.
 		 */
 		private boolean validateEmail(String email) {
 				if (!StringUtils.hasText(email)) {

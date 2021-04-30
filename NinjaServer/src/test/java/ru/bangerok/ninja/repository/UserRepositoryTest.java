@@ -10,10 +10,10 @@ import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * Класс для тестирования репозитория, работающего с сущностью User.
+ * Class for testing the repository working with the User entity.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.9
  */
 @SpringBootTest
 public class UserRepositoryTest extends AbstractRepositoryTest {
@@ -22,7 +22,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		private RepositoryLocator repositoryLocator;
 
 		/**
-		 * Метод для тестирования поиска пользователя в базе данных по id.
+		 * Method for testing the search for a user in the database by id.
 		 */
 		@Test
 		void checkingUserFindById() {
@@ -35,7 +35,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		}
 
 		/**
-		 * Метод для тестирования поиска пользователя в базе данных по электронной почте.
+		 * Method for testing a user search in a database by email.
 		 */
 		@Test
 		void checkingUserFindByEmail() {
@@ -48,7 +48,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		}
 
 		/**
-		 * Метод для тестирования поиска пользователя в базе данных по providerId.
+		 * Method for testing user search in the database by providerId.
 		 */
 		@Test
 		void checkingUserFindByProviderId() {
@@ -61,7 +61,7 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
 		}
 
 		/**
-		 * Метод для тестирования проверки доступности электронной почты в базе данных.
+		 * Method for testing email availability check in database.
 		 */
 		@Test
 		void checkingUserExistByEmail() {

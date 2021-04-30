@@ -9,38 +9,38 @@ import ru.bangerok.ninja.validation.annotation.ValidPassword;
 import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
 
 /**
- * Payload java класс для парсинга данных запроса регистрации в параметры rest метода.
+ * Payload java class for parsing registration request data into rest method parameters.
  * <p>
- * Используется, например, здесь: {@link AuthController#registerUser}.
+ * Used for example here: {@link AuthController#registerUser}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Data
 @PasswordMatches()
 public class RegisterRequest {
 
 		/**
-		 * Private поле, содержащее имя пользователя при регистрации с клиента.
+		 * Private field containing the username when registering from a client.
 		 */
 		@NotNull(message = "errors.invalid.empty.username")
 		private String username;
 
 		/**
-		 * Private поле, содержащее электронную почту пользователя при регистрации с клиента.
+		 * Private field containing the user's email when registering from a client.
 		 */
 		@NotNull(message = "errors.invalid.empty.email")
 		@ValidEmail(message = "errors.invalid.email")
 		private String email;
 
 		/**
-		 * Private поле, содержащее пароль пользователя при регистрации с клиента.
+		 * Private field containing the user's password when registering from a client.
 		 */
 		@ValidPassword
 		private String password;
 
 		/**
-		 * Private поле, содержащее повторный ввод пароля пользователя при регистрации с клиента.
+		 * Private field containing re-entering the user's password when registering from a client.
 		 */
 		@Match(message = "errors.invalid.matchingPassword")
 		private String matchingPassword;

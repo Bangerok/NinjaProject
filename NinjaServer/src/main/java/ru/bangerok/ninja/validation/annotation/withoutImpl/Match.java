@@ -9,13 +9,12 @@ import java.lang.annotation.Target;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 
 /**
- * Мета-аннотация без имплементации, которая может быть использована для проверки повторного ввода
- * пароля.
+ * An unimplemented meta annotation that can be used to validate password re-entry.
  * <p>
- * Используется, например, здесь: {@link RegisterRequest}.
+ * Used for example here: {@link RegisterRequest}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.15
  */
 @Documented
 @Target({FIELD})

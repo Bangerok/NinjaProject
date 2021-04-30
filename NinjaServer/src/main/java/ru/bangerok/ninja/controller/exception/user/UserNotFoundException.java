@@ -5,12 +5,12 @@ import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Класс исключения для обработки ошибок отсутствия пользователя в базе данных.
+ * Exception class for handling errors when a user is not in the database.
  * <p>
- * Используется, например, здесь: {@link UserServiceImpl#getCurrentUser(UserPrincipal)}
+ * Used for example here: {@link UserServiceImpl#getCurrentUser(UserPrincipal)}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.5
  */
 public final class UserNotFoundException extends RuntimeException {
 

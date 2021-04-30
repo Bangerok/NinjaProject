@@ -1,4 +1,4 @@
 /**
- * Список геттеров модуля Settings.
+ * Settings module getter list.
  */
-export default {}
+export default {};

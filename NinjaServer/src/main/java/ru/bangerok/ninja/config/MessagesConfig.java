@@ -6,19 +6,19 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
 
 /**
- * Конфигурационный java класс объявления и настройки бина для локализации обычных и валидационных
- * сообщений.
+ * Configuration java class for declaring and configuring a bean for localization of regular and
+ * validation messages.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.4
  */
 @Configuration
 public class MessagesConfig {
 
 		/**
-		 * Получение и конфигурация ResourceBundle для локализации сообщений по ключу.
+		 * Getting and configuring a ResourceBundle to localize messages by key.
 		 *
-		 * @return конфигурационный объект с настройками для получения сообщений.
+		 * @return configuration object with settings for receiving messages.
 		 */
 		@Bean
 		public ResourceBundleMessageSource messages() {

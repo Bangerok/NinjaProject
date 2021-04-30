@@ -23,12 +23,13 @@ import org.slf4j.LoggerFactory;
 import ru.bangerok.ninja.validation.annotation.ValidPassword;
 
 /**
- * Валидирующий класс для аннотации - валидации введенного пароля пользователем при регистрации.
+ * Validating class for annotation - validation of the entered password by the user during
+ * registration.
  * <p>
- * Подключается здесь: {@link ValidPassword}.
+ * Connects here: {@link ValidPassword}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.5
  */
 public class PasswordConstraintValidator implements ConstraintValidator<ValidPassword, String> {
 
@@ -63,10 +64,10 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 		}
 
 		/**
-		 * Получение кастомных сообщений для валидации пароля.
+		 * Receiving custom messages for password validation.
 		 *
-		 * @return MessageResolver с данными о новом списке сообщений, которые будут использованы для
-		 * сообщений об ошибке валидации.
+		 * @return MessageResolver with data about the new list of messages to be used for validation
+		 * error messages.
 		 */
 		private MessageResolver getMessageResolver() {
 				Properties props = new Properties();

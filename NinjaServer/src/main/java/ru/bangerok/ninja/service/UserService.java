@@ -8,75 +8,74 @@ import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.security.UserPrincipal;
 
 /**
- * Сервисный класс для работы с сущностью пользователя и его авторизацией/аутентификацией.
+ * Service class for working with user entity and its authorization/authentication.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 public interface UserService {
 
 		/**
-		 * Метод для регистрации нового пользователя и сохранение его в базе данных.
+		 * Method for registering a new user and storing it in the database.
 		 *
-		 * @param registerData данные для регистрации пользователя.
-		 * @return созданный в базе данных или, если не удалось, null.
-		 * @throws UserAlreadyExistException пользователь уже существует.
+		 * @param registerData user registration data.
+		 * @return created in the database, or if failed, null.
+		 * @throws UserAlreadyExistException user already exists.
 		 */
 		User registerNewUserAccount(RegisterRequest registerData) throws UserAlreadyExistException;
 
 		/**
-		 * Метод для аутентификации авторизующегося пользователя и создание токена аутентификации для
-		 * него.
+		 * Method for authenticating the logged in user and creating an authentication token for him.
 		 *
-		 * @param loginData данные для аутентификации пользователя.
-		 * @return токен аутентификации.
+		 * @param loginData user authentication data.
+		 * @return authentication token.
 		 */
 		String creatingTokenForAuthUser(LoginRequest loginData);
 
 		/**
-		 * Метод для получения данных текущего аутентифицированного пользователя.
+		 * Method for getting data of the current authenticated user.
 		 *
-		 * @param currentUser текущий авторизованнай пользователь.
-		 * @return данные аутентифицированного пользователя.
+		 * @param currentUser current logged in user.
+		 * @return authenticated user data.
 		 */
 		User getCurrentUser(UserPrincipal currentUser);
 
 		/**
-		 * Метод для получения пользователя, которому был выдан токен верификации электронной почты.
+		 * Method for getting the user who was issued the email verification token.
 		 *
-		 * @param verificationToken токен верификации почты.
-		 * @return пользователь, для которого был выдан токен верификации почты.
+		 * @param verificationToken email verification token.
+		 * @return the user for whom the email verification token was issued.
 		 */
 		User getUser(String verificationToken);
 
 		/**
-		 * Метод для создания и сохранения токена для верификации электронной почты.
+		 * Method for creating and saving a token for email verification.
 		 *
-		 * @param user регистрирующийся пользователь.
-		 * @return токен верификации.
+		 * @param user registering user.
+		 * @return verification token.
 		 */
 		VerificationToken createVerificationTokenForUser(User user);
 
 		/**
-		 * Метод для обновления токена верификации с новым значением токена.
+		 * Method for updating the verification token with a new token value.
 		 *
-		 * @param existingVerificationToken существующие значение токена верификации.
-		 * @return обновленный токен верификации.
+		 * @param existingVerificationToken the existing value of the verification token.
+		 * @return updated verification token.
 		 */
 		VerificationToken generateNewVerificationToken(String existingVerificationToken);
 
 		/**
-		 * Метод для получения токена верификации из базы данных по его значению токена.
+		 * Method for obtaining a verification token from the database by its token value.
 		 *
-		 * @param verificationToken регистрирующийся пользователь.
-		 * @return токен верификации или null.
+		 * @param verificationToken email verification token.
+		 * @return verification token or null.
 		 */
 		VerificationToken getVerificationToken(String verificationToken);
 
 		/**
-		 * Метод для сохранения данных пользователя в базу данных.
+		 * Method for saving user data to database.
 		 *
-		 * @param user пользователь.
+		 * @param user user data.
 		 */
 		void saveRegisteredUser(User user);
 }

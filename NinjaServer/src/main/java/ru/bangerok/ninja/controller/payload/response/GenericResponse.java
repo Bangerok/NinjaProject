@@ -9,29 +9,29 @@ import org.springframework.validation.ObjectError;
 import ru.bangerok.ninja.controller.AuthController;
 
 /**
- * Payload java класс для отправки ответа от сервера в контроллере.
+ * Payload java class to send response from server in controller.
  * <p>
- * Используется, например, здесь: {@link AuthController#registerUser}.
+ * Used for example here: {@link AuthController#registerUser}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.5
  */
 @Data
 @NoArgsConstructor
 public class GenericResponse {
 
 		/**
-		 * Private поле, содержащее сообщение о конечном результате выполнения запроса.
+		 * Private field containing a message about the final result of the request.
 		 */
 		private String message;
 
 		/**
-		 * Private поле, содержащее какие либо данные для обработки на клиенте.
+		 * Private field containing any data to be processed on the client.
 		 */
 		private Object data;
 
 		/**
-		 * Private поле, содержащее ошибки выполнения запроса.
+		 * Private field containing query execution errors.
 		 */
 		private String error;
 
