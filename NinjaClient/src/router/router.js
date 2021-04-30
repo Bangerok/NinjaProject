@@ -1,12 +1,11 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
 /**
- * Объект, используемый для хранения доступных страниц системы
- * и используемых для их отображения компонентов, которые подклюачется
- * динамически.
+ * An object used to store the available system pages and components used to
+ * display them, which are dynamically connected.
  */
 const routes = [
   {
@@ -18,8 +17,8 @@ const routes = [
       icon: 'fa-home',
       title: 'navigation.menu.general',
       showInMenu: true,
-      requiresAuthorization: true
-    }
+      requiresAuthorization: true,
+    },
   },
   {
     path: '/news',
@@ -30,8 +29,8 @@ const routes = [
       icon: 'fa-rss',
       title: 'navigation.menu.news',
       showInMenu: true,
-      requiresAuthorization: true
-    }
+      requiresAuthorization: true,
+    },
   },
   {
     path: '/info',
@@ -42,8 +41,8 @@ const routes = [
       icon: 'fa-info',
       title: 'navigation.menu.info',
       showInMenu: true,
-      requiresAuthorization: true
-    }
+      requiresAuthorization: true,
+    },
   },
   {
     path: '/login',
@@ -52,8 +51,8 @@ const routes = [
     component: () => import('../views/ViewLogin'),
     meta: {
       showInMenu: false,
-      requiresAuthorization: false
-    }
+      requiresAuthorization: false,
+    },
   },
   {
     path: '/register',
@@ -62,8 +61,8 @@ const routes = [
     component: () => import('../views/ViewRegister'),
     meta: {
       showInMenu: false,
-      requiresAuthorization: false
-    }
+      requiresAuthorization: false,
+    },
   },
   {
     path: "*",
@@ -73,23 +72,23 @@ const routes = [
     meta: {
       title: 'navigation.menu.notFound',
       showInMenu: false,
-      requiresAuthorization: true
-    }
-  }
+      requiresAuthorization: true,
+    },
+  },
 ];
 
 /**
- * Конфигурационный объект для настройки роутинга в системе.
+ * Configuration object for configuring routing in the system.
  */
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
-  routes
+  routes,
 });
 
 /**
- * Проверка перед переходом наличия токена и если его нет -
- * перенаправление на страницу авторизации.
+ * Checking for the presence of a token before changing the route and if it is
+ * not there - redirecting to the authorization page.
  */
 router.beforeEach((to, from, next) => {
   if (localStorage.getItem('jwt-token')) {
@@ -105,6 +104,6 @@ router.beforeEach((to, from, next) => {
   }
 
   next();
-})
+});
 
-export default router
+export default router;

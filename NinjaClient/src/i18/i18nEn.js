@@ -1,5 +1,5 @@
 /**
- * Файл локализации системы на английском языке.
+ * System localization file in English.
  */
 const messagesEn = {
   navigation: {
@@ -10,7 +10,7 @@ const messagesEn = {
       news: 'News',
       info: 'About project',
       notFound: 'Page not found',
-    }
+    },
   },
   pages: {
     notFound: {
@@ -19,7 +19,7 @@ const messagesEn = {
     },
     inDevelopment: {
       title: 'The page is under construction!',
-      description: 'Please come back a little later.'
+      description: 'Please come back a little later.',
     },
     auth: {
       login: {
@@ -43,12 +43,12 @@ const messagesEn = {
   },
   dialogs: {
     title: {
-      confirmation: 'Confirmation'
+      confirmation: 'Confirmation',
     },
     content: {
       confirmation: 'Are you sure you want to do this?',
-      resendToken: 'Verification token for email confirmation expired. To complete the registration you need to get a new one. Do you agree?'
-    }
+      resendToken: 'Verification token for email confirmation expired. To complete the registration you need to get a new one. Do you agree?',
+    },
   },
   buttons: {
     authBtn: 'Authorization',
@@ -74,6 +74,6 @@ const messagesEn = {
       credential: 'Invalid credentials used',
     },
   },
-}
+};
 
-export default messagesEn
+export default messagesEn;

@@ -1,4 +1,4 @@
 /**
- * Список действий модуля Settings.
+ * Settings module actions list.
  */
-export default {}
+export default {};

@@ -78,31 +78,31 @@
 import {mapActions, mapMutations, mapState} from 'vuex';
 
 /**
- * Компонент для показа верхнего информационного меню.
+ * Component for showing top information menu.
  */
 export default {
   name: 'TheToolbar',
   data: () => ({
     /**
-     * Включен/выключен ночной режим оформления системы
+     * On/off the night mode of the system design.
      */
     nightMode: true,
     /**
-     * Выбранный язык локализации системы
+     * Selected system localization language.
      */
     locale: 'ru',
     /**
-     * Список доступных локалей системы для переключения между ними
+     * List of available system locales for switching between them.
      */
     items: [
       {
         text: 'Русский',
-        value: 'ru'
+        value: 'ru',
       }, {
         text: 'English',
-        value: 'en'
-      }
-    ]
+        value: 'en',
+      },
+    ],
   }),
   computed: mapState('settings', {'navigation': state => state.navigation}),
   methods: {
@@ -110,7 +110,7 @@ export default {
     ...mapActions('auth', ['callLogout']),
   },
   /**
-   * Настраиваем систему после монтирования компонента
+   * System setup at the stage of component mounting.
    */
   mounted() {
     let nightMode = localStorage.getItem('nightMode');
@@ -128,21 +128,21 @@ export default {
   },
   watch: {
     /**
-     * Сохраняем выбранный режим оформления системы в localStorage
+     * Saving the selected system design mode to localStorage.
      */
     nightMode() {
       this.$vuetify.theme.dark = this.nightMode;
       localStorage.setItem('nightMode', this.nightMode);
     },
     /**
-     * Сохраняем выбранный язык системы в localStorage
+     * Saving the selected system language to localStorage.
      */
     locale() {
       this.$i18n.locale = this.locale;
       localStorage.setItem('locale', this.locale);
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>

@@ -1,37 +1,42 @@
-import axios from '../axios.api'
+// noinspection JSValidateJSDoc
+
+import axios from '../axios.api';
 
 /**
- * Отправка запросов в AuthController на сервере.
+ * Sending requests to AuthController on the server.
  */
 export default {
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/user'.
+   * Sending a request to a rest method at '/auth/user'.
    *
-   * @return promise
+   * @return {AxiosPromise} with a response from the server.
    */
   getUser() {
     return axios.get('/auth/user');
   },
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/login'.
+   * Sending a request to a rest method at '/auth/login'.
    *
-   * @return promise
+   * @param loginData authorization data.
+   * @return {AxiosPromise} with a response from the server.
    */
   login(loginData) {
     return axios.post('/auth/login', loginData);
   },
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/registrationConfirm'.
+   * Sending a request to a rest method at '/auth/registrationConfirm'.
    *
-   * @return promise
+   * @param registerData registration data.
+   * @return {AxiosPromise} with a response from the server.
    */
   register(registerData) {
     return axios.post('/auth/register', registerData);
   },
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/registrationConfirm'.
+   * Sending a request to a rest method at '/auth/registrationConfirm'.
    *
-   * @return promise
+   * @param token the token sent to the user by email.
+   * @return {AxiosPromise} with a response from the server.
    */
   confirmEmail(token) {
     return axios.getWithParams('/auth/registrationConfirm', {
@@ -39,13 +44,14 @@ export default {
     });
   },
   /**
-   * Отправка запроса в rest-метод по адресу '/auth/resendRegistrationToken'.
+   * Sending a request to a rest method at '/auth/resendRegistrationToken'.
    *
-   * @return promise
+   * @param oldToken expired token.
+   * @return {AxiosPromise} with a response from the server.
    */
   reSendVerificationTokenEmail(oldToken) {
     return axios.getWithParams('/auth/resendRegistrationToken', {
       oldToken: oldToken
     });
   },
-}
+};
