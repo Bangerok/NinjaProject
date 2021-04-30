@@ -3,10 +3,10 @@ package ru.bangerok.ninja.security.error;
 import org.springframework.security.core.AuthenticationException;
 
 /**
- * Класс исключения для обработки ошибки аутентификации.
+ * Exception class for handling authentication failure.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 public class OAuth2AuthenticationProcessingException extends AuthenticationException {
 

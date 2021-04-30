@@ -8,27 +8,26 @@ import ru.bangerok.ninja.NinjaApplication;
 import ru.bangerok.ninja.security.TokenProvider;
 
 /**
- * Конфигурационный java класс для загрузки настроек spring из файла application.yaml по префиксу -
- * app.
+ * Config java class to load spring settings from application.yaml file by prefix - app.
  * <p>
- * Подключается здесь: {@link NinjaApplication}.
+ * Connects here: {@link NinjaApplication}.
  * <p>
- * Используется, например, здесь: {@link TokenProvider}.
+ * Used for example here: {@link TokenProvider}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Data
 @ConfigurationProperties("app")
 public class AppPropertiesConfig {
 
 		/**
-		 * Private поле, в котором хранится информация, необходимая для генерации Json Web токенов.
+		 * Private field that stores information required to generate Json Web tokens.
 		 */
 		private final Auth auth = new Auth();
 
 		/**
-		 * Private поле, в котором хранится информация о redirect ссылках после oauth2 авторизации.
+		 * Private field that stores information about redirect links after oauth2 authorization.
 		 */
 		private final OAuth2 oauth2 = new OAuth2();
 
@@ -36,12 +35,13 @@ public class AppPropertiesConfig {
 		public static class Auth {
 
 				/**
-				 * Private поле, в котором хранится информация о секрете токена для его генерации.
+				 * Private field, which stores information about the secret of the token for its
+				 * generation.
 				 */
 				private String tokenSecret;
 
 				/**
-				 * Private поле, в котором хранится длительность действия токена.
+				 * Private field that stores the duration of the token.
 				 */
 				private long tokenExpirationMsec;
 		}
@@ -50,8 +50,7 @@ public class AppPropertiesConfig {
 		public static final class OAuth2 {
 
 				/**
-				 * Private поле, в котором хранится список redirect ссылок, используемых после oauth2
-				 * авторизации.
+				 * Private field that stores a list of redirect links used after oauth2 authorization.
 				 */
 				private List<String> authorizedRedirectUris = new ArrayList<>();
 

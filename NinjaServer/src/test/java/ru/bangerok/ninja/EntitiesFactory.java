@@ -6,19 +6,19 @@ import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.repository.AbstractRepositoryTest;
 
 /**
- * Класс для создания тестовых экземпляров сущностей без сохранения в базу данных.
+ * Class for creating test instances of entities without saving to the database.
  * <p>
- * Используется, например, здесь: {@link AbstractRepositoryTest}.
+ * Used for example here: {@link AbstractRepositoryTest}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.9
  */
 public class EntitiesFactory {
 
 		/**
-		 * Метод для генерации пользователя для дальнейшего его удаления.
+		 * Method for generating a user for further deletion.
 		 *
-		 * @return сгенерированный пользователь.
+		 * @return generated user.
 		 */
 		public User getNewUser() {
 				User user = new User();

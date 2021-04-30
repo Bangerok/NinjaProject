@@ -49,13 +49,16 @@
 </template>
 
 <script>
+/**
+ * Basic component for showing custom content dialog.
+ */
 export default {
   name: "BaseDialog",
   props: {
     confirm: Function,
-    show: Boolean
+    show: Boolean,
   },
-}
+};
 </script>
 
 <style scoped>

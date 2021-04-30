@@ -1,4 +1,4 @@
 /**
- * Список основных геттеров.
+ * List of basic getters.
  */
-export default {}
+export default {};

@@ -38,28 +38,30 @@
 import {mapState} from "vuex";
 
 /**
- * Компонент для показа меню-навигации по системе.
+ * Component for displaying menu navigation through the system.
  */
 export default {
   name: "TheSidebar",
   computed: {
     ...mapState('settings', {'navigation': state => state.navigation}),
     /**
-     * Метод для получения списка routes, у которых в мета данных есть информация о том,
-     * что их нужно отобразить.
+     * Getting a list of routes that have information in their meta data that they need to be displayed.
      *
-     * @return отфильтрованный список routes
+     * @return routes filtered list
      */
-    filteredNavigationLinks() {
+    filteredNavigationLinks()  {
       return this.$router.options.routes.filter(route => route.meta.showInMenu);
     },
   },
   methods: {
-    getCurrentYear: () => {
-      return new Date().getFullYear();
-    }
-  }
-}
+    /**
+     * Getting the current year for copyright.
+     *
+     * @return {number} this year.
+     */
+    getCurrentYear: () => new Date().getFullYear(),
+  },
+};
 </script>
 
 <style scoped>

@@ -13,13 +13,13 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 
 /**
- * Мета-аннотация с имплементацией, которая может быть использована для валидации пароля при
- * регистрации на совпадение с повторным вводом пароля.
+ * Meta-annotation with implementation, which can be used to validate the password when registering
+ * for a match with re-entering the password.
  * <p>
- * Используется, например, здесь: {@link RegisterRequest}.
+ * Used for example here: {@link RegisterRequest}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 @Documented
 @Constraint(validatedBy = PasswordMatchesValidator.class)

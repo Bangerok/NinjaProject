@@ -11,10 +11,11 @@ import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * Сущность привилегий. Используется для точечных прав сервера. Например, на отдельную сущность.
+ * The essence of privilege. Used for dotted server permissions. For example, for a separate
+ * entity.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.4
  */
 @Data
 @Entity
@@ -24,13 +25,13 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 public class Privilege extends BaseEntity {
 
 		/**
-		 * Private поле, в котором хранится наименование привилегии в базе данных.
+		 * Private field that stores the name of the privilege in the database.
 		 */
 		@Column(name = "name", unique = true)
 		private String name;
 
 		/**
-		 * Private поле, в котором хранится список ролей, которым доступна данная привилегия.
+		 * Private field that stores a list of roles that have access to this privilege.
 		 */
 		@ManyToMany(mappedBy = "privileges")
 		private List<Role> roles;

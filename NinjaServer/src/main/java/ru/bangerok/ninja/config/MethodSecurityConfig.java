@@ -8,21 +8,22 @@ import org.springframework.security.config.annotation.method.configuration.Globa
 import ru.bangerok.ninja.security.CustomPermissionEvaluator;
 
 /**
- * Конфигурационный java класс для того, чтобы использовать кастомный класс, в котором определены
- * методы, которые можно вызывать из @PreAuthorize или @PostAuthorize.
+ * Configuration java class for using a custom class that defines methods that can be called from
+ * PreAuthorize or PostAuthorize annotations.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.6
  */
 @Configuration
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
 		/**
-		 * Метод для создания и настройки handler, который вызывается при использовании выражений в
+		 * Method for creating and configuring a handler, which is called when using validation
+		 * expressions.
 		 *
-		 * @return настроенный handler с кастомным сервисным классом внутри. Аннотации - PreAuthorize
-		 * или @PostAuthorize.
+		 * @return customized handler with custom service class inside. Annotations - PreAuthorize or
+		 * PostAuthorize.
 		 */
 		@Override
 		protected MethodSecurityExpressionHandler createExpressionHandler() {

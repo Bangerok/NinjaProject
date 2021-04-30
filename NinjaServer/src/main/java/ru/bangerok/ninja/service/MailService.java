@@ -4,20 +4,20 @@ import javax.mail.MessagingException;
 import ru.bangerok.ninja.event.listener.RegistrationListener;
 
 /**
- * Сервисный класс для работы с отправкой писем на электронную почту.
+ * Service class for working with sending letters to email.
  * <p>
- * Используется, например, здесь: {@link RegistrationListener}
+ * Used for example here: {@link RegistrationListener}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.3
  */
 public interface MailService {
 
 		/**
-		 * Метод для отправки верификационного сообщения на электронную почту.
+		 * Method for sending verification email.
 		 *
-		 * @param toEmail куда отправляем.
-		 * @param token   токен верификации, выданный пользователю для проверки электронной почты.
+		 * @param toEmail where we send.
+		 * @param token   verification token issued to the user to verify email.
 		 */
 		void sendVerifiedMessage(String toEmail, String token) throws MessagingException;
 }

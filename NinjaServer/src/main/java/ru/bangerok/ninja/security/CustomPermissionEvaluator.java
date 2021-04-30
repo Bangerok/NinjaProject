@@ -6,22 +6,22 @@ import org.springframework.security.core.Authentication;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
 
 /**
- * Класс, содержащий методы проверки наличия у пользователя разрешений на какую либо сущность.
+ * A class containing methods for checking whether a user has permissions on an entity.
  * <p>
- * Подключается здесь: {@link MethodSecurityConfig}.
+ * Connects here: {@link MethodSecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.6
  */
 public class CustomPermissionEvaluator implements PermissionEvaluator {
 
 		/**
-		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 * Method for checking if a user has access to a specific object.
 		 *
-		 * @param auth               данные аутентификации.
-		 * @param targetDomainObject объект, доступ к которому запрашивается.
-		 * @param permission         наименование разрешения.
-		 * @return true, если права доступа есть, иначе false.
+		 * @param auth               authentication data.
+		 * @param targetDomainObject the object to which access is requested.
+		 * @param permission         permit name.
+		 * @return true if access rights are present, otherwise false.
 		 */
 		@Override
 		public boolean hasPermission(Authentication auth, Object targetDomainObject,
@@ -34,13 +34,13 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		}
 
 		/**
-		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 * Method for checking if a user has access to a specific object.
 		 *
-		 * @param auth       данные аутентификации.
-		 * @param targetId   идентификатор целевого объекта доступа.
-		 * @param targetType тип целевого объекта доступа.
-		 * @param permission наименование разрешения.
-		 * @return true, если права доступа есть, иначе false.
+		 * @param auth       authentication data.
+		 * @param targetId   access target id.
+		 * @param targetType access target type.
+		 * @param permission permit name.
+		 * @return true if access rights are present, otherwise false.
 		 */
 		@Override
 		public boolean hasPermission(Authentication auth, Serializable targetId, String targetType,
@@ -52,12 +52,12 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 		}
 
 		/**
-		 * Метод для проверки наличия доступа у пользователя к определенному объекту.
+		 * Method for checking if a user has access to a specific object.
 		 *
-		 * @param auth       данные аутентификации.
-		 * @param targetType тип целевого объекта доступа.
-		 * @param permission наименование разрешения.
-		 * @return true, если права на объект найдены, иначе false.
+		 * @param auth       authentication data.
+		 * @param targetType access target type.
+		 * @param permission permit name.
+		 * @return true if access rights are present, otherwise false
 		 */
 		private boolean hasPrivilege(Authentication auth, String targetType, String permission) {
 				return auth.getAuthorities().parallelStream().anyMatch(

@@ -7,11 +7,11 @@
 
 <script>
 /**
- * Страница с информацией о том, что текущая страница не существует.
+ * Page with information that the current page does not exist.
  */
 export default {
-  name: "ViewNotFound"
-}
+  name: "ViewNotFound",
+};
 </script>
 
 <style scoped>

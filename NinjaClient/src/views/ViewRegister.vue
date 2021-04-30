@@ -87,40 +87,40 @@
 import {mapActions} from "vuex";
 
 /**
- * Страница для регистрации пользователя.
+ * User registration page.
  */
 export default {
   name: "ViewRegister",
   data: () => ({
     /**
-     * Флаг скрытия/отображения вводимых паролей пользователя.
+     * Show/hide the password entered by the user.
      */
     isShowPassword: false,
     /**
-     * Значение электронной почты для регистрации.
+     * Email for registration.
      */
     email: null,
     /**
-     * Значение имени пользователя для регистрации.
+     * Username for registration.
      */
     username: null,
     /**
-     * Значение пароля для регистрации.
+     * Password for registration.
      */
     password: '',
     /**
-     * Значение повторно набранного пароля для регистрации.
+     * Matching password for registration.
      */
     matchingPassword: '',
     /**
-     * Список ошибок валидации введенных данных регистрации.
+     * List of validation errors for entered registration data.
      */
     errors: [],
   }),
   methods: {
     ...mapActions('auth', ['register']),
     /**
-     * Отправка данных на сервер для валидации и завершения регистрации.
+     * Sending data to the server for validation and registration completion.
      */
     submit() {
       // noinspection JSValidateTypes
@@ -128,7 +128,7 @@ export default {
         username: this.username,
         email: this.email,
         password: this.password,
-        matchingPassword: this.matchingPassword
+        matchingPassword: this.matchingPassword,
       }).then(() => {
         this.$router.push("/login");
       }).catch((error) => {
@@ -137,19 +137,25 @@ export default {
           return {
             field: e.field,
             message: e['defaultMessage'],
-          }
-        })
+          };
+        });
       });
     },
     /**
-     * Проверка поля на наличие ошибок, полученных после валидации данных регистрации.
+     * Checking the field for errors received after validation of registration data.
+     *
+     * @param fieldName checked field.
+     * @return {boolean} true if there are errors for this field, otherwise false.
      */
     isError(fieldName) {
       return this.errors.filter(e => e.field === fieldName).length > 0;
     },
     /**
-     * Получение значения для локализации ошибки для поля, полученной после валидации
-     * данных регистрации. Возвращается значение самой весомой ошибки.
+     * Obtaining and localization of errors for a field received after validation of registration
+     * data.
+     *
+     * @param fieldName field for filtering the list of errors received during validation.
+     * @return {string|(*|string|VueI18n.LocaleMessages)[]} list of localized errors.
      */
     errorMessage(fieldName) {
       const filteringErrorObjects = this.errors.filter(e => e.field === fieldName);
@@ -162,7 +168,7 @@ export default {
       });
     },
   },
-}
+};
 </script>
 
 <style scoped>

@@ -5,12 +5,12 @@ import org.springframework.boot.test.context.SpringBootTest;
 import ru.bangerok.ninja.EntitiesFactory;
 
 /**
- * Абстрактный базовый класс для тестов, содержащий инициализацию фабрики тестовых данных.
+ * An abstract base class for tests containing the initialization of the test data factory.
  * <p>
- * Используется, например, здесь: {@link UserRepositoryTest}.
+ * Used for example here: {@link UserRepositoryTest}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.9
  */
 @SpringBootTest
 public abstract class AbstractRepositoryTest {

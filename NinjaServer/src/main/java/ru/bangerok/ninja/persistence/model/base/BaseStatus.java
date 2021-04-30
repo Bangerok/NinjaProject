@@ -1,21 +1,21 @@
 package ru.bangerok.ninja.persistence.model.base;
 
 /**
- * Класс перечисления для статусов сущностей проекта.
+ * Enumeration class for project entity statuses.
  * <p>
- * Для полной картины смотри: {@link BaseEntity#getStatus}.
+ * For a complete picture, see: {@link BaseEntity#getStatus}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.3
  */
 public enum BaseStatus {
 		/**
-		 * Статус, сигнализирующий об активности записи в базе данных.
+		 * Status indicating the activity of a record in the database.
 		 */
 		ACTIVE,
 
 		/**
-		 * Статус, сигнализирующий об не активности записи в базе данных.
+		 * Status indicating inactivity of a record in the database.
 		 */
 		DELETED
 }

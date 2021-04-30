@@ -7,11 +7,11 @@
 
 <script>
 /**
- * Страница с информацией о том, что она находится в разработке.
+ * Page with information that it is under construction.
  */
 export default {
-  name: "ViewInDevelopment"
-}
+  name: "ViewInDevelopment",
+};
 </script>
 
 <style scoped>

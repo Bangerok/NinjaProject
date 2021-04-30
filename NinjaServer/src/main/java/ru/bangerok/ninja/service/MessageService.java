@@ -3,29 +3,29 @@ package ru.bangerok.ninja.service;
 import ru.bangerok.ninja.controller.AuthController;
 
 /**
- * Сервисный класс для работы с локализацией сообщений на сервере.
+ * Service class for working with localization of messages on the server.
  * <p>
- * Используется, например, здесь: {@link AuthController}
+ * Used for example here: {@link AuthController}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.4
  */
 public interface MessageService {
 
 		/**
-		 * Метод для получения локализованного сообщения.
+		 * Method for getting a localized message.
 		 *
-		 * @param path ключ сообщения.
-		 * @return локализованное сообщение.
+		 * @param path message key.
+		 * @return localized message.
 		 */
 		String getMessage(String path);
 
 		/**
-		 * Метод для получения локализованного сообщения с параметрами.
+		 * Method for getting localized message with parameters.
 		 *
-		 * @param path ключ сообщения.
-		 * @param args параметры сообщения.
-		 * @return локализованное сообщение.
+		 * @param path message key.
+		 * @param args message parameters.
+		 * @return localized message.
 		 */
 		String getMessageWithArgs(String path, Object[] args);
 }

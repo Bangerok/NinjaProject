@@ -3,21 +3,21 @@ package ru.bangerok.ninja.enumeration;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * Класс перечисления для провайдеров авторизаций пользователей.
+ * Enumeration class for user authorization providers.
  * <p>
- * Для полной картины смотри: {@link User#getAuthProvider}.
+ * For a complete picture, see: {@link User#getAuthProvider}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.13
  */
 public enum AuthProvider {
 		/**
-		 * Локальный тип провайдера, который устанавливается при стандартной регистрации.
+		 * Local provider type, which is set during standard registration.
 		 */
 		local,
 
 		/**
-		 * Тип внешнего провайдер, который устанавливается при oauth2 авторизации через Google.
+		 * The type of external provider that is set during oauth2 authorization via Google.
 		 */
 		google
 }

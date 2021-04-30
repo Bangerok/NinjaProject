@@ -7,21 +7,21 @@ import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.persistence.model.user.Role;
 
 /**
- * Repository java класс для связи с базой данных и работой с сущностью роли.
+ * Repository java class for communicating with the database and working with the role entity.
  * <p>
- * Используется, например, здесь: {@link AuthController}.
+ * Used for example here: {@link AuthController}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.3
  */
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long> {
 
 		/**
-		 * Метод для поиска роли по ее имени в базе данных.
+		 * Method for finding a role by its name in the database.
 		 *
-		 * @param name наименование роли.
-		 * @return Optional с найденной ролью.
+		 * @param name role name.
+		 * @return Optional with found role.
 		 */
 		Optional<Role> findByName(String name);
 }

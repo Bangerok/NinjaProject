@@ -15,13 +15,13 @@
 import {mapMutations, mapState} from "vuex";
 
 /**
- * Компонент для показа окна уведомлений о различных событий в системе.
+ * Component for displaying a notification window about various events in the system.
  */
 export default {
   name: "NotificationMsg",
   computed: mapState({'notification': state => state.notification}),
   methods: mapMutations(['setNotificationShow']),
-}
+};
 </script>
 
 <style scoped>

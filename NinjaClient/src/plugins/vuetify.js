@@ -5,9 +5,8 @@ import Vuetify from 'vuetify/lib';
 Vue.use(Vuetify);
 
 /**
- * Конфигурационный объект, используемый для настройки отображения
- * компонентов в системе (режим отображения, настройка цветов).
- * Подключение нужных иконок.
+ * A configuration object used to customize the display of components in the
+ * system (display mode, color customization). Connecting the necessary icons.
  */
 export default new Vuetify({
   icons: {
@@ -24,8 +23,8 @@ export default new Vuetify({
         sidebar: '#27282a',
         toolbar: '#1c1d1f',
         content: '#27292D',
-      }
+      },
     },
-    dark: true
-  }
+    dark: true,
+  },
 });

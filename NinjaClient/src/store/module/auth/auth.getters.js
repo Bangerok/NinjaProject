@@ -1,4 +1,4 @@
 /**
- * Список геттеров модуля Auth.
+ * Auth module getter list.
  */
-export default {}
+export default {};
