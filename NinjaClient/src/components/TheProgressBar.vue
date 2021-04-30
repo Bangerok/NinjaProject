@@ -8,12 +8,12 @@
 import {mapState} from "vuex";
 
 /**
- * Компонент для показа строки состояния выполнения запросов к серверу.
+ * Component for displaying the status bar of execution of requests to the server.
  */
 export default {
   name: "TheProgressBar",
-  computed: mapState({'loading': state => state.loading})
-}
+  computed: mapState({'loading': state => state.loading}),
+};
 </script>
 
 <style scoped>

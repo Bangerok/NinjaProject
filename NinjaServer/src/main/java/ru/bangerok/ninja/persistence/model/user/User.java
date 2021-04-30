@@ -21,11 +21,10 @@ import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * Сущность пользователей. Используется для хранения данных авторизованных пользователей и их
- * ролей.
+ * The essence of users. Used to store the data of authorized users and their roles.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.1.0
  */
 @Data
 @Entity
@@ -35,73 +34,73 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 public class User extends BaseEntity {
 
 		/**
-		 * Private поле, в котором хранится полное имя пользователя.
+		 * Private field that stores the user's full name.
 		 */
 		@Column(name = "full_name")
 		private String fullname;
 
 		/**
-		 * Private поле, в котором хранится логин пользователя.
+		 * Private field that stores the username.
 		 */
 		@Column(name = "username")
 		private String username;
 
 		/**
-		 * Private поле, в котором хранится ссылка на аватарку пользователя.
+		 * Private field that stores a link to the user's avatar.
 		 */
 		@Column(name = "avatar")
 		private String avatar;
 
 		/**
-		 * Private поле, в котором хранится электронная почта пользователя.
+		 * Private field that stores the user's email.
 		 */
 		@Email
 		@Column(name = "email", unique = true)
 		private String email;
 
 		/**
-		 * Private поле, в котором хранится информация о подтверждении электронной почты пользователя.
+		 * Private field that stores information about the user's email confirmation.
 		 */
 		@Column(name = "email_verified")
 		private Boolean emailVerified;
 
 		/**
-		 * Private поле, в котором хранится тип провайдера авторизации пользователя.
+		 * Private field that stores the type of the user's authorization provider.
 		 */
 		@Enumerated(EnumType.STRING)
 		@Column(name = "auth_provider")
 		private AuthProvider authProvider;
 
 		/**
-		 * Private поле, в котором хранится id пользователя, который хранится в базе данных провайдера
-		 * авторизации.
+		 * Private field, which stores the user id, which is stored in the database of the authorization
+		 * provider.
 		 */
 		@Column(name = "auth_provider_id", unique = true)
 		private String providerId;
 
 		/**
-		 * Private поле, в котором хранится дата последнего визита пользователя.
+		 * Private field that stores the date of the user's last visit.
 		 */
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@Column(name = "last_visit_date")
 		private LocalDateTime lastVisit;
 
 		/**
-		 * Private поле, в котором хранится, если есть, зашифрованный пароль пользователя.
+		 * Private field that stores, if any, the user's encrypted password.
 		 */
 		@JsonIgnore
 		@Column(name = "password")
 		private String password;
 
 		/**
-		 * Private поле, в котором хранится токен для верификации электронной почты.
+		 * Private field that stores the email verification token.
 		 */
 		@JsonIgnore
 		@OneToOne(mappedBy = "user")
 		private VerificationToken verificationToken;
 
 		/**
-		 * Private поле, в котором хранится список ролей, доступных данному пользователю.
+		 * Private field that stores the list of roles available to this user.
 		 */
 		@JsonIgnore
 		@ManyToMany

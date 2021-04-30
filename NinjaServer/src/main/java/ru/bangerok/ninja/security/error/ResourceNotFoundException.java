@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 /**
- * Класс исключения для обработки 404 ошибки, связанной с получением ресурсов.
+ * Exception class for handling 404 errors related to getting resources.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @ResponseStatus(HttpStatus.NOT_FOUND)
 public class ResourceNotFoundException extends RuntimeException {

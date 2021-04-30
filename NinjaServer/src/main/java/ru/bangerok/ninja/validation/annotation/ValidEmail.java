@@ -14,13 +14,12 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.EmailValidator;
 
 /**
- * Мета-аннотация с имплементацией, которая может быть использована для валидации электронной
- * почты.
+ * Meta-annotation with implementation that can be used to validate email.
  * <p>
- * Используется, например, здесь: {@link RegisterRequest#getEmail()}.
+ * Used for example here: {@link RegisterRequest#getEmail()}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 @Target({TYPE, FIELD, ANNOTATION_TYPE})
 @Retention(RUNTIME)

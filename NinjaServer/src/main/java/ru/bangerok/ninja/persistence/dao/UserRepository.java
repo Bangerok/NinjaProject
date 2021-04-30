@@ -7,47 +7,47 @@ import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * Repository java класс для связи с базой данных и работой с сущностью пользователя.
+ * Repository java class for communicating with the database and working with the user entity.
  * <p>
- * Используется, например, здесь: {@link AuthController}.
+ * Used for example here: {@link AuthController}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.1.0
  */
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
 		/**
-		 * Метод для поиска пользователя по его id в базе данных.
+		 * Method for finding a user by his id in the database.
 		 *
-		 * @param id идентификатор пользователя.
-		 * @return Optional с найденным пользователем.
+		 * @param id user ID.
+		 * @return Optional with found user.
 		 */
 		@SuppressWarnings("NullableProblems")
 		@Override
 		Optional<User> findById(Long id);
 
 		/**
-		 * Метод для поиска пользователя по его электронной почте в базе данных.
+		 * Method for finding a user by his email in the database.
 		 *
-		 * @param email электронная почта пользователя.
-		 * @return Optional с найденным пользователем.
+		 * @param email user's email.
+		 * @return Optional with found user.
 		 */
 		Optional<User> findByEmail(String email);
 
 		/**
-		 * Метод для поиска пользователя по его id с внешнего провайдера в базе данных.
+		 * Method for finding a user by his id from an external provider in the database.
 		 *
-		 * @param providerId идентификатор пользователя на внешнем провайдере авторизации.
-		 * @return Optional с найденным пользователем.
+		 * @param providerId user id on the external authorization provider.
+		 * @return Optional with found user.
 		 */
 		Optional<User> findByProviderId(String providerId);
 
 		/**
-		 * Метод для проверки на занятость электронной почты в базе данных.
+		 * Method for checking for the existence of email in the database.
 		 *
-		 * @param email проверяемая электронная почта пользователя.
-		 * @return true, если почта уже существует, иначе false.
+		 * @param email user verified email.
+		 * @return true if mail already exists, otherwise false.
 		 */
 		boolean existsByEmail(String email);
 }

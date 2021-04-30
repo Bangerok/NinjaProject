@@ -11,13 +11,13 @@ import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.service.base.ServiceLocator;
 
 /**
- * Прослушиватель-класс для работы с отправкой уведомлений регистрируюшимся пользователям о
- * необходимости ее верификации путем перехода по ссылке в сообщении.
+ * Listener-class for working with sending notifications to registering users about the need to
+ * verify it by clicking on the link in the message.
  * <p>
- * Используется, например, здесь: {@link AuthController#registerUser(RegisterRequest)}
+ * Used for example here: {@link AuthController#registerUser(RegisterRequest)}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.4.3
  */
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
@@ -39,9 +39,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		}
 
 		/**
-		 * Метод для отправки сообщения с ссылкой верификации на почту.
+		 * Method for sending a message with a verification link to the mail.
 		 *
-		 * @param event событие с данными пользователя.
+		 * @param event user data event.
 		 */
 		private void confirmRegistration(final OnRegistrationCompleteEvent event)
 				throws MessagingException {

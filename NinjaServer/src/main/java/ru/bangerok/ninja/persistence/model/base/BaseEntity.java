@@ -17,10 +17,10 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 /**
- * Базовый класс для всех сущностей.
+ * Base class for all entities.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.3
  */
 @Data
 @MappedSuperclass
@@ -29,8 +29,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 public class BaseEntity {
 
 		/**
-		 * Private поле, в котором хранится информация об id записи в базе данных. Автоматически
-		 * генерируется при сохранении в базу данных. Предварительно назначать не нужно.
+		 * Private field that stores information about the id of the record in the database.
+		 * Automatically generated when saved to the database. No need to pre-assign.
 		 */
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,31 +38,31 @@ public class BaseEntity {
 		private Long id;
 
 		/**
-		 * Private поле, в котором хранится информация о дате сохранения записи в базе данных.
-		 * Предварительно назначать не нужно.
+		 * Private field that stores information about the date the record was saved in the database. No
+		 * need to pre-assign.
 		 */
 		@CreatedDate
 		@Column(name = "base_created_date")
 		private Date created;
 
 		/**
-		 * Private поле, в котором хранится информация о дате обновления записи в базе данных.
-		 * Предварительно назначать не нужно.
+		 * Private field that stores information about the date the record was updated in the database.
+		 * No need to pre-assign.
 		 */
 		@LastModifiedDate
 		@Column(name = "base_updated_date")
 		private Date updated;
 
 		/**
-		 * Private поле, в котором хранится информация о статусе записи в базе данных. Предварительно
-		 * назначать не нужно.
+		 * Private field that stores information about the status of a record in the database. It is not
+		 * necessary to pre-appoint.
 		 */
 		@Enumerated(EnumType.STRING)
 		@Column(name = "base_status")
 		private BaseStatus status;
 
 		/**
-		 * Private метод, который выполняется перед сохранением записи в базу данных.
+		 * Private method that is executed before saving the record to the database.
 		 */
 		@PrePersist
 		private void prePersistFunction() {
@@ -71,7 +71,7 @@ public class BaseEntity {
 		}
 
 		/**
-		 * Private метод, который выполняется перед обновлением записи в базе данных.
+		 * Private method that is executed before updating a record in the database.
 		 */
 		@PreUpdate
 		private void preUpdateFunction() {

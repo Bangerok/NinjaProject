@@ -24,13 +24,13 @@ import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfo;
 import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
 
 /**
- * Сервисный класс, который обновляет или регистрирует нового пользователя, используя полученные
- * данные с внешнего провайдера авторизации.
+ * A service class that updates or registers a new user using data received from an external
+ * authorization provider.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Service
 @Transactional
@@ -44,11 +44,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 
 		/**
-		 * Метод для получения пользователя аутентификации после успешной авторизации с внешнего
-		 * провайдера.
+		 * Method for getting user authentication after successful authorization from external
+		 * provider.
 		 *
-		 * @param oAuth2UserRequest запрос авторизации oauth2.
-		 * @return аутентифицированный пользователь после успешной авторизации.
+		 * @param oAuth2UserRequest oauth2 authorization request.
+		 * @return authenticated user after successful authorization.
 		 */
 		@Override
 		public OAuth2User loadUser(OAuth2UserRequest oAuth2UserRequest)
@@ -65,12 +65,12 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 
 		/**
-		 * Метод для создания пользователя аутентификации после успешной авторизации с внешнего
-		 * провайдера.
+		 * Method for creating an authentication user after successful authorization from an external
+		 * provider.
 		 *
-		 * @param oAuth2UserRequest запрос авторизации oauth2.
-		 * @param oAuth2User        пользователь oauth2 с данными после авторизации.
-		 * @return аутентифицированный пользователь после его создания.
+		 * @param oAuth2UserRequest oauth2 authorization request.
+		 * @param oAuth2User        oauth2 user with data after authorization.
+		 * @return authenticated user after creating it.
 		 */
 		private OAuth2User processOAuth2User(OAuth2UserRequest oAuth2UserRequest,
 				OAuth2User oAuth2User) {
@@ -93,11 +93,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 
 		/**
-		 * Метод для сохранения нового пользователя в базу данных.
+		 * Method for saving a new user to the database.
 		 *
-		 * @param oAuth2UserRequest запрос авторизации oauth2.
-		 * @param oAuth2UserInfo    данные пользователя oauth2.
-		 * @return пользователь.
+		 * @param oAuth2UserRequest oauth2 authorization request.
+		 * @param oAuth2UserInfo    oauth2 user data.
+		 * @return user.
 		 */
 		private User registerNewUser(OAuth2UserRequest oAuth2UserRequest,
 				OAuth2UserInfo oAuth2UserInfo) {
@@ -123,11 +123,11 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 
 		/**
-		 * Метод для обновления пользователя в базе данных.
+		 * Method for updating a user in a database.
 		 *
-		 * @param existingUser   существующий пользователь.
-		 * @param oAuth2UserInfo данные пользователя oauth2.
-		 * @return пользователь.
+		 * @param existingUser   existing user.
+		 * @param oAuth2UserInfo oauth2 user data.
+		 * @return user.
 		 */
 		private User updateExistingUser(User existingUser, OAuth2UserInfo oAuth2UserInfo) {
 				existingUser.setFullname(oAuth2UserInfo.getName());

@@ -22,11 +22,10 @@ import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.base.ServiceLocator;
 
 /**
- * Контроллер для получения запросов с клиента, связанные с авторизацией/аутентификацией
- * пользователей.
+ * Controller for receiving requests from the client related to user authorization/authentication.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.1.8
  */
 @RestController
 @RequestMapping("auth")
@@ -41,12 +40,12 @@ public class AuthController {
 		}
 
 		/**
-		 * Rest метод-запрос, вызывающийся с клиента для получения из базы данных информации об
-		 * авторизованном пользователе. Перед отправкой ответа - проверяются права пользователя на
-		 * доступ к сущности User.
+		 * Rest request method called from the client to retrieve information about the authorized user
+		 * from the database. Before sending a response - the user's rights to access the User entity
+		 * are checked.
 		 *
-		 * @param userPrincipal сущность, хранящаяся в аутентификации.
-		 * @return текущий пользователь, если есть, иначе null.
+		 * @param userPrincipal entity stored in authentication.
+		 * @return the current user, if any, otherwise null.
 		 */
 		@PostAuthorize("hasPermission(returnObject, 'READ')")
 		@GetMapping("/user")
@@ -55,11 +54,10 @@ public class AuthController {
 		}
 
 		/**
-		 * Rest метод-запрос, вызывающийся с клиента для аутентификации пользователя по полученным
-		 * данным.
+		 * Rest request method called from the client to authenticate the user by the received data.
 		 *
-		 * @param loginRequest данные необходимые для аутентификации пользователя.
-		 * @return AuthResponse с токеном аутентификации.
+		 * @param loginRequest data required for user authentication.
+		 * @return GenericResponse with authentication token.
 		 */
 		@PostMapping("/login")
 		public GenericResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -69,11 +67,10 @@ public class AuthController {
 		}
 
 		/**
-		 * Rest метод-запрос, вызывающийся с клиента для регистрации пользователя и сохранении его в
-		 * базу данных.
+		 * Rest request method called from the client to register a user and save it to the database.
 		 *
-		 * @param registerRequest данные необходимые для регистрации пользователя.
-		 * @return ApiResponse с информацией об успешной регистрации.
+		 * @param registerRequest data required for user registration.
+		 * @return GenericResponse with information about successful registration.
 		 */
 		@PostMapping("/register")
 		public GenericResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
@@ -86,11 +83,10 @@ public class AuthController {
 		}
 
 		/**
-		 * Rest метод-запрос, вызывающийся для верификации электронной почты зарегистрированного
-		 * пользователя.
+		 * Rest request method called to verify the email of the registered user.
 		 *
-		 * @param token токен верификации пользователя.
-		 * @return ApiResponse с информацией об успешной верификации или об ошибке.
+		 * @param token user verification token.
+		 * @return GenericResponse with information about successful verification or error.
 		 */
 		@GetMapping("/registrationConfirm")
 		public GenericResponse confirmRegistration(@RequestParam("token") String token) {
@@ -117,10 +113,10 @@ public class AuthController {
 		}
 
 		/**
-		 * Rest метод-запрос, отправляющий на электронную почту пользователя новый токен верификации.
+		 * Rest request method that sends a new verification token to the user's email.
 		 *
-		 * @param existingToken истекший токен верификации пользователя.
-		 * @return GenericResponse с информацией об отправке нового токена на почту пользователя.
+		 * @param existingToken expired user verification token.
+		 * @return GenericResponse with information about sending a new token to the user's mail.
 		 */
 		@GetMapping("/resendRegistrationToken")
 		public GenericResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken)

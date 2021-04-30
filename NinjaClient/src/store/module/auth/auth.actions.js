@@ -1,14 +1,19 @@
+// noinspection JSUnresolvedFunction
+
 import authApi from "../../../api/service/auth.service";
 import i18n from "./../../../i18/i18n";
-import router from './../../../router/router'
+import router from './../../../router/router';
 
 /**
- * Список действий модуля Auth.
+ * Auth module actions list.
  */
 export default {
   /**
-   * Действие для отправки запроса на сервер для получения и сохранения
-   * данных авторизованного пользователя.
+   * Sending a request to the server to receive and save the data of an
+   * authorized user.
+   *
+   * @param commit module mutation data.
+   * @return {Promise<void>} for further processing if needed.
    */
   async getCurrentUser({commit}) {
     await authApi.getUser().then(response => {
@@ -16,9 +21,13 @@ export default {
     });
   },
   /**
-   * Действие для отправки запроса на сервер для авторизации пользователя
-   * по email и паролю. Получение токена аутентификации и запись его
-   * в localStorage. Если авторизация не получилась, то вывод окна с ошибкой.
+   * Sending a request to the server for user authorization by email and password.
+   * Obtaining an authentication token and writing it to localStorage.
+   * If authorization failed, then displaying a window with an error.
+   *
+   * @param commit module mutation data.
+   * @param loginRequestData authorization data.
+   * @return {Promise<void>} for further processing if needed.
    */
   async login({commit}, loginRequestData) {
     await authApi.login(loginRequestData).then(({data}) => {
@@ -33,9 +42,11 @@ export default {
     });
   },
   /**
-   * Действие для отправки запроса на сервер для регистрации пользователя
-   * по переданным в метод данных. Если регистрация не удалась, то вывод
-   * окна с ошибкой.
+   * User registration according to the data passed to the method. If registration is not successful, then a window with an error will be displayed.
+   *
+   * @param commit module mutation data.
+   * @param registerRequestData registration data.
+   * @return {Promise<void>} for further processing if needed.
    */
   async register({commit}, registerRequestData) {
     await authApi.register(registerRequestData).then(response => {
@@ -59,9 +70,12 @@ export default {
     });
   },
   /**
-   * Действие для выполнения проверки указанной пользователем при регистрации
-   * электронной почты путем отправки токена подтверждения на сервер для
-   * проверки.
+   * Verification of the email specified by the user during registration
+   * by sending a confirmation token to the server for verification.
+   *
+   * @param commit module mutation data.
+   * @param verifyToken verification token.
+   * @return {Promise<void>} for further processing if needed.
    */
   async confirmEmail({commit}, verifyToken) {
     await authApi.confirmEmail(verifyToken).then(({data}) => {
@@ -77,8 +91,12 @@ export default {
     });
   },
   /**
-   * Действие для отправки на почту нового токена верификации электронной почты
-   * взамен истекшего.
+   * Sending a new email verification token to the mail to replace the expired
+   * one.
+   *
+   * @param commit module mutation data.
+   * @param expiredVerifyToken expired token.
+   * @return {Promise<void>} for further processing if needed.
    */
   async reSendVerificationTokenEmail({commit}, expiredVerifyToken) {
     await authApi.reSendVerificationTokenEmail(expiredVerifyToken).then(
@@ -91,8 +109,9 @@ export default {
         });
   },
   /**
-   * Действие для выполнения logout пользователя системы и перенаправление
-   * на страницу с авторизацией.
+   * Logging out the user and redirecting to the login page.
+   *
+   * @param commit module mutation data.
    */
   callLogout({commit}) {
     commit('setCurrentUser', null);
@@ -100,4 +119,4 @@ export default {
     localStorage.removeItem("jwt-token");
     router.go(0);
   },
-}
+};

@@ -22,10 +22,10 @@ import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationSuccessHandler;
 import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
 
 /**
- * Конфигурационный java класс для настройки авторизации и ее безопасности.
+ * Configuration java class for setting up authorization and its security.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.1.0
  */
 @Configuration
 @EnableWebSecurity
@@ -51,10 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		/**
-		 * Метод для настройки аутентификации на использование кастомного UserDetailService вместе с
-		 * шифрованием пароля.
+		 * Method for configuring authentication to use a custom UserDetailService along with password
+		 * encryption.
 		 *
-		 * @param authenticationManagerBuilder authBuilder для настройки.
+		 * @param authenticationManagerBuilder authBuilder for customization.
 		 */
 		@Override
 		public void configure(AuthenticationManagerBuilder authenticationManagerBuilder)
@@ -65,9 +65,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 
 		/**
-		 * Метод для настройки связи клиента с сервером, разрешений и подключение кастомных сервисов.
+		 * Method for configuring client-server communication, permissions and connecting custom
+		 * services.
 		 *
-		 * @param http конфигурация соединения клиента с сервером.
+		 * @param http configuration of client-to-server connection.
 		 */
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {

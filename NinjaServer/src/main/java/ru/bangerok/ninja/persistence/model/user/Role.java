@@ -14,11 +14,11 @@ import net.minidev.json.annotate.JsonIgnore;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * Сущность ролей. Используется для глобальных прав сервера. Например, на отдельный контроллер или
- * запрос. Так же у каждой роли есть свой список привилегий.
+ * Essence of roles. Used for global server rights. For example, for a separate controller or
+ * request. Also, each role has its own list of privileges.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.3
  */
 @Data
 @Entity
@@ -28,19 +28,19 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 public class Role extends BaseEntity {
 
 		/**
-		 * Private поле, в котором хранится наименование роли в базе данных.
+		 * Private field that stores the name of the role in the database.
 		 */
 		@Column(name = "name", unique = true)
 		private String name;
 
 		/**
-		 * Private поле, в котором хранится список пользователей, которым доступна данная роль.
+		 * Private field that stores a list of users who have access to this role.
 		 */
 		@ManyToMany(mappedBy = "roles")
 		private Set<User> users;
 
 		/**
-		 * Private поле, в котором хранится список привилегий, доступных данной роли в базе данных.
+		 * Private field that stores the list of privileges available for this role in the database.
 		 */
 		@JsonIgnore
 		@ManyToMany

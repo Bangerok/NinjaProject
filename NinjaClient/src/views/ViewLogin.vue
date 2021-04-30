@@ -63,44 +63,49 @@
 import {mapActions} from "vuex";
 
 /**
- * Страница для авторизации пользователя.
+ * User authorization page.
  */
 export default {
   name: "ViewLogin",
   data: () => ({
     /**
-     * Флаг скрытия/отображения вводимого пароля пользователя.
+     * Show/hide the password entered by the user.
      */
     isShowPassword: false,
     /**
-     * Значение электронной почты при авторизации пользователя.
+     * Email for user authorization.
      */
     email: null,
     /**
-     * Значение пароля при авторизации пользователя.
+     * Password for user authorization.
      */
     password: null,
   }),
   methods: {
     ...mapActions('auth', ['login']),
-
     /**
-     * Запуск авторизации пользователя.
+     * User authorization.
      */
     auth() {
       const payload = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
 
       // noinspection JSValidateTypes
       this.login(payload);
     },
-    isValidStrValue: (value) => {
+    /**
+     * Validating a string for filling.
+     *
+     * @param value checked string.
+     * @return {boolean} true if the string satisfies the conditions, false otherwise.
+     */
+    isValidStrValue(value) {
       return value && value.trim().length > 0;
     },
   },
-}
+};
 </script>
 
 <style scoped>

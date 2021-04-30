@@ -1,14 +1,14 @@
-import Vue from 'vue'
-import App from './App.vue'
+import Vue from 'vue';
+import App from './App.vue';
 import i18n from "./i18/i18n";
-import store from './store/store'
-import router from './router/router'
+import store from './store/store';
+import router from './router/router';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
 /**
- * Конфигурация настроек всей системы.
+ * Configuring system-wide settings.
  */
 new Vue({
   i18n,

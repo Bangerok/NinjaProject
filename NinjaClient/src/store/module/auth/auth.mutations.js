@@ -1,11 +1,14 @@
 /**
- * Список мутаций модуля Auth.
+ * Auth module mutation list.
  */
 export default {
   /**
-   * Мутация установки данных авторизованного пользователя.
+   * Setting authorized user data.
+   *
+   * @param state auth module state.
+   * @param payload new data.
    */
   setCurrentUser(state, payload) {
-    state.user = payload;
+    return state.user = payload;
   },
-}
+};

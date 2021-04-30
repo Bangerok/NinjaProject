@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 import ru.bangerok.ninja.config.SecurityConfig;
 
 /**
- * Класс, используемый Spring Security при успешном выполнении пользователем logout.
+ * Class used by Spring Security when user successfully logout.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.1
  */
 @Component
 public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
@@ -28,12 +28,12 @@ public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
 		}
 
 		/**
-		 * Метод, вызывающийся при успешном logout пользователя, предназначенный для удаления cookie
-		 * авторизации из ответа.
+		 * Method called upon successful user logout, designed to remove the authorization cookie from
+		 * the response.
 		 *
-		 * @param request        запрос.
-		 * @param response       ответ запроса.
-		 * @param authentication аутентификация.
+		 * @param request        request.
+		 * @param response       response.
+		 * @param authentication authentication.
 		 */
 		@Override
 		public void onLogoutSuccess(

@@ -1,23 +1,30 @@
-import axios from 'axios'
-import store from '../store/store'
+// noinspection JSValidateJSDoc
 
-const TOKEN_TYPE = "jwt-token"
-const LOADING = "setLoading"
+import axios from 'axios';
+import store from '../store/store';
+
+const TOKEN_TYPE = "jwt-token";
+const LOADING = "setLoading";
 
 /**
- * Конфигурация axios.
+ * Axios configuration.
  *
- * @return promise Axios
+ * @param method request type.
+ * @param url request address.
+ * @param params request parameters.
+ * @param data request data for processing on the server.
+ * @param additionalHeaders additional request headers.
+ * @return {AxiosPromise} with a response from the server.
  */
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
     method: method,
-    url: '/api' + url
-  }
+    url: '/api' + url,
+  };
 
   const headers = {
     'Content-Type': 'application/json',
-  }
+  };
 
   if (localStorage.getItem(TOKEN_TYPE)) {
     headers['Authorization'] = 'Bearer ' + localStorage.getItem(TOKEN_TYPE);
@@ -53,31 +60,36 @@ function request(method, url, params, data, additionalHeaders) {
 }
 
 /**
- * Настройка метода GET для отправки на сервер.
+ * Setting up the GET method for sending to the server.
  *
- * @return promise Axios
+ * @param url request address.
+ * @return {AxiosPromise} with a response from the server.
  */
 function get(url) {
-  return getWithParams(url, null)
+  return getWithParams(url, null);
 }
 
 /**
- * Настройка метода GET с параметрами для отправки на сервер.
+ * Setting up the GET method with parameters for sending to the server.
  *
- * @return promise Axios
+ * @param url request address.
+ * @param params request parameters.
+ * @return {AxiosPromise} with a response from the server.
  */
 function getWithParams(url, params) {
-  return request('get', url, params, null, null)
+  return request('get', url, params, null, null);
 }
 
 /**
- * Настройка метода POST для отправки на сервер.
+ * Setting up the POST method for sending to the server.
  *
- * @return promise Axios
+ * @param url request address.
+ * @param data request data for processing on the server.
+ * @return {AxiosPromise} with a response from the server.
  */
 function post(url, data) {
-  data = data || {}
-  return request('post', url, null, data, null)
+  data = data || {};
+  return request('post', url, null, data, null);
 }
 
-export default {get, getWithParams, post}
+export default {get, getWithParams, post};

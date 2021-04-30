@@ -1,4 +1,4 @@
 /**
- * Список основных действий.
+ * List of basic actions.
  */
-export default {}
+export default {};

@@ -5,19 +5,19 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
- * Конфигурационный java класс для настройки разрешенных хостов для запросов, разрешенных методов
- * rest, разрешенных заголовков в запросах к серверу и т.д.
+ * Configuration java class for configuring allowed hosts for requests, allowed rest methods,
+ * allowed headers in server requests, etc.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
 		/**
-		 * Метод для добавления CORS маппинга.
+		 * Method for adding CORS mapping.
 		 *
-		 * @param registry конфигурационный файл для CORS.
+		 * @param registry config file for CORS.
 		 */
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {

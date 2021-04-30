@@ -14,12 +14,12 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * Класс, используемый Spring Security при провальном выполнении аутентификации пользователя.
+ * Class used by Spring Security when user authentication fails.
  * <p>
- * Подключается здесь: {@link SecurityConfig}.
+ * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.0
  */
 @Component
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
@@ -32,10 +32,10 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
 		}
 
 		/**
-		 * Метод, вызывающийся при ошибке аутентификации пользователя, и перенаправляет на клиент.
+		 * Method called when user authentication fails and redirects to client.
 		 *
-		 * @param request  запрос.
-		 * @param response ответ запроса.
+		 * @param request  request.
+		 * @param response response.
 		 */
 		@Override
 		public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,

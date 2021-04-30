@@ -4,13 +4,13 @@ import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Класс исключения для обработки ошибок регистрации и изменения данных пользователя, если данные
- * уже заняты.
+ * Exception class for handling registration errors and changing user data if the data is already
+ * taken.
  * <p>
- * Используется, например, здесь: {@link UserServiceImpl#registerNewUserAccount(RegisterRequest)}
+ * Used for example here: {@link UserServiceImpl#registerNewUserAccount(RegisterRequest)}.
  *
  * @author v.kuznetsov
- * @version 1.0
+ * @since 0.3.15
  */
 public final class UserAlreadyExistException extends RuntimeException {
 

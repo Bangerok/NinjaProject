@@ -25,7 +25,7 @@ import BaseDialog from "./components/base/dialog/BaseDialog";
 import {mapActions, mapState} from 'vuex';
 
 /**
- * Построение скелета страниц системы.
+ * Building the skeleton of the system pages.
  */
 export default {
   components: {
@@ -34,12 +34,11 @@ export default {
   },
   data: () => ({
     /**
-     * Флаг скрытия/отображения диалога подтверждения запроса нового токена верификации
-     * электронной почты.
+     * Show/hide the confirmation dialog for requesting a new email verification token.
      */
     showConfirmResendTokenDialog: false,
     /**
-     * Истекший токен верификации.
+     * Expired verification token.
      */
     expiredVerifyToken: '',
   }),
@@ -47,15 +46,18 @@ export default {
   methods: {
     ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail"]),
     /**
-     * Метод для отправки запроса на сервер для отправки на почту нового токена верификации
-     * электронной почты.
+     * Receiving a new verification token for a user.
      */
     confirmDialog() {
       // noinspection JSValidateTypes
       this.reSendVerificationTokenEmail(this.expiredVerifyToken);
       this.showConfirmResendTokenDialog = false;
-    }
+    },
   },
+  /**
+   * Checking the value of the browser address bar for the presence of various tokens and processing
+   * them when switching to the application.
+   */
   created() {
     const uri = new URL(location.href);
     const jwtToken = uri.searchParams.get("token");
@@ -74,13 +76,16 @@ export default {
       });
     }
   },
+  /**
+   * Getting user data by jwt token at the mount stage.
+   */
   mounted() {
     if (localStorage.getItem("jwt-token")) {
       // noinspection JSValidateTypes
       this.getCurrentUser();
     }
   },
-}
+};
 </script>
 
 <!--suppress CssUnusedSymbol -->
