@@ -1,25 +1,27 @@
 ---
-name: Bug report about: Создайте отчет, чтобы помочь нам улучшить приложение title: '[BUG] Краткое
-название ошибки.' labels: 'bug' assignees: 'Bangerok'
+name: Bug reports
+about: Create a report to help us improve the app
+title: '[BUG] Short name of the error.'
+labels: 'bug'
+assignees: 'Bangerok'
 
 ---
 
-**Описание ошибки**
-Четкое и краткое описание ошибки.
+**Error description**
+A clear and concise description of the error.
 
-**Воспроизведение**
-Шаги по воспроизведению поведения:
+**Reproduction**
+Steps to Reproduce Behavior:
+1. Go here '...'
+2. Click on the '....'
+3. Scroll to '....'
+4. See error.
 
-1. Перейти сюда '...'
-2. Нажать на '....'
-3. Прокрутить до '....'
-4. Увидеть ошибку.
+**Expected behavior**
+A clear and concise description of what you expected.
 
-**Ожидаемое поведение**
-Четкое и краткое описание того, что вы ожидали.
+**Screenshots**
+If possible, please add screenshots to explain your problem.
 
-**Скриншоты**
-Если возможно, добавьте снимки экрана, чтобы объяснить вашу проблему.
-
-**Дополнительный контекст**
-Добавьте сюда любой другой контекст проблемы.
+**Additional context**
+Add any other problem context here.
