@@ -1,3 +1,4 @@
+// @formatter:off
 ---
 name: Bug reports
 about: Create a report to help us improve the app
