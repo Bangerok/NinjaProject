@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.security.oauth2.user;
 
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 
 /**
  * An abstract class with common methods and fields for all class objects (if there are several)
@@ -11,16 +12,13 @@ import java.util.Map;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 public abstract class OAuth2UserInfo {
 
 		/**
 		 * Protected field that stores user attributes from an external authorization provider.
 		 */
 		protected final Map<String, Object> attributes;
-
-		public OAuth2UserInfo(Map<String, Object> attributes) {
-				this.attributes = attributes;
-		}
 
 		/**
 		 * Abstract method for getting user id in external authorization provider.

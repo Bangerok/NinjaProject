@@ -2,6 +2,8 @@ package ru.bangerok.ninja.controller.payload.request;
 
 import javax.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
@@ -16,7 +18,8 @@ import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-@Data
+@Getter
+@Setter
 @PasswordMatches()
 public class RegisterRequest {
 

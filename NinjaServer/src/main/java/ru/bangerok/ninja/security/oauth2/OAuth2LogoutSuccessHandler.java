@@ -2,6 +2,7 @@ package ru.bangerok.ninja.security.oauth2;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
@@ -16,16 +17,12 @@ import ru.bangerok.ninja.config.SecurityConfig;
  * @author v.kuznetsov
  * @since 0.3.1
  */
+@RequiredArgsConstructor
 @Component
 public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
 		LogoutSuccessHandler {
 
 		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
-
-		public OAuth2LogoutSuccessHandler(
-				HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
-				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
-		}
 
 		/**
 		 * Method called upon successful user logout, designed to remove the authorization cookie from

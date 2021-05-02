@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -22,6 +23,7 @@ import ru.bangerok.ninja.persistence.model.user.User;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 public class UserPrincipal implements OAuth2User, UserDetails {
 
 		/**
@@ -38,12 +40,6 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		 * Private field that stores a list of attributes received from an external provider.
 		 */
 		private Map<String, Object> attributes;
-
-		public UserPrincipal(User user,
-				Collection<? extends GrantedAuthority> authorities) {
-				this.user = user;
-				this.authorities = authorities;
-		}
 
 		/**
 		 * Static method to create and populate an authenticated user created in the usual way.

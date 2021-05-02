@@ -2,8 +2,9 @@ package ru.bangerok.ninja.controller.payload.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import ru.bangerok.ninja.controller.AuthController;
@@ -16,7 +17,8 @@ import ru.bangerok.ninja.controller.AuthController;
  * @author v.kuznetsov
  * @since 0.4.5
  */
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class GenericResponse {
 
@@ -36,16 +38,15 @@ public class GenericResponse {
 		private String error;
 
 		public GenericResponse(String message) {
-				super();
 				this.message = message;
 		}
 
-		public GenericResponse(String message, String error) {
-				super();
-				this.message = message;
-				this.error = error;
-		}
-
+		/**
+		 * Formation of a response from the server after field validation.
+		 *
+		 * @param allErrors list of validation errors.
+		 * @param error error name.
+		 */
 		public GenericResponse(List<ObjectError> allErrors, String error) {
 				this.error = error;
 				String temp = allErrors.stream().map(e -> {

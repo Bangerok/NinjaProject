@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -26,6 +27,7 @@ import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -35,18 +37,6 @@ public class UserServiceImpl implements UserService {
 		private final PasswordEncoder passwordEncoder;
 		private final AuthenticationManager authenticationManager;
 		private final TokenProvider tokenProvider;
-
-		public UserServiceImpl(
-				RepositoryLocator repositoryLocator,
-				MessageService messageService, PasswordEncoder passwordEncoder,
-				AuthenticationManager authenticationManager,
-				TokenProvider tokenProvider) {
-				this.repositoryLocator = repositoryLocator;
-				this.messageService = messageService;
-				this.passwordEncoder = passwordEncoder;
-				this.authenticationManager = authenticationManager;
-				this.tokenProvider = tokenProvider;
-		}
 
 		@Override
 		public User registerNewUserAccount(RegisterRequest registerData)

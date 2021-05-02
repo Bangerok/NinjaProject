@@ -9,6 +9,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
@@ -18,11 +20,12 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  * @author v.kuznetsov
  * @since 0.4.3
  */
-@Data
-@Entity
-@Table(name = "verification_tokens")
+@Getter
+@Setter
 @EqualsAndHashCode(of = {"token", "user", "expiryDate"}, callSuper = true)
 @ToString(of = {"token", "user", "expiryDate"}, callSuper = true)
+@Entity
+@Table(name = "verification_tokens")
 public class VerificationToken extends BaseEntity {
 
 		/**

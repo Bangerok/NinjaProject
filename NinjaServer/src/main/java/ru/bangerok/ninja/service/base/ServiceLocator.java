@@ -2,6 +2,8 @@ package ru.bangerok.ninja.service.base;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.service.MailService;
@@ -16,9 +18,9 @@ import ru.bangerok.ninja.service.UserService;
  * @author v.kuznetsov
  * @since 0.4.3
  */
+@Getter
+@RequiredArgsConstructor
 @Service
-@Data
-@AllArgsConstructor
 public class ServiceLocator {
 
 		private final UserService userService;
