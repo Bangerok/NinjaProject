@@ -1,9 +1,9 @@
 ---
 name: Bug reports
 about: Create a report to help us improve the app
-title: '[BUG] Short name of the error.'
-labels: 'bug'
-assignees: 'Bangerok'
+title: "[BUG] Short name of the error."
+labels: bug
+assignees: Bangerok
 
 ---
 
