@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -14,6 +15,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import ru.bangerok.ninja.service.MailService;
 import ru.bangerok.ninja.service.MessageService;
 
+@RequiredArgsConstructor
 @Service
 public class MailServiceImpl implements MailService {
 
@@ -21,14 +23,6 @@ public class MailServiceImpl implements MailService {
 		private final JavaMailSender mailSender;
 		private final Environment env;
 		private final SpringTemplateEngine thymeleafTemplateEngine;
-
-		public MailServiceImpl(MessageService messageService, JavaMailSender mailSender,
-				Environment env, SpringTemplateEngine thymeleafTemplateEngine) {
-				this.messageService = messageService;
-				this.mailSender = mailSender;
-				this.env = env;
-				this.thymeleafTemplateEngine = thymeleafTemplateEngine;
-		}
 
 		@Override
 		public void sendVerifiedMessage(String toEmail, String token) throws MessagingException {
