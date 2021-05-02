@@ -1,9 +1,9 @@
 ---
 name: Bug reports
 about: Create a report to help us improve the app
-title: '[BUG] Short name of the error.'
-labels: 'bug'
-assignees: 'Bangerok'
+title: "[BUG] Short name of the error."
+labels: bug
+assignees: Bangerok
 
 ---
 
@@ -19,6 +19,9 @@ Steps to Reproduce Behavior:
 
 **Expected behavior**
 A clear and concise description of what you expected.
+
+**Possible solution to the problem**
+A detailed and understandable solution to the problem using lists.
 
 **Screenshots**
 If possible, please add screenshots to explain your problem.
