@@ -12,6 +12,8 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,10 +24,11 @@ import org.springframework.data.annotation.LastModifiedDate;
  * @author v.kuznetsov
  * @since 0.3.3
  */
-@Data
-@MappedSuperclass
+@Getter
+@Setter
 @EqualsAndHashCode(of = {"id"})
 @ToString(of = {"id"})
+@MappedSuperclass
 public class BaseEntity {
 
 		/**

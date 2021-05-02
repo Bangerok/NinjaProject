@@ -3,6 +3,7 @@ package ru.bangerok.ninja.controller;
 import java.time.LocalDateTime;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,17 +28,13 @@ import ru.bangerok.ninja.service.base.ServiceLocator;
  * @author v.kuznetsov
  * @since 0.1.8
  */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("auth")
 public class AuthController {
 
 		private final ServiceLocator serviceLocator;
 		private final ApplicationEventPublisher eventPublisher;
-
-		public AuthController(ServiceLocator serviceLocator, ApplicationEventPublisher eventPublisher) {
-				this.serviceLocator = serviceLocator;
-				this.eventPublisher = eventPublisher;
-		}
 
 		/**
 		 * Rest request method called from the client to retrieve information about the authorized user

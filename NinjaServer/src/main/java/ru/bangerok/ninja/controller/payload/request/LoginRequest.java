@@ -1,6 +1,8 @@
 package ru.bangerok.ninja.controller.payload.request;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import ru.bangerok.ninja.controller.AuthController;
 
 /**
@@ -11,7 +13,8 @@ import ru.bangerok.ninja.controller.AuthController;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-@Data
+@Getter
+@Setter
 public class LoginRequest {
 
 		/**

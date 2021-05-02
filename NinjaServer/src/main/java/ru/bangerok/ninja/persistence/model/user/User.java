@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
@@ -26,11 +28,12 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  * @author v.kuznetsov
  * @since 0.1.0
  */
-@Data
-@Entity
-@Table(name = "users")
+@Getter
+@Setter
 @EqualsAndHashCode(of = {"username"}, callSuper = true)
 @ToString(of = {"fullname"}, callSuper = true)
+@Entity
+@Table(name = "users")
 public class User extends BaseEntity {
 
 		/**

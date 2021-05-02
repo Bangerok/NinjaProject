@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -32,16 +33,12 @@ import ru.bangerok.ninja.security.oauth2.user.OAuth2UserInfoFactory;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 
 		private final RepositoryLocator repositoryLocator;
-
-		public CustomOAuth2UserService(
-				RepositoryLocator repositoryLocator) {
-				this.repositoryLocator = repositoryLocator;
-		}
 
 		/**
 		 * Method for getting user authentication after successful authorization from external

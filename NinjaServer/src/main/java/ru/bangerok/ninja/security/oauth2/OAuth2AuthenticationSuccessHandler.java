@@ -8,7 +8,7 @@ import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -27,21 +27,13 @@ import ru.bangerok.ninja.util.CookieUtils;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 		private final TokenProvider tokenProvider;
 		private final AppPropertiesConfig appProperties;
 		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
-
-		@Autowired
-		OAuth2AuthenticationSuccessHandler(TokenProvider tokenProvider,
-				AppPropertiesConfig appProperties,
-				HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository) {
-				this.tokenProvider = tokenProvider;
-				this.appProperties = appProperties;
-				this.httpCookieOAuth2AuthorizationRequestRepository = httpCookieOAuth2AuthorizationRequestRepository;
-		}
 
 		/**
 		 * The method called upon successful user authentication, designed to clear the response from

@@ -1,5 +1,7 @@
 package ru.bangerok.ninja.config;
 
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +29,7 @@ import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
  * @author v.kuznetsov
  * @since 0.1.0
  */
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -36,19 +39,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 		private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
 		private final OAuth2LogoutSuccessHandler oAuth2LogoutSuccessHandler;
-
-		public SecurityConfig(
-				CustomUserDetailsService customUserDetailsService,
-				CustomOAuth2UserService customOAuth2UserService,
-				OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler,
-				OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler,
-				OAuth2LogoutSuccessHandler oAuth2LogoutSuccessHandler) {
-				this.customUserDetailsService = customUserDetailsService;
-				this.customOAuth2UserService = customOAuth2UserService;
-				this.oAuth2AuthenticationSuccessHandler = oAuth2AuthenticationSuccessHandler;
-				this.oAuth2AuthenticationFailureHandler = oAuth2AuthenticationFailureHandler;
-				this.oAuth2LogoutSuccessHandler = oAuth2LogoutSuccessHandler;
-		}
 
 		/**
 		 * Method for configuring authentication to use a custom UserDetailService along with password
