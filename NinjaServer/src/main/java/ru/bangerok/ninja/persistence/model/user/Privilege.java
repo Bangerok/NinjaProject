@@ -7,6 +7,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
@@ -17,11 +19,12 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  * @author v.kuznetsov
  * @since 0.3.4
  */
-@Data
-@Entity
-@Table(name = "privileges")
+@Getter
+@Setter
 @EqualsAndHashCode(of = {"name"}, callSuper = true)
 @ToString(of = {"name"}, callSuper = true)
+@Entity
+@Table(name = "privileges")
 public class Privilege extends BaseEntity {
 
 		/**

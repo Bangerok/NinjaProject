@@ -8,6 +8,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.SignatureException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import java.util.Date;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
@@ -24,16 +25,13 @@ import ru.bangerok.ninja.controller.payload.request.LoginRequest;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 @Service
 public class TokenProvider {
 
 		private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
 		private final AppPropertiesConfig appProperties;
-
-		public TokenProvider(AppPropertiesConfig appProperties) {
-				this.appProperties = appProperties;
-		}
 
 		/**
 		 * Method for generating an authentication token from existing user data.

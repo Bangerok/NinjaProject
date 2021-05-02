@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.security;
 
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -19,16 +20,12 @@ import ru.bangerok.ninja.security.error.ResourceNotFoundException;
  * @author v.kuznetsov
  * @since 0.3.0
  */
+@RequiredArgsConstructor
 @Service
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
 		private final RepositoryLocator repositoryLocator;
-
-		public CustomUserDetailsService(
-				RepositoryLocator repositoryLocator) {
-				this.repositoryLocator = repositoryLocator;
-		}
 
 		/**
 		 * Method to get create authenticated user based on user retrieved from database via email.

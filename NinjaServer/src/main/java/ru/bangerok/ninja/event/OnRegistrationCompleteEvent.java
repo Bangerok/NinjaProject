@@ -16,7 +16,6 @@ import ru.bangerok.ninja.persistence.model.user.User;
  * @since 0.4.3
  */
 @Getter
-@Setter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
 		private final User user;

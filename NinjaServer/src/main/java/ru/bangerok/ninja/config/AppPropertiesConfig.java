@@ -3,6 +3,8 @@ package ru.bangerok.ninja.config;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import ru.bangerok.ninja.NinjaApplication;
 import ru.bangerok.ninja.security.TokenProvider;
@@ -17,7 +19,8 @@ import ru.bangerok.ninja.security.TokenProvider;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-@Data
+@Getter
+@Setter
 @ConfigurationProperties("app")
 public class AppPropertiesConfig {
 
@@ -31,7 +34,8 @@ public class AppPropertiesConfig {
 		 */
 		private final OAuth2 oauth2 = new OAuth2();
 
-		@Data
+		@Getter
+		@Setter
 		public static class Auth {
 
 				/**
@@ -46,7 +50,8 @@ public class AppPropertiesConfig {
 				private long tokenExpirationMsec;
 		}
 
-		@Data
+		@Getter
+		@Setter
 		public static final class OAuth2 {
 
 				/**

@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.event.listener;
 
 import javax.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
@@ -19,14 +20,11 @@ import ru.bangerok.ninja.service.base.ServiceLocator;
  * @author v.kuznetsov
  * @since 0.4.3
  */
+@RequiredArgsConstructor
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
 		private final ServiceLocator serviceLocator;
-
-		public RegistrationListener(ServiceLocator serviceLocator) {
-				this.serviceLocator = serviceLocator;
-		}
 
 		@Override
 		public void onApplicationEvent(@NonNull final OnRegistrationCompleteEvent event) {
