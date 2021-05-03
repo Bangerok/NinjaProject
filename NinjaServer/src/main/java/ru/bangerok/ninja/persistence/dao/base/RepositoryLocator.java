@@ -1,7 +1,5 @@
 package ru.bangerok.ninja.persistence.dao.base;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
