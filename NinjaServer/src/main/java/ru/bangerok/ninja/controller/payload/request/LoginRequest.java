@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.controller.payload.request;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import ru.bangerok.ninja.controller.AuthController;

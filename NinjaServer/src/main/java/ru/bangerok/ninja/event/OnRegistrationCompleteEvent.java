@@ -1,7 +1,6 @@
 package ru.bangerok.ninja.event;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;

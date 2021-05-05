@@ -2,7 +2,6 @@ package ru.bangerok.ninja.config;
 
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -10,7 +9,7 @@ import ru.bangerok.ninja.NinjaApplication;
 import ru.bangerok.ninja.security.TokenProvider;
 
 /**
- * Config java class to load spring settings from application.yaml file by prefix - app.
+ * Config java class to load spring settings from application.yml file by prefix - app.
  * <p>
  * Connects here: {@link NinjaApplication}.
  * <p>
