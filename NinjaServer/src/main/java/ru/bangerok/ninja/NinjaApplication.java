@@ -2,7 +2,7 @@ package ru.bangerok.ninja;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.bangerok.ninja.config.JwtPropertiesConfig;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import ru.bangerok.ninja.config.DatabaseConfig;
 import ru.bangerok.ninja.config.MailSenderConfig;
 import ru.bangerok.ninja.config.MessagesConfig;
@@ -18,7 +18,7 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
  * run.
  * <p>
  * Application configuration is represented by these classes:
- * <p> - {@link JwtPropertiesConfig} => ({@link JwtProperties}),
+ * <p> - {@link JwtProperties},
  * <p> - {@link MessagesConfig},
  * <p> - {@link MethodSecurityConfig},
  * <p> - {@link MvcConfig},
@@ -32,6 +32,7 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
  * @since 0.0.0
  */
 @SpringBootApplication
+@ConfigurationPropertiesScan("ru.bangerok.ninja.config.properties")
 public class NinjaApplication {
 
 		public static void main(String[] args) {
