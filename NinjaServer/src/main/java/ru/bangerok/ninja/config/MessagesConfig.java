@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
-import ru.bangerok.ninja.service.impl.MailServiceImpl;
 import ru.bangerok.ninja.service.impl.MessageServiceImpl;
 
 /**
