@@ -2,11 +2,9 @@ package ru.bangerok.ninja.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.core.env.Environment;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -21,7 +19,6 @@ public class MailServiceImpl implements MailService {
 
 		private final MessageService messageService;
 		private final JavaMailSender mailSender;
-		private final Environment env;
 		private final SpringTemplateEngine thymeleafTemplateEngine;
 
 		@Override
@@ -48,7 +45,6 @@ public class MailServiceImpl implements MailService {
 				thymeleafContext.setVariables(templateModel);
 
 				String htmlBody = thymeleafTemplateEngine.process(templateName, thymeleafContext);
-
 				sendHtmlMessage(to, subject, htmlBody);
 		}
 
@@ -56,7 +52,6 @@ public class MailServiceImpl implements MailService {
 				throws MessagingException {
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
-				helper.setFrom(Objects.requireNonNull(env.getProperty("support.email")));
 				helper.setTo(to);
 				helper.setSubject(subject);
 				helper.setText(htmlBody, true);

@@ -13,7 +13,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import ru.bangerok.ninja.config.AppPropertiesConfig;
+import ru.bangerok.ninja.config.properties.JwtProperties;
+import ru.bangerok.ninja.config.properties.JwtProperties.Auth;
 import ru.bangerok.ninja.controller.AuthController;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 
@@ -31,7 +32,7 @@ public class TokenProvider {
 
 		private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-		private final AppPropertiesConfig appProperties;
+		private final JwtProperties jwtProperties;
 
 		/**
 		 * Method for generating an authentication token from existing user data.
@@ -40,14 +41,16 @@ public class TokenProvider {
 		 * @return authentication token string.
 		 */
 		public String createToken(Authentication authentication) {
-				UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
+				final Long userPrincipalId = ((UserPrincipal) authentication.getPrincipal()).getId();
+				final Date currentDate = new Date();
+				final Auth auth = jwtProperties.getAuth();
 
 				return Jwts.builder()
-						.setSubject(String.valueOf(userPrincipal.getId()))
-						.setIssuedAt(new Date())
+						.setSubject(String.valueOf(userPrincipalId))
+						.setIssuedAt(currentDate)
 						.setExpiration(
-								new Date(new Date().getTime() + appProperties.getAuth().getTokenExpirationMsec()))
-						.signWith(SignatureAlgorithm.HS512, appProperties.getAuth().getTokenSecret())
+								new Date(currentDate.getTime() + auth.getTokenExpirationMsec()))
+						.signWith(SignatureAlgorithm.HS512, auth.getTokenSecret())
 						.compact();
 		}
 
@@ -59,7 +62,7 @@ public class TokenProvider {
 		 */
 		public long getUserIdFromToken(String token) {
 				Claims claims = Jwts.parser()
-						.setSigningKey(appProperties.getAuth().getTokenSecret())
+						.setSigningKey(jwtProperties.getAuth().getTokenSecret())
 						.parseClaimsJws(token)
 						.getBody();
 
@@ -74,7 +77,7 @@ public class TokenProvider {
 		 */
 		public boolean validateToken(String authToken) {
 				try {
-						Jwts.parser().setSigningKey(appProperties.getAuth().getTokenSecret())
+						Jwts.parser().setSigningKey(jwtProperties.getAuth().getTokenSecret())
 								.parseClaimsJws(authToken);
 						return true;
 				} catch (SignatureException ex) {
