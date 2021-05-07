@@ -1,44 +1,6 @@
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5024/ninja_database?serverTimezone=UTC+3
-    username: ninja
-    password: ninja
-    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: none
-  liquibase:
-    change-log: classpath:liquibase/db.changelog-master.yml
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            clientId: 707167609466-40pekve7j2peuaf08b9e7jf8jdbp3hd7.apps.googleusercontent.com
-            clientSecret: ILwB054_dK4tFTNknvuj0M0v
-            redirectUri: "{baseUrl}/login/oauth2/code/{registrationId}"
-            scope:
-              - email
-              - profile
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: kuznetsov.w.a@gmail.com
-    password: 123qweasdZxc123qweasdZxc
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-support:
-  email: kuznetsov.w.a@gmail.com
 server:
   port: 9000
-app:
-  auth:
-    tokenSecret: 926D96C90030DD58429D2751AC1BDBBC
-    tokenExpirationMsec: 864000000
-  oauth2:
-    authorizedRedirectUris:
-      - http://localhost:3000

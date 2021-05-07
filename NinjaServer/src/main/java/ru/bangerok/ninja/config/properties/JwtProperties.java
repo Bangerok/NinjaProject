@@ -1,27 +1,25 @@
-package ru.bangerok.ninja.config;
+package ru.bangerok.ninja.config.properties;
 
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import ru.bangerok.ninja.NinjaApplication;
+import org.springframework.stereotype.Component;
+import ru.bangerok.ninja.config.JwtPropertiesConfig;
 import ru.bangerok.ninja.security.TokenProvider;
 
 /**
- * Config java class to load spring settings from application.yml file by prefix - app.
+ * Java class containing settings for generating JWT tokens.
  * <p>
- * Connects here: {@link NinjaApplication}.
+ * Connects here: {@link JwtPropertiesConfig}.
  * <p>
  * Used for example here: {@link TokenProvider}.
  *
  * @author v.kuznetsov
- * @since 0.3.0
+ * @since 0.5.5
  */
 @Getter
-@Setter
-@ConfigurationProperties("app")
-public class AppPropertiesConfig {
+@Component
+public class JwtProperties {
 
 		/**
 		 * Private field that stores information required to generate Json Web tokens.
@@ -34,33 +32,31 @@ public class AppPropertiesConfig {
 		private final OAuth2 oauth2 = new OAuth2();
 
 		@Getter
-		@Setter
 		public static class Auth {
 
 				/**
 				 * Private field, which stores information about the secret of the token for its
 				 * generation.
 				 */
-				private String tokenSecret;
+				private final String tokenSecret = "926D96C90030DD58429D2751AC1BDBBC";
 
 				/**
 				 * Private field that stores the duration of the token.
 				 */
-				private long tokenExpirationMsec;
+				private final long tokenExpirationMsec = 864000000;
 		}
 
 		@Getter
-		@Setter
 		public static final class OAuth2 {
 
 				/**
 				 * Private field that stores a list of redirect links used after oauth2 authorization.
 				 */
-				private List<String> authorizedRedirectUris = new ArrayList<>();
+				private final List<String> authorizedRedirectUris;
 
-				public OAuth2 authorizedRedirectUris(List<String> authorizedRedirectUris) {
-						this.authorizedRedirectUris = authorizedRedirectUris;
-						return this;
+				public OAuth2() {
+						authorizedRedirectUris = new ArrayList<>();
+						authorizedRedirectUris.add("http://localhost:3000");
 				}
 		}
 }
