@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.oauth2.client.CommonOAuth2Provider;
@@ -19,6 +20,18 @@ import org.springframework.security.oauth2.client.web.OAuth2AuthorizedClientRepo
  */
 @Configuration
 public class OAuth2LoginConfig {
+
+		/**
+		 * Private variable containing the client ID.
+		 */
+		@Value("${spring.security.oauth2.client.registration.google.clientId}")
+		private String clientId;
+
+		/**
+		 * Private variable containing the client secret.
+		 */
+		@Value("${spring.security.oauth2.client.registration.google.clientSecret}")
+		private String clientSecret;
 
 		/**
 		 * Constructs and return an InMemoryClientRegistrationRepository using the provided parameters.
@@ -58,11 +71,10 @@ public class OAuth2LoginConfig {
 		 *
 		 * @return a new ClientRegistration.
 		 */
-		@SuppressWarnings("SpellCheckingInspection")
 		private ClientRegistration googleClientRegistration() {
 				return CommonOAuth2Provider.GOOGLE.getBuilder("google")
-						.clientId("707167609466-40pekve7j2peuaf08b9e7jf8jdbp3hd7.apps.googleusercontent.com")
-						.clientSecret("ILwB054_dK4tFTNknvuj0M0v")
+						.clientId(clientId)
+						.clientSecret(clientSecret)
 						.redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
 						.scope("profile", "email")
 						.build();

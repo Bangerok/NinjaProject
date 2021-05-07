@@ -1,16 +1,13 @@
 package ru.bangerok.ninja.config.properties;
 
-import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
-import org.springframework.stereotype.Component;
-import ru.bangerok.ninja.config.JwtPropertiesConfig;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import ru.bangerok.ninja.security.TokenProvider;
 
 /**
  * Java class containing settings for generating JWT tokens.
- * <p>
- * Connects here: {@link JwtPropertiesConfig}.
  * <p>
  * Used for example here: {@link TokenProvider}.
  *
@@ -18,7 +15,7 @@ import ru.bangerok.ninja.security.TokenProvider;
  * @since 0.5.5
  */
 @Getter
-@Component
+@ConfigurationProperties("app")
 public class JwtProperties {
 
 		/**
@@ -32,31 +29,28 @@ public class JwtProperties {
 		private final OAuth2 oauth2 = new OAuth2();
 
 		@Getter
+		@Setter
 		public static class Auth {
 
 				/**
 				 * Private field, which stores information about the secret of the token for its
 				 * generation.
 				 */
-				private final String tokenSecret = "926D96C90030DD58429D2751AC1BDBBC";
+				private String tokenSecret;
 
 				/**
 				 * Private field that stores the duration of the token.
 				 */
-				private final long tokenExpirationMsec = 864000000;
+				private long tokenExpirationMsec;
 		}
 
 		@Getter
+		@Setter
 		public static final class OAuth2 {
 
 				/**
 				 * Private field that stores a list of redirect links used after oauth2 authorization.
 				 */
-				private final List<String> authorizedRedirectUris;
-
-				public OAuth2() {
-						authorizedRedirectUris = new ArrayList<>();
-						authorizedRedirectUris.add("http://localhost:3000");
-				}
+				private List<String> authorizedRedirectUris;
 		}
 }

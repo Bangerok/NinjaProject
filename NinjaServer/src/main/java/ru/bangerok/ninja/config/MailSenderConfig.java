@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.config;
 
 import java.util.Properties;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -18,6 +19,18 @@ import ru.bangerok.ninja.service.impl.MailServiceImpl;
 public class MailSenderConfig {
 
 		/**
+		 * Private field with username for mail sender.
+		 */
+		@Value("${spring.mail.username}")
+		private String username;
+
+		/**
+		 * Private field with password for mail sender.
+		 */
+		@Value("${spring.mail.password}")
+		private String password;
+
+		/**
 		 * Getting and configuring the settings object for sending messages to the emails.
 		 * <p>
 		 * Used for example here: {@link MailServiceImpl}.
@@ -30,8 +43,8 @@ public class MailSenderConfig {
 				mailSender.setHost("smtp.gmail.com");
 				mailSender.setPort(587);
 
-				mailSender.setUsername("kuznetsov.w.a@gmail.com");
-				mailSender.setPassword("123qweasdZxc123qweasdZxc");
+				mailSender.setUsername(username);
+				mailSender.setPassword(password);
 
 				Properties props = mailSender.getJavaMailProperties();
 				props.put("mail.transport.protocol", "smtp");
