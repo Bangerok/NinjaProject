@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
+import ru.bangerok.ninja.service.impl.MailServiceImpl;
 
 /**
  * Java config class to customize thymeleaf template usage.
@@ -19,6 +20,8 @@ public class ThymeleafConfiguration {
 
 		/**
 		 * Getting a template engine to be used to load and populate templates.
+		 * <p>
+		 * Used for example here: {@link MailServiceImpl}.
 		 *
 		 * @return end object - SpringTemplateEngine.
 		 */
