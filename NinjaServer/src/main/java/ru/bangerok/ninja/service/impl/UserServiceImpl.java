@@ -1,11 +1,15 @@
 package ru.bangerok.ninja.service.impl;
 
+import static ru.bangerok.ninja.enumeration.Roles.USER;
+
 import java.time.LocalDateTime;
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -13,11 +17,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.bangerok.ninja.controller.exception.user.UserAlreadyExistException;
-import ru.bangerok.ninja.controller.exception.user.UserNotFoundException;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
 import ru.bangerok.ninja.enumeration.AuthProvider;
+import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
@@ -28,6 +32,7 @@ import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
 @RequiredArgsConstructor
+@Slf4j
 @Service
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -39,17 +44,39 @@ public class UserServiceImpl implements UserService {
 		private final TokenProvider tokenProvider;
 
 		@Override
-		public User registerNewUserAccount(RegisterRequest registerData)
-				throws UserAlreadyExistException {
+		public User getCurrentUser(UserPrincipal currentUser) {
+				if (Objects.isNull(currentUser)) {
+						return null;
+				}
+
+				return currentUser.getUser();
+		}
+
+		@Override
+		public String creatingTokenForAuthUser(LoginRequest loginData) {
+				Authentication authentication = authenticationManager.authenticate(
+						new UsernamePasswordAuthenticationToken(loginData.getEmail(), loginData.getPassword())
+				);
+
+				User user = repositoryLocator.getUserRepository().findByEmail(loginData.getEmail())
+						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
+								"user.error.not.found.by.email",
+								new Object[]{loginData.getEmail()}
+						)));
+
+				user.setLastVisit(LocalDateTime.now());
+				repositoryLocator.getUserRepository().save(user);
+				SecurityContextHolder.getContext().setAuthentication(authentication);
+				return tokenProvider.createToken(authentication);
+		}
+
+		@Override
+		public User registerNewUserAccount(RegisterRequest registerData) {
 				if (repositoryLocator.getUserRepository().existsByEmail(registerData.getEmail())) {
-						throw new UserAlreadyExistException(
-								messageService.getMessageWithArgs(
-										"user.error.exist.email",
-										new Object[]{
-												registerData.getEmail()
-										}
-								)
-						);
+						throw new ResourceAlreadyExistException(messageService.getMessageWithArgs(
+								"user.error.exist.email",
+								new Object[]{registerData.getEmail()}
+						));
 				}
 
 				User user = new User();
@@ -57,62 +84,28 @@ public class UserServiceImpl implements UserService {
 				user.setEmail(registerData.getEmail());
 				user.setAuthProvider(AuthProvider.local);
 				user.setPassword(passwordEncoder.encode(registerData.getPassword()));
-
-				Role userRole = repositoryLocator.getRoleRepository().findByName("ROLE_USER").orElse(null);
-				if (Objects.nonNull(userRole)) {
-						user.setRoles(Collections.singleton(userRole));
-				}
-
+				Role userRole = repositoryLocator.getRoleRepository().findByName(USER.getName())
+						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
+								"role.error.not.found.by.name", new Object[]{USER.getName()}
+						)));
+				user.setRoles(Stream.of(userRole).collect(Collectors.toCollection(HashSet::new)));
 				return repositoryLocator.getUserRepository().save(user);
 		}
 
 		@Override
-		public String creatingTokenForAuthUser(LoginRequest loginData) {
-				Authentication authentication = authenticationManager.authenticate(
-						new UsernamePasswordAuthenticationToken(
-								loginData.getEmail(),
-								loginData.getPassword()
-						)
-				);
-
-				User user = repositoryLocator.getUserRepository()
-						.findByEmail(loginData.getEmail()).orElseThrow(() -> new UserNotFoundException(
-								messageService.getMessage(
-										"user.error.not.found"
-								)
-						));
-
-				user.setLastVisit(LocalDateTime.now());
-				repositoryLocator.getUserRepository().save(user);
-				SecurityContextHolder.getContext().setAuthentication(authentication);
-
-				return tokenProvider.createToken(authentication);
+		public VerificationToken getVerificationToken(String verificationToken) {
+				return repositoryLocator.getTokenRepository().findByToken(verificationToken)
+						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
+								"token.error.not.found.by.token", new Object[]{verificationToken}
+						)));
 		}
 
 		@Override
-		public User getCurrentUser(UserPrincipal currentUser) {
-				long currentUserId = Optional.ofNullable(currentUser)
-						.orElseThrow(() -> new UserNotFoundException(
-								messageService.getMessage(
-										"user.error.not.found.auth"
-								)
-						)).getId();
-
-				return repositoryLocator.getUserRepository()
-						.findById(currentUserId).orElseThrow(() -> new UserNotFoundException(
-								messageService.getMessage(
-										"user.error.not.found"
-								)
-						));
-		}
-
-		@Override
-		public User getUser(String verificationToken) {
-				Optional<VerificationToken> tokenOptional = repositoryLocator.getTokenRepository()
-						.findByToken(verificationToken);
-
-				return tokenOptional.map(VerificationToken::getUser).orElse(null);
-
+		public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
+				VerificationToken token = this.getVerificationToken(existingVerificationToken);
+				token.setToken(UUID.randomUUID().toString());
+				token.setExpiryDate(LocalDateTime.now().plusDays(1));
+				return repositoryLocator.getTokenRepository().save(token);
 		}
 
 		@Override
@@ -121,27 +114,7 @@ public class UserServiceImpl implements UserService {
 				myToken.setToken(UUID.randomUUID().toString());
 				myToken.setUser(user);
 				myToken.setExpiryDate(LocalDateTime.now().plusDays(1));
-
 				return repositoryLocator.getTokenRepository().save(myToken);
-		}
-
-		@Override
-		public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
-				Optional<VerificationToken> tokenOptional = repositoryLocator.getTokenRepository()
-						.findByToken(existingVerificationToken);
-				if (tokenOptional.isPresent()) {
-						VerificationToken token = tokenOptional.get();
-						token.setToken(UUID.randomUUID().toString());
-						token.setExpiryDate(LocalDateTime.now().plusDays(1));
-						return repositoryLocator.getTokenRepository().save(token);
-				}
-
-				return null;
-		}
-
-		@Override
-		public VerificationToken getVerificationToken(String verificationToken) {
-				return repositoryLocator.getTokenRepository().findByToken(verificationToken).orElse(null);
 		}
 
 		@Override

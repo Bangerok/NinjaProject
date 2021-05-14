@@ -20,7 +20,7 @@ import ru.bangerok.ninja.controller.AuthController;
 @Getter
 @Setter
 @NoArgsConstructor
-public class GenericResponse {
+public class ApiResponse {
 
 		/**
 		 * Private field containing a message about the final result of the request.
@@ -37,7 +37,7 @@ public class GenericResponse {
 		 */
 		private String error;
 
-		public GenericResponse(String message) {
+		public ApiResponse(String message) {
 				this.message = message;
 		}
 
@@ -47,7 +47,7 @@ public class GenericResponse {
 		 * @param allErrors list of validation errors.
 		 * @param error error name.
 		 */
-		public GenericResponse(List<ObjectError> allErrors, String error) {
+		public ApiResponse(List<ObjectError> allErrors, String error) {
 				this.error = error;
 				String temp = allErrors.stream().map(e -> {
 						if (e instanceof FieldError) {
