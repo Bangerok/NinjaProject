@@ -41,12 +41,12 @@ public class TokenProvider {
 		 * @return authentication token string.
 		 */
 		public String createToken(Authentication authentication) {
-				final Long userPrincipalId = ((UserPrincipal) authentication.getPrincipal()).getId();
+				final Long principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
 				final Date currentDate = new Date();
-				final Auth auth = jwtProperties.getAuth();
 
+				final Auth auth = jwtProperties.getAuth();
 				return Jwts.builder()
-						.setSubject(String.valueOf(userPrincipalId))
+						.setSubject(String.valueOf(principalId))
 						.setIssuedAt(currentDate)
 						.setExpiration(
 								new Date(currentDate.getTime() + auth.getTokenExpirationMsec()))

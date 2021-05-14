@@ -45,7 +45,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		 * Static method to create and populate an authenticated user created in the usual way.
 		 *
 		 * @param user logged in user.
-		 * @return authenticated user.
+		 * @return {@link UserPrincipal} authenticated user.
 		 */
 		public static UserPrincipal create(User user) {
 				List<GrantedAuthority> authorities = new ArrayList<>();
@@ -64,7 +64,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		 * through an external provider.
 		 *
 		 * @param user logged in user.
-		 * @return authenticated user.
+		 * @return {@link UserPrincipal} authenticated user.
 		 */
 		public static UserPrincipal create(User user, Map<String, Object> attributes) {
 				UserPrincipal userPrincipal = UserPrincipal.create(user);
@@ -72,8 +72,8 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 				return userPrincipal;
 		}
 
-		public Long getId() {
-				return user.getId();
+		public User getUser() {
+				return user;
 		}
 
 		@Override

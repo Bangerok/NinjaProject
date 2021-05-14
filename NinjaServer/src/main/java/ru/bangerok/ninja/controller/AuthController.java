@@ -1,7 +1,6 @@
 package ru.bangerok.ninja.controller;
 
 import java.time.LocalDateTime;
-import javax.mail.MessagingException;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.controller.payload.request.LoginRequest;
 import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
-import ru.bangerok.ninja.controller.payload.response.GenericResponse;
+import ru.bangerok.ninja.controller.payload.response.ApiResponse;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
@@ -42,7 +41,7 @@ public class AuthController {
 		 * are checked.
 		 *
 		 * @param userPrincipal entity stored in authentication.
-		 * @return the current user, if any, otherwise null.
+		 * @return {@link User} or null.
 		 */
 		@PostAuthorize("hasPermission(returnObject, 'READ')")
 		@GetMapping("/user")
@@ -54,78 +53,69 @@ public class AuthController {
 		 * Rest request method called from the client to authenticate the user by the received data.
 		 *
 		 * @param loginRequest data required for user authentication.
-		 * @return GenericResponse with authentication token.
+		 * @return {@link ApiResponse} with authentication token.
 		 */
 		@PostMapping("/login")
-		public GenericResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-				String token = serviceLocator.getUserService()
-						.creatingTokenForAuthUser(loginRequest);
-				return new GenericResponse(token);
+		public ApiResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+				String token = serviceLocator.getUserService().creatingTokenForAuthUser(loginRequest);
+				return new ApiResponse(token);
 		}
 
 		/**
 		 * Rest request method called from the client to register a user and save it to the database.
 		 *
 		 * @param registerRequest data required for user registration.
-		 * @return GenericResponse with information about successful registration.
+		 * @return {@link ApiResponse} with information about successful registration.
 		 */
 		@PostMapping("/register")
-		public GenericResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
+		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
 				User registered = serviceLocator.getUserService().registerNewUserAccount(registerRequest);
 				eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, ""));
 
-				return new GenericResponse(
-						serviceLocator.getMessageService().getMessage("register.success.ended")
-				);
+				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+						"registration.completed.successfully"
+				));
 		}
 
 		/**
 		 * Rest request method called to verify the email of the registered user.
 		 *
 		 * @param token user verification token.
-		 * @return GenericResponse with information about successful verification or error.
+		 * @return {@link ApiResponse} with information about verification.
 		 */
 		@GetMapping("/registrationConfirm")
-		public GenericResponse confirmRegistration(@RequestParam("token") String token) {
+		public ApiResponse confirmRegistration(@RequestParam("token") String token) {
 				VerificationToken verificationToken = serviceLocator.getUserService()
 						.getVerificationToken(token);
-				if (verificationToken == null) {
-						return new GenericResponse(
-								serviceLocator.getMessageService().getMessage("register.error.token.invalid")
-						);
-				}
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-						GenericResponse genericResponse = new GenericResponse();
-						genericResponse.setData(verificationToken.getToken());
-						return genericResponse;
+						ApiResponse apiResponse = new ApiResponse();
+						apiResponse.setData(verificationToken.getToken());
+						return apiResponse;
 				}
 
 				User user = verificationToken.getUser();
 				user.setEmailVerified(true);
 				serviceLocator.getUserService().saveRegisteredUser(user);
-				return new GenericResponse(
-						serviceLocator.getMessageService().getMessage("register.success.verified.email")
-				);
+				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+						"registration.confirmation.successfully"
+				));
 		}
 
 		/**
 		 * Rest request method that sends a new verification token to the user's email.
 		 *
 		 * @param existingToken expired user verification token.
-		 * @return GenericResponse with information about sending a new token to the user's mail.
+		 * @return {@link ApiResponse} with information about sending a new token to the user's email.
 		 */
 		@GetMapping("/resendRegistrationToken")
-		public GenericResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken)
-				throws MessagingException {
+		public ApiResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
 				VerificationToken newToken = serviceLocator.getUserService()
 						.generateNewVerificationToken(existingToken);
-
-				User user = serviceLocator.getUserService().getUser(newToken.getToken());
+				User user = newToken.getUser();
 				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), newToken.getToken());
-
-				return new GenericResponse(
-						serviceLocator.getMessageService().getMessage("register.success.resend.token")
-				);
+				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+						"registration.confirmation.getting.new.token"
+				));
 		}
 }

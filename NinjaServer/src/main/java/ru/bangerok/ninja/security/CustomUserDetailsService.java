@@ -4,13 +4,13 @@ package ru.bangerok.ninja.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.User;
-import ru.bangerok.ninja.security.error.ResourceNotFoundException;
+import ru.bangerok.ninja.service.MessageService;
 
 /**
  * A service class that allows you to get a user in some way.
@@ -25,20 +25,24 @@ import ru.bangerok.ninja.security.error.ResourceNotFoundException;
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
+		private final MessageService messageService;
 		private final RepositoryLocator repositoryLocator;
 
 		/**
 		 * Method to get create authenticated user based on user retrieved from database via email.
 		 *
 		 * @param email email.
-		 * @return authenticated user.
+		 * @return {@link UserDetails} authenticated user.
+		 * @throws ResourceNotFoundException user not found by email.
 		 */
 		@Override
-		public UserDetails loadUserByUsername(String email)
-				throws UsernameNotFoundException {
+		public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
 				User user = repositoryLocator.getUserRepository().findByEmail(email)
 						.orElseThrow(() ->
-								new UsernameNotFoundException("User not found with email : " + email)
+								new ResourceNotFoundException(messageService.getMessageWithArgs(
+										"user.error.not.found.by.email",
+										new Object[]{email}
+								))
 						);
 
 				return UserPrincipal.create(user);
@@ -48,11 +52,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 * Method to get create authenticated user based on user retrieved from database by id.
 		 *
 		 * @param id user ID.
-		 * @return authenticated user.
+		 * @return {@link UserDetails} authenticated user.
+		 * @throws ResourceNotFoundException user not found by id.
 		 */
-		public UserDetails loadUserById(Long id) {
+		public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
 				User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
-						() -> new ResourceNotFoundException("User", "id", id)
+						() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
+								"user.error.not.found.by.id",
+								new Object[]{id}
+						))
 				);
 
 				return UserPrincipal.create(user);

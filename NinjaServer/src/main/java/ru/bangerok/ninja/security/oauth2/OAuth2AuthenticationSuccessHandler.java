@@ -15,8 +15,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.config.properties.JwtProperties;
+import ru.bangerok.ninja.exception.request.BadRequestException;
 import ru.bangerok.ninja.security.TokenProvider;
-import ru.bangerok.ninja.security.error.BadRequestException;
+import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
@@ -31,6 +32,7 @@ import ru.bangerok.ninja.util.CookieUtils;
 @Component
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
+		private final MessageService messageService;
 		private final TokenProvider tokenProvider;
 		private final JwtProperties jwtProperties;
 		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
@@ -42,10 +44,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		 * @param request        request.
 		 * @param response       response.
 		 * @param authentication authentication.
+		 * @throws IOException         server redirect error..
+		 * @throws BadRequestException unauthorized redirect URI.
 		 */
 		@Override
 		public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
-				Authentication authentication) throws IOException {
+				Authentication authentication) throws IOException, BadRequestException {
 				String targetUrl = determineTargetUrl(request, response, authentication);
 
 				if (response.isCommitted()) {
@@ -58,32 +62,38 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		}
 
 		/**
-		 * Method for getting the target redirect url.
+		 * Method for getting the target redirect URI.
 		 *
 		 * @param request        request.
 		 * @param response       response.
 		 * @param authentication authentication.
-		 * @return redirect url.
+		 * @return redirect URI.
+		 * @throws BadRequestException [not found/unauthorized] redirect URI.
 		 */
 		@Override
 		protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
-				Authentication authentication) {
+				Authentication authentication) throws BadRequestException {
 				Optional<String> redirectUri = CookieUtils
 						.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
 						.map(Cookie::getValue);
 
-				if (redirectUri.isPresent() && !isAuthorizedRedirectUri(redirectUri.get())) {
-						throw new BadRequestException(
-								"Sorry! We've got an Unauthorized Redirect URI and can't proceed with the authentication");
+				if (redirectUri.isPresent()) {
+						final String uri = redirectUri.get();
+						if (!isAuthorizedRedirectUri(uri)) {
+								throw new BadRequestException(messageService.getMessageWithArgs(
+										"auth.error.unauthorized.uri", new Object[]{uri}
+								));
+						}
+						String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
+						String token = tokenProvider.createToken(authentication);
+						return UriComponentsBuilder.fromUriString(targetUrl)
+								.queryParam("token", token)
+								.build().toUriString();
 				}
 
-				String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
-				String token = tokenProvider.createToken(authentication);
-
-				return UriComponentsBuilder.fromUriString(targetUrl)
-						.queryParam("token", token)
-						.build().toUriString();
+				throw new BadRequestException(messageService.getMessage(
+						"auth.error.not.found.unauthorized.uri"
+				));
 		}
 
 		/**
@@ -107,14 +117,12 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		 */
 		private boolean isAuthorizedRedirectUri(String uri) {
 				URI clientRedirectUri = URI.create(uri);
-
 				return jwtProperties.getOauth2().getAuthorizedRedirectUris()
 						.stream()
 						.anyMatch(authorizedRedirectUri -> {
 								URI authorizedURI = URI.create(authorizedRedirectUri);
-
-								return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
-										&& authorizedURI.getPort() == clientRedirectUri.getPort();
+								return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost()) &&
+										authorizedURI.getPort() == clientRedirectUri.getPort();
 						});
 		}
 }

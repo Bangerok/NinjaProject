@@ -30,7 +30,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		 * Method for getting authorization request from regular request cookie.
 		 *
 		 * @param request request.
-		 * @return authorization request.
+		 * @return {@link OAuth2AuthorizationRequest} derived from cookies.
 		 */
 		@Override
 		public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
@@ -67,7 +67,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements
 		 * Method for deleting an authorization request.
 		 *
 		 * @param request request.
-		 * @return authorization request after deletion.
+		 * @return {@link OAuth2AuthorizationRequest} authorization request after deletion.
 		 */
 		@Override
 		public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request) {

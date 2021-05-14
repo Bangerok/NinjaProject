@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import TheNotificationMsg from "./components/TheNotificationMsg";
-import TheProgressBar from "./components/TheProgressBar";
-import TheToolbar from "./components/TheToolbar";
-import TheSidebar from "./components/TheSidebar";
-import TheRouterView from "./components/TheRouterView";
-import BaseDialog from "./components/base/dialog/BaseDialog";
+const TheNotificationMsg = () => import("./components/TheNotificationMsg");
+const TheProgressBar = () => import("./components/TheProgressBar");
+const TheToolbar = () => import("./components/TheToolbar");
+const TheSidebar = () => import("./components/TheSidebar");
+const TheRouterView = () => import("./components/TheRouterView");
+const BaseDialog = () => import("./components/base/dialog/BaseDialog");
 import {mapActions, mapState} from 'vuex';
 
 /**

@@ -17,7 +17,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>bangerok</groupId>
   <artifactId>ninja-project</artifactId>
-  <version>0.5.1</version>
+  <version>0.5.7</version>
   <packaging>pom</packaging>
 
   <name>Parent POM for project modules</name>
