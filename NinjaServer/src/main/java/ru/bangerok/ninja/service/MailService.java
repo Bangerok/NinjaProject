@@ -1,7 +1,7 @@
 package ru.bangerok.ninja.service;
 
-import javax.mail.MessagingException;
 import ru.bangerok.ninja.event.listener.RegistrationListener;
+import ru.bangerok.ninja.exception.email.FailureSendEmailException;
 
 /**
  * Service class for working with sending letters to email.
@@ -18,6 +18,7 @@ public interface MailService {
 		 *
 		 * @param toEmail where we send.
 		 * @param token   verification token issued to the user to verify email.
+		 * @throws FailureSendEmailException unsuccessful email message sending.
 		 */
-		void sendVerifiedMessage(String toEmail, String token) throws MessagingException;
+		void sendVerifiedMessage(String toEmail, String token) throws FailureSendEmailException;
 }

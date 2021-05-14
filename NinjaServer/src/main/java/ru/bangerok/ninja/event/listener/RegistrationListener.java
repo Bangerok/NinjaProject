@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.event.listener;
 
-import javax.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.NonNull;
@@ -28,12 +27,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 
 		@Override
 		public void onApplicationEvent(@NonNull final OnRegistrationCompleteEvent event) {
-				// TODO: изменить обработку ошибок
-				try {
-						this.confirmRegistration(event);
-				} catch (MessagingException e) {
-						e.printStackTrace();
-				}
+				this.confirmRegistration(event);
 		}
 
 		/**
@@ -41,8 +35,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		 *
 		 * @param event user data event.
 		 */
-		private void confirmRegistration(final OnRegistrationCompleteEvent event)
-				throws MessagingException {
+		private void confirmRegistration(final OnRegistrationCompleteEvent event) {
 				User user = event.getUser();
 				String token = serviceLocator.getUserService().createVerificationTokenForUser(user)
 						.getToken();

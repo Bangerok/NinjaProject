@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.security.error;
+package ru.bangerok.ninja.exception.auth;
 
 import org.springframework.security.core.AuthenticationException;
 
