@@ -62,17 +62,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
 				http
-						.cors().and()
+						.cors()
+						.and()
 						.sessionManagement()
-						.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+						.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+						.and()
 						.csrf().disable()
 						.formLogin()
 						.disable()
 						.httpBasic()
 						.disable()
-						.exceptionHandling(e -> e
-								.authenticationEntryPoint(new RestAuthenticationEntryPoint())
-						)
+						.exceptionHandling(e -> e.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
 						.authorizeRequests(a -> a
 								.antMatchers("/auth/register", "/auth/registrationConfirm",
 										"/auth/resendRegistrationToken", "/auth/login", "/login/**").permitAll()
