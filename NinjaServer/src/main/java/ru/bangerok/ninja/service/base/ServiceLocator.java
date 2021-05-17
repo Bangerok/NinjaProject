@@ -3,7 +3,7 @@ package ru.bangerok.ninja.service.base;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.service.MailService;
 import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;

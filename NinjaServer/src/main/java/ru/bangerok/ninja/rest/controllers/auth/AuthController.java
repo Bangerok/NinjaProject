@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller;
+package ru.bangerok.ninja.rest.controllers.auth;
 
 import java.time.LocalDateTime;
 import javax.validation.Valid;
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bangerok.ninja.controller.payload.request.LoginRequest;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
-import ru.bangerok.ninja.controller.payload.response.ApiResponse;
+import ru.bangerok.ninja.rest.payload.request.LoginRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.response.ApiResponse;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;

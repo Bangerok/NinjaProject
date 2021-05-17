@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -116,6 +115,7 @@ public class User extends BaseEntity {
 		/**
 		 * A private field that stores a list of user settings.
 		 */
-		@OneToMany(mappedBy="user")
+		@JsonIgnore
+		@OneToMany(mappedBy = "user")
 		private Collection<UserSetting> settings;
 }

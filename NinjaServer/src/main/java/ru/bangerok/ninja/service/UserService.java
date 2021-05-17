@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.service;
 
 import org.springframework.security.core.AuthenticationException;
-import ru.bangerok.ninja.controller.payload.request.LoginRequest;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.request.LoginRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.model.user.User;

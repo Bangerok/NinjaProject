@@ -15,8 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.config.properties.JwtProperties;
 import ru.bangerok.ninja.config.properties.JwtProperties.Auth;
-import ru.bangerok.ninja.controller.AuthController;
-import ru.bangerok.ninja.controller.payload.request.LoginRequest;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
+import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 
 /**
  * Service class that contains code for generating and validating Json Web tokens.

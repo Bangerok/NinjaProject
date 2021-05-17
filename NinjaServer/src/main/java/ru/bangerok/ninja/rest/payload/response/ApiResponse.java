@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller.payload.response;
+package ru.bangerok.ninja.rest.payload.response;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 
 /**
  * Payload java class to send response from server in controller.
@@ -49,7 +49,7 @@ public class ApiResponse {
 		 */
 		public ApiResponse(List<ObjectError> allErrors, String error) {
 				this.error = error;
-				String temp = allErrors.stream().map(e -> {
+				String temp = allErrors.parallelStream().map(e -> {
 						if (e instanceof FieldError) {
 								return "{\"field\":\"" + ((FieldError) e).getField() + "\",\"defaultMessage\":\""
 										+ e.getDefaultMessage() + "\"}";

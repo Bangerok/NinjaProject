@@ -16,9 +16,11 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async getCurrentUser({commit}) {
-    await authApi.getUser().then(response => {
-      commit('setCurrentUser', response.data);
-    });
+    const response = await authApi.getUser();
+    console.log(response);
+    commit('setCurrentUser', response.data);
+
+    return response;
   },
   /**
    * Sending a request to the server for user authorization by email and password.

@@ -1,9 +1,9 @@
-package ru.bangerok.ninja.controller.payload.request;
+package ru.bangerok.ninja.rest.payload.request;
 
 import javax.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 import ru.bangerok.ninja.validation.annotation.ValidPassword;

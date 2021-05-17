@@ -9,7 +9,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 
 /**

@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.service;
 
-import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 
 /**
  * Service class for working with localization of messages on the server.
