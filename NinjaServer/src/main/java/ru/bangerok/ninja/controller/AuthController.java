@@ -90,7 +90,7 @@ public class AuthController {
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
 						ApiResponse apiResponse = new ApiResponse();
-						apiResponse.setData(verificationToken.getToken());
+						apiResponse.setData(verificationToken.getValue());
 						return apiResponse;
 				}
 
@@ -113,7 +113,7 @@ public class AuthController {
 				VerificationToken newToken = serviceLocator.getUserService()
 						.generateNewVerificationToken(existingToken);
 				User user = newToken.getUser();
-				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), newToken.getToken());
+				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), newToken.getValue());
 				return new ApiResponse(serviceLocator.getMessageService().getMessage(
 						"registration.confirmation.getting.new.token"
 				));

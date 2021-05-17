@@ -38,7 +38,7 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
 		private void confirmRegistration(final OnRegistrationCompleteEvent event) {
 				User user = event.getUser();
 				String token = serviceLocator.getUserService().createVerificationTokenForUser(user)
-						.getToken();
+						.getValue();
 
 				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), token);
 		}

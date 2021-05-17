@@ -3,7 +3,7 @@ package ru.bangerok.ninja.service.impl;
 import static ru.bangerok.ninja.enumeration.Roles.USER;
 
 import java.time.LocalDateTime;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -88,13 +88,13 @@ public class UserServiceImpl implements UserService {
 						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
 								"role.error.not.found.by.name", new Object[]{USER.getName()}
 						)));
-				user.setRoles(Stream.of(userRole).collect(Collectors.toCollection(HashSet::new)));
+				user.setRoles(Stream.of(userRole).collect(Collectors.toCollection(ArrayList::new)));
 				return repositoryLocator.getUserRepository().save(user);
 		}
 
 		@Override
 		public VerificationToken getVerificationToken(String verificationToken) {
-				return repositoryLocator.getTokenRepository().findByToken(verificationToken)
+				return repositoryLocator.getTokenRepository().findByValue(verificationToken)
 						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
 								"token.error.not.found.by.token", new Object[]{verificationToken}
 						)));
@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
 				VerificationToken token = this.getVerificationToken(existingVerificationToken);
-				token.setToken(UUID.randomUUID().toString());
+				token.setValue(UUID.randomUUID().toString());
 				token.setExpiryDate(LocalDateTime.now().plusDays(1));
 				return repositoryLocator.getTokenRepository().save(token);
 		}
@@ -111,7 +111,7 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public VerificationToken createVerificationTokenForUser(User user) {
 				VerificationToken myToken = new VerificationToken();
-				myToken.setToken(UUID.randomUUID().toString());
+				myToken.setValue(UUID.randomUUID().toString());
 				myToken.setUser(user);
 				myToken.setExpiryDate(LocalDateTime.now().plusDays(1));
 				return repositoryLocator.getTokenRepository().save(myToken);

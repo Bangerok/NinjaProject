@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import java.util.Set;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -15,8 +15,8 @@ import net.minidev.json.annotate.JsonIgnore;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * Essence of roles. Used for global server rights. For example, for a separate controller or
- * request. Also, each role has its own list of privileges.
+ * Entity for the table with user roles. Used for global server rights. For example, for a separate
+ * controller or request. Also, each role has its own list of privileges.
  *
  * @author v.kuznetsov
  * @since 0.3.3
@@ -32,14 +32,14 @@ public class Role extends BaseEntity {
 		/**
 		 * Private field that stores the name of the role in the database.
 		 */
-		@Column(name = "name", unique = true)
+		@Column(name = "name", unique = true, nullable = false)
 		private String name;
 
 		/**
 		 * Private field that stores a list of users who have access to this role.
 		 */
 		@ManyToMany(mappedBy = "roles")
-		private Set<User> users;
+		private Collection<User> users;
 
 		/**
 		 * Private field that stores the list of privileges available for this role in the database.
@@ -49,5 +49,5 @@ public class Role extends BaseEntity {
 		@JoinTable(name = "role_privileges",
 				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},
 				inverseJoinColumns = {@JoinColumn(name = "privilege_id", referencedColumnName = "base_id")})
-		private Set<Privilege> privileges;
+		private Collection<Privilege> privileges;
 }

@@ -1,0 +1,110 @@
+databaseChangeLog:
+  - changeSet:
+      id: db_0.3.3_creating_roles_table
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+                    primaryKey: true
+                    primaryKeyName: roles_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                  name: name
+                  type: VARCHAR(255)
+            tableName: roles
+  - changeSet:
+      id: db_0.3.3_creating_link_table_users_roles
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: user_id
+                  type: BIGINT
+              - column:
+                  name: role_id
+                  type: BIGINT
+            tableName: user_roles
+  - changeSet:
+      id: db_0.3.3_adding_foreign_keys_for_users_roles
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_roles
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: roles
+            validate: true
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_roles
+            constraintName: fk_user_roles_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: users
+            validate: true
+  - changeSet:
+      id: db_0.3.3_load_data_for_roles_table
+      author: v.kuznetsov
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: base_id
+                  name: base_id
+                  type: NUMERIC
+              - column:
+                  header: base_created_date
+                  name: base_created_date
+                  type: DATE
+              - column:
+                  header: base_updated_date
+                  name: base_updated_date
+                  type: skip
+              - column:
+                  header: base_status
+                  name: base_status
+                  type: STRING
+              - column:
+                  header: name
+                  name: name
+                  type: STRING
+            commentLineStartsWith: '#'
+            encoding: UTF-8
+            file: data/roles.csv
+            quotchar: '"'
+            separator: ','
+            tableName: roles
+            relativeToChangelogFile: true

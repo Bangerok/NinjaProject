@@ -21,8 +21,8 @@ public interface VerificationTokenRepository extends JpaRepository<VerificationT
 		/**
 		 * Method for finding a verification token by its token value in the database.
 		 *
-		 * @param token verification token value.
+		 * @param Value verification token value.
 		 * @return Optional with found token.
 		 */
-		Optional<VerificationToken> findByToken(String token);
+		Optional<VerificationToken> findByValue(String Value);
 }
