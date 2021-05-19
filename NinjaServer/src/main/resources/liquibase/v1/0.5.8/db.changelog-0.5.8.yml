@@ -42,17 +42,17 @@ databaseChangeLog:
               - column:
                   constraints:
                     nullable: false
-                  name: user_base_id
+                  name: user_id
                   type: BIGINT
             tableName: user_settings
         - addForeignKeyConstraint:
-            baseColumnNames: user_base_id
+            baseColumnNames: user_id
             baseTableName: user_settings
             constraintName: fk_user_settings_user
             deferrable: false
             initiallyDeferred: false
-            onDelete: CASCADE
-            onUpdate: RESTRICT
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
             referencedColumnNames: base_id
             referencedTableName: users
             validate: true

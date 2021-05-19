@@ -3,7 +3,7 @@ package ru.bangerok.ninja.persistence.model.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -99,7 +99,7 @@ public class User extends BaseEntity {
 		 * Private field that stores the email verification token.
 		 */
 		@JsonIgnore
-		@OneToOne(mappedBy = "user")
+		@OneToOne(mappedBy = "user", orphanRemoval = true)
 		private VerificationToken verificationToken;
 
 		/**
@@ -110,12 +110,12 @@ public class User extends BaseEntity {
 		@JoinTable(name = "user_roles",
 				joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "base_id")},
 				inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")})
-		private Collection<Role> roles;
+		private List<Role> roles;
 
 		/**
 		 * A private field that stores a list of user settings.
 		 */
 		@JsonIgnore
-		@OneToMany(mappedBy = "user")
-		private Collection<UserSetting> settings;
+		@OneToMany(mappedBy = "user", orphanRemoval = true)
+		private List<UserSetting> settings;
 }

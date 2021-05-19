@@ -59,8 +59,8 @@ databaseChangeLog:
             constraintName: fk_role_privileges_privileges
             deferrable: false
             initiallyDeferred: false
-            onDelete: CASCADE
-            onUpdate: RESTRICT
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
             referencedColumnNames: base_id
             referencedTableName: privileges
             validate: true
@@ -70,8 +70,8 @@ databaseChangeLog:
             constraintName: fk_role_privileges_role
             deferrable: false
             initiallyDeferred: false
-            onDelete: CASCADE
-            onUpdate: RESTRICT
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
             referencedColumnNames: base_id
             referencedTableName: roles
             validate: true
