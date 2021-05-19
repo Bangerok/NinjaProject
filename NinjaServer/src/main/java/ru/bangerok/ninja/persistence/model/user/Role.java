@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -39,7 +39,7 @@ public class Role extends BaseEntity {
 		 * Private field that stores a list of users who have access to this role.
 		 */
 		@ManyToMany(mappedBy = "roles")
-		private Collection<User> users;
+		private List<User> users;
 
 		/**
 		 * Private field that stores the list of privileges available for this role in the database.
@@ -49,5 +49,5 @@ public class Role extends BaseEntity {
 		@JoinTable(name = "role_privileges",
 				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},
 				inverseJoinColumns = {@JoinColumn(name = "privilege_id", referencedColumnName = "base_id")})
-		private Collection<Privilege> privileges;
+		private List<Privilege> privileges;
 }

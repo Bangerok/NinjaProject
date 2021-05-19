@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
@@ -36,5 +36,5 @@ public class Privilege extends BaseEntity {
 		 * Private field that stores a list of roles that have access to this privilege.
 		 */
 		@ManyToMany(mappedBy = "privileges")
-		private Collection<Role> roles;
+		private List<Role> roles;
 }

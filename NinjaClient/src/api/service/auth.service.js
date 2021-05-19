@@ -39,9 +39,7 @@ export default {
    * @return {AxiosPromise} with a response from the server.
    */
   confirmEmail(token) {
-    return axios.getWithParams('/auth/registrationConfirm', {
-      token: token
-    });
+    return axios.getWithParams('/auth/registrationConfirm', {token});
   },
   /**
    * Sending a request to a rest method at '/auth/resendRegistrationToken'.
@@ -50,8 +48,6 @@ export default {
    * @return {AxiosPromise} with a response from the server.
    */
   reSendVerificationTokenEmail(oldToken) {
-    return axios.getWithParams('/auth/resendRegistrationToken', {
-      oldToken: oldToken
-    });
+    return axios.getWithParams('/auth/resendRegistrationToken', {oldToken});
   },
 };

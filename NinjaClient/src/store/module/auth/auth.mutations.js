@@ -6,9 +6,9 @@ export default {
    * Setting authorized user data.
    *
    * @param state auth module state.
-   * @param payload new data.
+   * @param userData new data.
    */
-  setCurrentUser(state, payload) {
-    return state.user = payload;
+  setCurrentUser(state, userData) {
+    state.user = userData;
   },
 };
