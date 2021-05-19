@@ -68,15 +68,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 						.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
 						.and()
 						.csrf().disable()
-						.formLogin()
-						.disable()
-						.httpBasic()
-						.disable()
+						.formLogin().disable()
+						.httpBasic().disable()
 						.exceptionHandling(e -> e.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
 						.authorizeRequests(a -> a
 								.antMatchers("/auth/register", "/auth/registrationConfirm",
 										"/auth/resendRegistrationToken", "/auth/login", "/login/**").permitAll()
-								.antMatchers("/auth/user").hasRole("USER")
+								.antMatchers("/auth/user", "/user/**").hasRole("USER")
 								.anyRequest().authenticated()
 						)
 						.logout(l -> l
