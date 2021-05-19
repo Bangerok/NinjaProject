@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.service;
 
-import java.util.Collection;
 import java.util.List;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.UserSetting;
