@@ -85,11 +85,25 @@ function getWithParams(url, params) {
  *
  * @param url request address.
  * @param data request data for processing on the server.
+ * @param params url params.
  * @return {AxiosPromise} with a response from the server.
  */
-function post(url, data) {
+function post(url, data, params) {
   data = data || {};
-  return request('post', url, null, data, null);
+  return request('post', url, params, data, null);
 }
 
-export default {get, getWithParams, post};
+/**
+ * Setting up the PUT method for sending to the server.
+ *
+ * @param url request address.
+ * @param data request data for processing on the server.
+ * @param params url params.
+ * @return {AxiosPromise} with a response from the server.
+ */
+function put(url, data, params) {
+  data = data || {};
+  return request('put', url, params, data, null);
+}
+
+export default {get, getWithParams, post, put};

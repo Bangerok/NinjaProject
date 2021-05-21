@@ -6,9 +6,11 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import ru.bangerok.ninja.exception.email.FailureSendEmailException;
@@ -17,6 +19,7 @@ import ru.bangerok.ninja.service.MessageService;
 
 @RequiredArgsConstructor
 @Slf4j
+@Scope("singleton")
 @Service
 public class MailServiceImpl implements MailService {
 

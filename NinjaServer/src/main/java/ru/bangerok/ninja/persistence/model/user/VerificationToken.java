@@ -14,15 +14,16 @@ import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * The essence of the verification token. Used to store issued tokens for user email verification.
+ * Entity for the table with verification tokens. Used to store issued tokens for user email
+ * verification.
  *
  * @author v.kuznetsov
  * @since 0.4.3
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"token", "user", "expiryDate"}, callSuper = true)
-@ToString(of = {"token", "user", "expiryDate"}, callSuper = true)
+@EqualsAndHashCode(of = {"value"}, callSuper = true)
+@ToString(of = {"value", "expiryDate", "user"}, callSuper = true)
 @Entity
 @Table(name = "verification_tokens")
 public class VerificationToken extends BaseEntity {
@@ -30,13 +31,13 @@ public class VerificationToken extends BaseEntity {
 		/**
 		 * Private field that stores the email verification token.
 		 */
-		@Column(name = "token", unique = true)
-		private String token;
+		@Column(name = "value", unique = true, nullable = false)
+		private String value;
 
 		/**
 		 * Private field that stores the date after which the verification token expires.
 		 */
-		@Column(name = "expiry_date")
+		@Column(name = "expiry_date", nullable = false)
 		private LocalDateTime expiryDate;
 
 		/**

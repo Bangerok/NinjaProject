@@ -16,9 +16,8 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async getCurrentUser({commit}) {
-    await authApi.getUser().then(response => {
-      commit('setCurrentUser', response.data);
-    });
+    const {data} = await authApi.getUser();
+    commit('setCurrentUser', data);
   },
   /**
    * Sending a request to the server for user authorization by email and password.
@@ -30,16 +29,20 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async login({commit}, loginRequestData) {
-    await authApi.login(loginRequestData).then(({data}) => {
+    try {
+      const {data} = await authApi.login(loginRequestData);
       localStorage.setItem("jwt-token", data.message);
       router.go(0);
-    }).catch(() => {
+    } catch (err) {
       commit(
-          'setOptionsNotification',
-          {color: 'error', text: i18n.tc('errors.invalid.credential')},
+          'setOptionsNotification', {
+            color: 'error',
+            text: i18n.tc('errors.invalid.credential'),
+            show: true
+          },
           {root: true}
       );
-    });
+    }
   },
   /**
    * User registration according to the data passed to the method. If registration is not successful, then a window with an error will be displayed.
@@ -52,7 +55,7 @@ export default {
     await authApi.register(registerRequestData).then(response => {
       commit(
           'setOptionsNotification',
-          {color: 'success', text: response.data.message},
+          {color: 'success', text: response.data.message, show: true},
           {root: true}
       );
 
@@ -63,7 +66,7 @@ export default {
       } else {
         commit(
             'setOptionsNotification',
-            {color: 'error', text: error.response.data.message},
+            {color: 'error', text: error.response.data.message, show: true},
             {root: true}
         );
       }
@@ -82,7 +85,7 @@ export default {
       if (!data.data) {
         commit(
             'setOptionsNotification',
-            {color: 'success', text: data.message},
+            {color: 'success', text: data.message, show: true},
             {root: true}
         );
       } else {
@@ -103,7 +106,7 @@ export default {
         ({data}) => {
           commit(
               'setOptionsNotification',
-              {color: 'success', text: data.message},
+              {color: 'success', text: data.message, show: true},
               {root: true}
           );
         });
@@ -115,7 +118,6 @@ export default {
    */
   callLogout({commit}) {
     commit('setCurrentUser', null);
-
     localStorage.removeItem("jwt-token");
     router.go(0);
   },

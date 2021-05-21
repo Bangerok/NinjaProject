@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.exception.resource;
 
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**

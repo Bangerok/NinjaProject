@@ -26,7 +26,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @Getter
 @Setter
 @EqualsAndHashCode(of = {"id"})
-@ToString(of = {"id"})
+@ToString(of = {"id", "status"})
 @MappedSuperclass
 public class BaseEntity {
 
@@ -36,7 +36,7 @@ public class BaseEntity {
 		 */
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "base_id")
+		@Column(name = "base_id", unique = true, nullable = false)
 		private Long id;
 
 		/**
@@ -44,7 +44,7 @@ public class BaseEntity {
 		 * need to pre-assign.
 		 */
 		@CreatedDate
-		@Column(name = "base_created_date")
+		@Column(name = "base_created_date", nullable = false)
 		private Date created;
 
 		/**
@@ -60,7 +60,7 @@ public class BaseEntity {
 		 * necessary to pre-appoint.
 		 */
 		@Enumerated(EnumType.STRING)
-		@Column(name = "base_status")
+		@Column(name = "base_status", nullable = false)
 		private BaseStatus status;
 
 		/**

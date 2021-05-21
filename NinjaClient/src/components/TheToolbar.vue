@@ -14,11 +14,11 @@
       </v-list-item>
     </v-card>
 
-    <v-tooltip bottom nudge-right="75px">
+    <v-tooltip bottom nudge-right="75px" nudge-bottom="5px">
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-1">
-          <v-app-bar-nav-icon class="mr-3 ml-n2" @click="setMinVariant(!navigation.minVariant)">
-            <v-icon v-if="navigation.minVariant">
+          <v-app-bar-nav-icon class="mr-3 ml-n2" @click="maxMenu = !maxMenu">
+            <v-icon v-if="maxMenu">
               fa-bars
             </v-icon>
 
@@ -43,7 +43,7 @@
       </v-icon>
       {{ $t('buttons.exitBtn') }}
     </v-btn>
-    <v-tooltip bottom>
+    <v-tooltip bottom nudge-bottom="5px">
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-3">
           <v-card flat max-width="130px" max-height="40px" color="appbar">
@@ -57,7 +57,7 @@
       <span class="overline">{{ $t('tooltips.changeLanguageSystem') }}</span>
     </v-tooltip>
 
-    <v-tooltip bottom nudge-top="10px">
+    <v-tooltip bottom nudge-top="5px">
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-0">
           <v-icon v-if="nightMode" class="mr-3 mt-n1">
@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import {mapActions, mapMutations, mapState} from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 
 /**
  * Component for showing top information menu.
@@ -90,7 +90,11 @@ export default {
     /**
      * Selected system localization language.
      */
-    locale: 'ru',
+    locale: 'en',
+    /**
+     * Selected show/hide full menu.
+     */
+    maxMenu: false,
     /**
      * List of available system locales for switching between them.
      */
@@ -104,42 +108,57 @@ export default {
       },
     ],
   }),
-  computed: mapState('settings', {'navigation': state => state.navigation}),
+  computed: mapGetters('settings', ['getSettingValueByName', 'getSettingByName']),
   methods: {
-    ...mapMutations('settings', ['setMinVariant']),
     ...mapActions('auth', ['callLogout']),
+    ...mapActions('settings', ['saveSetting']),
   },
   /**
    * System setup at the stage of component mounting.
    */
   mounted() {
-    let nightMode = localStorage.getItem('nightMode');
-    if (nightMode) {
-      nightMode = nightMode === "true";
+    const nightMode = this.getSettingValueByName('nightMode');
+    // noinspection JSIncompatibleTypesComparison
+    if (nightMode !== null) {
       this.$vuetify.theme.dark = nightMode;
       this.nightMode = nightMode;
     }
 
-    let locale = localStorage.getItem('locale');
+    const locale = this.getSettingValueByName('locale');
     if (locale) {
       this.$i18n.locale = locale;
       this.locale = locale;
     }
+
+    const maxMenu = this.getSettingValueByName('maxMenu');
+    if (maxMenu) {
+      this.maxMenu = maxMenu;
+    }
   },
   watch: {
     /**
-     * Saving the selected system design mode to localStorage.
+     * Saving the selected system design mode.
      */
     nightMode() {
-      this.$vuetify.theme.dark = this.nightMode;
-      localStorage.setItem('nightMode', this.nightMode);
+      const isNew = this.saveSetting({name: 'nightMode', value: this.nightMode.toString()});
+      if (isNew) {
+        this.$vuetify.theme.dark = this.nightMode;
+      }
     },
     /**
-     * Saving the selected system language to localStorage.
+     * Saving the selected system language.
      */
     locale() {
-      this.$i18n.locale = this.locale;
-      localStorage.setItem('locale', this.locale);
+      const isNew = this.saveSetting({name: 'locale', value: this.locale});
+      if (isNew) {
+        this.$i18n.locale = this.locale;
+      }
+    },
+    /**
+     * Saving the selected flag of show/hide full menu.
+     */
+    maxMenu() {
+      this.saveSetting({name: 'maxMenu', value: this.maxMenu.toString()});
     },
   },
 };

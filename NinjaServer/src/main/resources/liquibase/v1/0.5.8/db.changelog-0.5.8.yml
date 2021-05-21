@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: db_0.5.8_creating_table_for_user_settings
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+                    primaryKey: true
+                    primaryKeyName: user_settings_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: value
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                  name: user_id
+                  type: BIGINT
+            tableName: user_settings
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_settings
+            constraintName: fk_user_settings_user
+            deferrable: false
+            initiallyDeferred: false
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: base_id
+            referencedTableName: users
+            validate: true

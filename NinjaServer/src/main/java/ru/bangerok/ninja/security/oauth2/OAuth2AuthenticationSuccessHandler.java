@@ -118,7 +118,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 		private boolean isAuthorizedRedirectUri(String uri) {
 				URI clientRedirectUri = URI.create(uri);
 				return jwtProperties.getOauth2().getAuthorizedRedirectUris()
-						.stream()
+						.parallelStream()
 						.anyMatch(authorizedRedirectUri -> {
 								URI authorizedURI = URI.create(authorizedRedirectUri);
 								return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost()) &&

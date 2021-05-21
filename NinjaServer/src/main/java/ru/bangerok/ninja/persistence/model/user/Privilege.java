@@ -12,8 +12,8 @@ import lombok.ToString;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
- * The essence of privilege. Used for dotted server permissions. For example, for a separate
- * entity.
+ * Entity for table with role privileges. Used for dotted server permissions. For example, for a
+ * separate entity.
  *
  * @author v.kuznetsov
  * @since 0.3.4
@@ -29,7 +29,7 @@ public class Privilege extends BaseEntity {
 		/**
 		 * Private field that stores the name of the privilege in the database.
 		 */
-		@Column(name = "name", unique = true)
+		@Column(name = "name", unique = true, nullable = false)
 		private String name;
 
 		/**
