@@ -4,8 +4,8 @@ import state from './state/state';
 import mutations from './state/mutations';
 import actions from './state/actions';
 import getters from './state/getters';
-import authModule from "./module/auth/auth.state";
-import settingsModule from "./module/settings/settings.state";
+import auth from "./module/auth/auth.state";
+import settings from "./module/settings/settings.state";
 
 Vue.use(Vuex);
 
@@ -18,7 +18,7 @@ export default new Vuex.Store({
   actions,
   getters,
   modules: {
-    auth: authModule,
-    settings: settingsModule,
+    auth,
+    settings,
   },
 });

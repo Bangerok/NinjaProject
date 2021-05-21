@@ -9,14 +9,9 @@ export default {
   namespaced: true,
   state: () => ({
     /**
-     * Navigation menu settings.
+     * Application user settings.
      */
-    navigation: {
-      /**
-       * Collapse/Expand the menu
-       */
-      minVariant: false,
-    },
+    userSettings: null,
   }),
   mutations,
   actions,

@@ -1,8 +1,8 @@
-package ru.bangerok.ninja.controller.payload.request;
+package ru.bangerok.ninja.rest.payload.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import ru.bangerok.ninja.controller.AuthController;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 
 /**
  * Payload java class for parsing authorization request data into rest method parameters.

@@ -45,6 +45,7 @@ export default {
   computed: mapState("auth", {"user": state => state.user}),
   methods: {
     ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail"]),
+    ...mapActions("settings", ["getAllUserSettings"]),
     /**
      * Receiving a new verification token for a user.
      */
@@ -83,6 +84,7 @@ export default {
     if (localStorage.getItem("jwt-token")) {
       // noinspection JSValidateTypes
       this.getCurrentUser();
+      this.getAllUserSettings();
     }
   },
 };

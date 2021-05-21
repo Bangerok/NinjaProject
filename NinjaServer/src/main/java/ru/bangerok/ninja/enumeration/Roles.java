@@ -2,7 +2,7 @@ package ru.bangerok.ninja.enumeration;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**

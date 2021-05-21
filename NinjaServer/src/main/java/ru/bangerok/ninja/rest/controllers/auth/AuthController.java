@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.controller;
+package ru.bangerok.ninja.rest.controllers.auth;
 
 import java.time.LocalDateTime;
 import javax.validation.Valid;
@@ -11,15 +11,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import ru.bangerok.ninja.controller.payload.request.LoginRequest;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
-import ru.bangerok.ninja.controller.payload.response.ApiResponse;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
+import ru.bangerok.ninja.rest.payload.request.LoginRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.response.ApiResponse;
 import ru.bangerok.ninja.security.CurrentUser;
 import ru.bangerok.ninja.security.UserPrincipal;
-import ru.bangerok.ninja.service.base.ServiceLocator;
+import ru.bangerok.ninja.service.MailService;
+import ru.bangerok.ninja.service.MessageService;
+import ru.bangerok.ninja.service.UserService;
 
 /**
  * Controller for receiving requests from the client related to user authorization/authentication.
@@ -32,7 +34,9 @@ import ru.bangerok.ninja.service.base.ServiceLocator;
 @RequestMapping("auth")
 public class AuthController {
 
-		private final ServiceLocator serviceLocator;
+		private final UserService userService;
+		private final MessageService msgService;
+		private final MailService mailService;
 		private final ApplicationEventPublisher eventPublisher;
 
 		/**
@@ -46,7 +50,7 @@ public class AuthController {
 		@PostAuthorize("hasPermission(returnObject, 'READ')")
 		@GetMapping("/user")
 		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
-				return serviceLocator.getUserService().getCurrentUser(userPrincipal);
+				return userService.getCurrentUser(userPrincipal);
 		}
 
 		/**
@@ -57,7 +61,7 @@ public class AuthController {
 		 */
 		@PostMapping("/login")
 		public ApiResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-				String token = serviceLocator.getUserService().creatingTokenForAuthUser(loginRequest);
+				String token = userService.creatingTokenForAuthUser(loginRequest);
 				return new ApiResponse(token);
 		}
 
@@ -69,10 +73,10 @@ public class AuthController {
 		 */
 		@PostMapping("/register")
 		public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
-				User registered = serviceLocator.getUserService().registerNewUserAccount(registerRequest);
+				User registered = userService.registerNewUserAccount(registerRequest);
 				eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, ""));
 
-				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+				return new ApiResponse(msgService.getMessage(
 						"registration.completed.successfully"
 				));
 		}
@@ -85,19 +89,19 @@ public class AuthController {
 		 */
 		@GetMapping("/registrationConfirm")
 		public ApiResponse confirmRegistration(@RequestParam("token") String token) {
-				VerificationToken verificationToken = serviceLocator.getUserService()
+				VerificationToken verificationToken = userService
 						.getVerificationToken(token);
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
 						ApiResponse apiResponse = new ApiResponse();
-						apiResponse.setData(verificationToken.getToken());
+						apiResponse.setData(verificationToken.getValue());
 						return apiResponse;
 				}
 
 				User user = verificationToken.getUser();
 				user.setEmailVerified(true);
-				serviceLocator.getUserService().saveRegisteredUser(user);
-				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+				userService.saveRegisteredUser(user);
+				return new ApiResponse(msgService.getMessage(
 						"registration.confirmation.successfully"
 				));
 		}
@@ -110,11 +114,11 @@ public class AuthController {
 		 */
 		@GetMapping("/resendRegistrationToken")
 		public ApiResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
-				VerificationToken newToken = serviceLocator.getUserService()
+				VerificationToken newToken = userService
 						.generateNewVerificationToken(existingToken);
 				User user = newToken.getUser();
-				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), newToken.getToken());
-				return new ApiResponse(serviceLocator.getMessageService().getMessage(
+				mailService.sendVerifiedMessage(user.getEmail(), newToken.getValue());
+				return new ApiResponse(msgService.getMessage(
 						"registration.confirmation.getting.new.token"
 				));
 		}

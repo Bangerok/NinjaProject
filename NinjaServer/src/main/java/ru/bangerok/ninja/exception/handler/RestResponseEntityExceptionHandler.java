@@ -12,10 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.bangerok.ninja.controller.payload.response.ApiResponse;
+import ru.bangerok.ninja.rest.payload.response.ApiResponse;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
-import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.validation.impl.PasswordConstraintValidator;
 
 /**

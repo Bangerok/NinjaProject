@@ -1,7 +1,5 @@
 <template>
-  <v-progress-linear indeterminate color="teal"
-                     v-show="loading"
-  />
+  <v-progress-linear indeterminate color="teal" v-if="loading"/>
 </template>
 
 <script>

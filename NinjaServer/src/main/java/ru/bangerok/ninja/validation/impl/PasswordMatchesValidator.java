@@ -3,7 +3,7 @@ package ru.bangerok.ninja.validation.impl;
 import java.lang.reflect.Field;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import ru.bangerok.ninja.controller.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
 
