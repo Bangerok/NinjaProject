@@ -13,7 +13,14 @@ import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 public interface MessageService {
 
 		/**
-		 * Method for getting a localized message.
+		 * Setting the user's language.
+		 *
+		 * @param language current user's language.
+		 */
+		void setLocale(String language);
+
+		/**
+		 * Getting a localized message.
 		 *
 		 * @param path message key.
 		 * @return localized message.
@@ -21,7 +28,7 @@ public interface MessageService {
 		String getMessage(String path);
 
 		/**
-		 * Method for getting localized message with parameters.
+		 * Getting localized message with parameters.
 		 *
 		 * @param path message key.
 		 * @param args message parameters.

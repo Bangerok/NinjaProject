@@ -118,7 +118,6 @@ export default {
    */
   callLogout({commit}) {
     commit('setCurrentUser', null);
-    commit('', null);
     localStorage.removeItem("jwt-token");
     router.go(0);
   },

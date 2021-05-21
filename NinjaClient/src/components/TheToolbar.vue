@@ -57,7 +57,7 @@
       <span class="overline">{{ $t('tooltips.changeLanguageSystem') }}</span>
     </v-tooltip>
 
-    <v-tooltip bottom nudge-top="5px" >
+    <v-tooltip bottom nudge-top="5px">
       <template #activator="{ on }">
         <v-list-item-icon v-on="on" class="justify-center mt-0">
           <v-icon v-if="nightMode" class="mr-3 mt-n1">
@@ -90,7 +90,7 @@ export default {
     /**
      * Selected system localization language.
      */
-    locale: 'ru',
+    locale: 'en',
     /**
      * Selected show/hide full menu.
      */
@@ -111,28 +111,28 @@ export default {
   computed: mapGetters('settings', ['getSettingValueByName', 'getSettingByName']),
   methods: {
     ...mapActions('auth', ['callLogout']),
-    ...mapActions('settings', ['saveUserSetting', 'updateUserSetting']),
+    ...mapActions('settings', ['saveSetting']),
   },
   /**
    * System setup at the stage of component mounting.
    */
   mounted() {
-    let nightMode = this.getSettingValueByName('nightMode');
-    if (nightMode) {
-      nightMode = nightMode === "true";
+    const nightMode = this.getSettingValueByName('nightMode');
+    // noinspection JSIncompatibleTypesComparison
+    if (nightMode !== null) {
       this.$vuetify.theme.dark = nightMode;
       this.nightMode = nightMode;
     }
 
-    let locale = this.getSettingValueByName('locale');
+    const locale = this.getSettingValueByName('locale');
     if (locale) {
       this.$i18n.locale = locale;
       this.locale = locale;
     }
 
-    let maxMenu = this.getSettingValueByName('maxMenu');
+    const maxMenu = this.getSettingValueByName('maxMenu');
     if (maxMenu) {
-      this.maxMenu = maxMenu === "true";
+      this.maxMenu = maxMenu;
     }
   },
   watch: {
@@ -140,42 +140,25 @@ export default {
      * Saving the selected system design mode.
      */
     nightMode() {
-      let nightModeSetting = this.getSettingByName('nightMode');
-      nightModeSetting.value = this.nightMode.toString();
-      if (!nightModeSetting.name) {
-        nightModeSetting.name = 'nightMode';
-        this.saveUserSetting(nightModeSetting);
-      } else {
-        this.updateUserSetting(nightModeSetting);
+      const isNew = this.saveSetting({name: 'nightMode', value: this.nightMode.toString()});
+      if (isNew) {
+        this.$vuetify.theme.dark = this.nightMode;
       }
-      this.$vuetify.theme.dark = this.nightMode;
     },
     /**
      * Saving the selected system language.
      */
     locale() {
-      let localeSetting = this.getSettingByName('locale');
-      localeSetting.value = this.locale;
-      if (!localeSetting.name) {
-        localeSetting.name = 'locale';
-        this.saveUserSetting(localeSetting);
-      } else {
-        this.updateUserSetting(localeSetting);
+      const isNew = this.saveSetting({name: 'locale', value: this.locale});
+      if (isNew) {
+        this.$i18n.locale = this.locale;
       }
-      this.$i18n.locale = this.locale;
     },
     /**
      * Saving the selected flag of show/hide full menu.
      */
     maxMenu() {
-      let maxMenuSetting = this.getSettingByName('maxMenu');
-      maxMenuSetting.value = this.maxMenu.toString();
-      if (!maxMenuSetting.name) {
-        maxMenuSetting.name = 'maxMenu';
-        this.saveUserSetting(maxMenuSetting);
-      } else {
-        this.updateUserSetting(maxMenuSetting);
-      }
+      this.saveSetting({name: 'maxMenu', value: this.maxMenu.toString()});
     },
   },
 };

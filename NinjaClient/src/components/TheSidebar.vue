@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-navigation-drawer app clipped color="sidebar" mobile-breakpoint="320"
-                         :mini-variant="getSettingValueByName('maxMenu') === 'true'"
+                         :mini-variant="!isMaxMenuShow"
     >
       <v-list class="py-0">
         <v-list-item
@@ -9,7 +9,7 @@
             :key="key"
             :to="item.path"
         >
-          <v-tooltip :disabled="!getSettingValueByName('maxMenu')" right
+          <v-tooltip :disabled="isMaxMenuShow" right
                      nudge-right="15px">
             <template #activator="{ on }">
               <v-list-item-icon v-on="on" class="justify-center">
@@ -26,8 +26,8 @@
       </v-list>
 
       <template #append>
-        <v-divider v-if="getSettingValueByName('maxMenu') === 'true'" />
-        <v-container v-if="getSettingValueByName('maxMenu') === 'true'" class="overline pb-0 mb-n1">
+        <v-divider v-if="isMaxMenuShow" />
+        <v-container v-if="isMaxMenuShow" class="overline pb-0 mb-n1">
           <p class="text-center text--disabled">&copy; Copyright, {{ getCurrentYear() }}</p>
         </v-container>
       </template>
@@ -53,6 +53,13 @@ export default {
     filteredNavigationLinks() {
       return this.$router.options.routes.filter(route => route.meta.showInMenu);
     },
+    isMaxMenuShow() {
+      const maxMenuShow = this.getSettingValueByName('maxMenu');
+      if (!maxMenuShow) {
+        return false;
+      }
+      return maxMenuShow;
+    }
   },
   methods: {
     /**

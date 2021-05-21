@@ -43,4 +43,27 @@ export default {
     const {data} = await userSettingsApi.update(userSetting);
     commit('updateUserSetting', data);
   },
+  /**
+   * Save or update user setting if new or updated.
+   * @param getters module getters data.
+   * @param dispatch actions module data.
+   * @param data user setting data.
+   * @return {boolean} true, if new user setting value, otherwise false.
+   */
+  async saveSetting({getters, dispatch}, data) {
+    let setting = getters.getSettingByName(data.name);
+    if (!setting.value || setting.value !== data.value) {
+      setting.value = data.value;
+      if (!setting.name) {
+        setting.name = data.name;
+        await dispatch('saveUserSetting', setting);
+      } else {
+        await dispatch('updateUserSetting', setting);
+      }
+
+      return true;
+    }
+
+    return false;
+  }
 };
