@@ -94,7 +94,7 @@ function post(url, data, params) {
 }
 
 /**
- * Setting up the POST method for sending to the server.
+ * Setting up the PUT method for sending to the server.
  *
  * @param url request address.
  * @param data request data for processing on the server.
