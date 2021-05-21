@@ -9,8 +9,7 @@
             :key="key"
             :to="item.path"
         >
-          <v-tooltip :disabled="isMaxMenuShow" right
-                     nudge-right="15px">
+          <v-tooltip :disabled="isMaxMenuShow" right nudge-right="15px">
             <template #activator="{ on }">
               <v-list-item-icon v-on="on" class="justify-center">
                 <v-icon dense>{{ item.meta.icon }}</v-icon>
@@ -26,7 +25,7 @@
       </v-list>
 
       <template #append>
-        <v-divider v-if="isMaxMenuShow" />
+        <v-divider v-if="isMaxMenuShow"/>
         <v-container v-if="isMaxMenuShow" class="overline pb-0 mb-n1">
           <p class="text-center text--disabled">&copy; Copyright, {{ getCurrentYear() }}</p>
         </v-container>
