@@ -17,7 +17,7 @@ export default {
     return axios.get(END_POINT);
   },
   /**
-   * Sending a post request to a rest method.
+   * Sending a post request to a rest method at '/user/settings'.
    *
    * @param userSetting setting data.
    * @return {AxiosPromise} with created user setting.
@@ -26,7 +26,7 @@ export default {
     return axios.post(END_POINT, userSetting);
   },
   /**
-   * Sending a put request to a rest method.
+   * Sending a put request to a rest method at '/user/settings'.
    *
    * @param userSetting setting new data.
    * @return {AxiosPromise} with updated user setting.
