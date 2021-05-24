@@ -2,6 +2,7 @@ package ru.bangerok.ninja.enumeration;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
@@ -14,6 +15,7 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  * @since 0.5.7
  */
 @Getter
+@ToString(doNotUseGetters = true)
 @RequiredArgsConstructor
 public enum Roles {
 		/**

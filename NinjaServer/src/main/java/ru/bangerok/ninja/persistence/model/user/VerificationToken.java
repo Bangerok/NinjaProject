@@ -22,8 +22,8 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"value"}, callSuper = true)
-@ToString(of = {"value", "expiryDate", "user"}, callSuper = true)
+@EqualsAndHashCode(doNotUseGetters = true, callSuper = true)
+@ToString(doNotUseGetters = true, callSuper = true)
 @Entity
 @Table(name = "verification_tokens")
 public class VerificationToken extends BaseEntity {

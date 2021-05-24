@@ -33,7 +33,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-                  name: name
+                  name: value
                   type: VARCHAR(255)
             tableName: roles
   - changeSet:

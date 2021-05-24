@@ -25,8 +25,8 @@ import org.springframework.data.annotation.LastModifiedDate;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"id"})
-@ToString(of = {"id", "status"})
+@EqualsAndHashCode(doNotUseGetters = true)
+@ToString(doNotUseGetters = true)
 @MappedSuperclass
 public class BaseEntity {
 

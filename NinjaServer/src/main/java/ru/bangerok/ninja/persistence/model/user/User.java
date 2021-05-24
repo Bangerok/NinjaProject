@@ -30,8 +30,10 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"email"}, callSuper = true)
-@ToString(of = {"fullname", "email", "emailVerified", "authProvider"}, callSuper = true)
+@EqualsAndHashCode(
+		exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true
+)
+@ToString(exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true)
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
