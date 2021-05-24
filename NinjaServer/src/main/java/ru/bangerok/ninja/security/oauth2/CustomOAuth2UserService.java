@@ -1,5 +1,7 @@
 package ru.bangerok.ninja.security.oauth2;
 
+import static ru.bangerok.ninja.enumeration.Roles.ROLE_USER;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +114,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 				user.setLastVisit(LocalDateTime.now());
 				user.setEmailVerified(true);
 
-				Role userRole = repositoryLocator.getRoleRepository().findByName("ROLE_USER").orElseThrow(
+				Role userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER).orElseThrow(
 						() -> new ResourceNotFoundException(messageService.getMessage("role.error.not.found"))
 				);
 				List<Role> roles = Stream.of(userRole)

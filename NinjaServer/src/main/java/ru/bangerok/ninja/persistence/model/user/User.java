@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,7 +32,9 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 @EqualsAndHashCode(
 		exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true
 )
-@ToString(exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true)
+@ToString(
+		exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true
+)
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -86,7 +87,6 @@ public class User extends BaseEntity {
 		/**
 		 * Private field that stores the date of the user's last visit.
 		 */
-		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@Column(name = "last_visit_date")
 		private LocalDateTime lastVisit;
 

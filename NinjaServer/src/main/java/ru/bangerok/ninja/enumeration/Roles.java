@@ -21,12 +21,12 @@ public enum Roles {
 		/**
 		 * The role is the user. Given upon registration.
 		 */
-		USER("ROLE_USER"),
+		ROLE_USER("ROLE_USER"),
 
 		/**
 		 * Role - administrator. Not issued yet. TODO: Add, in the future, the award of this role.
 		 */
-		ADMIN("ROLE_ADMIN");
+		ROLE_ADMIN("ROLE_ADMIN");
 
 		/**
 		 * The role name that is stored in the database.
