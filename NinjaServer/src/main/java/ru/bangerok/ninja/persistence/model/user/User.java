@@ -42,7 +42,7 @@ public class User extends BaseEntity {
 		/**
 		 * Private field that stores the user's full name.
 		 */
-		@Column(name = "full_name", nullable = false)
+		@Column(name = "full_name")
 		private String fullname;
 
 		/**
