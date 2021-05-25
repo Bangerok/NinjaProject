@@ -6,7 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -59,8 +61,8 @@ public class AuthController {
 		 * @param loginRequest data required for user authentication.
 		 * @return {@link ApiResponse} with authentication token.
 		 */
-		@PostMapping("/login")
-		public ApiResponse authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
+		@PatchMapping("/login")
+		public ApiResponse authenticateUser(@RequestBody LoginRequest loginRequest) {
 				String token = userService.creatingTokenForAuthUser(loginRequest);
 				return new ApiResponse(token);
 		}
@@ -87,7 +89,7 @@ public class AuthController {
 		 * @param token user verification token.
 		 * @return {@link ApiResponse} with information about verification.
 		 */
-		@GetMapping("/registrationConfirm")
+		@PutMapping("/registrationConfirm")
 		public ApiResponse confirmRegistration(@RequestParam("token") String token) {
 				VerificationToken verificationToken = userService
 						.getVerificationToken(token);
@@ -112,7 +114,7 @@ public class AuthController {
 		 * @param existingToken expired user verification token.
 		 * @return {@link ApiResponse} with information about sending a new token to the user's email.
 		 */
-		@GetMapping("/resendRegistrationToken")
+		@PutMapping("/resendRegistrationToken")
 		public ApiResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
 				VerificationToken newToken = userService
 						.generateNewVerificationToken(existingToken);

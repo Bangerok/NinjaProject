@@ -21,7 +21,7 @@ export default {
    * @return {AxiosPromise} with a response from the server.
    */
   login(loginData) {
-    return axios.post('/auth/login', loginData);
+    return axios.patch('/auth/login', loginData);
   },
   /**
    * Sending a request to a rest method at '/auth/registrationConfirm'.
@@ -39,7 +39,7 @@ export default {
    * @return {AxiosPromise} with a response from the server.
    */
   confirmEmail(token) {
-    return axios.getWithParams('/auth/registrationConfirm', {token});
+    return axios.put('/auth/registrationConfirm', null,{token});
   },
   /**
    * Sending a request to a rest method at '/auth/resendRegistrationToken'.
@@ -48,6 +48,6 @@ export default {
    * @return {AxiosPromise} with a response from the server.
    */
   reSendVerificationTokenEmail(oldToken) {
-    return axios.getWithParams('/auth/resendRegistrationToken', {oldToken});
+    return axios.put('/auth/resendRegistrationToken',null, {oldToken});
   },
 };
