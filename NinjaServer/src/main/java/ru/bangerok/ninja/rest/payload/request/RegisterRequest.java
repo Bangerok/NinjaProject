@@ -26,7 +26,7 @@ public class RegisterRequest {
 		 * Private field containing the username when registering from a client.
 		 */
 		@NotNull(message = "errors.invalid.empty.username")
-		private String username;
+		private String name;
 
 		/**
 		 * Private field containing the user's email when registering from a client.
