@@ -2,6 +2,7 @@ package ru.bangerok.ninja.enumeration;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
@@ -14,17 +15,18 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  * @since 0.5.7
  */
 @Getter
+@ToString(doNotUseGetters = true)
 @RequiredArgsConstructor
 public enum Roles {
 		/**
 		 * The role is the user. Given upon registration.
 		 */
-		USER("ROLE_USER"),
+		ROLE_USER("ROLE_USER"),
 
 		/**
 		 * Role - administrator. Not issued yet. TODO: Add, in the future, the award of this role.
 		 */
-		ADMIN("ROLE_ADMIN");
+		ROLE_ADMIN("ROLE_ADMIN");
 
 		/**
 		 * The role name that is stored in the database.

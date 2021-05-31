@@ -49,10 +49,7 @@ databaseChangeLog:
             baseColumnNames: user_id
             baseTableName: user_settings
             constraintName: fk_user_settings_user
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedColumnNames: base_id
             referencedTableName: users
-            validate: true

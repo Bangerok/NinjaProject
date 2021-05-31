@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.service.impl;
 
-import static ru.bangerok.ninja.enumeration.Roles.USER;
+import static ru.bangerok.ninja.enumeration.Roles.ROLE_USER;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,9 +17,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.annotation.SessionScope;
-import ru.bangerok.ninja.rest.payload.request.LoginRequest;
-import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
@@ -28,6 +24,8 @@ import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
+import ru.bangerok.ninja.rest.payload.request.LoginRequest;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.security.TokenProvider;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.MessageService;
@@ -35,7 +33,7 @@ import ru.bangerok.ninja.service.UserService;
 
 @RequiredArgsConstructor
 @Slf4j
-@Scope("singleton")
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -82,13 +80,15 @@ public class UserServiceImpl implements UserService {
 				}
 
 				User user = new User();
+				user.setFullname(registerData.getUsername());
 				user.setUsername(registerData.getUsername());
+				user.setEmailVerified(false);
 				user.setEmail(registerData.getEmail());
 				user.setAuthProvider(AuthProvider.local);
 				user.setPassword(passwordEncoder.encode(registerData.getPassword()));
-				Role userRole = repositoryLocator.getRoleRepository().findByName(USER.getName())
+				Role userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER)
 						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
-								"role.error.not.found.by.name", new Object[]{USER.getName()}
+								"role.error.not.found.by.name", new Object[]{ROLE_USER.getName()}
 						)));
 				user.setRoles(Stream.of(userRole).collect(Collectors.toCollection(ArrayList::new)));
 				return repositoryLocator.getUserRepository().save(user);

@@ -33,7 +33,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-                  name: name
+                  name: value
                   type: VARCHAR(255)
             tableName: roles
   - changeSet:
@@ -57,24 +57,18 @@ databaseChangeLog:
             baseColumnNames: role_id
             baseTableName: user_roles
             constraintName: fk_user_roles_roles
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedColumnNames: base_id
             referencedTableName: roles
-            validate: true
         - addForeignKeyConstraint:
             baseColumnNames: user_id
             baseTableName: user_roles
             constraintName: fk_user_roles_user
-            deferrable: false
-            initiallyDeferred: false
-            onDelete: NO ACTION
-            onUpdate: NO ACTION
+            onDelete: CASCADE
+            onUpdate: RESTRICT
             referencedColumnNames: base_id
             referencedTableName: users
-            validate: true
   - changeSet:
       id: db_0.3.3_load_data_for_roles_table
       author: v.kuznetsov

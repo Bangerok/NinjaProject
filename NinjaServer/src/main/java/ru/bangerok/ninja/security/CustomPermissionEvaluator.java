@@ -1,6 +1,8 @@
 package ru.bangerok.ninja.security;
 
 import java.io.Serializable;
+import org.hibernate.Hibernate;
+import org.hibernate.proxy.HibernateProxy;
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
@@ -29,6 +31,11 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
 				if ((auth == null) || (targetDomainObject == null) || !(permission instanceof String)) {
 						return false;
 				}
+
+				if (targetDomainObject instanceof HibernateProxy) {
+						targetDomainObject = Hibernate.unproxy(targetDomainObject);
+				}
+
 				final String targetType = targetDomainObject.getClass().getSimpleName().toUpperCase();
 				return hasPrivilege(auth, targetType, permission.toString().toUpperCase());
 		}

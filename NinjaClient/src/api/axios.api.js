@@ -63,20 +63,10 @@ function request(method, url, params, data, additionalHeaders) {
  * Setting up the GET method for sending to the server.
  *
  * @param url request address.
- * @return {AxiosPromise} with a response from the server.
- */
-function get(url) {
-  return getWithParams(url, null);
-}
-
-/**
- * Setting up the GET method with parameters for sending to the server.
- *
- * @param url request address.
  * @param params request parameters.
  * @return {AxiosPromise} with a response from the server.
  */
-function getWithParams(url, params) {
+function get(url, params) {
   return request('get', url, params, null, null);
 }
 
@@ -106,4 +96,17 @@ function put(url, data, params) {
   return request('put', url, params, data, null);
 }
 
-export default {get, getWithParams, post, put};
+/**
+ * Setting up the PATCH method for sending to the server.
+ *
+ * @param url request address.
+ * @param data request data for processing on the server.
+ * @param params url params.
+ * @return {AxiosPromise} with a response from the server.
+ */
+function patch(url, data, params) {
+  data = data || {};
+  return request('patch', url, params, data, null);
+}
+
+export default {get, post, put, patch};
