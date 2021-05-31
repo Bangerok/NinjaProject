@@ -30,6 +30,8 @@ databaseChangeLog:
                   name: base_status
                   type: VARCHAR(255)
               - column:
+                  constraints:
+                    nullable: false
                   name: full_name
                   type: VARCHAR(255)
               - column:

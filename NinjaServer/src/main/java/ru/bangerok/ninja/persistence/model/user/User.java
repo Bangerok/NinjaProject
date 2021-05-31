@@ -46,7 +46,7 @@ public class User extends BaseEntity {
 		/**
 		 * Private field that stores the user's full name.
 		 */
-		@Column(name = "full_name")
+		@Column(name = "full_name", nullable = false)
 		@JsonView(Views.UserShortData.class)
 		private String fullname;
 

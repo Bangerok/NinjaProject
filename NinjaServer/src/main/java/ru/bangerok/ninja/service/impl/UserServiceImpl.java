@@ -80,8 +80,7 @@ public class UserServiceImpl implements UserService {
 				}
 
 				User user = new User();
-				user.setFullname(registerData.getUsername());
-				user.setUsername(registerData.getUsername());
+				user.setFullname(registerData.getName());
 				user.setEmailVerified(false);
 				user.setEmail(registerData.getEmail());
 				user.setAuthProvider(AuthProvider.local);
