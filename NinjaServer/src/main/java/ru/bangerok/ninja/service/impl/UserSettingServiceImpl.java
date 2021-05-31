@@ -3,8 +3,9 @@ package ru.bangerok.ninja.service.impl;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.annotation.SessionScope;
 import ru.bangerok.ninja.persistence.dao.UserSettingRepository;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.UserSetting;
@@ -13,7 +14,8 @@ import ru.bangerok.ninja.service.UserSettingService;
 
 @RequiredArgsConstructor
 @Slf4j
-@Scope("singleton")
+@SessionScope
+@Transactional
 @Service
 public class UserSettingServiceImpl implements UserSettingService {
 

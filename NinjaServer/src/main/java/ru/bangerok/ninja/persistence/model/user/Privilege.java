@@ -20,8 +20,8 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"name"}, callSuper = true)
-@ToString(of = {"name"}, callSuper = true)
+@EqualsAndHashCode(exclude = {"roles"}, doNotUseGetters = true, callSuper = true)
+@ToString(exclude = {"roles"}, doNotUseGetters = true, callSuper = true)
 @Entity
 @Table(name = "privileges")
 public class Privilege extends BaseEntity {

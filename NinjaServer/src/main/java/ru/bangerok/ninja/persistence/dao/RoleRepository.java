@@ -3,6 +3,7 @@ package ru.bangerok.ninja.persistence.dao;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import ru.bangerok.ninja.enumeration.Roles;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.persistence.model.user.Role;
 
@@ -20,8 +21,8 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
 		/**
 		 * Method for finding a role by its name in the database.
 		 *
-		 * @param name role name.
+		 * @param value role value.
 		 * @return Optional with found role.
 		 */
-		Optional<Role> findByName(String name);
+		Optional<Role> findByValue(Roles value);
 }

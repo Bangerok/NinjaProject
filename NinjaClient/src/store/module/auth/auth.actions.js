@@ -52,7 +52,8 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async register({commit}, registerRequestData) {
-    await authApi.register(registerRequestData).then(response => {
+    try {
+      const response = await authApi.register(registerRequestData);
       commit(
           'setOptionsNotification',
           {color: 'success', text: response.data.message, show: true},
@@ -60,7 +61,7 @@ export default {
       );
 
       return Promise.resolve(response);
-    }).catch((error) => {
+    } catch (error) {
       if (error.response.data.error) {
         return Promise.reject(error);
       } else {
@@ -70,7 +71,7 @@ export default {
             {root: true}
         );
       }
-    });
+    }
   },
   /**
    * Verification of the email specified by the user during registration
@@ -81,35 +82,32 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async confirmEmail({commit}, verifyToken) {
-    await authApi.confirmEmail(verifyToken).then(({data}) => {
-      if (!data.data) {
-        commit(
-            'setOptionsNotification',
-            {color: 'success', text: data.message, show: true},
-            {root: true}
-        );
-      } else {
-        return Promise.reject(data);
-      }
-    });
+    const {data} = await authApi.confirmEmail(verifyToken);
+    if (!data.data) {
+      commit(
+          'setOptionsNotification',
+          {color: 'success', text: data.message, show: true},
+          {root: true}
+      );
+    } else {
+      return Promise.reject(data);
+    }
   },
   /**
    * Sending a new email verification token to the mail to replace the expired
    * one.
    *
    * @param commit module mutation data.
-   * @param expiredVerifyToken expired token.
+   * @param expiredToken expired token.
    * @return {Promise<void>} for further processing if needed.
    */
-  async reSendVerificationTokenEmail({commit}, expiredVerifyToken) {
-    await authApi.reSendVerificationTokenEmail(expiredVerifyToken).then(
-        ({data}) => {
-          commit(
-              'setOptionsNotification',
-              {color: 'success', text: data.message, show: true},
-              {root: true}
-          );
-        });
+  async reSendVerificationTokenEmail({commit}, expiredToken) {
+    const {data} = await authApi.reSendVerificationTokenEmail(expiredToken);
+    commit(
+        'setOptionsNotification',
+        {color: 'success', text: data.message, show: true},
+        {root: true}
+    );
   },
   /**
    * Logging out the user and redirecting to the login page.

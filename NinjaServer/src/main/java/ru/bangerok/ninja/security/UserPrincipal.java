@@ -50,7 +50,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 		public static UserPrincipal create(User user) {
 				List<GrantedAuthority> authorities = new ArrayList<>();
 				for (Role role : user.getRoles()) {
-						authorities.add(new SimpleGrantedAuthority(role.getName()));
+						authorities.add(new SimpleGrantedAuthority(role.getValue().getName()));
 						for (Privilege privilege : role.getPrivileges()) {
 								authorities.add(new SimpleGrantedAuthority(privilege.getName()));
 						}

@@ -3,6 +3,8 @@ package ru.bangerok.ninja.persistence.model.user;
 import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -11,7 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import net.minidev.json.annotate.JsonIgnore;
+import ru.bangerok.ninja.enumeration.Roles;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
 /**
@@ -23,18 +25,19 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"name"}, callSuper = true)
-@ToString(of = {"name"}, callSuper = true)
+@EqualsAndHashCode(exclude = {"privileges"}, doNotUseGetters = true, callSuper = true)
+@ToString(exclude = {"privileges"}, doNotUseGetters = true, callSuper = true)
 @Entity
 @Table(name = "roles")
 public class Role extends BaseEntity {
 
+
 		/**
 		 * Private field that stores the name of the role in the database.
 		 */
-		@Column(name = "name", unique = true, nullable = false)
-		private String name;
-
+		@Column(name = "value", unique = true, nullable = false)
+		@Enumerated(EnumType.STRING)
+		private Roles value;
 		/**
 		 * Private field that stores a list of users who have access to this role.
 		 */
@@ -44,7 +47,6 @@ public class Role extends BaseEntity {
 		/**
 		 * Private field that stores the list of privileges available for this role in the database.
 		 */
-		@JsonIgnore
 		@ManyToMany
 		@JoinTable(name = "role_privileges",
 				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},

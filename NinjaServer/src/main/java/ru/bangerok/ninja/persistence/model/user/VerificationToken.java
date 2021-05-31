@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.persistence.model.user;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,8 +23,8 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(of = {"value"}, callSuper = true)
-@ToString(of = {"value", "expiryDate", "user"}, callSuper = true)
+@EqualsAndHashCode(doNotUseGetters = true, callSuper = true)
+@ToString(doNotUseGetters = true, callSuper = true)
 @Entity
 @Table(name = "verification_tokens")
 public class VerificationToken extends BaseEntity {
@@ -38,6 +39,7 @@ public class VerificationToken extends BaseEntity {
 		 * Private field that stores the date after which the verification token expires.
 		 */
 		@Column(name = "expiry_date", nullable = false)
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		private LocalDateTime expiryDate;
 
 		/**
