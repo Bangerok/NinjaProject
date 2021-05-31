@@ -13,7 +13,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import net.minidev.json.annotate.JsonIgnore;
 import ru.bangerok.ninja.enumeration.Roles;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 
@@ -48,7 +47,6 @@ public class Role extends BaseEntity {
 		/**
 		 * Private field that stores the list of privileges available for this role in the database.
 		 */
-		@JsonIgnore
 		@ManyToMany
 		@JoinTable(name = "role_privileges",
 				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},

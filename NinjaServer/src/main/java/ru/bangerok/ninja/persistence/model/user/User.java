@@ -1,6 +1,8 @@
 package ru.bangerok.ninja.persistence.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
@@ -20,6 +22,7 @@ import lombok.Setter;
 import lombok.ToString;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
+import ru.bangerok.ninja.persistence.model.views.Views;
 
 /**
  * Entity for the table with users. Used to store the data of authorized users and their roles.
@@ -35,6 +38,7 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 @ToString(
 		exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true
 )
+@JsonIgnoreProperties({"lastVisit", "verificationToken", "settings", "roles", "password"})
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
@@ -43,31 +47,36 @@ public class User extends BaseEntity {
 		 * Private field that stores the user's full name.
 		 */
 		@Column(name = "full_name")
+		@JsonView(Views.UserShortData.class)
 		private String fullname;
-
-		/**
-		 * Private field that stores the username.
-		 */
-		@Column(name = "username")
-		private String username;
 
 		/**
 		 * Private field that stores a link to the user's avatar.
 		 */
 		@Column(name = "avatar")
+		@JsonView(Views.UserShortData.class)
 		private String avatar;
+
+		/**
+		 * Private field that stores the username.
+		 */
+		@Column(name = "username")
+		@JsonView(Views.UserFullData.class)
+		private String username;
 
 		/**
 		 * Private field that stores the user's email.
 		 */
 		@Email
 		@Column(name = "email", unique = true, nullable = false)
+		@JsonView(Views.UserFullData.class)
 		private String email;
 
 		/**
 		 * Private field that stores information about the user's email confirmation.
 		 */
 		@Column(name = "email_verified", nullable = false)
+		@JsonView(Views.UserFullData.class)
 		private Boolean emailVerified;
 
 		/**
@@ -75,6 +84,7 @@ public class User extends BaseEntity {
 		 */
 		@Enumerated(EnumType.STRING)
 		@Column(name = "auth_provider", nullable = false)
+		@JsonView(Views.UserFullData.class)
 		private AuthProvider authProvider;
 
 		/**
@@ -82,32 +92,31 @@ public class User extends BaseEntity {
 		 * provider.
 		 */
 		@Column(name = "auth_provider_id")
+		@JsonView(Views.UserFullData.class)
 		private String providerId;
 
 		/**
 		 * Private field that stores the date of the user's last visit.
 		 */
 		@Column(name = "last_visit_date")
+		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		private LocalDateTime lastVisit;
-
-		/**
-		 * Private field that stores, if any, the user's encrypted password.
-		 */
-		@JsonIgnore
-		@Column(name = "password")
-		private String password;
 
 		/**
 		 * Private field that stores the email verification token.
 		 */
-		@JsonIgnore
 		@OneToOne(mappedBy = "user", orphanRemoval = true)
 		private VerificationToken verificationToken;
 
 		/**
+		 * A private field that stores a list of user settings.
+		 */
+		@OneToMany(mappedBy = "user", orphanRemoval = true)
+		private List<UserSetting> settings;
+
+		/**
 		 * Private field that stores the list of roles available to this user.
 		 */
-		@JsonIgnore
 		@ManyToMany
 		@JoinTable(name = "user_roles",
 				joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "base_id")},
@@ -115,9 +124,8 @@ public class User extends BaseEntity {
 		private List<Role> roles;
 
 		/**
-		 * A private field that stores a list of user settings.
+		 * Private field that stores, if any, the user's encrypted password.
 		 */
-		@JsonIgnore
-		@OneToMany(mappedBy = "user", orphanRemoval = true)
-		private List<UserSetting> settings;
+		@Column(name = "password")
+		private String password;
 }

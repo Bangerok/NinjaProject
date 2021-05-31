@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.rest.controllers.auth;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import java.time.LocalDateTime;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
+import ru.bangerok.ninja.persistence.model.views.Views;
 import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.rest.payload.response.ApiResponse;
@@ -51,6 +53,7 @@ public class AuthController {
 		 */
 		@PostAuthorize("hasPermission(returnObject, 'READ')")
 		@GetMapping("/user")
+		@JsonView(Views.UserShortData.class)
 		public User getCurrentUser(@CurrentUser UserPrincipal userPrincipal) {
 				return userService.getCurrentUser(userPrincipal);
 		}

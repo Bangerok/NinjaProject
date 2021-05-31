@@ -15,7 +15,7 @@ import ru.bangerok.ninja.security.CustomPermissionEvaluator;
  * @since 0.3.6
  */
 @Configuration
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
 		/**
