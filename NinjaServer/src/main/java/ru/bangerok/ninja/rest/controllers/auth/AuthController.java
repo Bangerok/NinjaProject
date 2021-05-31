@@ -91,8 +91,7 @@ public class AuthController {
 		 */
 		@PutMapping("/registrationConfirm")
 		public ApiResponse confirmRegistration(@RequestParam("token") String token) {
-				VerificationToken verificationToken = userService
-						.getVerificationToken(token);
+				VerificationToken verificationToken = userService.getVerificationToken(token);
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
 						ApiResponse apiResponse = new ApiResponse();
