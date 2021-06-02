@@ -1,7 +1,6 @@
 // noinspection JSUnresolvedFunction
 
 import authApi from "../../../api/service/auth.service";
-import i18n from "./../../../i18/i18n";
 import router from './../../../router/router';
 
 /**
@@ -16,8 +15,13 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async getCurrentUser({commit}) {
-    const {data} = await authApi.getUser();
-    commit('setCurrentUser', data);
+    try {
+      const {data} = await authApi.getUser();
+      commit('setCurrentUser', data);
+      return Promise.resolve(data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
   /**
    * Sending a request to the server for user authorization by email and password.
@@ -37,8 +41,9 @@ export default {
       commit(
           'setOptionsNotification', {
             color: 'error',
-            text: i18n.tc('errors.invalid.credential'),
-            show: true
+            text: err.response.data.message,
+            show: true,
+            i18n: false
           },
           {root: true}
       );
@@ -56,7 +61,12 @@ export default {
       const response = await authApi.register(registerRequestData);
       commit(
           'setOptionsNotification',
-          {color: 'success', text: response.data.message, show: true},
+          {
+            color: 'success',
+            text: response.data.message,
+            show: true,
+            i18n: true
+          },
           {root: true}
       );
 
@@ -67,7 +77,12 @@ export default {
       } else {
         commit(
             'setOptionsNotification',
-            {color: 'error', text: error.response.data.message, show: true},
+            {
+              color: 'error',
+              text: error.response.data.message,
+              show: true,
+              i18n: true
+            },
             {root: true}
         );
       }
@@ -86,7 +101,7 @@ export default {
     if (!data.data) {
       commit(
           'setOptionsNotification',
-          {color: 'success', text: data.message, show: true},
+          {color: 'success', text: data.message, show: true, i18n: true},
           {root: true}
       );
     } else {
@@ -105,7 +120,7 @@ export default {
     const {data} = await authApi.reSendVerificationTokenEmail(expiredToken);
     commit(
         'setOptionsNotification',
-        {color: 'success', text: data.message, show: true},
+        {color: 'success', text: data.message, show: true, i18n: true},
         {root: true}
     );
   },
@@ -114,7 +129,8 @@ export default {
    *
    * @param commit module mutation data.
    */
-  callLogout({commit}) {
+  async callLogout({commit}) {
+    await authApi.logout();
     commit('setCurrentUser', null);
     localStorage.removeItem("jwt-token");
     router.go(0);

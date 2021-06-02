@@ -25,7 +25,7 @@ public class DatabaseConfig {
 				DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
 				dataSourceBuilder.driverClassName("org.postgresql.Driver");
 				dataSourceBuilder
-						.url("jdbc:postgresql://localhost:5024/ninja_database?serverTimezone=UTC+3");
+						.url("jdbc:postgresql://localhost:5024/ninja_database");
 				dataSourceBuilder.username("ninja");
 				dataSourceBuilder.password("ninja");
 				return dataSourceBuilder.build();

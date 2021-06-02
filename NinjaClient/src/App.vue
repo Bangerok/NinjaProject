@@ -44,7 +44,8 @@ export default {
   }),
   computed: mapState("auth", {"user": state => state.user}),
   methods: {
-    ...mapActions("auth", ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail"]),
+    ...mapActions("auth",
+        ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail", "callLogout"]),
     ...mapActions("settings", ["getAllUserSettings"]),
     /**
      * Receiving a new verification token for a user.
@@ -56,35 +57,35 @@ export default {
     },
   },
   /**
-   * Checking the value of the browser address bar for the presence of various tokens and processing
-   * them when switching to the application.
-   */
-  created() {
-    const uri = new URL(location.href);
-    const jwtToken = uri.searchParams.get("token");
-    if (jwtToken) {
-      localStorage.setItem("jwt-token", jwtToken);
-      document.location.replace(uri.origin);
-      this.$forceUpdate();
-    }
-
-    const confirmEmailToken = uri.searchParams.get("confirmEmailToken");
-    if (confirmEmailToken) {
-      // noinspection JSValidateTypes
-      this.confirmEmail(confirmEmailToken).catch(error => {
-        this.expiredVerifyToken = error.data;
-        this.showConfirmResendTokenDialog = true;
-      });
-    }
-  },
-  /**
-   * Getting user data by jwt token at the mount stage.
+   * Getting user data by jwt token at the mount stage or checking the value of the browser
+   * address bar for the presence of various tokens and processing them when switching to
+   * the application.
    */
   mounted() {
     if (localStorage.getItem("jwt-token")) {
       // noinspection JSValidateTypes
-      this.getCurrentUser();
-      this.getAllUserSettings();
+      this.getCurrentUser().then(() => {
+        this.getAllUserSettings();
+      }).catch(() => {
+        this.callLogout();
+      });
+    } else {
+      const uri = new URL(location.href);
+      const jwtToken = uri.searchParams.get("token");
+      if (jwtToken) {
+        localStorage.setItem("jwt-token", jwtToken);
+        document.location.replace(uri.origin);
+        this.$forceUpdate();
+      }
+
+      const confirmEmailToken = uri.searchParams.get("confirmEmailToken");
+      if (confirmEmailToken) {
+        // noinspection JSValidateTypes
+        this.confirmEmail(confirmEmailToken).catch(error => {
+          this.expiredVerifyToken = error.data;
+          this.showConfirmResendTokenDialog = true;
+        });
+      }
     }
   },
 };

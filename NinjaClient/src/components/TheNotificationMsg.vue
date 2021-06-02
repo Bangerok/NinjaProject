@@ -4,7 +4,7 @@
               v-model="notification.show"
               :color="notification.color"
   >
-    {{ $t(notification.text) }}
+    {{ i18n(notification.text, notification.i18n) }}
     <v-btn text @click="setNotificationShow">
       {{ $t('buttons.closeBtn') }}
     </v-btn>
@@ -20,7 +20,16 @@ import {mapMutations, mapState} from "vuex";
 export default {
   name: "NotificationMsg",
   computed: mapState({'notification': state => state.notification}),
-  methods: mapMutations(['setNotificationShow']),
+  methods: {
+    ...mapMutations(['setNotificationShow']),
+    i18n(text, isLocalized) {
+      if (isLocalized) {
+        return this.$t(text);
+      }
+
+      return text;
+    },
+  }
 };
 </script>
 

@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.bangerok.ninja.config.SecurityConfig;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 
 /**
  * The class that is used to read the JWT authentication token from the request, validate it and set
@@ -51,17 +52,20 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
 						if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
 								long id = tokenProvider.getUserIdFromToken(jwt);
 
-								UserDetails userDetails = customUserDetailsService.loadUserById(id);
+								try {
+										UserDetails userDetails = customUserDetailsService.loadUserById(id);
+										UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+												userDetails, null, userDetails.getAuthorities());
+										authentication
+												.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-								UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-										userDetails, null, userDetails.getAuthorities());
-								authentication
-										.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-								SecurityContextHolder.getContext().setAuthentication(authentication);
+										SecurityContextHolder.getContext().setAuthentication(authentication);
+								} catch (ResourceNotFoundException e) {
+										SecurityContextHolder.getContext().setAuthentication(null);
+								}
 						}
-				} catch (Exception ex) {
-						logger.error("Could not set user authentication in security context", ex);
+				} catch (Exception e) {
+						logger.error("Could not set user authentication in security context", e);
 				}
 
 				filterChain.doFilter(request, response);

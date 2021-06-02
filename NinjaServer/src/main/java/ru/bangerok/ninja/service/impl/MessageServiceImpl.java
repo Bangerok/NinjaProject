@@ -13,7 +13,7 @@ import ru.bangerok.ninja.service.MessageService;
 public class MessageServiceImpl implements MessageService {
 
 		private final MessageSource messages;
-		private Locale locale;
+		private Locale locale = new Locale("en");
 
 		@Override
 		public void setLocale(String language) {
