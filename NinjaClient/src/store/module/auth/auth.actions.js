@@ -97,16 +97,30 @@ export default {
    * @return {Promise<void>} for further processing if needed.
    */
   async confirmEmail({commit}, verifyToken) {
-    const {data} = await authApi.confirmEmail(verifyToken);
-    if (!data.data) {
-      commit(
-          'setOptionsNotification',
-          {color: 'success', text: data.message, show: true, i18n: true},
-          {root: true}
-      );
-    } else {
-      return Promise.reject(data);
+    let notification = {
+      color: "success",
+      text: "",
+      show: true,
+      i18n: true,
+    };
+    try {
+      const {data} = await authApi.confirmEmail(verifyToken);
+      if (!data.data) {
+        notification.text = data.message;
+      } else {
+        return Promise.reject(data);
+      }
+    } catch (e) {
+      notification.color = "error";
+      notification.text = e.response.data.message;
+      notification.i18n = false;
     }
+
+    commit(
+        'setOptionsNotification',
+        notification,
+        {root: true}
+    );
   },
   /**
    * Sending a new email verification token to the mail to replace the expired
