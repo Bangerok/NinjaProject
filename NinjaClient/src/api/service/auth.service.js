@@ -50,4 +50,12 @@ export default {
   reSendVerificationTokenEmail(oldToken) {
     return axios.put('/auth/resendRegistrationToken',null, {oldToken});
   },
+  /**
+   * Sending a request to a rest method at '/auth/resendRegistrationToken'.
+   *
+   * @return {AxiosPromise} with a response from the server.
+   */
+  logout() {
+    return axios.get('/logout');
+  },
 };

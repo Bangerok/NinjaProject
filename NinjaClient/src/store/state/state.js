@@ -22,5 +22,9 @@ export default {
      * Show/hide notification.
      */
     show: false,
+    /**
+     * Need or no localized
+     */
+    i18n: true
   },
 };

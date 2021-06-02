@@ -10,7 +10,6 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.User;
-import ru.bangerok.ninja.service.MessageService;
 
 /**
  * A service class that allows you to get a user in some way.
@@ -25,7 +24,6 @@ import ru.bangerok.ninja.service.MessageService;
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
-		private final MessageService messageService;
 		private final RepositoryLocator repositoryLocator;
 
 		/**
@@ -39,10 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
 				User user = repositoryLocator.getUserRepository().findByEmail(email)
 						.orElseThrow(() ->
-								new ResourceNotFoundException(messageService.getMessageWithArgs(
-										"user.error.not.found.by.email",
-										new Object[]{email}
-								))
+								new ResourceNotFoundException("User with email - %s, not found.", email)
 						);
 
 				return UserPrincipal.create(user);
@@ -57,10 +52,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		 */
 		public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
 				User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
-						() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
-								"user.error.not.found.by.id",
-								new Object[]{id}
-						))
+						() -> new ResourceNotFoundException("User with id - %s, not found.", String.valueOf(id))
 				);
 
 				return UserPrincipal.create(user);

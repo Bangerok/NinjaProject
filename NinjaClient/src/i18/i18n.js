@@ -17,6 +17,6 @@ const messages = {
  * Configuration object used to localize the system.
  */
 export default new VueI18n({
-  locale: 'ru',
+  locale: 'en',
   messages,
 });
