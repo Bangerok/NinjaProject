@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.validation.annotation;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.RECORD_COMPONENT;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -23,7 +24,7 @@ import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
  */
 @Documented
 @Constraint(validatedBy = PasswordMatchesValidator.class)
-@Target({TYPE, ANNOTATION_TYPE})
+@Target({TYPE, ANNOTATION_TYPE, RECORD_COMPONENT})
 @Retention(RUNTIME)
 public @interface PasswordMatches {
 

@@ -55,13 +55,13 @@ public class UserServiceImpl implements UserService {
 		@Override
 		public String creatingTokenForAuthUser(LoginRequest loginData) {
 				Authentication authentication = authenticationManager.authenticate(
-						new UsernamePasswordAuthenticationToken(loginData.getEmail(), loginData.getPassword())
+						new UsernamePasswordAuthenticationToken(loginData.email(), loginData.password())
 				);
 
-				User user = repositoryLocator.getUserRepository().findByEmail(loginData.getEmail())
+				User user = repositoryLocator.getUserRepository().findByEmail(loginData.email())
 						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
 								"user.error.not.found.by.email",
-								new Object[]{loginData.getEmail()}
+								new Object[]{loginData.email()}
 						)));
 
 				user.setLastVisit(LocalDateTime.now());
@@ -72,19 +72,19 @@ public class UserServiceImpl implements UserService {
 
 		@Override
 		public User registerNewUserAccount(RegisterRequest registerData) {
-				if (repositoryLocator.getUserRepository().existsByEmail(registerData.getEmail())) {
+				if (repositoryLocator.getUserRepository().existsByEmail(registerData.email())) {
 						throw new ResourceAlreadyExistException(messageService.getMessageWithArgs(
 								"user.error.exist.email",
-								new Object[]{registerData.getEmail()}
+								new Object[]{registerData.email()}
 						));
 				}
 
 				User user = new User();
-				user.setFullname(registerData.getName());
+				user.setFullname(registerData.name());
 				user.setEmailVerified(false);
-				user.setEmail(registerData.getEmail());
+				user.setEmail(registerData.email());
 				user.setAuthProvider(AuthProvider.local);
-				user.setPassword(passwordEncoder.encode(registerData.getPassword()));
+				user.setPassword(passwordEncoder.encode(registerData.password()));
 				Role userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER)
 						.orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
 								"role.error.not.found.by.name", new Object[]{ROLE_USER.getName()}

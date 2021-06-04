@@ -31,8 +31,8 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 		@Override
 		public boolean isValid(Object obj, ConstraintValidatorContext context) {
 				RegisterRequest registerRequest = (RegisterRequest) obj;
-				boolean result = registerRequest.getPassword()
-						.equals(registerRequest.getMatchingPassword());
+				boolean result = registerRequest.password()
+						.equals(registerRequest.matchingPassword());
 				if (!result) {
 						for (Field field : obj.getClass().getDeclaredFields()) {
 								if (field.isAnnotationPresent(Match.class)) {

@@ -97,9 +97,7 @@ public class AuthController {
 				VerificationToken verificationToken = userService.getVerificationToken(token);
 
 				if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
-						ApiResponse apiResponse = new ApiResponse();
-						apiResponse.setData(verificationToken.getValue());
-						return apiResponse;
+						return new ApiResponse((Object) verificationToken.getValue());
 				}
 
 				User user = verificationToken.getUser();
