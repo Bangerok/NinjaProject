@@ -68,7 +68,7 @@ public class UserSettingsController {
 		 * @param userSetting       setting new data
 		 * @return updated {@link UserSetting}.
 		 */
-		@PutMapping("{id}")
+		@PutMapping("/{id}")
 		@JsonView(Views.UserSettingsData.class)
 		public UserSetting update(
 				@PathVariable("id") UserSetting userSettingFromDb,
