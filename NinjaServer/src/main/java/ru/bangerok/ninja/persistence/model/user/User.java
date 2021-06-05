@@ -20,6 +20,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.data.relational.core.mapping.Table;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 import ru.bangerok.ninja.persistence.model.views.Views;
@@ -39,8 +40,7 @@ import ru.bangerok.ninja.persistence.model.views.Views;
 		exclude = {"verificationToken", "roles", "settings"}, doNotUseGetters = true, callSuper = true
 )
 @JsonIgnoreProperties({"lastVisit", "verificationToken", "settings", "roles", "password"})
-@Entity
-@Table(name = "users")
+@Table("users")
 public class User extends BaseEntity {
 
 		/**

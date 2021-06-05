@@ -17,7 +17,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.relational.core.mapping.Column;
 import ru.bangerok.ninja.persistence.model.views.Views;
 
 /**
@@ -30,7 +32,6 @@ import ru.bangerok.ninja.persistence.model.views.Views;
 @Setter
 @EqualsAndHashCode(doNotUseGetters = true)
 @ToString(doNotUseGetters = true)
-@MappedSuperclass
 public class BaseEntity {
 
 		/**
@@ -38,8 +39,7 @@ public class BaseEntity {
 		 * Automatically generated when saved to the database. No need to pre-assign.
 		 */
 		@Id
-		@GeneratedValue(strategy = GenerationType.IDENTITY)
-		@Column(name = "base_id", unique = true, nullable = false)
+		@Column("base_id")
 		@JsonView(Views.BaseId.class)
 		private Long id;
 
@@ -48,7 +48,7 @@ public class BaseEntity {
 		 * need to pre-assign.
 		 */
 		@CreatedDate
-		@Column(name = "base_created_date", nullable = false)
+		@Column("base_created_date")
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@JsonView(Views.BaseFull.class)
 		private LocalDateTime created;
@@ -58,7 +58,7 @@ public class BaseEntity {
 		 * No need to pre-assign.
 		 */
 		@LastModifiedDate
-		@Column(name = "base_updated_date")
+		@Column("base_updated_date")
 		@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 		@JsonView(Views.BaseFull.class)
 		private LocalDateTime updated;
@@ -67,8 +67,7 @@ public class BaseEntity {
 		 * Private field that stores information about the status of a record in the database. It is not
 		 * necessary to pre-appoint.
 		 */
-		@Column(name = "base_status", nullable = false)
-		@Enumerated(EnumType.STRING)
+		@Column("base_status")
 		@JsonView(Views.BaseFull.class)
 		private BaseStatus status;
 

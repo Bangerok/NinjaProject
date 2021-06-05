@@ -33,4 +33,5 @@ public record RegisterRequest(
 		// Private field containing re-entering the user's password when registering from a client.
 		@Match(message = "errors.invalid.matchingPassword")
 		String matchingPassword) {
+
 }
