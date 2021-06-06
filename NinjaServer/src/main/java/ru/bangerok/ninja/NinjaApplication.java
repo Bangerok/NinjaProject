@@ -1,7 +1,7 @@
 package ru.bangerok.ninja;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import static org.springframework.boot.SpringApplication.run;
+
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import ru.bangerok.ninja.config.DatabaseConfig;
 import ru.bangerok.ninja.config.MailSenderConfig;
@@ -31,11 +31,10 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
  * @author v.kuznetsov
  * @since 0.0.0
  */
-@SpringBootApplication
 @ConfigurationPropertiesScan("ru.bangerok.ninja.config.properties")
 public class NinjaApplication {
 
 		public static void main(String[] args) {
-				SpringApplication.run(NinjaApplication.class, args);
+				run(NinjaApplication.class, args);
 		}
 }
