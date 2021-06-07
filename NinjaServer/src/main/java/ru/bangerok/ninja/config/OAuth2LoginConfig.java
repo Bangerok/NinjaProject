@@ -24,13 +24,13 @@ public class OAuth2LoginConfig {
 		/**
 		 * Private variable containing the client ID.
 		 */
-		@Value("${spring.security.oauth2.client.registration.google.clientId}")
+		@Value("${spring.security.oauth2.client.registration.google.clientId:clientId}")
 		private String clientId;
 
 		/**
 		 * Private variable containing the client secret.
 		 */
-		@Value("${spring.security.oauth2.client.registration.google.clientSecret}")
+		@Value("${spring.security.oauth2.client.registration.google.clientSecret:clientSecret}")
 		private String clientSecret;
 
 		/**

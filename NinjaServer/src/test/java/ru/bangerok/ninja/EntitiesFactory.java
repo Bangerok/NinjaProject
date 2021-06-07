@@ -22,10 +22,10 @@ public class EntitiesFactory {
 		 */
 		public User getNewUser() {
 				User user = new User();
-				user.setPassword("TestUserPassword");
-				user.setAuthProvider(AuthProvider.google);
-				user.setProviderId("TestProviderId");
+				user.setFullname("Ivanov Ivan");
+				user.setEmailVerified(false);
 				user.setEmail(String.format("test.%d@example.com", getRandomNumber()));
+				user.setAuthProvider(AuthProvider.local);
 				return user;
 		}
 
