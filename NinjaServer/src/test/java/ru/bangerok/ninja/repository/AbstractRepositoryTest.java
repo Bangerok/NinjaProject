@@ -12,7 +12,6 @@ import ru.bangerok.ninja.EntitiesFactory;
  * @author v.kuznetsov
  * @since 0.3.9
  */
-@SpringBootTest
 public abstract class AbstractRepositoryTest {
 
 		protected EntitiesFactory factory;
