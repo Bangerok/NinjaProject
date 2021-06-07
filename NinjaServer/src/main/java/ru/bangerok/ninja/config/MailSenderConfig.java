@@ -21,13 +21,13 @@ public class MailSenderConfig {
 		/**
 		 * Private field with username for mail sender.
 		 */
-		@Value("${spring.mail.username}")
+		@Value("${spring.mail.username:username}")
 		private String username;
 
 		/**
 		 * Private field with password for mail sender.
 		 */
-		@Value("${spring.mail.password}")
+		@Value("${spring.mail.password:password}")
 		private String password;
 
 		/**
