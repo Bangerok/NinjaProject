@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.persistence.dao;
 
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.persistence.model.user.User;
 
@@ -15,33 +15,32 @@ import ru.bangerok.ninja.persistence.model.user.User;
  * @since 0.1.0
  */
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends ReactiveCrudRepository<User, Long> {
 
 		/**
 		 * Method for finding a user by his id in the database.
 		 *
 		 * @param id user ID.
-		 * @return Optional with found user.
+		 * @return Mono with found user.
 		 */
 		@SuppressWarnings("NullableProblems")
-		@Override
-		Optional<User> findById(Long id);
+		Mono<User> findById(Long id);
 
 		/**
 		 * Method for finding a user by his email in the database.
 		 *
 		 * @param email user's email.
-		 * @return Optional with found user.
+		 * @return Mono with found user.
 		 */
-		Optional<User> findByEmail(String email);
+		Mono<User> findByEmail(String email);
 
 		/**
 		 * Method for finding a user by his id from an external provider in the database.
 		 *
 		 * @param providerId user id on the external authorization provider.
-		 * @return Optional with found user.
+		 * @return Mono with found user.
 		 */
-		Optional<User> findByProviderId(String providerId);
+		Mono<User> findByProviderId(String providerId);
 
 		/**
 		 * Method for checking for the existence of email in the database.

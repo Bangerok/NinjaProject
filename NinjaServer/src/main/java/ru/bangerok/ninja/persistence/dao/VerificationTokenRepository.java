@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.persistence.dao;
 
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
@@ -16,13 +16,13 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  * @since 0.4.3
  */
 @Repository
-public interface VerificationTokenRepository extends JpaRepository<VerificationToken, Long> {
+public interface VerificationTokenRepository extends ReactiveCrudRepository<VerificationToken, Long> {
 
-		/**
-		 * Method for finding a verification token by its token value in the database.
-		 *
-		 * @param Value verification token value.
-		 * @return Optional with found token.
-		 */
-		Optional<VerificationToken> findByValue(String Value);
+    /**
+     * Method for finding a verification token by its token value in the database.
+     *
+     * @param Value verification token value.
+     * @return Mono with found token.
+     */
+    Mono<VerificationToken> findByValue(String Value);
 }

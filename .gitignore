@@ -1,6 +1,7 @@
 # Indellij Idea
 **.iml
 .idea/
+Runs/
 
 # Maven
 **/target/

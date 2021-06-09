@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.persistence.dao;
 
-import java.util.Optional;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 import ru.bangerok.ninja.enumeration.Roles;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.persistence.model.user.Role;
@@ -16,13 +16,13 @@ import ru.bangerok.ninja.persistence.model.user.Role;
  * @since 0.3.3
  */
 @Repository
-public interface RoleRepository extends JpaRepository<Role, Long> {
+public interface RoleRepository extends ReactiveCrudRepository<Role, Long> {
 
 		/**
 		 * Method for finding a role by its name in the database.
 		 *
 		 * @param value role value.
-		 * @return Optional with found role.
+		 * @return Mono with found role.
 		 */
-		Optional<Role> findByValue(Roles value);
+		Mono<Role> findByValue(Roles value);
 }
