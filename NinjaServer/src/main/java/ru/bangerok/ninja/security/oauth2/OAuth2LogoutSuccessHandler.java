@@ -20,24 +20,25 @@ import ru.bangerok.ninja.config.SecurityConfig;
 @RequiredArgsConstructor
 @Component
 public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
-		LogoutSuccessHandler {
+    LogoutSuccessHandler {
 
-		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+  private final HttpCookieOAuth2AuthorizationRequestRepository
+      httpCookieOAuth2AuthorizationRequestRepository;
 
-		/**
-		 * Method called upon successful user logout, designed to remove the authorization cookie from
-		 * the response.
-		 *
-		 * @param request        request.
-		 * @param response       response.
-		 * @param authentication authentication.
-		 */
-		@Override
-		public void onLogoutSuccess(
-				HttpServletRequest request,
-				HttpServletResponse response,
-				Authentication authentication) {
-				httpCookieOAuth2AuthorizationRequestRepository
-						.removeAuthorizationRequestCookies(request, response);
-		}
+  /**
+   * Method called upon successful user logout, designed to remove the authorization cookie from
+   * the response.
+   *
+   * @param request        request.
+   * @param response       response.
+   * @param authentication authentication.
+   */
+  @Override
+  public void onLogoutSuccess(
+      HttpServletRequest request,
+      HttpServletResponse response,
+      Authentication authentication) {
+    httpCookieOAuth2AuthorizationRequestRepository
+        .removeAuthorizationRequestCookies(request, response);
+  }
 }

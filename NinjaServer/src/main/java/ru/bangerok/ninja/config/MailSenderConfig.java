@@ -18,39 +18,39 @@ import ru.bangerok.ninja.service.impl.MailServiceImpl;
 @Configuration
 public class MailSenderConfig {
 
-		/**
-		 * Private field with username for mail sender.
-		 */
-		@Value("${spring.mail.username:username}")
-		private String username;
+  /**
+   * Private field with username for mail sender.
+   */
+  @Value("${spring.mail.username:username}")
+  private String username;
 
-		/**
-		 * Private field with password for mail sender.
-		 */
-		@Value("${spring.mail.password:password}")
-		private String password;
+  /**
+   * Private field with password for mail sender.
+   */
+  @Value("${spring.mail.password:password}")
+  private String password;
 
-		/**
-		 * Getting and configuring the settings object for sending messages to the emails.
-		 * <p>
-		 * Used for example here: {@link MailServiceImpl}.
-		 *
-		 * @return configuration object with mail sender settings.
-		 */
-		@Bean
-		public JavaMailSender getJavaMailSender() {
-				JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-				mailSender.setHost("smtp.gmail.com");
-				mailSender.setPort(587);
+  /**
+   * Getting and configuring the settings object for sending messages to the emails.
+   * <p>
+   * Used for example here: {@link MailServiceImpl}.
+   *
+   * @return configuration object with mail sender settings.
+   */
+  @Bean
+  public JavaMailSender getJavaMailSender() {
+    JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+    mailSender.setHost("smtp.gmail.com");
+    mailSender.setPort(587);
 
-				mailSender.setUsername(username);
-				mailSender.setPassword(password);
+    mailSender.setUsername(username);
+    mailSender.setPassword(password);
 
-				Properties props = mailSender.getJavaMailProperties();
-				props.put("mail.transport.protocol", "smtp");
-				props.put("mail.smtp.auth", "true");
-				props.put("mail.smtp.starttls.enable", "true");
+    Properties props = mailSender.getJavaMailProperties();
+    props.put("mail.transport.protocol", "smtp");
+    props.put("mail.smtp.auth", "true");
+    props.put("mail.smtp.starttls.enable", "true");
 
-				return mailSender;
-		}
+    return mailSender;
+  }
 }

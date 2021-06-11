@@ -19,31 +19,31 @@ import ru.bangerok.ninja.service.UserSettingService;
 @Service
 public class UserSettingServiceImpl implements UserSettingService {
 
-		private final UserSettingRepository userSettingRepo;
-		private final MessageService messageService;
+  private final UserSettingRepository userSettingRepo;
+  private final MessageService messageService;
 
-		@Override
-		public List<UserSetting> getAll(User user) {
-				return userSettingRepo.findAllByUser(user);
-		}
+  @Override
+  public List<UserSetting> getAll(User user) {
+    return userSettingRepo.findAllByUser(user);
+  }
 
-		@Override
-		public UserSetting create(UserSetting userSetting, User user) {
-				userSetting.setUser(user);
-				configuringUserLanguage(userSetting);
-				return userSettingRepo.save(userSetting);
-		}
+  @Override
+  public UserSetting create(UserSetting userSetting, User user) {
+    userSetting.setUser(user);
+    configuringUserLanguage(userSetting);
+    return userSettingRepo.save(userSetting);
+  }
 
-		@Override
-		public UserSetting update(UserSetting userSettingFromDb, UserSetting userSetting) {
-				userSettingFromDb.setValue(userSetting.getValue());
-				configuringUserLanguage(userSettingFromDb);
-				return userSettingRepo.save(userSettingFromDb);
-		}
+  @Override
+  public UserSetting update(UserSetting userSettingFromDb, UserSetting userSetting) {
+    userSettingFromDb.setValue(userSetting.getValue());
+    configuringUserLanguage(userSettingFromDb);
+    return userSettingRepo.save(userSettingFromDb);
+  }
 
-		private void configuringUserLanguage(UserSetting userSetting) {
-				if (userSetting.getName().equals("locale")) {
-						messageService.setLocale(userSetting.getValue());
-				}
-		}
+  private void configuringUserLanguage(UserSetting userSetting) {
+    if (userSetting.getName().equals("locale")) {
+      messageService.setLocale(userSetting.getValue());
+    }
+  }
 }

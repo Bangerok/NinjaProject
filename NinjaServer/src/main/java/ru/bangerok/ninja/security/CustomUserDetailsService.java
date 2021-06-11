@@ -24,37 +24,37 @@ import ru.bangerok.ninja.persistence.model.user.User;
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
-		private final RepositoryLocator repositoryLocator;
+  private final RepositoryLocator repositoryLocator;
 
-		/**
-		 * Method to get create authenticated user based on user retrieved from database via email.
-		 *
-		 * @param email email.
-		 * @return {@link UserDetails} authenticated user.
-		 * @throws ResourceNotFoundException user not found by email.
-		 */
-		@Override
-		public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
-				User user = repositoryLocator.getUserRepository().findByEmail(email)
-						.orElseThrow(() ->
-								new ResourceNotFoundException("User with email - %s, not found.", email)
-						);
+  /**
+   * Method to get create authenticated user based on user retrieved from database via email.
+   *
+   * @param email email.
+   * @return {@link UserDetails} authenticated user.
+   * @throws ResourceNotFoundException user not found by email.
+   */
+  @Override
+  public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
+    User user = repositoryLocator.getUserRepository().findByEmail(email)
+        .orElseThrow(() ->
+            new ResourceNotFoundException("User with email - %s, not found.", email)
+        );
 
-				return UserPrincipal.create(user);
-		}
+    return UserPrincipal.create(user);
+  }
 
-		/**
-		 * Method to get create authenticated user based on user retrieved from database by id.
-		 *
-		 * @param id user ID.
-		 * @return {@link UserDetails} authenticated user.
-		 * @throws ResourceNotFoundException user not found by id.
-		 */
-		public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
-				User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
-						() -> new ResourceNotFoundException("User with id - %s, not found.", String.valueOf(id))
-				);
+  /**
+   * Method to get create authenticated user based on user retrieved from database by id.
+   *
+   * @param id user ID.
+   * @return {@link UserDetails} authenticated user.
+   * @throws ResourceNotFoundException user not found by id.
+   */
+  public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
+    User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
+        () -> new ResourceNotFoundException("User with id - %s, not found.", String.valueOf(id))
+    );
 
-				return UserPrincipal.create(user);
-		}
+    return UserPrincipal.create(user);
+  }
 }

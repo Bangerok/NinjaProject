@@ -22,8 +22,8 @@ import ru.bangerok.ninja.service.UserSettingService;
 @Service
 public class ServiceLocator {
 
-		private final UserService userService;
-		private final MailService mailService;
-		private final MessageService messageService;
-		private final UserSettingService userSettingService;
+  private final UserService userService;
+  private final MailService mailService;
+  private final MessageService messageService;
+  private final UserSettingService userSettingService;
 }

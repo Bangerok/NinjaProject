@@ -9,23 +9,23 @@ package ru.bangerok.ninja.persistence.model.views;
  */
 public class Views {
 
-		public interface BaseId {
+  public interface BaseId {
 
-		}
+  }
 
-		public interface BaseFull extends BaseId {
+  public interface BaseFull extends BaseId {
 
-		}
+  }
 
-		public interface UserShortData extends BaseId {
+  public interface UserShortData extends BaseId {
 
-		}
+  }
 
-		public interface UserFullData extends UserShortData {
+  public interface UserFullData extends UserShortData {
 
-		}
+  }
 
-		public interface UserSettingsData extends BaseId {
+  public interface UserSettingsData extends BaseId {
 
-		}
+  }
 }

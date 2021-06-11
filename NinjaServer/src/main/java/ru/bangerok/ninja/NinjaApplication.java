@@ -1,7 +1,6 @@
 package ru.bangerok.ninja;
 
-import static org.springframework.boot.SpringApplication.run;
-
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import ru.bangerok.ninja.config.DatabaseConfig;
 import ru.bangerok.ninja.config.MailSenderConfig;
@@ -18,23 +17,23 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
  * run.
  * <p>
  * Application configuration is represented by these classes:
- * <p> - {@link JwtProperties},
- * <p> - {@link MessagesConfig},
- * <p> - {@link MethodSecurityConfig},
- * <p> - {@link MvcConfig},
- * <p> - {@link SecurityConfig},
- * <p> - {@link ThymeleafConfiguration},
- * <p> - {@link MailSenderConfig},
- * <p> - {@link DatabaseConfig},
- * <p> - {@link OAuth2LoginConfig}.
+ * </p>
+ * <p> - {@link JwtProperties}, </p>
+ * <p> - {@link MessagesConfig}, </p>
+ * <p> - {@link MethodSecurityConfig}, </p>
+ * <p> - {@link MvcConfig}, </p>
+ * <p> - {@link SecurityConfig}, </p>
+ * <p> - {@link ThymeleafConfiguration}, </p>
+ * <p> - {@link MailSenderConfig}, </p>
+ * <p> - {@link DatabaseConfig}, </p>
+ * <p> - {@link OAuth2LoginConfig}. </p>
  *
  * @author v.kuznetsov
  * @since 0.0.0
  */
 @ConfigurationPropertiesScan("ru.bangerok.ninja.config.properties")
 public class NinjaApplication {
-
-		public static void main(String[] args) {
-				run(NinjaApplication.class, args);
-		}
+  public static void main(String[] args) {
+    SpringApplication.run(NinjaApplication.class, args);
+  }
 }

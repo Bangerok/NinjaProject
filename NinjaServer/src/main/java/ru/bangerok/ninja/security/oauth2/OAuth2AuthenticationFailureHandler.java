@@ -26,26 +26,27 @@ import ru.bangerok.ninja.util.CookieUtils;
 @Component
 public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-		private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
+  private final HttpCookieOAuth2AuthorizationRequestRepository
+      httpCookieOAuth2AuthorizationRequestRepository;
 
-		/**
-		 * Method called when user authentication fails and redirects to client.
-		 *
-		 * @param request  request.
-		 * @param response response.
-		 * @throws IOException server redirect error.
-		 */
-		@Override
-		public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
-				AuthenticationException exception) throws IOException {
-				String targetUrl = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
-						.map(Cookie::getValue)
-						.orElse(("/"));
-				targetUrl = UriComponentsBuilder.fromUriString(targetUrl)
-						.queryParam("error", exception.getLocalizedMessage())
-						.build().toUriString();
-				httpCookieOAuth2AuthorizationRequestRepository
-						.removeAuthorizationRequestCookies(request, response);
-				getRedirectStrategy().sendRedirect(request, response, targetUrl);
-		}
+  /**
+   * Method called when user authentication fails and redirects to client.
+   *
+   * @param request  request.
+   * @param response response.
+   * @throws IOException server redirect error.
+   */
+  @Override
+  public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                      AuthenticationException exception) throws IOException {
+    String targetUrl = CookieUtils.getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
+        .map(Cookie::getValue)
+        .orElse(("/"));
+    targetUrl = UriComponentsBuilder.fromUriString(targetUrl)
+        .queryParam("error", exception.getLocalizedMessage())
+        .build().toUriString();
+    httpCookieOAuth2AuthorizationRequestRepository
+        .removeAuthorizationRequestCookies(request, response);
+    getRedirectStrategy().sendRedirect(request, response, targetUrl);
+  }
 }

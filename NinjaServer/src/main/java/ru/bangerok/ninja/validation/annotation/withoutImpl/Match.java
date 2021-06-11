@@ -21,5 +21,5 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 @Retention(RUNTIME)
 public @interface Match {
 
-		String message() default "Dont match passwords";
+  String message() default "Dont match passwords";
 }

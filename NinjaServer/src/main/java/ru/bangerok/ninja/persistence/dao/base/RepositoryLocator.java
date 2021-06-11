@@ -21,7 +21,7 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
 @Service
 public class RepositoryLocator {
 
-		private final UserRepository userRepository;
-		private final RoleRepository roleRepository;
-		private final VerificationTokenRepository tokenRepository;
+  private final UserRepository userRepository;
+  private final RoleRepository roleRepository;
+  private final VerificationTokenRepository tokenRepository;
 }

@@ -9,11 +9,11 @@ package ru.bangerok.ninja.exception.resource;
  */
 public class ResourceNotFoundException extends RuntimeException {
 
-		public ResourceNotFoundException(String message) {
-				super(message);
-		}
+  public ResourceNotFoundException(String message) {
+    super(message);
+  }
 
-		public ResourceNotFoundException(String message, String value) {
-				super(String.format(message, value));
-		}
+  public ResourceNotFoundException(String message, String value) {
+    super(String.format(message, value));
+  }
 }

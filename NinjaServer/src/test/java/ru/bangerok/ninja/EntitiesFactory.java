@@ -15,21 +15,21 @@ import ru.bangerok.ninja.repository.AbstractRepositoryTest;
  */
 public class EntitiesFactory {
 
-		/**
-		 * Method for generating a user for further deletion.
-		 *
-		 * @return generated user.
-		 */
-		public User getNewUser() {
-				User user = new User();
-				user.setFullname("Ivanov Ivan");
-				user.setEmailVerified(false);
-				user.setEmail(String.format("test.%d@example.com", getRandomNumber()));
-				user.setAuthProvider(AuthProvider.local);
-				return user;
-		}
+  /**
+   * Method for generating a user for further deletion.
+   *
+   * @return generated user.
+   */
+  public User getNewUser() {
+    User user = new User();
+    user.setFullname("Ivanov Ivan");
+    user.setEmailVerified(false);
+    user.setEmail(String.format("test.%d@example.com", getRandomNumber()));
+    user.setAuthProvider(AuthProvider.LOCAL);
+    return user;
+  }
 
-		private int getRandomNumber() {
-				return new Random().nextInt();
-		}
+  private int getRandomNumber() {
+    return new Random().nextInt();
+  }
 }

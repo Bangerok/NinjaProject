@@ -28,9 +28,9 @@ import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 @Retention(RUNTIME)
 public @interface PasswordMatches {
 
-		String message() default "Matching error";
+  String message() default "Matching error";
 
-		Class<?>[] groups() default {};
+  Class<?>[] groups() default {};
 
-		Class<? extends Payload>[] payload() default {};
+  Class<? extends Payload>[] payload() default {};
 }

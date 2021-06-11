@@ -16,20 +16,20 @@ import ru.bangerok.ninja.service.impl.MessageServiceImpl;
 @Configuration
 public class MessagesConfig {
 
-		/**
-		 * Getting and configuring a ResourceBundle to localize messages by key.
-		 * <p>
-		 * Used for example here: {@link MessageServiceImpl}.
-		 *
-		 * @return configuration object with settings for receiving messages.
-		 */
-		@Bean
-		public ResourceBundleMessageSource messages() {
-				var source = new ResourceBundleMessageSource();
-				source.setBasenames("messages/labels");
-				source.setDefaultEncoding(StandardCharsets.UTF_8.name());
-				source.setUseCodeAsDefaultMessage(true);
+  /**
+   * Getting and configuring a ResourceBundle to localize messages by key.
+   * <p>
+   * Used for example here: {@link MessageServiceImpl}.
+   *
+   * @return configuration object with settings for receiving messages.
+   */
+  @Bean
+  public ResourceBundleMessageSource messages() {
+    var source = new ResourceBundleMessageSource();
+    source.setBasenames("messages/labels");
+    source.setDefaultEncoding(StandardCharsets.UTF_8.name());
+    source.setUseCodeAsDefaultMessage(true);
 
-				return source;
-		}
+    return source;
+  }
 }

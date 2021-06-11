@@ -15,32 +15,32 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class DatabaseConfig {
 
-		/**
-		 * Getting and configuring the settings object for connecting to the database.
-		 *
-		 * @return configuration object with database settings.
-		 */
-		@Bean
-		public DataSource getDataSource() {
-				DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
-				dataSourceBuilder.driverClassName("org.postgresql.Driver");
-				dataSourceBuilder
-						.url("jdbc:postgresql://localhost:5024/ninja_database");
-				dataSourceBuilder.username("ninja");
-				dataSourceBuilder.password("ninja");
-				return dataSourceBuilder.build();
-		}
+  /**
+   * Getting and configuring the settings object for connecting to the database.
+   *
+   * @return configuration object with database settings.
+   */
+  @Bean
+  public DataSource getDataSource() {
+    DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
+    dataSourceBuilder.driverClassName("org.postgresql.Driver");
+    dataSourceBuilder
+        .url("jdbc:postgresql://localhost:5024/ninja_database");
+    dataSourceBuilder.username("ninja");
+    dataSourceBuilder.password("ninja");
+    return dataSourceBuilder.build();
+  }
 
-		/**
-		 * Getting and configuring the settings object for liquibase (database versioning).
-		 *
-		 * @return configuration object with liquibase settings.
-		 */
-		@Bean
-		public SpringLiquibase liquibase() {
-				SpringLiquibase liquibase = new SpringLiquibase();
-				liquibase.setChangeLog("classpath:liquibase/db.changelog-master.yml");
-				liquibase.setDataSource(getDataSource());
-				return liquibase;
-		}
+  /**
+   * Getting and configuring the settings object for liquibase (database versioning).
+   *
+   * @return configuration object with liquibase settings.
+   */
+  @Bean
+  public SpringLiquibase liquibase() {
+    SpringLiquibase liquibase = new SpringLiquibase();
+    liquibase.setChangeLog("classpath:liquibase/db.changelog-master.yml");
+    liquibase.setDataSource(getDataSource());
+    return liquibase;
+  }
 }

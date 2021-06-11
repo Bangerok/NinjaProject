@@ -2,9 +2,9 @@ package ru.bangerok.ninja.event;
 
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
+import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
-import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * An event-class that is triggered after successful user registration.
@@ -17,12 +17,12 @@ import ru.bangerok.ninja.persistence.model.user.User;
 @Getter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
-		private final User user;
-		private final String appUrl;
+  private final User user;
+  private final String appUrl;
 
-		public OnRegistrationCompleteEvent(User user, String appUrl) {
-				super(user);
-				this.user = user;
-				this.appUrl = appUrl;
-		}
+  public OnRegistrationCompleteEvent(User user, String appUrl) {
+    super(user);
+    this.user = user;
+    this.appUrl = appUrl;
+  }
 }

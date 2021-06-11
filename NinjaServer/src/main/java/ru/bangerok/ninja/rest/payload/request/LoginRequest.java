@@ -10,11 +10,11 @@ import ru.bangerok.ninja.rest.controllers.auth.AuthController;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-public record LoginRequest (
-		// Private field containing the user's email when authorizing from the client.
-		String email,
+public record LoginRequest(
+    // Private field containing the user's email when authorizing from the client.
+    String email,
 
-		// Private field containing the user's password when authorizing from the client.
-		String password) {
+    // Private field containing the user's password when authorizing from the client.
+    String password) {
 
 }

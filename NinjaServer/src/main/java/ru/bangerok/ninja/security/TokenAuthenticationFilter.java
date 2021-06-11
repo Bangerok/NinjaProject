@@ -28,60 +28,62 @@ import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
  */
 public class TokenAuthenticationFilter extends OncePerRequestFilter {
 
-		@Autowired
-		private TokenProvider tokenProvider;
+  @Autowired
+  private TokenProvider tokenProvider;
 
-		@Autowired
-		private CustomUserDetailsService customUserDetailsService;
+  @Autowired
+  private CustomUserDetailsService customUserDetailsService;
 
-		/**
-		 * Method for pre-checking the authentication data in the request before passing it further.
-		 *
-		 * @param request     request data.
-		 * @param response    response data.
-		 * @param filterChain chain of requests.
-		 */
-		@Transactional
-		@Override
-		protected void doFilterInternal(@NonNull HttpServletRequest request,
-				@NonNull HttpServletResponse response,
-				@NonNull FilterChain filterChain) throws ServletException, IOException {
-				try {
-						String jwt = getJwtFromRequest(request);
+  /**
+   * Method for pre-checking the authentication data in the request before passing it further.
+   *
+   * @param request     request data.
+   * @param response    response data.
+   * @param filterChain chain of requests.
+   */
+  @Transactional
+  @Override
+  protected void doFilterInternal(@NonNull HttpServletRequest request,
+                                  @NonNull HttpServletResponse response,
+                                  @NonNull FilterChain filterChain)
+      throws ServletException, IOException {
+    try {
+      String jwt = getJwtFromRequest(request);
 
-						if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-								long id = tokenProvider.getUserIdFromToken(jwt);
+      if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
+        long id = tokenProvider.getUserIdFromToken(jwt);
 
-								try {
-										UserDetails userDetails = customUserDetailsService.loadUserById(id);
-										UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-												userDetails, null, userDetails.getAuthorities());
-										authentication
-												.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        try {
+          UserDetails userDetails = customUserDetailsService.loadUserById(id);
+          UsernamePasswordAuthenticationToken authentication =
+              new UsernamePasswordAuthenticationToken(
+                  userDetails, null, userDetails.getAuthorities());
+          authentication
+              .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
-										SecurityContextHolder.getContext().setAuthentication(authentication);
-								} catch (ResourceNotFoundException e) {
-										SecurityContextHolder.getContext().setAuthentication(null);
-								}
-						}
-				} catch (Exception e) {
-						logger.error("Could not set user authentication in security context", e);
-				}
+          SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (ResourceNotFoundException e) {
+          SecurityContextHolder.getContext().setAuthentication(null);
+        }
+      }
+    } catch (Exception e) {
+      logger.error("Could not set user authentication in security context", e);
+    }
 
-				filterChain.doFilter(request, response);
-		}
+    filterChain.doFilter(request, response);
+  }
 
-		/**
-		 * Method for getting an authentication token from request headers.
-		 *
-		 * @param request request data.
-		 * @return a string with a token, if any, otherwise null.
-		 */
-		private String getJwtFromRequest(HttpServletRequest request) {
-				String bearerToken = request.getHeader("Authorization");
-				if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-						return bearerToken.substring(7);
-				}
-				return null;
-		}
+  /**
+   * Method for getting an authentication token from request headers.
+   *
+   * @param request request data.
+   * @return a string with a token, if any, otherwise null.
+   */
+  private String getJwtFromRequest(HttpServletRequest request) {
+    String bearerToken = request.getHeader("Authorization");
+    if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
+      return bearerToken.substring(7);
+    }
+    return null;
+  }
 }

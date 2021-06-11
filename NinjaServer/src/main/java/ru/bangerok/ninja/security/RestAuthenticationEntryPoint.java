@@ -20,19 +20,20 @@ import ru.bangerok.ninja.config.SecurityConfig;
  */
 public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-		private static final Logger logger = LoggerFactory
-				.getLogger(RestAuthenticationEntryPoint.class);
+  private static final Logger logger = LoggerFactory
+      .getLogger(RestAuthenticationEntryPoint.class);
 
-		/**
-		 * Method for sending authentication error to client.
-		 *
-		 * @param httpServletRequest  request.
-		 * @param httpServletResponse response.
-		 */
-		@Override
-		public void commence(HttpServletRequest httpServletRequest,
-				HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException {
-				logger.error("Responding with unauthorized error. Message - {}", e.getMessage());
-				httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getLocalizedMessage());
-		}
+  /**
+   * Method for sending authentication error to client.
+   *
+   * @param httpServletRequest  request.
+   * @param httpServletResponse response.
+   */
+  @Override
+  public void commence(HttpServletRequest httpServletRequest,
+                       HttpServletResponse httpServletResponse, AuthenticationException e)
+      throws IOException {
+    logger.error("Responding with unauthorized error. Message - {}", e.getMessage());
+    httpServletResponse.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getLocalizedMessage());
+  }
 }

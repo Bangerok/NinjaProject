@@ -12,7 +12,7 @@ import ru.bangerok.ninja.service.impl.MailServiceImpl;
  */
 public final class FailureSendEmailException extends RuntimeException {
 
-		public FailureSendEmailException(final String message) {
-				super(message);
-		}
+  public FailureSendEmailException(final String message) {
+    super(message);
+  }
 }

@@ -28,24 +28,24 @@ import ru.bangerok.ninja.persistence.model.views.Views;
 @Table(name = "user_settings")
 public class UserSetting extends BaseEntity {
 
-		/**
-		 * A private field that stores the name of setting.
-		 */
-		@Column(name = "name", nullable = false)
-		@JsonView(Views.UserSettingsData.class)
-		private String name;
+  /**
+   * A private field that stores the name of setting.
+   */
+  @Column(name = "name", nullable = false)
+  @JsonView(Views.UserSettingsData.class)
+  private String name;
 
-		/**
-		 * A private field that stores the value of setting.
-		 */
-		@Column(name = "value", nullable = false)
-		@JsonView(Views.UserSettingsData.class)
-		private String value;
+  /**
+   * A private field that stores the value of setting.
+   */
+  @Column(name = "value", nullable = false)
+  @JsonView(Views.UserSettingsData.class)
+  private String value;
 
-		/**
-		 * A private field where the user of the saved setting is stored.
-		 */
-		@ManyToOne
-		@JoinColumn(name = "user_id", nullable = false)
-		private User user;
+  /**
+   * A private field where the user of the saved setting is stored.
+   */
+  @ManyToOne
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
 }

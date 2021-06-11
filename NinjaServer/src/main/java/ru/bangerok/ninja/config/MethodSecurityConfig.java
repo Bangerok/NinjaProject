@@ -18,18 +18,18 @@ import ru.bangerok.ninja.security.CustomPermissionEvaluator;
 @EnableGlobalMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
 
-		/**
-		 * Method for creating and configuring a handler, which is called when using validation
-		 * expressions.
-		 *
-		 * @return customized handler with custom service class inside. Annotations - PreAuthorize or
-		 * PostAuthorize.
-		 */
-		@Override
-		protected MethodSecurityExpressionHandler createExpressionHandler() {
-				DefaultMethodSecurityExpressionHandler expressionHandler =
-						new DefaultMethodSecurityExpressionHandler();
-				expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
-				return expressionHandler;
-		}
+  /**
+   * Method for creating and configuring a handler, which is called when using validation
+   * expressions.
+   *
+   * @return customized handler with custom service class inside. Annotations - PreAuthorize or
+   * PostAuthorize.
+   */
+  @Override
+  protected MethodSecurityExpressionHandler createExpressionHandler() {
+    DefaultMethodSecurityExpressionHandler expressionHandler =
+        new DefaultMethodSecurityExpressionHandler();
+    expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
+    return expressionHandler;
+  }
 }

@@ -14,20 +14,20 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-		/**
-		 * Method for adding CORS mapping.
-		 *
-		 * @param registry config file for CORS.
-		 */
-		@Override
-		public void addCorsMappings(CorsRegistry registry) {
-				long MAX_AGE_SECS = 3600;
+  /**
+   * Method for adding CORS mapping.
+   *
+   * @param registry config file for CORS.
+   */
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    long MAX_AGE_SECS = 3600;
 
-				registry.addMapping("/**")
-						.allowedOriginPatterns("*")
-						.allowedMethods("GET", "POST", "PUT", "PATCH")
-						.allowedHeaders("*")
-						.allowCredentials(true)
-						.maxAge(MAX_AGE_SECS);
-		}
+    registry.addMapping("/**")
+        .allowedOriginPatterns("*")
+        .allowedMethods("GET", "POST", "PUT", "PATCH")
+        .allowedHeaders("*")
+        .allowCredentials(true)
+        .maxAge(MAX_AGE_SECS);
+  }
 }

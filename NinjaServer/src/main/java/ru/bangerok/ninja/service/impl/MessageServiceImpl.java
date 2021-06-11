@@ -12,25 +12,25 @@ import ru.bangerok.ninja.service.MessageService;
 @Service
 public class MessageServiceImpl implements MessageService {
 
-		private final MessageSource messages;
-		private Locale locale = new Locale("en");
+  private final MessageSource messages;
+  private Locale locale = new Locale("en");
 
-		@Override
-		public void setLocale(String language) {
-				locale = new Locale(language);
-		}
+  @Override
+  public void setLocale(String language) {
+    locale = new Locale(language);
+  }
 
-		@Override
-		public String getMessage(String path) {
-				return getMessage(path, null);
-		}
+  @Override
+  public String getMessage(String path) {
+    return getMessage(path, null);
+  }
 
-		@Override
-		public String getMessageWithArgs(String path, Object[] args) {
-				return getMessage(path, args);
-		}
+  @Override
+  public String getMessageWithArgs(String path, Object[] args) {
+    return getMessage(path, args);
+  }
 
-		private String getMessage(String path, Object[] args) {
-				return messages.getMessage(path, args, locale);
-		}
+  private String getMessage(String path, Object[] args) {
+    return messages.getMessage(path, args, locale);
+  }
 }

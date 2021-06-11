@@ -14,7 +14,7 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
  */
 public final class ResourceAlreadyExistException extends RuntimeException {
 
-		public ResourceAlreadyExistException(final String message) {
-				super(message);
-		}
+  public ResourceAlreadyExistException(final String message) {
+    super(message);
+  }
 }

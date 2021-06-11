@@ -30,67 +30,67 @@ import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 @Service
 public class TokenProvider {
 
-		private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
+  private static final Logger logger = LoggerFactory.getLogger(TokenProvider.class);
 
-		private final JwtProperties jwtProperties;
+  private final JwtProperties jwtProperties;
 
-		/**
-		 * Method for generating an authentication token from existing user data.
-		 *
-		 * @param authentication user authentication information.
-		 * @return authentication token string.
-		 */
-		public String createToken(Authentication authentication) {
-				final Long principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
-				final Date currentDate = new Date();
+  /**
+   * Method for generating an authentication token from existing user data.
+   *
+   * @param authentication user authentication information.
+   * @return authentication token string.
+   */
+  public String createToken(Authentication authentication) {
+    final Long principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
+    final Date currentDate = new Date();
 
-				final Auth auth = jwtProperties.getAuth();
-				return Jwts.builder()
-						.setSubject(String.valueOf(principalId))
-						.setIssuedAt(currentDate)
-						.setExpiration(
-								new Date(currentDate.getTime() + auth.getTokenExpirationMsec()))
-						.signWith(SignatureAlgorithm.HS512, auth.getTokenSecret())
-						.compact();
-		}
+    final Auth auth = jwtProperties.getAuth();
+    return Jwts.builder()
+        .setSubject(String.valueOf(principalId))
+        .setIssuedAt(currentDate)
+        .setExpiration(
+            new Date(currentDate.getTime() + auth.getTokenExpirationMsec()))
+        .signWith(SignatureAlgorithm.HS512, auth.getTokenSecret())
+        .compact();
+  }
 
-		/**
-		 * Method for decrypting a token to get its data.
-		 *
-		 * @param token token with encrypted user data.
-		 * @return user id or user id in external provider.
-		 */
-		public long getUserIdFromToken(String token) {
-				Claims claims = Jwts.parser()
-						.setSigningKey(jwtProperties.getAuth().getTokenSecret())
-						.parseClaimsJws(token)
-						.getBody();
+  /**
+   * Method for decrypting a token to get its data.
+   *
+   * @param token token with encrypted user data.
+   * @return user id or user id in external provider.
+   */
+  public long getUserIdFromToken(String token) {
+    Claims claims = Jwts.parser()
+        .setSigningKey(jwtProperties.getAuth().getTokenSecret())
+        .parseClaimsJws(token)
+        .getBody();
 
-				return Long.parseLong(claims.getSubject());
-		}
+    return Long.parseLong(claims.getSubject());
+  }
 
-		/**
-		 * Method for checking the authentication token for validation.
-		 *
-		 * @param authToken token string for verification.
-		 * @return true if the token is valid, otherwise false.
-		 */
-		public boolean validateToken(String authToken) {
-				try {
-						Jwts.parser().setSigningKey(jwtProperties.getAuth().getTokenSecret())
-								.parseClaimsJws(authToken);
-						return true;
-				} catch (SignatureException ex) {
-						logger.error("Invalid JWT signature");
-				} catch (MalformedJwtException ex) {
-						logger.error("Invalid JWT token");
-				} catch (ExpiredJwtException ex) {
-						logger.error("Expired JWT token");
-				} catch (UnsupportedJwtException ex) {
-						logger.error("Unsupported JWT token");
-				} catch (IllegalArgumentException ex) {
-						logger.error("JWT claims string is empty.");
-				}
-				return false;
-		}
+  /**
+   * Method for checking the authentication token for validation.
+   *
+   * @param authToken token string for verification.
+   * @return true if the token is valid, otherwise false.
+   */
+  public boolean validateToken(String authToken) {
+    try {
+      Jwts.parser().setSigningKey(jwtProperties.getAuth().getTokenSecret())
+          .parseClaimsJws(authToken);
+      return true;
+    } catch (SignatureException ex) {
+      logger.error("Invalid JWT signature");
+    } catch (MalformedJwtException ex) {
+      logger.error("Invalid JWT token");
+    } catch (ExpiredJwtException ex) {
+      logger.error("Expired JWT token");
+    } catch (UnsupportedJwtException ex) {
+      logger.error("Unsupported JWT token");
+    } catch (IllegalArgumentException ex) {
+      logger.error("JWT claims string is empty.");
+    }
+    return false;
+  }
 }

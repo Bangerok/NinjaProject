@@ -18,18 +18,18 @@ import ru.bangerok.ninja.service.impl.UserServiceImpl;
 @ToString(doNotUseGetters = true)
 @RequiredArgsConstructor
 public enum Roles {
-		/**
-		 * The role is the user. Given upon registration.
-		 */
-		ROLE_USER("ROLE_USER"),
+  /**
+   * The role is the user. Given upon registration.
+   */
+  ROLE_USER("ROLE_USER"),
 
-		/**
-		 * Role - administrator. Not issued yet. TODO: Add, in the future, the award of this role.
-		 */
-		ROLE_ADMIN("ROLE_ADMIN");
+  /**
+   * Role - administrator. Not issued yet. TODO: Add, in the future, the award of this role.
+   */
+  ROLE_ADMIN("ROLE_ADMIN");
 
-		/**
-		 * The role name that is stored in the database.
-		 */
-		private final String name;
+  /**
+   * The role name that is stored in the database.
+   */
+  private final String name;
 }

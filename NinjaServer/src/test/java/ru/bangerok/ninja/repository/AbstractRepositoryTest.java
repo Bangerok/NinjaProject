@@ -1,7 +1,6 @@
 package ru.bangerok.ninja.repository;
 
 import javax.annotation.PostConstruct;
-import org.springframework.boot.test.context.SpringBootTest;
 import ru.bangerok.ninja.EntitiesFactory;
 
 /**
@@ -14,10 +13,10 @@ import ru.bangerok.ninja.EntitiesFactory;
  */
 public abstract class AbstractRepositoryTest {
 
-		protected EntitiesFactory factory;
+  protected EntitiesFactory factory;
 
-		@PostConstruct
-		void init() {
-				factory = new EntitiesFactory();
-		}
+  @PostConstruct
+  void init() {
+    factory = new EntitiesFactory();
+  }
 }

@@ -17,41 +17,42 @@ import ru.bangerok.ninja.validation.annotation.ValidEmail;
  */
 public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
 
-		/**
-		 * Pattern for checking email.
-		 */
-		private static final String EMAIL_PATTERN =
-				"^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
+  /**
+   * Pattern for checking email.
+   */
+  private static final String EMAIL_PATTERN =
+      "^[_A-Za-z0-9-+]+(.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(.[A-Za-z0-9]+)*(.[A-Za-z]{2,})$";
 
-		@Override
-		public void initialize(ValidEmail constraintAnnotation) {
-		}
+  @Override
+  public void initialize(ValidEmail constraintAnnotation) {
+    // Do nothing
+  }
 
-		/**
-		 * Email validator method.
-		 *
-		 * @param email   email for validation.
-		 * @param context validator context.
-		 * @return true if the email is valid, otherwise false.
-		 */
-		@Override
-		public boolean isValid(String email, ConstraintValidatorContext context) {
-				return (validateEmail(email));
-		}
+  /**
+   * Email validator method.
+   *
+   * @param email   email for validation.
+   * @param context validator context.
+   * @return true if the email is valid, otherwise false.
+   */
+  @Override
+  public boolean isValid(String email, ConstraintValidatorContext context) {
+    return (validateEmail(email));
+  }
 
-		/**
-		 * Method for checking email using reg-exp pattern.
-		 *
-		 * @param email email for validation.
-		 * @return true if the email passed validation, otherwise false.
-		 */
-		private boolean validateEmail(String email) {
-				if (!StringUtils.hasText(email)) {
-						return true;
-				}
+  /**
+   * Method for checking email using reg-exp pattern.
+   *
+   * @param email email for validation.
+   * @return true if the email passed validation, otherwise false.
+   */
+  private boolean validateEmail(String email) {
+    if (!StringUtils.hasText(email)) {
+      return true;
+    }
 
-				Pattern pattern = Pattern.compile(EMAIL_PATTERN);
-				Matcher matcher = pattern.matcher(email);
-				return matcher.matches();
-		}
+    var pattern = Pattern.compile(EMAIL_PATTERN);
+    var matcher = pattern.matcher(email);
+    return matcher.matches();
+  }
 }

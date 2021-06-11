@@ -32,24 +32,24 @@ import ru.bangerok.ninja.persistence.model.base.BaseEntity;
 public class Role extends BaseEntity {
 
 
-		/**
-		 * Private field that stores the name of the role in the database.
-		 */
-		@Column(name = "value", unique = true, nullable = false)
-		@Enumerated(EnumType.STRING)
-		private Roles value;
-		/**
-		 * Private field that stores a list of users who have access to this role.
-		 */
-		@ManyToMany(mappedBy = "roles")
-		private List<User> users;
+  /**
+   * Private field that stores the name of the role in the database.
+   */
+  @Column(name = "value", unique = true, nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Roles value;
+  /**
+   * Private field that stores a list of users who have access to this role.
+   */
+  @ManyToMany(mappedBy = "roles")
+  private List<User> users;
 
-		/**
-		 * Private field that stores the list of privileges available for this role in the database.
-		 */
-		@ManyToMany
-		@JoinTable(name = "role_privileges",
-				joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},
-				inverseJoinColumns = {@JoinColumn(name = "privilege_id", referencedColumnName = "base_id")})
-		private List<Privilege> privileges;
+  /**
+   * Private field that stores the list of privileges available for this role in the database.
+   */
+  @ManyToMany
+  @JoinTable(name = "role_privileges",
+      joinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "base_id")},
+      inverseJoinColumns = {@JoinColumn(name = "privilege_id", referencedColumnName = "base_id")})
+  private List<Privilege> privileges;
 }

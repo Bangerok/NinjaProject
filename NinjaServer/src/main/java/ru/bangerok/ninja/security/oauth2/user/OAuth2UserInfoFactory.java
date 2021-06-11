@@ -21,25 +21,25 @@ import ru.bangerok.ninja.service.MessageService;
 @Component
 public class OAuth2UserInfoFactory {
 
-		private final MessageService messageService;
+  private final MessageService messageService;
 
-		/**
-		 * Static object method with user data for oAuth2 authorization.
-		 *
-		 * @param registrationId authorization provider type.
-		 * @param attributes     user attributes obtained from an external authorization provider
-		 * @return {@link OAuth2UserInfo} after oAuth2 authorization.
-		 * @throws OAuth2AuthenticationProcessingException if a non-Google provider is used for
-		 *                                                 authorization.
-		 */
-		public OAuth2UserInfo getOAuth2UserInfo(String registrationId, Map<String, Object> attributes)
-				throws OAuth2AuthenticationProcessingException {
-				if (registrationId.equalsIgnoreCase(AuthProvider.google.toString())) {
-						return new GoogleOAuth2UserInfo(attributes);
-				} else {
-						throw new OAuth2AuthenticationProcessingException(messageService.getMessageWithArgs(
-								"auth.error.provider.not.supported", new Object[]{registrationId})
-						);
-				}
-		}
+  /**
+   * Static object method with user data for oAuth2 authorization.
+   *
+   * @param registrationId authorization provider type.
+   * @param attributes     user attributes obtained from an external authorization provider
+   * @return {@link OAuth2UserInfo} after oAuth2 authorization.
+   * @throws OAuth2AuthenticationProcessingException if a non-Google provider is used for
+   *                                                 authorization.
+   */
+  public OAuth2UserInfo getOAuth2UserInfo(String registrationId, Map<String, Object> attributes)
+      throws OAuth2AuthenticationProcessingException {
+    if (registrationId.equalsIgnoreCase(AuthProvider.GOOGLE.toString())) {
+      return new GoogleOAuth2UserInfo(attributes);
+    } else {
+      throw new OAuth2AuthenticationProcessingException(messageService.getMessageWithArgs(
+          "auth.error.provider.not.supported", new Object[] {registrationId})
+      );
+    }
+  }
 }

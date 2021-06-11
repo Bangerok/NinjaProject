@@ -4,10 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import ru.bangerok.ninja.rest.controllers.auth.AuthController;
-import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
+import ru.bangerok.ninja.rest.controllers.auth.AuthController;
+import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.base.ServiceLocator;
 
 /**
@@ -23,23 +23,23 @@ import ru.bangerok.ninja.service.base.ServiceLocator;
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
-		private final ServiceLocator serviceLocator;
+  private final ServiceLocator serviceLocator;
 
-		@Override
-		public void onApplicationEvent(@NonNull final OnRegistrationCompleteEvent event) {
-				this.confirmRegistration(event);
-		}
+  @Override
+  public void onApplicationEvent(@NonNull final OnRegistrationCompleteEvent event) {
+    this.confirmRegistration(event);
+  }
 
-		/**
-		 * Method for sending a message with a verification link to the mail.
-		 *
-		 * @param event user data event.
-		 */
-		private void confirmRegistration(final OnRegistrationCompleteEvent event) {
-				User user = event.getUser();
-				String token = serviceLocator.getUserService().createVerificationTokenForUser(user)
-						.getValue();
+  /**
+   * Method for sending a message with a verification link to the mail.
+   *
+   * @param event user data event.
+   */
+  private void confirmRegistration(final OnRegistrationCompleteEvent event) {
+    User user = event.getUser();
+    String token = serviceLocator.getUserService().createVerificationTokenForUser(user)
+        .getValue();
 
-				serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), token);
-		}
+    serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), token);
+  }
 }

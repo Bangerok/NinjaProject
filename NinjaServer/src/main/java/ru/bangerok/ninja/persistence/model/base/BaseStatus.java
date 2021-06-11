@@ -9,13 +9,13 @@ package ru.bangerok.ninja.persistence.model.base;
  * @since 0.3.3
  */
 public enum BaseStatus {
-		/**
-		 * Status indicating the activity of a record in the database.
-		 */
-		ACTIVE,
+  /**
+   * Status indicating the activity of a record in the database.
+   */
+  ACTIVE,
 
-		/**
-		 * Status indicating inactivity of a record in the database.
-		 */
-		DELETED
+  /**
+   * Status indicating inactivity of a record in the database.
+   */
+  DELETED
 }

@@ -18,58 +18,58 @@ import ru.bangerok.ninja.persistence.model.user.User;
 @SpringBootTest
 public class UserRepositoryTest extends AbstractRepositoryTest {
 
-		@Autowired
-		private UserRepository userRepository;
+  @Autowired
+  private UserRepository userRepository;
 
-		/**
-		 * Method for testing the search for a user in the database by id.
-		 */
-		@Test
-		void checkingUserFindById() {
-				User newUser = userRepository.save(factory.getNewUser());
+  /**
+   * Method for testing the search for a user in the database by id.
+   */
+  @Test
+  void checkingUserFindById() {
+    User newUser = userRepository.save(factory.getNewUser());
 
-				User userFoundById = userRepository.findById(newUser.getId())
-						.orElse(null);
-				assertNotNull(userFoundById);
-				userRepository.delete(userFoundById);
-		}
+    User userFoundById = userRepository.findById(newUser.getId())
+        .orElse(null);
+    assertNotNull(userFoundById);
+    userRepository.delete(userFoundById);
+  }
 
-		/**
-		 * Method for testing a user search in a database by email.
-		 */
-		@Test
-		void checkingUserFindByEmail() {
-				User newUser = userRepository.save(factory.getNewUser());
+  /**
+   * Method for testing a user search in a database by email.
+   */
+  @Test
+  void checkingUserFindByEmail() {
+    User newUser = userRepository.save(factory.getNewUser());
 
-				User userFoundByEmail = userRepository
-						.findByEmail(newUser.getEmail()).orElse(null);
-				assertNotNull(userFoundByEmail);
-				userRepository.delete(userFoundByEmail);
-		}
+    User userFoundByEmail = userRepository
+        .findByEmail(newUser.getEmail()).orElse(null);
+    assertNotNull(userFoundByEmail);
+    userRepository.delete(userFoundByEmail);
+  }
 
-		/**
-		 * Method for testing user search in the database by providerId.
-		 */
-		@Test
-		void checkingUserFindByProviderId() {
-				User newUser = userRepository.save(factory.getNewUser());
+  /**
+   * Method for testing user search in the database by providerId.
+   */
+  @Test
+  void checkingUserFindByProviderId() {
+    User newUser = userRepository.save(factory.getNewUser());
 
-				User userFoundByProviderId = userRepository
-						.findByProviderId(newUser.getProviderId()).orElse(null);
-				assertNotNull(userFoundByProviderId);
-				userRepository.delete(userFoundByProviderId);
-		}
+    User userFoundByProviderId = userRepository
+        .findByProviderId(newUser.getProviderId()).orElse(null);
+    assertNotNull(userFoundByProviderId);
+    userRepository.delete(userFoundByProviderId);
+  }
 
-		/**
-		 * Method for testing email availability check in database.
-		 */
-		@Test
-		void checkingUserExistByEmail() {
-				User newUser = userRepository.save(factory.getNewUser());
+  /**
+   * Method for testing email availability check in database.
+   */
+  @Test
+  void checkingUserExistByEmail() {
+    User newUser = userRepository.save(factory.getNewUser());
 
-				boolean existsByEmail = userRepository
-						.existsByEmail(newUser.getEmail());
-				assertTrue(existsByEmail);
-				userRepository.delete(newUser);
-		}
+    boolean existsByEmail = userRepository
+        .existsByEmail(newUser.getEmail());
+    assertTrue(existsByEmail);
+    userRepository.delete(newUser);
+  }
 }
