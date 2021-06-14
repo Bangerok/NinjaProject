@@ -6,13 +6,15 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.util.SerializationUtils;
-import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
+import ru.bangerok.ninja.security.oauth2.HttpCookieOauth2AuthorizationRequestRepository;
 
 /**
- * Class for working with cookies. Used before sending an authorization request to the provider and
- * after receiving a response from him.
- * <p>
- * Used for example here: {@link HttpCookieOAuth2AuthorizationRequestRepository#loadAuthorizationRequest(HttpServletRequest)}.
+ * <p> Class for working with cookies. Used before sending an authorization request to the provider
+ * and after receiving a response from him. </p>
+ * Used for example here:
+ * {@link
+ * HttpCookieOauth2AuthorizationRequestRepository#loadAuthorizationRequest(HttpServletRequest)
+ * }.
  *
  * @author v.kuznetsov
  * @since 0.3.0
@@ -24,7 +26,7 @@ public class CookieUtils {
    *
    * @param request request.
    * @param name    cookie name.
-   * @return Optional с cookie.
+   * @return optional с cookie.
    */
   public static Optional<Cookie> getCookie(HttpServletRequest request, String name) {
     Cookie[] cookies = request.getCookies();

@@ -9,8 +9,7 @@ import ru.bangerok.ninja.persistence.dao.VerificationTokenRepository;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Service class for getting the required repositories.
- * <p>
+ * <p> Service class for getting the required repositories. </p>
  * Used for example here: {@link UserServiceImpl}.
  *
  * @author v.kuznetsov

@@ -5,11 +5,10 @@ import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 import ru.bangerok.ninja.validation.annotation.ValidPassword;
-import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
+import ru.bangerok.ninja.validation.annotation.single.Match;
 
 /**
- * Payload java record for parsing registration request data into rest method parameters.
- * <p>
+ * <p> Payload java record for parsing registration request data into rest method parameters. </p>
  * Used for example here: {@link AuthController#registerUser}.
  *
  * @author v.kuznetsov

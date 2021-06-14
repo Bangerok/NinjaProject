@@ -16,11 +16,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import ru.bangerok.ninja.security.CustomUserDetailsService;
 import ru.bangerok.ninja.security.RestAuthenticationEntryPoint;
 import ru.bangerok.ninja.security.TokenAuthenticationFilter;
-import ru.bangerok.ninja.security.oauth2.CustomOAuth2UserService;
-import ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository;
-import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationFailureHandler;
-import ru.bangerok.ninja.security.oauth2.OAuth2AuthenticationSuccessHandler;
-import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
+import ru.bangerok.ninja.security.oauth2.CustomOauth2UserService;
+import ru.bangerok.ninja.security.oauth2.HttpCookieOauth2AuthorizationRequestRepository;
+import ru.bangerok.ninja.security.oauth2.Oauth2AuthenticationFailureHandler;
+import ru.bangerok.ninja.security.oauth2.Oauth2AuthenticationSuccessHandler;
+import ru.bangerok.ninja.security.oauth2.Oauth2LogoutSuccessHandler;
 
 /**
  * Configuration java class for setting up authorization and its security.
@@ -34,10 +34,10 @@ import ru.bangerok.ninja.security.oauth2.OAuth2LogoutSuccessHandler;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   private final CustomUserDetailsService customUserDetailsService;
-  private final CustomOAuth2UserService customOAuth2UserService;
-  private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
-  private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
-  private final OAuth2LogoutSuccessHandler oAuth2LogoutSuccessHandler;
+  private final CustomOauth2UserService customOauth2UserService;
+  private final Oauth2AuthenticationSuccessHandler oauth2AuthenticationSuccessHandler;
+  private final Oauth2AuthenticationFailureHandler oauth2AuthenticationFailureHandler;
+  private final Oauth2LogoutSuccessHandler oauth2LogoutSuccessHandler;
 
   /**
    * Method for configuring authentication to use a custom UserDetailService along with password
@@ -80,7 +80,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .logout(l -> l
             .deleteCookies("JSESSIONID")
             .invalidateHttpSession(true)
-            .logoutSuccessHandler(oAuth2LogoutSuccessHandler)
+            .logoutSuccessHandler(oauth2LogoutSuccessHandler)
             .permitAll()
         )
         .oauth2Login(o -> o
@@ -92,10 +92,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .baseUri("/login/oauth2/code/*")
             .and()
             .userInfoEndpoint()
-            .userService(customOAuth2UserService)
+            .userService(customOauth2UserService)
             .and()
-            .successHandler(oAuth2AuthenticationSuccessHandler)
-            .failureHandler(oAuth2AuthenticationFailureHandler)
+            .successHandler(oauth2AuthenticationSuccessHandler)
+            .failureHandler(oauth2AuthenticationFailureHandler)
         )
         .addFilterBefore(tokenAuthenticationFilter(),
             UsernamePasswordAuthenticationFilter.class);
@@ -113,8 +113,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   }
 
   @Bean
-  public HttpCookieOAuth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
-    return new HttpCookieOAuth2AuthorizationRequestRepository();
+  public HttpCookieOauth2AuthorizationRequestRepository cookieAuthorizationRequestRepository() {
+    return new HttpCookieOauth2AuthorizationRequestRepository();
   }
 
   @Bean

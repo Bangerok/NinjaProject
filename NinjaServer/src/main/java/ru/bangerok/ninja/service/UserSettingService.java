@@ -6,8 +6,7 @@ import ru.bangerok.ninja.persistence.model.user.UserSetting;
 import ru.bangerok.ninja.rest.controllers.user.UserSettingsController;
 
 /**
- * Service class for working with user setting entity.
- * <p>
+ * <p> Interface for working with user setting entity. </p>
  * Used for example here: {@link UserSettingsController}.
  *
  * @author v.kuznetsov
@@ -19,7 +18,7 @@ public interface UserSettingService {
    * Saving the new user application setting.
    *
    * @param user setting author.
-   * @return {@link List<UserSetting>} for a specific user application.
+   * @return settings for a specific user application.
    */
   List<UserSetting> getAll(User user);
 
@@ -28,7 +27,7 @@ public interface UserSettingService {
    *
    * @param userSetting setting data.
    * @param user        setting author.
-   * @return {@link UserSetting} for a specific user application.
+   * @return saved setting for a specific user application.
    */
   UserSetting create(UserSetting userSetting, User user);
 
@@ -37,7 +36,7 @@ public interface UserSettingService {
    *
    * @param userSettingFromDb setting old data.
    * @param userSetting       setting new data.
-   * @return updated {@link UserSetting}.
+   * @return updated setting for a specific user application.
    */
   UserSetting update(UserSetting userSettingFromDb, UserSetting userSetting);
 }

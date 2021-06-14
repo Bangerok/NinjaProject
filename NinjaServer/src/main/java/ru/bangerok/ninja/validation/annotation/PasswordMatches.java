@@ -14,9 +14,8 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 
 /**
- * Meta-annotation with implementation, which can be used to validate the password when registering
- * for a match with re-entering the password.
- * <p>
+ * <p> Meta-annotation with implementation, which can be used to validate the password when
+ * registering for a match with re-entering the password. </p>
  * Used for example here: {@link RegisterRequest}.
  *
  * @author v.kuznetsov
@@ -28,9 +27,24 @@ import ru.bangerok.ninja.validation.impl.PasswordMatchesValidator;
 @Retention(RUNTIME)
 public @interface PasswordMatches {
 
+  /**
+   * Configurable error localization message with default value.
+   *
+   * @return localization message or default value.
+   */
   String message() default "Matching error";
 
+  /**
+   * Allows you to determine under what circumstances this check will be triggered.
+   *
+   * @return array groups or default value.
+   */
   Class<?>[] groups() default {};
 
+  /**
+   * Allows you to define the payload that will be transmitted with verification.
+   *
+   * @return array payloads or default value.
+   */
   Class<? extends Payload>[] payload() default {};
 }

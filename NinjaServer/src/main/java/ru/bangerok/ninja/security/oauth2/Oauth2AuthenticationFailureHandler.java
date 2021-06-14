@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.security.oauth2;
 
-import static ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static ru.bangerok.ninja.security.oauth2.HttpCookieOauth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 import java.io.IOException;
 import javax.servlet.http.Cookie;
@@ -15,8 +15,7 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * Class used by Spring Security when user authentication fails.
- * <p>
+ * <p> Class used by Spring Security when user authentication fails. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
@@ -24,10 +23,10 @@ import ru.bangerok.ninja.util.CookieUtils;
  */
 @RequiredArgsConstructor
 @Component
-public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+public class Oauth2AuthenticationFailureHandler extends SimpleUrlAuthenticationFailureHandler {
 
-  private final HttpCookieOAuth2AuthorizationRequestRepository
-      httpCookieOAuth2AuthorizationRequestRepository;
+  private final HttpCookieOauth2AuthorizationRequestRepository
+      httpCookieOauth2AuthorizationRequestRepository;
 
   /**
    * Method called when user authentication fails and redirects to client.
@@ -45,7 +44,7 @@ public class OAuth2AuthenticationFailureHandler extends SimpleUrlAuthenticationF
     targetUrl = UriComponentsBuilder.fromUriString(targetUrl)
         .queryParam("error", exception.getLocalizedMessage())
         .build().toUriString();
-    httpCookieOAuth2AuthorizationRequestRepository
+    httpCookieOauth2AuthorizationRequestRepository
         .removeAuthorizationRequestCookies(request, response);
     getRedirectStrategy().sendRedirect(request, response, targetUrl);
   }

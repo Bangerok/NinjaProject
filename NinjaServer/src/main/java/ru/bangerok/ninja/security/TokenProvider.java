@@ -19,8 +19,7 @@ import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 
 /**
- * Service class that contains code for generating and validating Json Web tokens.
- * <p>
+ * <p> Service class that contains code for generating and validating Json Web tokens. </p>
  * Used for example here: {@link AuthController#authenticateUser(LoginRequest)}.
  *
  * @author v.kuznetsov

@@ -3,8 +3,7 @@ package ru.bangerok.ninja.exception.email;
 import ru.bangerok.ninja.service.impl.MailServiceImpl;
 
 /**
- * An exception class for handling unsuccessful email messages.
- * <p>
+ * <p> An exception class for handling unsuccessful email messages. </p>
  * Used for example here: {@link MailServiceImpl}.
  *
  * @author v.kuznetsov

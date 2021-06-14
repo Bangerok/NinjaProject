@@ -9,9 +9,17 @@ import org.springframework.web.context.annotation.SessionScope;
 import ru.bangerok.ninja.persistence.dao.UserSettingRepository;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.UserSetting;
+import ru.bangerok.ninja.rest.controllers.user.UserSettingsController;
 import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserSettingService;
 
+/**
+ * <p> Service class (implementation) for working with user setting entity. </p>
+ * Used for example here: {@link UserSettingsController}.
+ *
+ * @author v.kuznetsov
+ * @since 0.5.8
+ */
 @RequiredArgsConstructor
 @Slf4j
 @SessionScope

@@ -10,8 +10,7 @@ import ru.bangerok.ninja.service.UserService;
 import ru.bangerok.ninja.service.UserSettingService;
 
 /**
- * Service class to get the services you want.
- * <p>
+ * <p> Service class to get the services you want. </p>
  * Used for example here: {@link AuthController}.
  *
  * @author v.kuznetsov

@@ -7,8 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import ru.bangerok.ninja.security.TokenProvider;
 
 /**
- * Java class containing settings for generating JWT tokens.
- * <p>
+ * <p> Java class containing settings for generating JWT tokens. </p>
  * Used for example here: {@link TokenProvider}.
  *
  * @author v.kuznetsov
@@ -26,8 +25,11 @@ public class JwtProperties {
   /**
    * Private field that stores information about redirect links after oauth2 authorization.
    */
-  private final OAuth2 oauth2 = new OAuth2();
+  private final Oauth2 oauth2 = new Oauth2();
 
+  /**
+   * Inner class for storing information about settings when generating JWT tokens.
+   */
   @Getter
   @Setter
   public static class Auth {
@@ -44,9 +46,12 @@ public class JwtProperties {
     private long tokenExpirationMsec;
   }
 
+  /**
+   * Inner class for storing information about list of redirect links.
+   */
   @Getter
   @Setter
-  public static final class OAuth2 {
+  public static final class Oauth2 {
 
     /**
      * Private field that stores a list of redirect links used after oauth2 authorization.

@@ -7,11 +7,9 @@ import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Repository java class for communicating with the database and working with the entity of the
- * verification token.
- * <p>
+ * <p> Repository java class for communicating with the database and working with the entity of the
+ * verification token. </p>
  * Used for example here: {@link UserServiceImpl#getVerificationToken(String)}.
- * </p>
  *
  * @author v.kuznetsov
  * @since 0.4.3
@@ -23,7 +21,7 @@ public interface VerificationTokenRepository extends JpaRepository<VerificationT
    * Method for finding a verification token by its token value in the database.
    *
    * @param value verification token value.
-   * @return Optional with found token.
+   * @return optional with found token.
    */
   Optional<VerificationToken> findByValue(String value);
 }

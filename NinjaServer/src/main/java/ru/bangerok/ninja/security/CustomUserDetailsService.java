@@ -12,8 +12,7 @@ import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * A service class that allows you to get a user in some way.
- * <p>
+ * <p> A service class that allows you to get a user in some way. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov

@@ -8,17 +8,15 @@ import ru.bangerok.ninja.config.MailSenderConfig;
 import ru.bangerok.ninja.config.MessagesConfig;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
 import ru.bangerok.ninja.config.MvcConfig;
-import ru.bangerok.ninja.config.OAuth2LoginConfig;
+import ru.bangerok.ninja.config.Oauth2LoginConfig;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.config.ThymeleafConfiguration;
 import ru.bangerok.ninja.config.properties.JwtProperties;
 
 /**
- * A class to run the entire spring application. To run, just use the command - mvn spring-boot:
- * run.
- * <p>
+ * <p> A class to run the entire spring application. To run, just use the command - mvn spring-boot:
+ * run. </p>
  * Application configuration is represented by these classes:
- * </p>
  * <p> - {@link JwtProperties}, </p>
  * <p> - {@link MessagesConfig}, </p>
  * <p> - {@link MethodSecurityConfig}, </p>
@@ -27,7 +25,7 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
  * <p> - {@link ThymeleafConfiguration}, </p>
  * <p> - {@link MailSenderConfig}, </p>
  * <p> - {@link DatabaseConfig}, </p>
- * <p> - {@link OAuth2LoginConfig}. </p>
+ * <p> - {@link Oauth2LoginConfig}. </p>
  *
  * @author v.kuznetsov
  * @since 0.0.0

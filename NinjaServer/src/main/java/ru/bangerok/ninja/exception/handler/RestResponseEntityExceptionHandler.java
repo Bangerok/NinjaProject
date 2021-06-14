@@ -34,7 +34,7 @@ public class RestResponseEntityExceptionHandler {
    * validation of the transmitted data to the server.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({MethodArgumentNotValidException.class})
   public ResponseEntity<ApiResponse> handleBadRequest(MethodArgumentNotValidException ex) {
@@ -49,7 +49,7 @@ public class RestResponseEntityExceptionHandler {
    * credentials.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({AuthenticationException.class})
   public ResponseEntity<ApiResponse> handleAuthentication(RuntimeException ex) {
@@ -62,7 +62,7 @@ public class RestResponseEntityExceptionHandler {
    * was not found under any circumstances.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({ResourceNotFoundException.class})
   public ResponseEntity<ApiResponse> handleResourceNotFound(RuntimeException ex) {
@@ -76,7 +76,7 @@ public class RestResponseEntityExceptionHandler {
    * database.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({ResourceAlreadyExistException.class})
   public ResponseEntity<ApiResponse> handleResourceAlreadyExist(RuntimeException ex) {
@@ -89,7 +89,7 @@ public class RestResponseEntityExceptionHandler {
    * authentication of the email provider when sending notifications to users.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({MailAuthenticationException.class})
   public ResponseEntity<ApiResponse> handleMailAuth(RuntimeException ex) {
@@ -101,7 +101,7 @@ public class RestResponseEntityExceptionHandler {
    * Exception handle method for handling all other server errors - Internal Server Error.
    *
    * @param ex method-related exception.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   @ExceptionHandler({Exception.class})
   public ResponseEntity<ApiResponse> handleInternal(RuntimeException ex) {
@@ -114,7 +114,7 @@ public class RestResponseEntityExceptionHandler {
    *
    * @param message    error message.
    * @param statusCode error code.
-   * @return {@link ResponseEntity<ApiResponse>} from the server.
+   * @return response data error from the server.
    */
   private ResponseEntity<ApiResponse> getResponseForSingleError(String message,
                                                                 HttpStatus statusCode) {

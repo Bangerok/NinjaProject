@@ -10,9 +10,8 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import ru.bangerok.ninja.config.SecurityConfig;
 
 /**
- * The class that is called when a user tries to access a protected resource without authentication.
- * In this case, we just return 401 Unauthorized response.
- * <p>
+ * <p> The class that is called when a user tries to access a protected resource without
+ * authentication. In this case, we just return 401 Unauthorized response. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov

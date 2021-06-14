@@ -7,8 +7,7 @@ import org.springframework.validation.ObjectError;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 
 /**
- * Payload java record to send response from server in controller.
- * <p>
+ * <p> Payload java record to send response from server in controller. </p>
  * Used for example here: {@link AuthController#registerUser}.
  *
  * @author v.kuznetsov

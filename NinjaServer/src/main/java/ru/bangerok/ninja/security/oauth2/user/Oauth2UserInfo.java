@@ -4,16 +4,15 @@ import java.util.Map;
 import lombok.RequiredArgsConstructor;
 
 /**
- * An abstract class with common methods and fields for all class objects (if there are several)
- * user data obtained from external authorization providers.
- * <p>
- * Used for example here: {@link GoogleOAuth2UserInfo}.
+ * <p> An abstract class with common methods and fields for all class objects (if there are several)
+ * user data obtained from external authorization providers. </p>
+ * Used for example here: {@link GoogleOauth2UserInfo}.
  *
  * @author v.kuznetsov
  * @since 0.3.0
  */
 @RequiredArgsConstructor
-public abstract class OAuth2UserInfo {
+public abstract class Oauth2UserInfo {
 
   /**
    * Protected field that stores user attributes from an external authorization provider.

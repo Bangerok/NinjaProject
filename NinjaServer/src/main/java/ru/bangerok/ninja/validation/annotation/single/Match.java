@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.validation.annotation.withoutImpl;
+package ru.bangerok.ninja.validation.annotation.single;
 
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -9,8 +9,7 @@ import java.lang.annotation.Target;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 
 /**
- * An unimplemented meta annotation that can be used to validate password re-entry.
- * <p>
+ * <p> An unimplemented meta annotation that can be used to validate password re-entry. </p>
  * Used for example here: {@link RegisterRequest}.
  *
  * @author v.kuznetsov
@@ -21,5 +20,10 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 @Retention(RUNTIME)
 public @interface Match {
 
+  /**
+   * Configurable error localization message with default value.
+   *
+   * @return localization message or default value.
+   */
   String message() default "Dont match passwords";
 }

@@ -7,8 +7,7 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.impl.UserServiceImpl;
 
 /**
- * Enumeration class for user roles names.
- * <p>
+ * <p> Enumeration class for user roles names. </p>
  * For a complete picture, see: {@link UserServiceImpl#registerNewUserAccount(RegisterRequest)}.
  *
  * @author v.kuznetsov

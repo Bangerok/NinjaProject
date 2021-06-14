@@ -15,9 +15,8 @@ import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
- * A class that represents an authenticated Spring Security Principal. It contains the data of the
- * authenticated user.
- * <p>
+ * <p> A class that represents an authenticated Spring Security Principal. It contains the data
+ * of the authenticated user. </p>
  * Used for example here: {@link CustomUserDetailsService#loadUserById(Long)}.
  *
  * @author v.kuznetsov

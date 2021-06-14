@@ -3,16 +3,15 @@ package ru.bangerok.ninja.security.oauth2.user;
 import java.util.Map;
 
 /**
- * Class for user data obtained through Google authorization provider.
- * <p>
- * Used for example here: {@link OAuth2UserInfoFactory}.
+ * <p> Class for user data obtained through Google authorization provider. </p>
+ * Used for example here: {@link Oauth2UserInfoFactory}.
  *
  * @author v.kuznetsov
  * @since 0.3.0
  */
-public class GoogleOAuth2UserInfo extends OAuth2UserInfo {
+public class GoogleOauth2UserInfo extends Oauth2UserInfo {
 
-  public GoogleOAuth2UserInfo(Map<String, Object> attributes) {
+  public GoogleOauth2UserInfo(Map<String, Object> attributes) {
     super(attributes);
   }
 

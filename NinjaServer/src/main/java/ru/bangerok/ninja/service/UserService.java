@@ -10,7 +10,7 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.security.UserPrincipal;
 
 /**
- * Service class for working with user entity and its authorization/authentication.
+ * Interface for working with user entity and its authorization/authentication.
  *
  * @author v.kuznetsov
  * @since 0.3.15
@@ -29,7 +29,7 @@ public interface UserService {
    * Method for authenticating the logged in user and creating an authentication token for him.
    *
    * @param loginData user authentication data.
-   * @return AuthenticationToken or throwing an exception.
+   * @return authenticationToken or throwing an exception.
    * @throws AuthenticationException   invalid credentials for user authentication.
    * @throws ResourceNotFoundException no user found by email.
    */

@@ -8,9 +8,9 @@ import org.springframework.security.core.AuthenticationException;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-public class OAuth2AuthenticationProcessingException extends AuthenticationException {
+public class Oauth2AuthenticationProcessingException extends AuthenticationException {
 
-  public OAuth2AuthenticationProcessingException(String msg) {
+  public Oauth2AuthenticationProcessingException(String msg) {
     super(msg);
   }
 }

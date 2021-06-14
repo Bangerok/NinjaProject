@@ -23,9 +23,8 @@ import org.slf4j.LoggerFactory;
 import ru.bangerok.ninja.validation.annotation.ValidPassword;
 
 /**
- * Validating class for annotation - validation of the entered password by the user during
- * registration.
- * <p>
+ * <p> Validating class for annotation - validation of the entered password by the user during
+ * registration. </p>
  * Connects here: {@link ValidPassword}.
  *
  * @author v.kuznetsov
@@ -65,8 +64,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
   /**
    * Receiving custom messages for password validation.
    *
-   * @return MessageResolver with data about the new list of messages to be used for validation
-   * error messages.
+   * @return list of messages to be used for validation error messages.
    */
   private MessageResolver getMessageResolver() {
     Properties props = new Properties();

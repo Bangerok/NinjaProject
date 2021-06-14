@@ -11,9 +11,8 @@ import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.service.base.ServiceLocator;
 
 /**
- * Listener-class for working with sending notifications to registering users about the need to
- * verify it by clicking on the link in the message.
- * <p>
+ * <p> Listener-class for working with sending notifications to registering users about the need to
+ * verify it by clicking on the link in the message. </p>
  * Used for example here: {@link AuthController#registerUser(RegisterRequest)}.
  *
  * @author v.kuznetsov

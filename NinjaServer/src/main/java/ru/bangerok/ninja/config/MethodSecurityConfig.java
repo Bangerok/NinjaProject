@@ -22,8 +22,7 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
    * Method for creating and configuring a handler, which is called when using validation
    * expressions.
    *
-   * @return customized handler with custom service class inside. Annotations - PreAuthorize or
-   * PostAuthorize.
+   * @return customized handler with custom service class inside: @PreAuthorize or @PostAuthorize.
    */
   @Override
   protected MethodSecurityExpressionHandler createExpressionHandler() {

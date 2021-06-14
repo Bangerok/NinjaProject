@@ -17,8 +17,7 @@ import ru.bangerok.ninja.service.impl.MessageServiceImpl;
 public class MessagesConfig {
 
   /**
-   * Getting and configuring a ResourceBundle to localize messages by key.
-   * <p>
+   * <p> Getting and configuring a ResourceBundle to localize messages by key. </p>
    * Used for example here: {@link MessageServiceImpl}.
    *
    * @return configuration object with settings for receiving messages.

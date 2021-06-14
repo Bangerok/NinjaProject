@@ -17,7 +17,7 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
  * @since 0.5.5
  */
 @Configuration
-public class OAuth2LoginConfig {
+public class Oauth2LoginConfig {
 
   /**
    * Private variable containing the client ID.

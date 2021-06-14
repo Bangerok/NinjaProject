@@ -31,6 +31,12 @@ import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.service.UserService;
 
+/**
+ * Service class (implementation) for working with user entity and its authorization/authentication.
+ *
+ * @author v.kuznetsov
+ * @since 0.3.15
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Transactional

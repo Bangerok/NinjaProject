@@ -9,8 +9,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 
 /**
- * Meta annotation that can be used to insert the currently authenticated user principal into controllers.
- * <p>
+ * <p> Meta annotation that can be used to insert the currently authenticated user principal into
+ * controllers. </p>
  * Used for example here: {@link AuthController#getCurrentUser(UserPrincipal)}.
  *
  * @author v.kuznetsov

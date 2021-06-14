@@ -1,8 +1,7 @@
 package ru.bangerok.ninja.persistence.model.base;
 
 /**
- * Enumeration class for project entity statuses.
- * <p>
+ * <p> Enumeration class for project entity statuses. </p>
  * For a complete picture, see: {@link BaseEntity#getStatus}.
  *
  * @author v.kuznetsov

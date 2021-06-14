@@ -10,16 +10,15 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * A class that provides functionality for storing an authorization request in cookies, getting it,
- * and deleting it.
- * <p>
+ * <p> A class that provides functionality for storing an authorization request in cookies,
+ * getting it, and deleting it. </p>=
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
  * @since 0.3.0
  */
 @Component
-public class HttpCookieOAuth2AuthorizationRequestRepository implements
+public class HttpCookieOauth2AuthorizationRequestRepository implements
     AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
   public static final String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";

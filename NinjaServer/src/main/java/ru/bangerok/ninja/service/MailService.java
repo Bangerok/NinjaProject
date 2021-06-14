@@ -4,8 +4,7 @@ import ru.bangerok.ninja.event.listener.RegistrationListener;
 import ru.bangerok.ninja.exception.email.FailureSendEmailException;
 
 /**
- * Service class for working with sending letters to email.
- * <p>
+ * <p> Interface for working with sending letters to email. </p>
  * Used for example here: {@link RegistrationListener}.
  *
  * @author v.kuznetsov

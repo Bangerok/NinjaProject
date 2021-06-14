@@ -10,8 +10,7 @@ import org.springframework.stereotype.Component;
 import ru.bangerok.ninja.config.SecurityConfig;
 
 /**
- * Class used by Spring Security when user successfully logout.
- * <p>
+ * <p> Class used by Spring Security when user successfully logout. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
@@ -19,11 +18,11 @@ import ru.bangerok.ninja.config.SecurityConfig;
  */
 @RequiredArgsConstructor
 @Component
-public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
+public class Oauth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler implements
     LogoutSuccessHandler {
 
-  private final HttpCookieOAuth2AuthorizationRequestRepository
-      httpCookieOAuth2AuthorizationRequestRepository;
+  private final HttpCookieOauth2AuthorizationRequestRepository
+      httpCookieOauth2AuthorizationRequestRepository;
 
   /**
    * Method called upon successful user logout, designed to remove the authorization cookie from
@@ -38,7 +37,7 @@ public class OAuth2LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler im
       HttpServletRequest request,
       HttpServletResponse response,
       Authentication authentication) {
-    httpCookieOAuth2AuthorizationRequestRepository
+    httpCookieOauth2AuthorizationRequestRepository
         .removeAuthorizationRequestCookies(request, response);
   }
 }

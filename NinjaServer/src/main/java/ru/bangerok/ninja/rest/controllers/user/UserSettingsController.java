@@ -37,7 +37,7 @@ public class UserSettingsController {
    * Rest request method called by the client to get the user's application settings.
    *
    * @param userPrincipal entity stored in authentication.
-   * @return {@link List<UserSetting>} or empty.
+   * @return list user settings or empty list.
    */
   @GetMapping
   @JsonView(Views.UserSettingsData.class)
@@ -50,7 +50,7 @@ public class UserSettingsController {
    *
    * @param userSetting   new setting data.
    * @param userPrincipal setting user.
-   * @return new {@link UserSetting}.
+   * @return new user setting.
    */
   @PostMapping
   @JsonView(Views.UserSettingsData.class)
@@ -66,7 +66,7 @@ public class UserSettingsController {
    *
    * @param userSettingFromDb old setting data.
    * @param userSetting       setting new data
-   * @return updated {@link UserSetting}.
+   * @return updated user setting.
    */
   @PutMapping("/{id}")
   @JsonView(Views.UserSettingsData.class)

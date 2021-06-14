@@ -1,6 +1,6 @@
 package ru.bangerok.ninja.security.oauth2;
 
-import static ru.bangerok.ninja.security.oauth2.HttpCookieOAuth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
+import static ru.bangerok.ninja.security.oauth2.HttpCookieOauth2AuthorizationRequestRepository.REDIRECT_URI_PARAM_COOKIE_NAME;
 
 import java.io.IOException;
 import java.net.URI;
@@ -21,8 +21,7 @@ import ru.bangerok.ninja.service.MessageService;
 import ru.bangerok.ninja.util.CookieUtils;
 
 /**
- * Class used by Spring Security when user authentication succeeds.
- * <p>
+ * <p> Class used by Spring Security when user authentication succeeds. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov
@@ -30,13 +29,13 @@ import ru.bangerok.ninja.util.CookieUtils;
  */
 @RequiredArgsConstructor
 @Component
-public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
   private final MessageService messageService;
   private final TokenProvider tokenProvider;
   private final JwtProperties jwtProperties;
-  private final HttpCookieOAuth2AuthorizationRequestRepository
-      httpCookieOAuth2AuthorizationRequestRepository;
+  private final HttpCookieOauth2AuthorizationRequestRepository
+      httpCookieOauth2AuthorizationRequestRepository;
 
   /**
    * The method called upon successful user authentication, designed to clear the response from
@@ -107,7 +106,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
   protected void clearAuthenticationAttributes(HttpServletRequest request,
                                                HttpServletResponse response) {
     super.clearAuthenticationAttributes(request);
-    httpCookieOAuth2AuthorizationRequestRepository
+    httpCookieOauth2AuthorizationRequestRepository
         .removeAuthorizationRequestCookies(request, response);
   }
 
@@ -122,9 +121,9 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     return jwtProperties.getOauth2().getAuthorizedRedirectUris()
         .parallelStream()
         .anyMatch(authorizedRedirectUri -> {
-          URI authorizedURI = URI.create(authorizedRedirectUri);
-          return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost()) &&
-              authorizedURI.getPort() == clientRedirectUri.getPort();
+          URI authorizedUri = URI.create(authorizedRedirectUri);
+          return authorizedUri.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
+              && authorizedUri.getPort() == clientRedirectUri.getPort();
         });
   }
 }

@@ -19,8 +19,7 @@ import ru.bangerok.ninja.service.impl.MailServiceImpl;
 public class ThymeleafConfiguration {
 
   /**
-   * Getting a template engine to be used to load and populate templates.
-   * <p>
+   * <p> Getting a template engine to be used to load and populate templates. </p>
    * Used for example here: {@link MailServiceImpl}.
    *
    * @return end object - SpringTemplateEngine.

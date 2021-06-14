@@ -5,11 +5,11 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
-import ru.bangerok.ninja.validation.annotation.withoutImpl.Match;
+import ru.bangerok.ninja.validation.annotation.single.Match;
 
 /**
- * Validating class for annotation - validation of entered passwords during user registration.
- * <p>
+ * <p> Validating class for annotation - validation of entered passwords during user registration
+ * . </p>
  * Connects here: {@link PasswordMatches}.
  *
  * @author v.kuznetsov

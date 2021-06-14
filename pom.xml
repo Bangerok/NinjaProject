@@ -61,6 +61,10 @@
     <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
     <lombok.version>1.18.20</lombok.version>
     <jakarta.validation.version>2.0.2</jakarta.validation.version>
+
+    <!-- Plugins -->
+    <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
+    <puppycrawl.checkstyle.version>8.43</puppycrawl.checkstyle.version>
   </properties>
 
   <build>
@@ -73,12 +77,12 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>3.1.2</version>
+        <version>${checkstyle-plugin.version}</version>
         <dependencies>
           <dependency>
             <groupId>com.puppycrawl.tools</groupId>
             <artifactId>checkstyle</artifactId>
-            <version>8.43</version>
+            <version>${puppycrawl.checkstyle.version}</version>
           </dependency>
         </dependencies>
         <configuration>

@@ -12,10 +12,18 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
+import ru.bangerok.ninja.event.listener.RegistrationListener;
 import ru.bangerok.ninja.exception.email.FailureSendEmailException;
 import ru.bangerok.ninja.service.MailService;
 import ru.bangerok.ninja.service.MessageService;
 
+/**
+ * <p> Service class (implementation) for working with sending letters to email. </p>
+ * Used for example here: {@link RegistrationListener}.
+ *
+ * @author v.kuznetsov
+ * @since 0.4.3
+ */
 @RequiredArgsConstructor
 @Slf4j
 @Scope("singleton")

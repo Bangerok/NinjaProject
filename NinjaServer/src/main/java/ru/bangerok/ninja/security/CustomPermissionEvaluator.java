@@ -8,8 +8,7 @@ import org.springframework.security.core.Authentication;
 import ru.bangerok.ninja.config.MethodSecurityConfig;
 
 /**
- * A class containing methods for checking whether a user has permissions on an entity.
- * <p>
+ * <p> A class containing methods for checking whether a user has permissions on an entity. </p>
  * Connects here: {@link MethodSecurityConfig}.
  *
  * @author v.kuznetsov

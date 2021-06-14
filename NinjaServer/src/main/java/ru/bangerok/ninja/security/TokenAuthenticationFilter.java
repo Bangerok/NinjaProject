@@ -18,9 +18,8 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 
 /**
- * The class that is used to read the JWT authentication token from the request, validate it and set
- * the SecurityContext Spring Security if the token is valid.
- * <p>
+ * <p> The class that is used to read the JWT authentication token from the request, validate it
+ * and set the SecurityContext Spring Security if the token is valid. </p>
  * Connects here: {@link SecurityConfig}.
  *
  * @author v.kuznetsov

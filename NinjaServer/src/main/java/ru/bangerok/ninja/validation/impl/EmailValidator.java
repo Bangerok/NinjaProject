@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.validation.impl;
 
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -8,8 +7,7 @@ import org.springframework.util.StringUtils;
 import ru.bangerok.ninja.validation.annotation.ValidEmail;
 
 /**
- * Validating class for annotation - pattern-based email validation.
- * <p>
+ * <p> Validating class for annotation - pattern-based email validation. </p>
  * Connects here: {@link ValidEmail}.
  *
  * @author v.kuznetsov

@@ -31,8 +31,7 @@ public class MailSenderConfig {
   private String password;
 
   /**
-   * Getting and configuring the settings object for sending messages to the emails.
-   * <p>
+   * <p> Getting and configuring the settings object for sending messages to the emails. </p>
    * Used for example here: {@link MailServiceImpl}.
    *
    * @return configuration object with mail sender settings.
