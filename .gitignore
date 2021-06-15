@@ -9,3 +9,6 @@ Runs/
 # Node files
 package-lock.json
 NinjaClient/node_modules
+
+# Docker
+docker/postgresql/data
