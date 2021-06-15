@@ -4,8 +4,7 @@ import javax.annotation.PostConstruct;
 import ru.bangerok.ninja.EntitiesFactory;
 
 /**
- * An abstract base class for tests containing the initialization of the test data factory.
- * <p>
+ * <p> An abstract base class for tests containing the initialization of the test data factory. </p>
  * Used for example here: {@link UserRepositoryTest}.
  *
  * @author v.kuznetsov

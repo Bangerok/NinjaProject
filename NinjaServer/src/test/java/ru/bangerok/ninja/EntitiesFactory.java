@@ -6,8 +6,7 @@ import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.repository.AbstractRepositoryTest;
 
 /**
- * Class for creating test instances of entities without saving to the database.
- * <p>
+ * <p> Class for creating test instances of entities without saving to the database. </p>
  * Used for example here: {@link AbstractRepositoryTest}.
  *
  * @author v.kuznetsov
