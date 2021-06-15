@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import ru.bangerok.ninja.persistence.dao.UserRepository;
-import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * Class for testing the repository working with the User entity.

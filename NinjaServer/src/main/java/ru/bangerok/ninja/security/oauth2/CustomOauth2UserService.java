@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
@@ -17,7 +18,8 @@ import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.exception.auth.Oauth2AuthenticationProcessingException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
-import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
+import ru.bangerok.ninja.persistence.dao.RoleRepository;
+import ru.bangerok.ninja.persistence.dao.UserRepository;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.security.oauth2.user.AbstractOauth2UserInfo;
@@ -38,7 +40,8 @@ import ru.bangerok.ninja.service.MessageService;
 public class CustomOauth2UserService extends DefaultOAuth2UserService {
 
   private final MessageService messageService;
-  private final RepositoryLocator repositoryLocator;
+  private final UserRepository userRepository;
+  private final RoleRepository roleRepository;
   private final Oauth2UserInfoFactory userInfoFactory;
 
   /**
@@ -82,7 +85,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
       );
     }
 
-    var user = repositoryLocator.getUserRepository().findByEmail(email)
+    var user = userRepository.findByEmail(email)
         .map(
             value -> updateExistingUser(value, oauth2UserInfo)
         ).orElseGet(
@@ -110,14 +113,14 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     user.setLastVisit(LocalDateTime.now());
     user.setEmailVerified(true);
 
-    var userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER).orElseThrow(
+    var userRole = roleRepository.findByValue(ROLE_USER).orElseThrow(
         () -> new ResourceNotFoundException(messageService.getMessage("role.error.not.found"))
     );
     var roles = Stream.of(userRole)
         .collect(Collectors.toCollection(ArrayList::new));
     user.setRoles(roles);
 
-    return repositoryLocator.getUserRepository().save(user);
+    return userRepository.save(user);
   }
 
   /**
@@ -132,6 +135,6 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
     existingUser.setFullname(abstractOauth2UserInfo.getName());
     existingUser.setAvatar(abstractOauth2UserInfo.getImageUrl());
     existingUser.setLastVisit(LocalDateTime.now());
-    return repositoryLocator.getUserRepository().save(existingUser);
+    return userRepository.save(existingUser);
   }
 }

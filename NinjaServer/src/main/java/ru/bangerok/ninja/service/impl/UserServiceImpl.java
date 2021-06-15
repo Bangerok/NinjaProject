@@ -12,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,8 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
-import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
-import ru.bangerok.ninja.persistence.model.user.Role;
+import ru.bangerok.ninja.persistence.dao.RoleRepository;
+import ru.bangerok.ninja.persistence.dao.UserRepository;
+import ru.bangerok.ninja.persistence.dao.VerificationTokenRepository;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.rest.payload.request.LoginRequest;
@@ -43,7 +43,9 @@ import ru.bangerok.ninja.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 
-  private final RepositoryLocator repositoryLocator;
+  private final UserRepository userRepository;
+  private final RoleRepository roleRepository;
+  private final VerificationTokenRepository tokenRepository;
   private final MessageService messageService;
   private final PasswordEncoder passwordEncoder;
   private final AuthenticationManager authenticationManager;
@@ -64,21 +66,21 @@ public class UserServiceImpl implements UserService {
         new UsernamePasswordAuthenticationToken(loginData.email(), loginData.password())
     );
 
-    var user = repositoryLocator.getUserRepository().findByEmail(loginData.email())
+    var user = userRepository.findByEmail(loginData.email())
         .orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
             "user.error.not.found.by.email",
             new Object[] {loginData.email()}
         )));
 
     user.setLastVisit(LocalDateTime.now());
-    repositoryLocator.getUserRepository().save(user);
+    userRepository.save(user);
     SecurityContextHolder.getContext().setAuthentication(authentication);
     return tokenProvider.createToken(authentication);
   }
 
   @Override
   public User registerNewUserAccount(RegisterRequest registerData) {
-    if (repositoryLocator.getUserRepository().existsByEmail(registerData.email())) {
+    if (userRepository.existsByEmail(registerData.email())) {
       throw new ResourceAlreadyExistException(messageService.getMessageWithArgs(
           "user.error.exist.email",
           new Object[] {registerData.email()}
@@ -91,17 +93,17 @@ public class UserServiceImpl implements UserService {
     user.setEmail(registerData.email());
     user.setAuthProvider(AuthProvider.LOCAL);
     user.setPassword(passwordEncoder.encode(registerData.password()));
-    var userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER)
+    var userRole = roleRepository.findByValue(ROLE_USER)
         .orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
             "role.error.not.found.by.name", new Object[] {ROLE_USER.getName()}
         )));
     user.setRoles(Stream.of(userRole).collect(Collectors.toCollection(ArrayList::new)));
-    return repositoryLocator.getUserRepository().save(user);
+    return userRepository.save(user);
   }
 
   @Override
   public VerificationToken getVerificationToken(String verificationToken) {
-    return repositoryLocator.getTokenRepository().findByValue(verificationToken)
+    return tokenRepository.findByValue(verificationToken)
         .orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
             "token.error.not.found.by.token", new Object[] {verificationToken}
         )));
@@ -112,7 +114,7 @@ public class UserServiceImpl implements UserService {
     var token = this.getVerificationToken(existingVerificationToken);
     token.setValue(UUID.randomUUID().toString());
     token.setExpiryDate(LocalDateTime.now().plusDays(1));
-    return repositoryLocator.getTokenRepository().save(token);
+    return tokenRepository.save(token);
   }
 
   @Override
@@ -121,11 +123,11 @@ public class UserServiceImpl implements UserService {
     myToken.setValue(UUID.randomUUID().toString());
     myToken.setUser(user);
     myToken.setExpiryDate(LocalDateTime.now().plusDays(1));
-    return repositoryLocator.getTokenRepository().save(myToken);
+    return tokenRepository.save(myToken);
   }
 
   @Override
   public void saveRegisteredUser(User user) {
-    repositoryLocator.getUserRepository().save(user);
+    userRepository.save(user);
   }
 }

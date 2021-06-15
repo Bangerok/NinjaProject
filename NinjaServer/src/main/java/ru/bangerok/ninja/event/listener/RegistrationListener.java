@@ -7,7 +7,8 @@ import org.springframework.stereotype.Component;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
-import ru.bangerok.ninja.service.base.ServiceLocator;
+import ru.bangerok.ninja.service.MailService;
+import ru.bangerok.ninja.service.UserService;
 
 /**
  * <p> Listener-class for working with sending notifications to registering users about the need to
@@ -21,7 +22,8 @@ import ru.bangerok.ninja.service.base.ServiceLocator;
 @Component
 public class RegistrationListener implements ApplicationListener<OnRegistrationCompleteEvent> {
 
-  private final ServiceLocator serviceLocator;
+  private final UserService userService;
+  private final MailService mailService;
 
   @Override
   public void onApplicationEvent(@NonNull final OnRegistrationCompleteEvent event) {
@@ -35,9 +37,9 @@ public class RegistrationListener implements ApplicationListener<OnRegistrationC
    */
   private void confirmRegistration(final OnRegistrationCompleteEvent event) {
     var user = event.getUser();
-    var token = serviceLocator.getUserService().createVerificationTokenForUser(user)
+    var token = userService.createVerificationTokenForUser(user)
         .getValue();
 
-    serviceLocator.getMailService().sendVerifiedMessage(user.getEmail(), token);
+    mailService.sendVerifiedMessage(user.getEmail(), token);
   }
 }

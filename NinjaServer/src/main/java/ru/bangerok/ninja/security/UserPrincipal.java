@@ -23,9 +23,6 @@ import ru.bangerok.ninja.persistence.model.user.User;
 @RequiredArgsConstructor
 public class UserPrincipal implements OAuth2User, UserDetails {
 
-  @Serial
-  private static final long serialVersionUID = 6508960619998936943L;
-
   /**
    * Private field that stores the essence of the authenticated user.
    */

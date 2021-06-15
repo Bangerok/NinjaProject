@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
-import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
+import ru.bangerok.ninja.persistence.dao.UserRepository;
 
 /**
  * <p> A service class that allows you to get a user in some way. </p>
@@ -22,7 +22,7 @@ import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
 @Transactional
 public class CustomUserDetailsService implements UserDetailsService {
 
-  private final RepositoryLocator repositoryLocator;
+  private final UserRepository userRepository;
 
   /**
    * Method to get create authenticated user based on user retrieved from database via email.
@@ -33,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    */
   @Override
   public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
-    var user = repositoryLocator.getUserRepository().findByEmail(email)
+    var user = userRepository.findByEmail(email)
         .orElseThrow(() ->
             new ResourceNotFoundException("User with email - %s, not found.", email)
         );
@@ -49,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    * @throws ResourceNotFoundException user not found by id.
    */
   public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
-    var user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
+    var user = userRepository.findById(id).orElseThrow(
         () -> new ResourceNotFoundException("User with id - %s, not found.", String.valueOf(id))
     );
 

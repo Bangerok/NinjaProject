@@ -1,7 +1,6 @@
 package ru.bangerok.ninja.validation.impl;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.Properties;
 import javax.validation.ConstraintValidator;
@@ -14,7 +13,6 @@ import org.passay.MessageResolver;
 import org.passay.PasswordData;
 import org.passay.PasswordValidator;
 import org.passay.PropertiesMessageResolver;
-import org.passay.RuleResult;
 import org.passay.SpecialCharacterRule;
 import org.passay.UppercaseCharacterRule;
 import org.passay.WhitespaceRule;
