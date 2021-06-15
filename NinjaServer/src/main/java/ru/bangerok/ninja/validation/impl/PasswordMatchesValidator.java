@@ -19,6 +19,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
   @Override
   public void initialize(PasswordMatches constraintAnnotation) {
+    // Do nothing
   }
 
   /**
@@ -30,11 +31,11 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
    */
   @Override
   public boolean isValid(Object obj, ConstraintValidatorContext context) {
-    RegisterRequest registerRequest = (RegisterRequest) obj;
-    boolean result = registerRequest.password()
+    var registerRequest = (RegisterRequest) obj;
+    var result = registerRequest.password()
         .equals(registerRequest.matchingPassword());
     if (!result) {
-      for (Field field : obj.getClass().getDeclaredFields()) {
+      for (var field : obj.getClass().getDeclaredFields()) {
         if (field.isAnnotationPresent(Match.class)) {
           context.disableDefaultConstraintViolation();
           context.buildConstraintViolationWithTemplate(

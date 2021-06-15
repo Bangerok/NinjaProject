@@ -23,7 +23,7 @@ public enum Roles {
   ROLE_USER("ROLE_USER"),
 
   /**
-   * Role - administrator. Not issued yet. TODO: Add, in the future, the award of this role.
+   * Role - administrator.
    */
   ROLE_ADMIN("ROLE_ADMIN");
 

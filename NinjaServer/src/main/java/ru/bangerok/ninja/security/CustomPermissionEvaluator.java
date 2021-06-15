@@ -35,7 +35,7 @@ public class CustomPermissionEvaluator implements PermissionEvaluator {
       targetDomainObject = Hibernate.unproxy(targetDomainObject);
     }
 
-    final String targetType = targetDomainObject.getClass().getSimpleName().toUpperCase();
+    final var targetType = targetDomainObject.getClass().getSimpleName().toUpperCase();
     return hasPrivilege(auth, targetType, permission.toString().toUpperCase());
   }
 

@@ -36,7 +36,7 @@ public class MailServiceImpl implements MailService {
 
   @Override
   public void sendVerifiedMessage(String toEmail, String token) {
-    Map<String, Object> templateModel = new HashMap<>();
+    var templateModel = new HashMap<String, Object>();
     templateModel.put("text", messageService.getMessage("email.registration.confirmation.text"));
     templateModel
         .put("urlName", messageService.getMessage("email.registration.confirmation.url.name"));
@@ -52,18 +52,17 @@ public class MailServiceImpl implements MailService {
 
   private void sendMessageUsingThymeleafTemplate(
       String to, String subject, Map<String, Object> templateModel, String templateName) {
-
-    Context thymeleafContext = new Context();
+    var thymeleafContext = new Context();
     thymeleafContext.setVariables(templateModel);
 
-    String htmlBody = thymeleafTemplateEngine.process(templateName, thymeleafContext);
+    var htmlBody = thymeleafTemplateEngine.process(templateName, thymeleafContext);
     sendHtmlMessage(to, subject, htmlBody);
   }
 
   private void sendHtmlMessage(String to, String subject, String htmlBody) {
     try {
-      MimeMessage message = mailSender.createMimeMessage();
-      MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+      var message = mailSender.createMimeMessage();
+      var helper = new MimeMessageHelper(message, true, "UTF-8");
       helper.setTo(to);
       helper.setSubject(subject);
       helper.setText(htmlBody, true);

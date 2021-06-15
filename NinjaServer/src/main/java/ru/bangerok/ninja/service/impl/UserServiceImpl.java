@@ -60,11 +60,11 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public String creatingTokenForAuthUser(LoginRequest loginData) {
-    Authentication authentication = authenticationManager.authenticate(
+    var authentication = authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(loginData.email(), loginData.password())
     );
 
-    User user = repositoryLocator.getUserRepository().findByEmail(loginData.email())
+    var user = repositoryLocator.getUserRepository().findByEmail(loginData.email())
         .orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
             "user.error.not.found.by.email",
             new Object[] {loginData.email()}
@@ -85,13 +85,13 @@ public class UserServiceImpl implements UserService {
       ));
     }
 
-    User user = new User();
+    var user = new User();
     user.setFullname(registerData.name());
     user.setEmailVerified(false);
     user.setEmail(registerData.email());
     user.setAuthProvider(AuthProvider.LOCAL);
     user.setPassword(passwordEncoder.encode(registerData.password()));
-    Role userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER)
+    var userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER)
         .orElseThrow(() -> new ResourceNotFoundException(messageService.getMessageWithArgs(
             "role.error.not.found.by.name", new Object[] {ROLE_USER.getName()}
         )));
@@ -109,7 +109,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public VerificationToken generateNewVerificationToken(String existingVerificationToken) {
-    VerificationToken token = this.getVerificationToken(existingVerificationToken);
+    var token = this.getVerificationToken(existingVerificationToken);
     token.setValue(UUID.randomUUID().toString());
     token.setExpiryDate(LocalDateTime.now().plusDays(1));
     return repositoryLocator.getTokenRepository().save(token);
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public VerificationToken createVerificationTokenForUser(User user) {
-    VerificationToken myToken = new VerificationToken();
+    var myToken = new VerificationToken();
     myToken.setValue(UUID.randomUUID().toString());
     myToken.setUser(user);
     myToken.setExpiryDate(LocalDateTime.now().plusDays(1));

@@ -9,7 +9,6 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -43,27 +42,15 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
   @Transactional
   @Override
   protected void doFilterInternal(@NonNull HttpServletRequest request,
-                                  @NonNull HttpServletResponse response,
-                                  @NonNull FilterChain filterChain)
+                               @NonNull HttpServletResponse response,
+                               @NonNull FilterChain filterChain)
       throws ServletException, IOException {
     try {
-      String jwt = getJwtFromRequest(request);
+      var jwt = getJwtFromRequest(request);
 
       if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-        long id = tokenProvider.getUserIdFromToken(jwt);
-
-        try {
-          UserDetails userDetails = customUserDetailsService.loadUserById(id);
-          UsernamePasswordAuthenticationToken authentication =
-              new UsernamePasswordAuthenticationToken(
-                  userDetails, null, userDetails.getAuthorities());
-          authentication
-              .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
-          SecurityContextHolder.getContext().setAuthentication(authentication);
-        } catch (ResourceNotFoundException e) {
-          SecurityContextHolder.getContext().setAuthentication(null);
-        }
+        var id = tokenProvider.getUserIdFromToken(jwt);
+        checkingAuthorization(request, id);
       }
     } catch (Exception e) {
       logger.error("Could not set user authentication in security context", e);
@@ -73,13 +60,32 @@ public class TokenAuthenticationFilter extends OncePerRequestFilter {
   }
 
   /**
+   * Checking user authorization by his id.
+   *
+   * @param request request data.
+   * @param id      the user ID in the database, obtained from the JWT token after decryption.
+   */
+  private void checkingAuthorization(HttpServletRequest request, long id) {
+    try {
+      var userDetails = customUserDetailsService.loadUserById(id);
+      var authentication = new UsernamePasswordAuthenticationToken(
+          userDetails, null, userDetails.getAuthorities()
+      );
+      authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+      SecurityContextHolder.getContext().setAuthentication(authentication);
+    } catch (ResourceNotFoundException e) {
+      SecurityContextHolder.getContext().setAuthentication(null);
+    }
+  }
+
+  /**
    * Method for getting an authentication token from request headers.
    *
    * @param request request data.
    * @return a string with a token, if any, otherwise null.
    */
   private String getJwtFromRequest(HttpServletRequest request) {
-    String bearerToken = request.getHeader("Authorization");
+    var bearerToken = request.getHeader("Authorization");
     if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
       return bearerToken.substring(7);
     }

@@ -89,6 +89,7 @@
           <configLocation>google-check-style.xml</configLocation>
           <violationSeverity>warning</violationSeverity>
           <consoleOutput>true</consoleOutput>
+          <includeTestSourceDirectory>true</includeTestSourceDirectory>
         </configuration>
         <executions>
           <execution>

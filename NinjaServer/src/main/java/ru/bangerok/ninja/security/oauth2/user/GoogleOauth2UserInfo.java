@@ -1,6 +1,7 @@
 package ru.bangerok.ninja.security.oauth2.user;
 
 import java.util.Map;
+import ru.bangerok.ninja.enumeration.AuthProvider;
 
 /**
  * <p> Class for user data obtained through Google authorization provider. </p>
@@ -9,10 +10,10 @@ import java.util.Map;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-public class GoogleOauth2UserInfo extends Oauth2UserInfo {
+public class GoogleOauth2UserInfo extends AbstractOauth2UserInfo {
 
-  public GoogleOauth2UserInfo(Map<String, Object> attributes) {
-    super(attributes);
+  public GoogleOauth2UserInfo(AuthProvider providerId, Map<String, Object> attributes) {
+    super(providerId, attributes);
   }
 
   @Override

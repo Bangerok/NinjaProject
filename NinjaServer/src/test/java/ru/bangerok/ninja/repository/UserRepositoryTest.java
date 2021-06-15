@@ -16,7 +16,7 @@ import ru.bangerok.ninja.persistence.model.user.User;
  * @since 0.3.9
  */
 @SpringBootTest
-public class UserRepositoryTest extends AbstractRepositoryTest {
+class UserRepositoryTest extends AbstractRepositoryTest {
 
   @Autowired
   private UserRepository userRepository;
@@ -26,9 +26,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
    */
   @Test
   void checkingUserFindById() {
-    User newUser = userRepository.save(factory.getNewUser());
+    var newUser = userRepository.save(factory.getNewUser());
 
-    User userFoundById = userRepository.findById(newUser.getId())
+    var userFoundById = userRepository.findById(newUser.getId())
         .orElse(null);
     assertNotNull(userFoundById);
     userRepository.delete(userFoundById);
@@ -39,9 +39,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
    */
   @Test
   void checkingUserFindByEmail() {
-    User newUser = userRepository.save(factory.getNewUser());
+    var newUser = userRepository.save(factory.getNewUser());
 
-    User userFoundByEmail = userRepository
+    var userFoundByEmail = userRepository
         .findByEmail(newUser.getEmail()).orElse(null);
     assertNotNull(userFoundByEmail);
     userRepository.delete(userFoundByEmail);
@@ -52,9 +52,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
    */
   @Test
   void checkingUserFindByProviderId() {
-    User newUser = userRepository.save(factory.getNewUser());
+    var newUser = userRepository.save(factory.getNewUser());
 
-    User userFoundByProviderId = userRepository
+    var userFoundByProviderId = userRepository
         .findByProviderId(newUser.getProviderId()).orElse(null);
     assertNotNull(userFoundByProviderId);
     userRepository.delete(userFoundByProviderId);
@@ -65,9 +65,9 @@ public class UserRepositoryTest extends AbstractRepositoryTest {
    */
   @Test
   void checkingUserExistByEmail() {
-    User newUser = userRepository.save(factory.getNewUser());
+    var newUser = userRepository.save(factory.getNewUser());
 
-    boolean existsByEmail = userRepository
+    var existsByEmail = userRepository
         .existsByEmail(newUser.getEmail());
     assertTrue(existsByEmail);
     userRepository.delete(newUser);

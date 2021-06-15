@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
-import ru.bangerok.ninja.persistence.model.user.VerificationToken;
 import ru.bangerok.ninja.persistence.model.views.Views;
 import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
@@ -66,7 +65,7 @@ public class AuthController {
    */
   @PatchMapping("/login")
   public ApiResponse authenticateUser(@RequestBody LoginRequest loginRequest) {
-    String token = userService.creatingTokenForAuthUser(loginRequest);
+    var token = userService.creatingTokenForAuthUser(loginRequest);
     return new ApiResponse(token);
   }
 
@@ -78,7 +77,7 @@ public class AuthController {
    */
   @PostMapping("/register")
   public ApiResponse registerUser(@Valid @RequestBody RegisterRequest registerRequest) {
-    User registered = userService.registerNewUserAccount(registerRequest);
+    var registered = userService.registerNewUserAccount(registerRequest);
     eventPublisher.publishEvent(new OnRegistrationCompleteEvent(registered, ""));
 
     return new ApiResponse(msgService.getMessage(
@@ -94,13 +93,13 @@ public class AuthController {
    */
   @PutMapping("/registrationConfirm")
   public ApiResponse confirmRegistration(@RequestParam("token") String token) {
-    VerificationToken verificationToken = userService.getVerificationToken(token);
+    var verificationToken = userService.getVerificationToken(token);
 
     if (verificationToken.getExpiryDate().isBefore(LocalDateTime.now())) {
       return new ApiResponse((Object) verificationToken.getValue());
     }
 
-    User user = verificationToken.getUser();
+    var user = verificationToken.getUser();
     user.setEmailVerified(true);
     userService.saveRegisteredUser(user);
     return new ApiResponse(msgService.getMessage(
@@ -116,9 +115,9 @@ public class AuthController {
    */
   @PutMapping("/resendRegistrationToken")
   public ApiResponse resendRegistrationToken(@RequestParam("oldToken") String existingToken) {
-    VerificationToken newToken = userService
+    var newToken = userService
         .generateNewVerificationToken(existingToken);
-    User user = newToken.getUser();
+    var user = newToken.getUser();
     mailService.sendVerifiedMessage(user.getEmail(), newToken.getValue());
     return new ApiResponse(msgService.getMessage(
         "registration.confirmation.getting.new.token"

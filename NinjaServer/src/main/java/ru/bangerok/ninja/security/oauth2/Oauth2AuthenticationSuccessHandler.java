@@ -51,7 +51,7 @@ public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
   public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                       Authentication authentication)
       throws IOException, BadRequestException {
-    String targetUrl = determineTargetUrl(request, response, authentication);
+    var targetUrl = determineTargetUrl(request, response, authentication);
 
     if (response.isCommitted()) {
       logger.debug("Response has already been committed. Unable to redirect to " + targetUrl);
@@ -74,19 +74,19 @@ public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
   @Override
   protected String determineTargetUrl(HttpServletRequest request, HttpServletResponse response,
                                       Authentication authentication) throws BadRequestException {
-    Optional<String> redirectUri = CookieUtils
+    var redirectUri = CookieUtils
         .getCookie(request, REDIRECT_URI_PARAM_COOKIE_NAME)
         .map(Cookie::getValue);
 
     if (redirectUri.isPresent()) {
-      final String uri = redirectUri.get();
+      final var uri = redirectUri.get();
       if (!isAuthorizedRedirectUri(uri)) {
         throw new BadRequestException(messageService.getMessageWithArgs(
             "auth.error.unauthorized.uri", new Object[] {uri}
         ));
       }
-      String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-      String token = tokenProvider.createToken(authentication);
+      var targetUrl = redirectUri.orElse(getDefaultTargetUrl());
+      var token = tokenProvider.createToken(authentication);
       return UriComponentsBuilder.fromUriString(targetUrl)
           .queryParam("token", token)
           .build().toUriString();
@@ -117,11 +117,11 @@ public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
    * @return true if the link is valid, otherwise false.
    */
   private boolean isAuthorizedRedirectUri(String uri) {
-    URI clientRedirectUri = URI.create(uri);
+    var clientRedirectUri = URI.create(uri);
     return jwtProperties.getOauth2().getAuthorizedRedirectUris()
         .parallelStream()
         .anyMatch(authorizedRedirectUri -> {
-          URI authorizedUri = URI.create(authorizedRedirectUri);
+          var authorizedUri = URI.create(authorizedRedirectUri);
           return authorizedUri.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
               && authorizedUri.getPort() == clientRedirectUri.getPort();
         });

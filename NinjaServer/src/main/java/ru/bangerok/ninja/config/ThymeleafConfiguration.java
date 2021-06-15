@@ -26,7 +26,7 @@ public class ThymeleafConfiguration {
    */
   @Bean
   public SpringTemplateEngine templateEngine() {
-    SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+    var templateEngine = new SpringTemplateEngine();
     templateEngine.setTemplateResolver(thymeleafTemplateResolver());
     return templateEngine;
   }
@@ -38,7 +38,7 @@ public class ThymeleafConfiguration {
    */
   @Bean
   public ITemplateResolver thymeleafTemplateResolver() {
-    ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
+    var templateResolver = new ClassLoaderTemplateResolver();
     templateResolver.setPrefix("templates/");
     templateResolver.setSuffix(".html");
     templateResolver.setTemplateMode("HTML");

@@ -1,7 +1,9 @@
 package ru.bangerok.ninja.security.oauth2.user;
 
 import java.util.Map;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import ru.bangerok.ninja.enumeration.AuthProvider;
 
 /**
  * <p> An abstract class with common methods and fields for all class objects (if there are several)
@@ -12,7 +14,10 @@ import lombok.RequiredArgsConstructor;
  * @since 0.3.0
  */
 @RequiredArgsConstructor
-public abstract class Oauth2UserInfo {
+public abstract class AbstractOauth2UserInfo {
+
+  @Getter
+  private final AuthProvider providerId;
 
   /**
    * Protected field that stores user attributes from an external authorization provider.

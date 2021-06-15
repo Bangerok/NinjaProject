@@ -36,11 +36,12 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
 
   @Override
   public void initialize(ValidPassword arg0) {
+    // Do nothing
   }
 
   @Override
   public boolean isValid(String password, ConstraintValidatorContext context) {
-    PasswordValidator validator = new PasswordValidator(getMessageResolver(), Arrays.asList(
+    var validator = new PasswordValidator(getMessageResolver(), Arrays.asList(
         new LengthRule(8, 16),
         new UppercaseCharacterRule(1),
         new LowercaseCharacterRule(1),
@@ -50,7 +51,7 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
         new WhitespaceRule())
     );
 
-    RuleResult result = validator.validate(new PasswordData(password));
+    var result = validator.validate(new PasswordData(password));
     if (result.isValid()) {
       return true;
     }
@@ -67,8 +68,8 @@ public class PasswordConstraintValidator implements ConstraintValidator<ValidPas
    * @return list of messages to be used for validation error messages.
    */
   private MessageResolver getMessageResolver() {
-    Properties props = new Properties();
-    InputStream inputStream = getClass().getClassLoader()
+    var props = new Properties();
+    var inputStream = getClass().getClassLoader()
         .getResourceAsStream("messages/password.properties");
 
     try {

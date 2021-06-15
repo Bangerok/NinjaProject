@@ -1,5 +1,7 @@
 package ru.bangerok.ninja;
 
+import static org.springframework.boot.SpringApplication.run;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -34,6 +36,6 @@ import ru.bangerok.ninja.config.properties.JwtProperties;
 @SpringBootApplication
 public class NinjaApplication {
   public static void main(String[] args) {
-    SpringApplication.run(NinjaApplication.class, args);
+    run(NinjaApplication.class, args);
   }
 }

@@ -1,8 +1,8 @@
 package ru.bangerok.ninja.security;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
@@ -10,8 +10,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
-import ru.bangerok.ninja.persistence.model.user.Privilege;
-import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
@@ -24,6 +22,9 @@ import ru.bangerok.ninja.persistence.model.user.User;
  */
 @RequiredArgsConstructor
 public class UserPrincipal implements OAuth2User, UserDetails {
+
+  @Serial
+  private static final long serialVersionUID = 6508960619998936943L;
 
   /**
    * Private field that stores the essence of the authenticated user.
@@ -47,10 +48,10 @@ public class UserPrincipal implements OAuth2User, UserDetails {
    * @return {@link UserPrincipal} authenticated user.
    */
   public static UserPrincipal create(User user) {
-    List<GrantedAuthority> authorities = new ArrayList<>();
-    for (Role role : user.getRoles()) {
+    var authorities = new ArrayList<GrantedAuthority>();
+    for (var role : user.getRoles()) {
       authorities.add(new SimpleGrantedAuthority(role.getValue().getName()));
-      for (Privilege privilege : role.getPrivileges()) {
+      for (var privilege : role.getPrivileges()) {
         authorities.add(new SimpleGrantedAuthority(privilege.getName()));
       }
     }
@@ -66,7 +67,7 @@ public class UserPrincipal implements OAuth2User, UserDetails {
    * @return {@link UserPrincipal} authenticated user.
    */
   public static UserPrincipal create(User user, Map<String, Object> attributes) {
-    UserPrincipal userPrincipal = UserPrincipal.create(user);
+    var userPrincipal = UserPrincipal.create(user);
     userPrincipal.setAttributes(attributes);
     return userPrincipal;
   }

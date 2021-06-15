@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.bangerok.ninja.config.SecurityConfig;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
-import ru.bangerok.ninja.persistence.model.user.User;
 
 /**
  * <p> A service class that allows you to get a user in some way. </p>
@@ -34,7 +33,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    */
   @Override
   public UserDetails loadUserByUsername(String email) throws ResourceNotFoundException {
-    User user = repositoryLocator.getUserRepository().findByEmail(email)
+    var user = repositoryLocator.getUserRepository().findByEmail(email)
         .orElseThrow(() ->
             new ResourceNotFoundException("User with email - %s, not found.", email)
         );
@@ -50,7 +49,7 @@ public class CustomUserDetailsService implements UserDetailsService {
    * @throws ResourceNotFoundException user not found by id.
    */
   public UserDetails loadUserById(Long id) throws ResourceNotFoundException {
-    User user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
+    var user = repositoryLocator.getUserRepository().findById(id).orElseThrow(
         () -> new ResourceNotFoundException("User with id - %s, not found.", String.valueOf(id))
     );
 

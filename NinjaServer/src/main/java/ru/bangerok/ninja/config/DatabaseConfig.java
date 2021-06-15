@@ -22,7 +22,7 @@ public class DatabaseConfig {
    */
   @Bean
   public DataSource getDataSource() {
-    DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
+    var dataSourceBuilder = DataSourceBuilder.create();
     dataSourceBuilder.driverClassName("org.postgresql.Driver");
     dataSourceBuilder
         .url("jdbc:postgresql://localhost:5024/ninja_database");
@@ -38,7 +38,7 @@ public class DatabaseConfig {
    */
   @Bean
   public SpringLiquibase liquibase() {
-    SpringLiquibase liquibase = new SpringLiquibase();
+    var liquibase = new SpringLiquibase();
     liquibase.setChangeLog("classpath:liquibase/db.changelog-master.yml");
     liquibase.setDataSource(getDataSource());
     return liquibase;

@@ -1,6 +1,5 @@
 package ru.bangerok.ninja.security;
 
-import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import ru.bangerok.ninja.config.properties.JwtProperties;
-import ru.bangerok.ninja.config.properties.JwtProperties.Auth;
 import ru.bangerok.ninja.rest.controllers.auth.AuthController;
 import ru.bangerok.ninja.rest.payload.request.LoginRequest;
 
@@ -40,10 +38,10 @@ public class TokenProvider {
    * @return authentication token string.
    */
   public String createToken(Authentication authentication) {
-    final Long principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
-    final Date currentDate = new Date();
+    final var principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
+    final var currentDate = new Date();
 
-    final Auth auth = jwtProperties.getAuth();
+    final var auth = jwtProperties.getAuth();
     return Jwts.builder()
         .setSubject(String.valueOf(principalId))
         .setIssuedAt(currentDate)
@@ -60,7 +58,7 @@ public class TokenProvider {
    * @return user id or user id in external provider.
    */
   public long getUserIdFromToken(String token) {
-    Claims claims = Jwts.parser()
+    var claims = Jwts.parser()
         .setSigningKey(jwtProperties.getAuth().getTokenSecret())
         .parseClaimsJws(token)
         .getBody();

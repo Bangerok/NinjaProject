@@ -8,14 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailAuthenticationException;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.rest.payload.response.ApiResponse;
-import ru.bangerok.ninja.validation.impl.PasswordConstraintValidator;
 
 /**
  * Exception java class for catching and handling all errors thrown by controllers.
@@ -27,7 +25,8 @@ import ru.bangerok.ninja.validation.impl.PasswordConstraintValidator;
 @RequiredArgsConstructor
 public class RestResponseEntityExceptionHandler {
 
-  private static final Logger logger = LoggerFactory.getLogger(PasswordConstraintValidator.class);
+  private static final Logger logger =
+      LoggerFactory.getLogger(RestResponseEntityExceptionHandler.class);
 
   /**
    * Exception handle method for handling 400 error - Bad request, associated with not passing the
@@ -39,8 +38,8 @@ public class RestResponseEntityExceptionHandler {
   @ExceptionHandler({MethodArgumentNotValidException.class})
   public ResponseEntity<ApiResponse> handleBadRequest(MethodArgumentNotValidException ex) {
     logger.error(ex.getClass().getName());
-    BindingResult result = ex.getBindingResult();
-    ApiResponse bodyOfResponse = new ApiResponse(result.getAllErrors(), result.getObjectName());
+    var result = ex.getBindingResult();
+    var bodyOfResponse = new ApiResponse(result.getAllErrors(), result.getObjectName());
     return new ResponseEntity<>(bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST);
   }
 
@@ -105,7 +104,7 @@ public class RestResponseEntityExceptionHandler {
    */
   @ExceptionHandler({Exception.class})
   public ResponseEntity<ApiResponse> handleInternal(RuntimeException ex) {
-    logger.error("500 - Internal Server Error.", ex);
+    logger.error("500 - Internal Server Error. Not identified.", ex);
     return getResponseForSingleError(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
   }
 

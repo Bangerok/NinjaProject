@@ -21,7 +21,7 @@ public class EntitiesFactory {
    * @return generated user.
    */
   public User getNewUser() {
-    User user = new User();
+    var user = new User();
     user.setFullname("Ivanov Ivan");
     user.setEmailVerified(false);
     user.setEmail(String.format("test.%d@example.com", getRandomNumber()));

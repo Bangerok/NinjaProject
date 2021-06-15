@@ -26,8 +26,7 @@ public class MethodSecurityConfig extends GlobalMethodSecurityConfiguration {
    */
   @Override
   protected MethodSecurityExpressionHandler createExpressionHandler() {
-    DefaultMethodSecurityExpressionHandler expressionHandler =
-        new DefaultMethodSecurityExpressionHandler();
+    var expressionHandler = new DefaultMethodSecurityExpressionHandler();
     expressionHandler.setPermissionEvaluator(new CustomPermissionEvaluator());
     return expressionHandler;
   }

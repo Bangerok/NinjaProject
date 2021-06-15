@@ -4,7 +4,6 @@ import static ru.bangerok.ninja.enumeration.Roles.ROLE_USER;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +18,9 @@ import ru.bangerok.ninja.enumeration.AuthProvider;
 import ru.bangerok.ninja.exception.auth.Oauth2AuthenticationProcessingException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.base.RepositoryLocator;
-import ru.bangerok.ninja.persistence.model.user.Role;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.security.UserPrincipal;
-import ru.bangerok.ninja.security.oauth2.user.Oauth2UserInfo;
+import ru.bangerok.ninja.security.oauth2.user.AbstractOauth2UserInfo;
 import ru.bangerok.ninja.security.oauth2.user.Oauth2UserInfoFactory;
 import ru.bangerok.ninja.service.MessageService;
 
@@ -55,8 +53,7 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
   @Override
   public OAuth2User loadUser(OAuth2UserRequest oauth2UserRequest)
       throws Oauth2AuthenticationProcessingException, ResourceNotFoundException {
-    OAuth2User oauth2User = super.loadUser(oauth2UserRequest);
-
+    var oauth2User = super.loadUser(oauth2UserRequest);
     return processOauth2User(oauth2UserRequest, oauth2User);
   }
 
@@ -72,22 +69,24 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
    */
   private OAuth2User processOauth2User(OAuth2UserRequest oauth2UserRequest, OAuth2User oauth2User)
       throws Oauth2AuthenticationProcessingException, ResourceNotFoundException {
-    Oauth2UserInfo oauth2UserInfo = userInfoFactory
-        .getOauth2UserInfo(oauth2UserRequest.getClientRegistration().getRegistrationId(),
+    var oauth2UserInfo = userInfoFactory
+        .getOauth2UserInfo(
+            AuthProvider.valueOf(
+                oauth2UserRequest.getClientRegistration().getRegistrationId().toUpperCase()),
             oauth2User.getAttributes());
 
-    final String email = oauth2UserInfo.getEmail();
+    final var email = oauth2UserInfo.getEmail();
     if (!StringUtils.hasText(email)) {
       throw new Oauth2AuthenticationProcessingException(messageService.getMessageWithArgs(
           "auth.error.email.not.found", new Object[] {email})
       );
     }
 
-    User user = repositoryLocator.getUserRepository().findByEmail(email)
+    var user = repositoryLocator.getUserRepository().findByEmail(email)
         .map(
             value -> updateExistingUser(value, oauth2UserInfo)
         ).orElseGet(
-            () -> registerNewUser(oauth2UserRequest, oauth2UserInfo)
+            () -> registerNewUser(oauth2UserInfo)
         );
 
     return UserPrincipal.create(user, oauth2User.getAttributes());
@@ -96,27 +95,25 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
   /**
    * Method for saving a new user to the database.
    *
-   * @param oauth2UserRequest oAuth2 authorization request.
-   * @param oauth2UserInfo    oAuth2 user data.
+   * @param abstractOauth2UserInfo oAuth2 user data.
    * @return registered {@link User}.
    * @throws ResourceNotFoundException a role with this name was not found.
    */
-  private User registerNewUser(OAuth2UserRequest oauth2UserRequest,
-                               Oauth2UserInfo oauth2UserInfo) throws ResourceNotFoundException {
-    User user = new User();
-    user.setAuthProvider(
-        AuthProvider.valueOf(oauth2UserRequest.getClientRegistration().getRegistrationId()));
-    user.setProviderId(oauth2UserInfo.getId());
-    user.setFullname(oauth2UserInfo.getName());
-    user.setEmail(oauth2UserInfo.getEmail());
-    user.setAvatar(oauth2UserInfo.getImageUrl());
+  private User registerNewUser(AbstractOauth2UserInfo abstractOauth2UserInfo)
+      throws ResourceNotFoundException {
+    var user = new User();
+    user.setAuthProvider(abstractOauth2UserInfo.getProviderId());
+    user.setProviderId(abstractOauth2UserInfo.getId());
+    user.setFullname(abstractOauth2UserInfo.getName());
+    user.setEmail(abstractOauth2UserInfo.getEmail());
+    user.setAvatar(abstractOauth2UserInfo.getImageUrl());
     user.setLastVisit(LocalDateTime.now());
     user.setEmailVerified(true);
 
-    Role userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER).orElseThrow(
+    var userRole = repositoryLocator.getRoleRepository().findByValue(ROLE_USER).orElseThrow(
         () -> new ResourceNotFoundException(messageService.getMessage("role.error.not.found"))
     );
-    List<Role> roles = Stream.of(userRole)
+    var roles = Stream.of(userRole)
         .collect(Collectors.toCollection(ArrayList::new));
     user.setRoles(roles);
 
@@ -126,13 +123,14 @@ public class CustomOauth2UserService extends DefaultOAuth2UserService {
   /**
    * Method for updating a user in a database.
    *
-   * @param existingUser   existing user.
-   * @param oauth2UserInfo oauth2 user data.
+   * @param existingUser           existing user.
+   * @param abstractOauth2UserInfo oauth2 user data.
    * @return updated {@link User}.
    */
-  private User updateExistingUser(User existingUser, Oauth2UserInfo oauth2UserInfo) {
-    existingUser.setFullname(oauth2UserInfo.getName());
-    existingUser.setAvatar(oauth2UserInfo.getImageUrl());
+  private User updateExistingUser(User existingUser,
+                                  AbstractOauth2UserInfo abstractOauth2UserInfo) {
+    existingUser.setFullname(abstractOauth2UserInfo.getName());
+    existingUser.setAvatar(abstractOauth2UserInfo.getImageUrl());
     existingUser.setLastVisit(LocalDateTime.now());
     return repositoryLocator.getUserRepository().save(existingUser);
   }

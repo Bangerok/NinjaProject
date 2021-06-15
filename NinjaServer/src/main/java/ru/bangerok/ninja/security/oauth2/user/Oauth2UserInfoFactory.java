@@ -27,14 +27,15 @@ public class Oauth2UserInfoFactory {
    *
    * @param registrationId authorization provider type.
    * @param attributes     user attributes obtained from an external authorization provider
-   * @return {@link Oauth2UserInfo} after oAuth2 authorization.
+   * @return {@link AbstractOauth2UserInfo} after oAuth2 authorization.
    * @throws Oauth2AuthenticationProcessingException if a non-Google provider is used for
    *                                                 authorization.
    */
-  public Oauth2UserInfo getOauth2UserInfo(String registrationId, Map<String, Object> attributes)
+  public AbstractOauth2UserInfo getOauth2UserInfo(AuthProvider registrationId,
+                                                  Map<String, Object> attributes)
       throws Oauth2AuthenticationProcessingException {
-    if (registrationId.equalsIgnoreCase(AuthProvider.GOOGLE.toString())) {
-      return new GoogleOauth2UserInfo(attributes);
+    if (AuthProvider.GOOGLE.equals(registrationId)) {
+      return new GoogleOauth2UserInfo(registrationId, attributes);
     } else {
       throw new Oauth2AuthenticationProcessingException(messageService.getMessageWithArgs(
           "auth.error.provider.not.supported", new Object[] {registrationId})
