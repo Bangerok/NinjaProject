@@ -1,14 +1,14 @@
-# Indellij Idea
+### Indellij Idea ###
 **.iml
 .idea/
 Runs/
 
-# Maven
+### Maven ###
 **/target/
 
-# Node files
+### Node files ###
 package-lock.json
 NinjaClient/node_modules
 
-# Docker
+### Docker ###
 docker/postgresql/data

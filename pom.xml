@@ -6,19 +6,17 @@
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
     <version>2.5.1</version>
-    <relativePath/>
+    <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>bangerok</groupId>
+  <groupId>ru.bangerok</groupId>
   <artifactId>ninja-project</artifactId>
   <version>0.5.14</version>
   <packaging>pom</packaging>
 
-  <name>Parent POM for project modules</name>
-
   <description>
-    The main POM file that connects and configures the project modules.
+    The main POM file that connects and configures the ninja project modules.
   </description>
 
   <url>https://github.com/Bangerok/NinjaProject</url>
@@ -39,65 +37,6 @@
       </roles>
     </developer>
   </developers>
-
-  <properties>
-    <!-- Compiler -->
-    <java.version>16</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <!-- Dependencies -->
-    <jsoup.version>1.13.1</jsoup.version>
-    <jjwt.version>0.9.1</jjwt.version>
-    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-    <passay.version>1.0</passay.version>
-    <guava.version>r05</guava.version>
-    <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-    <lombok.version>1.18.20</lombok.version>
-    <jakarta.validation.version>2.0.2</jakarta.validation.version>
-
-    <!-- Plugins -->
-    <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
-    <puppycrawl.checkstyle.version>8.43</puppycrawl.checkstyle.version>
-  </properties>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${puppycrawl.checkstyle.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <configLocation>google-check-style.xml</configLocation>
-          <violationSeverity>warning</violationSeverity>
-          <consoleOutput>true</consoleOutput>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
 
   <profiles>
     <profile>

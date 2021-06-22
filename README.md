@@ -2,7 +2,6 @@ Project Ninja
 =============================
 
 ### Description
-
 ___
 Consists of two modules — the client part (NinjaClient), and the server part (NinjaServer).
 
@@ -30,7 +29,6 @@ Consists of two modules — the client part (NinjaClient), and the server part (
     - and much more.
 
 ### Instructions for starting the project
-
 ___
 
 1. Download sources or clone the project via git.
@@ -68,7 +66,6 @@ _**P.S.: All commands are executed from the console. It is also convenient to us
 configurations, for example, in Intellij Idea (IDE).**_
 
 ### License
-
 ___
 **[MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)**
 
