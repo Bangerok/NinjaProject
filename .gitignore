@@ -8,7 +8,7 @@ Runs/
 
 ### Node files ###
 package-lock.json
-NinjaClient/node_modules
+**/node*/
 
 ### Docker ###
 docker/postgresql/data
