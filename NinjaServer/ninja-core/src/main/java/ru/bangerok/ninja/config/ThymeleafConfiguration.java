@@ -2,7 +2,6 @@ package ru.bangerok.ninja.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
@@ -15,7 +14,6 @@ import ru.bangerok.ninja.service.impl.MailServiceImpl;
  * @since 0.4.11
  */
 @Configuration
-@EnableWebMvc
 public class ThymeleafConfiguration {
 
   /**

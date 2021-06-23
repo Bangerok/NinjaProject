@@ -3,6 +3,7 @@ Project Ninja
 
 ### Description
 ___
+
 Consists of two modules — the client part (NinjaClient), and the server part (NinjaServer).
 
 1. The first module is written in VueJS, the dependencies of which can be viewed in the file
@@ -67,6 +68,7 @@ configurations, for example, in Intellij Idea (IDE).**_
 
 ### License
 ___
+
 **[MIT](https://github.com/git/git-scm.com/blob/main/MIT-LICENSE.txt)**
 
 _Copyright ©2021, Vladislav (Bangerok) Kuznetsov_

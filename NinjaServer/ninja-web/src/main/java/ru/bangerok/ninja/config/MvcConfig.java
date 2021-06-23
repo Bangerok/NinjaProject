@@ -2,6 +2,7 @@ package ru.bangerok.ninja.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
@@ -12,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @since 0.3.0
  */
 @Configuration
+@EnableWebMvc
 public class MvcConfig implements WebMvcConfigurer {
 
   /**
