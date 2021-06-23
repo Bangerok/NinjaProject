@@ -82,11 +82,11 @@ databaseChangeLog:
               - column:
                   header: base_created_date
                   name: base_created_date
-                  type: DATE
+                  type: SKIP
               - column:
                   header: base_updated_date
                   name: base_updated_date
-                  type: skip
+                  type: SKIP
               - column:
                   header: base_status
                   name: base_status
