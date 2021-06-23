@@ -1,7 +1,8 @@
 module.exports = {
-  "devServer": {
-    "port": 3000,
-    "proxy": {
+  lintOnSave: 'error',
+  devServer: {
+    port: 3000,
+    proxy: {
       "/api": {
         target: 'http://localhost:9000',
         ws: true,
@@ -9,9 +10,9 @@ module.exports = {
         pathRewrite: {
           '^/api': '',
         },
-      }
+      },
     },
-    "stats": "errors-only",
-    "clientLogLevel": "error"
+    stats: "errors-only",
+    clientLogLevel: "error",
   },
 }

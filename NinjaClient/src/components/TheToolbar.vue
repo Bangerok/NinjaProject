@@ -1,10 +1,26 @@
 <!--suppress HtmlUnknownTag -->
 <template>
-  <v-app-bar color="toolbar" app elevation="2" clipped-left>
-    <v-card flat max-width="295px" max-height="100%" color="appbar" class="mt-n4 ml-n5">
+  <v-app-bar
+    color="toolbar"
+    app
+    elevation="2"
+    clipped-left
+  >
+    <v-card
+      flat
+      max-width="295px"
+      max-height="100%"
+      color="appbar"
+      class="mt-n4 ml-n5"
+    >
       <v-list-item two-line>
         <v-list-item-avatar>
-          <v-icon large color="orange darken-4">fa-bolt</v-icon>
+          <v-icon
+            large
+            color="orange darken-4"
+          >
+            fa-bolt
+          </v-icon>
         </v-list-item-avatar>
 
         <v-list-item-content>
@@ -14,10 +30,20 @@
       </v-list-item>
     </v-card>
 
-    <v-tooltip bottom nudge-right="75px" nudge-bottom="5px">
+    <v-tooltip
+      bottom
+      nudge-right="75px"
+      nudge-bottom="5px"
+    >
       <template #activator="{ on }">
-        <v-list-item-icon v-on="on" class="justify-center mt-1">
-          <v-app-bar-nav-icon class="mr-3 ml-n2" @click="maxMenu = !maxMenu">
+        <v-list-item-icon
+          class="justify-center mt-1"
+          v-on="on"
+        >
+          <v-app-bar-nav-icon
+            class="mr-3 ml-n2"
+            @click="maxMenu = !maxMenu"
+          >
             <v-icon v-if="maxMenu">
               fa-bars
             </v-icon>
@@ -31,25 +57,43 @@
       <span class="overline">{{ $t('tooltips.minVariant') }}</span>
     </v-tooltip>
 
+    <!--suppress JSUnresolvedVariable -->
     <v-toolbar-title class="pl-2 font-weight-medium">
       {{ $t($route.meta.title) }}
     </v-toolbar-title>
 
-    <v-spacer/>
+    <v-spacer />
 
-    <v-btn text class="mr-3" link @click="callLogout">
+    <v-btn
+      text="mr-3"
+      link
+      @click="callLogout"
+    >
       <v-icon class="mr-1">
         fa-sign-out-alt
       </v-icon>
       {{ $t('buttons.exitBtn') }}
     </v-btn>
-    <v-tooltip bottom nudge-bottom="5px">
+    <v-tooltip
+      bottom
+      nudge-bottom="5px"
+    >
       <template #activator="{ on }">
-        <v-list-item-icon v-on="on" class="justify-center mt-3">
-          <v-card flat max-width="130px" max-height="40px" color="appbar">
-            <v-select flat prepend-icon="fa-globe"
-                      v-model="locale"
-                      :items="items"
+        <v-list-item-icon
+          class="justify-center mt-3"
+          v-on="on"
+        >
+          <v-card
+            flat
+            max-width="130px"
+            max-height="40px"
+            color="appbar"
+          >
+            <v-select
+              v-model="locale"
+              flat
+              prepend-icon="fa-globe"
+              :items="items"
             />
           </v-card>
         </v-list-item-icon>
@@ -57,16 +101,33 @@
       <span class="overline">{{ $t('tooltips.changeLanguageSystem') }}</span>
     </v-tooltip>
 
-    <v-tooltip bottom nudge-top="5px">
+    <v-tooltip
+      bottom
+      nudge-top="5px"
+    >
       <template #activator="{ on }">
-        <v-list-item-icon v-on="on" class="justify-center mt-0">
-          <v-icon v-if="nightMode" class="mr-3 mt-n1">
+        <v-list-item-icon
+          class="justify-center mt-0"
+          v-on="on"
+        >
+          <v-icon
+            v-if="nightMode"
+            class="mr-3 mt-n1"
+          >
             fa-sun
           </v-icon>
-          <v-icon v-else class="mr-3 mt-n1">
+          <v-icon
+            v-else
+            class="mr-3 mt-n1"
+          >
             fa-moon
           </v-icon>
-          <v-switch v-model="nightMode" inset :color="nightMode ? 'white' : ''" class="mt-4"/>
+          <v-switch
+            v-model="nightMode"
+            inset
+            :color="nightMode ? 'white' : ''"
+            class="mt-4"
+          />
         </v-list-item-icon>
       </template>
       <span class="overline">{{ $t('tooltips.nightMode') }}</span>
@@ -109,32 +170,6 @@ export default {
     ],
   }),
   computed: mapGetters('settings', ['getSettingValueByName', 'getSettingByName']),
-  methods: {
-    ...mapActions('auth', ['callLogout']),
-    ...mapActions('settings', ['saveSetting']),
-  },
-  /**
-   * System setup at the stage of component mounting.
-   */
-  mounted() {
-    const nightMode = this.getSettingValueByName('nightMode');
-    // noinspection JSIncompatibleTypesComparison
-    if (nightMode !== null) {
-      this.$vuetify.theme.dark = nightMode;
-      this.nightMode = nightMode;
-    }
-
-    const locale = this.getSettingValueByName('locale');
-    if (locale) {
-      this.$i18n.locale = locale;
-      this.locale = locale;
-    }
-
-    const maxMenu = this.getSettingValueByName('maxMenu');
-    if (maxMenu) {
-      this.maxMenu = maxMenu;
-    }
-  },
   watch: {
     /**
      * Saving the selected system design mode.
@@ -160,6 +195,32 @@ export default {
     maxMenu() {
       this.saveSetting({name: 'maxMenu', value: this.maxMenu.toString()});
     },
+  },
+  /**
+   * System setup at the stage of component mounting.
+   */
+  mounted() {
+    const nightMode = this.getSettingValueByName('nightMode');
+    // noinspection JSIncompatibleTypesComparison
+    if (nightMode !== null) {
+      this.$vuetify.theme.dark = nightMode;
+      this.nightMode = nightMode;
+    }
+
+    const locale = this.getSettingValueByName('locale');
+    if (locale) {
+      this.$i18n.locale = locale;
+      this.locale = locale;
+    }
+
+    const maxMenu = this.getSettingValueByName('maxMenu');
+    if (maxMenu) {
+      this.maxMenu = maxMenu;
+    }
+  },
+  methods: {
+    ...mapActions('auth', ['callLogout']),
+    ...mapActions('settings', ['saveSetting']),
   },
 };
 </script>

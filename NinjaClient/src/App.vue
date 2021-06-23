@@ -1,12 +1,15 @@
 <template>
   <div id="app">
     <v-app>
-      <the-notification-msg/>
-      <the-progress-bar/>
-      <the-toolbar v-if="user"/>
-      <the-sidebar v-if="user"/>
-      <the-router-view/>
-      <base-dialog v-bind:show="showConfirmResendTokenDialog" v-bind:confirm="confirmDialog">
+      <the-notification-msg />
+      <the-progress-bar />
+      <the-toolbar v-if="user" />
+      <the-sidebar v-if="user" />
+      <the-router-view />
+      <base-dialog
+        :show="showConfirmResendTokenDialog"
+        :confirm="confirmDialog"
+      >
         <template #content>
           {{ $t('dialogs.content.resendToken') }}
         </template>
@@ -43,19 +46,6 @@ export default {
     expiredVerifyToken: '',
   }),
   computed: mapState("auth", {"user": state => state.user}),
-  methods: {
-    ...mapActions("auth",
-        ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail", "callLogout"]),
-    ...mapActions("settings", ["getAllUserSettings"]),
-    /**
-     * Receiving a new verification token for a user.
-     */
-    confirmDialog() {
-      // noinspection JSValidateTypes
-      this.reSendVerificationTokenEmail(this.expiredVerifyToken);
-      this.showConfirmResendTokenDialog = false;
-    },
-  },
   /**
    * Getting user data by jwt token at the mount stage or checking the value of the browser
    * address bar for the presence of various tokens and processing them when switching to
@@ -87,6 +77,19 @@ export default {
         });
       }
     }
+  },
+  methods: {
+    ...mapActions("auth",
+        ["getCurrentUser", "confirmEmail", "reSendVerificationTokenEmail", "callLogout"]),
+    ...mapActions("settings", ["getAllUserSettings"]),
+    /**
+     * Receiving a new verification token for a user.
+     */
+    confirmDialog() {
+      // noinspection JSValidateTypes
+      this.reSendVerificationTokenEmail(this.expiredVerifyToken);
+      this.showConfirmResendTokenDialog = false;
+    },
   },
 };
 </script>

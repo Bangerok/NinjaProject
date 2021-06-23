@@ -1,11 +1,16 @@
 <template>
-  <v-snackbar right top
-              :timeout="3000"
-              v-model="notification.show"
-              :color="notification.color"
+  <v-snackbar
+    v-model="notification.show"
+    right
+    top
+    :timeout="3000"
+    :color="notification.color"
   >
     {{ i18n(notification.text, notification.i18n) }}
-    <v-btn text @click="setNotificationShow">
+    <v-btn
+      text
+      @click="setNotificationShow"
+    >
       {{ $t('buttons.closeBtn') }}
     </v-btn>
   </v-snackbar>
