@@ -8,7 +8,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 /**
  * <p> A class to run the entire spring application. To run, just use the command - mvn spring-boot:
  * run. </p>
- * <p>
+ *
  * @author v.kuznetsov
  * @since 0.0.0
  */
