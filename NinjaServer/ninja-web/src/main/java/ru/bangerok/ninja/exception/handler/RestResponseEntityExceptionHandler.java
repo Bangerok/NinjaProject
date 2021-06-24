@@ -11,8 +11,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.bangerok.ninja.resource.ResourceAlreadyExistException;
-import ru.bangerok.ninja.resource.ResourceNotFoundException;
+import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.rest.payload.response.ApiResponse;
 
 /**

@@ -13,7 +13,6 @@ import org.springframework.security.web.authentication.SimpleUrlAuthenticationSu
 import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.bangerok.ninja.config.properties.JwtProperties;
-import ru.bangerok.ninja.config.properties.Oauth2Properties;
 import ru.bangerok.ninja.exception.request.BadRequestException;
 import ru.bangerok.ninja.security.TokenProvider;
 import ru.bangerok.ninja.service.MessageService;
@@ -31,7 +30,7 @@ public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
   private final MessageService messageService;
   private final TokenProvider tokenProvider;
-  private final Oauth2Properties oauth2Properties;
+  private final JwtProperties jwtProperties;
   private final HttpCookieOauth2AuthorizationRequestRepository
       httpCookieOauth2AuthorizationRequestRepository;
 
@@ -116,7 +115,7 @@ public class Oauth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
    */
   private boolean isAuthorizedRedirectUri(String uri) {
     var clientRedirectUri = URI.create(uri);
-    return oauth2Properties.getAuthorizedRedirectUris()
+    return jwtProperties.getOauth2().getAuthorizedRedirectUris()
         .parallelStream()
         .anyMatch(authorizedRedirectUri -> {
           var authorizedUri = URI.create(authorizedRedirectUri);

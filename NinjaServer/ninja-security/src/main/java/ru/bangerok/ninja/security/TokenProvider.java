@@ -38,12 +38,13 @@ public class TokenProvider {
     final var principalId = ((UserPrincipal) authentication.getPrincipal()).getUser().getId();
     final var currentDate = new Date();
 
+    final var auth = jwtProperties.getAuth();
     return Jwts.builder()
         .setSubject(String.valueOf(principalId))
         .setIssuedAt(currentDate)
         .setExpiration(
-            new Date(currentDate.getTime() + jwtProperties.getTokenExpirationMsec()))
-        .signWith(SignatureAlgorithm.HS512, jwtProperties.getTokenSecret())
+            new Date(currentDate.getTime() + auth.getTokenExpirationMsec()))
+        .signWith(SignatureAlgorithm.HS512, auth.getTokenSecret())
         .compact();
   }
 
@@ -55,7 +56,7 @@ public class TokenProvider {
    */
   public long getUserIdFromToken(String token) {
     var claims = Jwts.parser()
-        .setSigningKey(jwtProperties.getTokenSecret())
+        .setSigningKey(jwtProperties.getAuth().getTokenSecret())
         .parseClaimsJws(token)
         .getBody();
 
@@ -70,7 +71,7 @@ public class TokenProvider {
    */
   public boolean validateToken(String authToken) {
     try {
-      Jwts.parser().setSigningKey(jwtProperties.getTokenSecret())
+      Jwts.parser().setSigningKey(jwtProperties.getAuth().getTokenSecret())
           .parseClaimsJws(authToken);
       return true;
     } catch (SignatureException ex) {

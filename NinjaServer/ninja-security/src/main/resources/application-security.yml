@@ -1,0 +1,6 @@
+app:
+  auth:
+    tokenExpirationMsec: 86400000
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000

@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.resource;
+package ru.bangerok.ninja.exception.resource;
 
 /**
  * <p> An exception class to handle attempts to create an existing resource. Whether it's user,

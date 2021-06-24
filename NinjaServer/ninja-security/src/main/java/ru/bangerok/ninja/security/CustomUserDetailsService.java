@@ -6,8 +6,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 import ru.bangerok.ninja.persistence.dao.UserRepository;
-import ru.bangerok.ninja.resource.ResourceNotFoundException;
 
 /**
  * <p> A service class that allows you to get a user in some way. </p>

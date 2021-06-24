@@ -13,6 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
  * @since 0.0.0
  */
 @SpringBootApplication
+@ConfigurationPropertiesScan("ru.bangerok.ninja.config.properties")
 public class NinjaWebApplication {
 
   public static void main(String[] args) {

@@ -31,6 +31,14 @@
       <artifactId>spring-security-oauth2-jose</artifactId>
     </dependency>
 
+    <!-- Spring Boot: configuration -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+
     <!-- HTTP -->
     <dependency>
       <groupId>org.springframework.boot</groupId>

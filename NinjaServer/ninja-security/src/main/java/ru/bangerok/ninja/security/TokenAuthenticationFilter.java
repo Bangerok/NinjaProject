@@ -13,7 +13,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.bangerok.ninja.resource.ResourceNotFoundException;
+import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
 
 /**
  * <p> The class that is used to read the JWT authentication token from the request, validate it
