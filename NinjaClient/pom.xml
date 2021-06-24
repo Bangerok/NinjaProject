@@ -4,11 +4,61 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
     <artifactId>ninja-project</artifactId>
-    <groupId>bangerok</groupId>
-    <version>0.5.7</version>
+    <groupId>ru.bangerok</groupId>
+    <version>0.5.14</version>
   </parent>
+
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ninja-client</artifactId>
+  <version>0.5.14</version>
   <packaging>pom</packaging>
-  <version>0.5.7</version>
+  <name>ninja-client</name>
+
+  <properties>
+    <!-- Plugins -->
+    <frontend-maven.version>1.12.0</frontend-maven.version>
+    <node.version>v14.17.0</node.version>
+    <npm.version>7.18.1</npm.version>
+  </properties>
+
+  <build>
+    <finalName>NinjaClient</finalName>
+    <plugins>
+      <plugin>
+        <groupId>com.github.eirslett</groupId>
+        <artifactId>frontend-maven-plugin</artifactId>
+        <version>${frontend-maven.version}</version>
+        <executions>
+          <execution>
+            <id>install node and npm</id>
+            <goals>
+              <goal>install-node-and-npm</goal>
+            </goals>
+            <configuration>
+              <nodeVersion>${node.version}</nodeVersion>
+              <npmVersion>${npm.version}</npmVersion>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm install</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>install</arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm run lint</id>
+            <goals>
+              <goal>npm</goal>
+            </goals>
+            <configuration>
+              <arguments>run lint</arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

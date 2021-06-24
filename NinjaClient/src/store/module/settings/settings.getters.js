@@ -35,6 +35,7 @@ export default {
     const userSetting = (state.userSettings || []).find(
         item => item.name === name
     );
+
     return (userSetting || {}) || null;
   }
 };

@@ -1,0 +1,9 @@
+server:
+  port: ${port:9000}
+
+spring:
+  profiles:
+    active:
+      - database
+      - core
+      - security

@@ -1,7 +1,8 @@
 <template>
-  <v-dialog persistent
-            v-model="show"
-            max-width="400"
+  <v-dialog 
+    v-model="show"
+    persistent
+    max-width="400"
   >
     <v-card>
       <header>
@@ -10,7 +11,7 @@
             {{ $t('dialogs.title.confirmation') }}
           </slot>
         </v-card-title>
-        <v-divider/>
+        <v-divider />
       </header>
 
       <main>
@@ -23,25 +24,25 @@
 
       <footer>
         <v-card-actions>
-          <v-spacer/>
+          <v-spacer />
           <slot name="footer">
             <v-btn
-                color="green darken-1"
-                text
-                @click="confirm"
+              color="green darken-1"
+              text
+              @click="confirm"
             >
               {{ $t('buttons.yesBtn') }}
             </v-btn>
 
             <v-btn
-                color="red darken-1"
-                text
-                @click="show = false"
+              color="red darken-1"
+              text
+              @click="show = false"
             >
               {{ $t('buttons.closeBtn') }}
             </v-btn>
           </slot>
-          <v-spacer/>
+          <v-spacer />
         </v-card-actions>
       </footer>
     </v-card>
@@ -55,7 +56,12 @@
 export default {
   name: "BaseDialog",
   props: {
-    confirm: Function,
+    confirm: {
+      type: Function,
+      default: () => {
+        return false;
+      }
+    },
     show: Boolean,
   },
 };

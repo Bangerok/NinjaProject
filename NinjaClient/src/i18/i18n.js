@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
-import messagesEn from "./i18nEn";
-import messagesRu from "./i18nRu";
+import messagesEn from "./messagesEn";
+import messagesRu from "./messagesRu";
 
 Vue.use(VueI18n);
 

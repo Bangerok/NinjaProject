@@ -1,7 +1,10 @@
 <template>
   <v-main class="content text--primary">
-    <transition appear name="slide-fade">
-      <router-view style="margin: 20px"></router-view>
+    <transition
+      appear
+      name="slide-fade"
+    >
+      <router-view style="margin: 20px" />
     </transition>
   </v-main>
 </template>
