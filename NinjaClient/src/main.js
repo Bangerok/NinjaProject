@@ -6,6 +6,7 @@ import router from './router/router';
 import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
+let test;
 
 /**
  * Configuring system-wide settings.
