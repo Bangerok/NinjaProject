@@ -8,9 +8,11 @@ One of the main 2 modules: responsible for the client side of the application.
 
 ### Start-up instructions
 ___
+
 1. First you need to download and install all dependencies with the _**“npm install”**_ command.
 2. After the dependencies are fully downloaded and installed, you can run the client module.
 To do this, run the _**“npm run serve”**_ command at the root of the module.
+3. Go to the browser at: **[http://localhost:3000/](http://localhost:3000/)**.
 
 ### Includes functionality
 ___
@@ -31,3 +33,5 @@ ___
 - Localization via Vue i18n;
 - Working with the server via Axios;
 - Launching the application via Vue Cli.
+
+![img.png](screenshot.png)
