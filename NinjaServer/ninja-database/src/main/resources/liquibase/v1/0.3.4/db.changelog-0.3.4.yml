@@ -1,0 +1,125 @@
+databaseChangeLog:
+  - changeSet:
+      id: db_0.3.4_creating_privileges_table
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    unique: true
+                    primaryKey: true
+                    primaryKeyName: privileges_pkey
+                  name: base_id
+                  type: BIGINT
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValueComputed: now()
+                  name: base_created_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: base_updated_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  constraints:
+                    nullable: false
+                  defaultValue: ACTIVE
+                  name: base_status
+                  type: VARCHAR(255)
+              - column:
+                  constraints:
+                    nullable: false
+                    unique: true
+                  name: name
+                  type: VARCHAR(255)
+            tableName: privileges
+  - changeSet:
+      id: db_0.3.4_creating_link_table_roles_privileges
+      author: v.kuznetsov
+      changes:
+        - createTable:
+            columns:
+              - column:
+                  name: role_id
+                  type: BIGINT
+              - column:
+                  name: privilege_id
+                  type: BIGINT
+            tableName: role_privileges
+  - changeSet:
+      id: db_0.3.4_adding_foreign_keys_for_roles_privileges
+      author: v.kuznetsov
+      changes:
+        - addForeignKeyConstraint:
+            baseColumnNames: privilege_id
+            baseTableName: role_privileges
+            constraintName: fk_role_privileges_privileges
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: privileges
+        - addForeignKeyConstraint:
+            baseColumnNames: role_id
+            baseTableName: role_privileges
+            constraintName: fk_role_privileges_role
+            onDelete: CASCADE
+            onUpdate: RESTRICT
+            referencedColumnNames: base_id
+            referencedTableName: roles
+  - changeSet:
+      id: db_0.3.4_load_data_for_privileges_table
+      author: v.kuznetsov
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: base_id
+                  name: base_id
+                  type: NUMERIC
+              - column:
+                  header: base_created_date
+                  name: base_created_date
+                  type: SKIP
+              - column:
+                  header: base_updated_date
+                  name: base_updated_date
+                  type: SKIP
+              - column:
+                  header: base_status
+                  name: base_status
+                  type: STRING
+              - column:
+                  header: name
+                  name: name
+                  type: STRING
+            commentLineStartsWith: '#'
+            encoding: UTF-8
+            file: data/privileges.csv
+            quotchar: '"'
+            separator: ','
+            tableName: privileges
+            relativeToChangelogFile: true
+  - changeSet:
+      id: db_0.3.4_load_data_for_roles_privileges_link_table
+      author: v.kuznetsov
+      changes:
+        - loadData:
+            columns:
+              - column:
+                  header: role_id
+                  name: role_id
+                  type: NUMERIC
+              - column:
+                  header: privilege_id
+                  name: privilege_id
+                  type: NUMERIC
+            commentLineStartsWith: '#'
+            encoding: UTF-8
+            file: data/role_privileges.csv
+            quotchar: '"'
+            separator: ','
+            tableName: role_privileges
+            relativeToChangelogFile: true

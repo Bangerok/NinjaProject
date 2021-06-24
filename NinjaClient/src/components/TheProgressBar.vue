@@ -1,5 +1,9 @@
 <template>
-  <v-progress-linear indeterminate color="teal" v-if="loading"/>
+  <v-progress-linear
+    v-if="loading"
+    indeterminate
+    color="teal"
+  />
 </template>
 
 <script>

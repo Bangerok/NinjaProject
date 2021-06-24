@@ -1,54 +1,70 @@
 <template>
-  <v-container class="full-height" fluid>
-    <v-layout justify-center align-center>
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="8" md="4">
-          <v-card height="100%" class="elevation-12">
+  <v-container
+    class="full-height"
+    fluid
+  >
+    <v-layout
+      justify-center
+      align-center
+    >
+      <v-row
+        align="center"
+        justify="center"
+      >
+        <v-col
+          cols="12"
+          sm="8"
+          md="4"
+        >
+          <v-card
+            height="100%"
+            class="elevation-12"
+          >
             <v-toolbar flat>
-              <v-spacer/>
+              <v-spacer />
               <v-toolbar-title>{{ $t('pages.auth.register.formName') }}</v-toolbar-title>
-              <v-spacer/>
+              <v-spacer />
             </v-toolbar>
 
             <v-card-text>
               <v-form>
                 <v-text-field
-                    v-model="email"
-                    :label="$t('pages.auth.general.email')"
-                    :error="isError('email')"
-                    :error-messages="errorMessage('email')"
-                    prepend-icon="fa-at"
+                  v-model="email"
+                  :label="$t('pages.auth.general.email')"
+                  :error="isError('email')"
+                  :error-messages="errorMessage('email')"
+                  prepend-icon="fa-at"
                 />
 
                 <v-text-field
-                    v-model="username"
-                    :label="$t('pages.auth.register.username')"
-                    :error="isError('username')"
-                    :error-messages="errorMessage('username')"
-                    prepend-icon="fa-user"
+                  v-model="username"
+                  :label="$t('pages.auth.register.username')"
+                  :error="isError('username')"
+                  :error-messages="errorMessage('username')"
+                  prepend-icon="fa-user"
                 />
 
                 <v-text-field
-                    v-model="password"
-                    :label="$t('pages.auth.general.password')"
-                    :error="isError('password')"
-                    :error-messages="errorMessage('password')"
-                    :error-count="5"
-                    :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
-                    :type="isShowPassword ? 'text' : 'password'"
-                    @click:append="isShowPassword = !isShowPassword"
-                    prepend-icon="fa-lock"
+                  v-model="password"
+                  :label="$t('pages.auth.general.password')"
+                  :error="isError('password')"
+                  :error-messages="errorMessage('password')"
+                  :error-count="5"
+                  :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                  :type="isShowPassword ? 'text' : 'password'"
+                  prepend-icon="fa-lock"
+                  @click:append="isShowPassword = !isShowPassword"
                 />
 
                 <v-text-field
-                    v-model="matchingPassword"
-                    :label="$t('pages.auth.register.matchingPassword')"
-                    :error="isError('PasswordMatches')"
-                    :error-messages="errorMessage('matchingPassword')"
-                    :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
-                    :type="isShowPassword ? 'text' : 'password'"
-                    @click:append="isShowPassword = !isShowPassword"
-                    prepend-icon="fa-lock"
+                  v-model="matchingPassword"
+                  :label="$t('pages.auth.register.matchingPassword')"
+                  :error="isError('PasswordMatches')"
+                  :error-messages="errorMessage('matchingPassword')"
+                  :append-icon="isShowPassword ? 'fa-eye' : 'fa-eye-slash'"
+                  :type="isShowPassword ? 'text' : 'password'"
+                  prepend-icon="fa-lock"
+                  @click:append="isShowPassword = !isShowPassword"
                 />
               </v-form>
             </v-card-text>
@@ -57,19 +73,35 @@
               <v-col class="text-center">
                 <v-row class="flex-column">
                   <v-col>
-                    <v-btn text color="primary" @click="submit">
+                    <v-btn
+                      text
+                      color="primary"
+                      @click="submit"
+                    >
                       {{ $t('buttons.registerBtn') }}
                     </v-btn>
 
-                    <v-btn to="/login" text color="teal">
+                    <v-btn
+                      to="/login"
+                      text
+                      color="teal"
+                    >
                       {{ $t('buttons.backBtn') }}
                     </v-btn>
                   </v-col>
 
                   <v-col class="mb-n4 mt-n5">
-                    <v-divider class="mb-1"/>
-                    <v-btn text href="api/login/google?redirect_uri=http://localhost:3000">
-                      <v-icon color="error" class="mr-2">mdi-google</v-icon>
+                    <v-divider class="mb-1" />
+                    <v-btn
+                      text
+                      href="api/login/google?redirect_uri=http://localhost:3000"
+                    >
+                      <v-icon
+                        color="error"
+                        class="mr-2"
+                      >
+                        mdi-google
+                      </v-icon>
                       {{ $t('pages.auth.register.google') }}
                     </v-btn>
                   </v-col>
