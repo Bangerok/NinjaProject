@@ -1,6 +1,8 @@
 Project Ninja
 =============================
 
+[![Build](https://github.com/Bangerok/NinjaProject/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/Bangerok/NinjaProject/actions/workflows/build-schedule.yml)
+
 ### Description
 ___
 
