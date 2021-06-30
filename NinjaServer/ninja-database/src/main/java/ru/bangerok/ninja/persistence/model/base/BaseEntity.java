@@ -37,6 +37,7 @@ public class BaseEntity implements Serializable {
 
   @Serial
   private static final long serialVersionUID = -7497413594208664990L;
+
   /**
    * Private field that stores information about the id of the record in the database.
    * Automatically generated when saved to the database. No need to pre-assign.

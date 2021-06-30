@@ -46,6 +46,7 @@ public class User extends BaseEntity {
 
   @Serial
   private static final long serialVersionUID = -639429246075727711L;
+
   /**
    * Private field that stores the user's full name.
    */
