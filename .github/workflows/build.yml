@@ -10,6 +10,7 @@ on:
 
 jobs:
   build:
+    name: code checking
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

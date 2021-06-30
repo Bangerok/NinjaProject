@@ -1,5 +1,6 @@
 package ru.bangerok.ninja.event;
 
+import java.io.Serial;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 import ru.bangerok.ninja.event.listener.RegistrationListener;
@@ -14,7 +15,9 @@ import ru.bangerok.ninja.persistence.model.user.User;
 @Getter
 public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
-  private final User user;
+  @Serial
+  private static final long serialVersionUID = -8907250014179158718L;
+  private final transient User user;
   private final String appUrl;
 
   /**
