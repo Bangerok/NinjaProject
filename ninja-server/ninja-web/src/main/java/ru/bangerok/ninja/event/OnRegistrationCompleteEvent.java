@@ -17,7 +17,7 @@ public class OnRegistrationCompleteEvent extends ApplicationEvent {
 
   @Serial
   private static final long serialVersionUID = -8907250014179158718L;
-  private final transient User user;
+  private final User user;
   private final String appUrl;
 
   /**

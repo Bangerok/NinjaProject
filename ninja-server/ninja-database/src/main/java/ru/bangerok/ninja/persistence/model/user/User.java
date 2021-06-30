@@ -3,7 +3,6 @@ package ru.bangerok.ninja.persistence.model.user;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serial;
 import java.time.LocalDateTime;
 import java.util.List;
 import javax.persistence.Column;
@@ -43,9 +42,6 @@ import ru.bangerok.ninja.persistence.model.views.Views;
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity {
-
-  @Serial
-  private static final long serialVersionUID = -639429246075727711L;
 
   /**
    * Private field that stores the user's full name.

@@ -7,8 +7,8 @@ Project Ninja
 ___
 
 Consists of two modules — the client part and the server part:
-1. **[NinjaClient](https://github.com/Bangerok/NinjaProject/tree/master/NinjaClient)** is written in VueJS.
-2. **[NinjaServer](https://github.com/Bangerok/NinjaProject/tree/master/NinjaClient)** is written using 
+1. **[ninja-client](https://github.com/Bangerok/NinjaProject/tree/master/NinjaClient)** is written in VueJS.
+2. **[ninja-server](https://github.com/Bangerok/NinjaProject/tree/master/NinjaClient)** is written using 
    **Spring Boot** and **Java 16**.
 
 ### Instructions for starting the project

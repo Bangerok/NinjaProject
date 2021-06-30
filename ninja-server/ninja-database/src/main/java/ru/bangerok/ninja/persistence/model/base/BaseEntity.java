@@ -2,7 +2,6 @@ package ru.bangerok.ninja.persistence.model.base;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
-import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -34,9 +33,6 @@ import ru.bangerok.ninja.persistence.model.views.Views;
 @ToString(doNotUseGetters = true)
 @MappedSuperclass
 public class BaseEntity implements Serializable {
-
-  @Serial
-  private static final long serialVersionUID = -7497413594208664990L;
 
   /**
    * Private field that stores information about the id of the record in the database.
