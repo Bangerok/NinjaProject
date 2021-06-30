@@ -48,8 +48,6 @@ public class EmailValidator implements ConstraintValidator<ValidEmail, String> {
       return true;
     }
 
-    var pattern = Pattern.compile(EMAIL_PATTERN);
-    var matcher = pattern.matcher(email);
-    return matcher.matches();
+    return email.matches(Pattern.quote(EMAIL_PATTERN));
   }
 }
