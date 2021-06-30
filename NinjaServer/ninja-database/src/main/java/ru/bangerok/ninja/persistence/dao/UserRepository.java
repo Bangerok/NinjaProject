@@ -2,6 +2,7 @@ package ru.bangerok.ninja.persistence.dao;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 import ru.bangerok.ninja.persistence.model.user.User;
 
@@ -21,9 +22,9 @@ public interface UserRepository extends JpaRepository<User, Long> {
    * @param id user ID.
    * @return optional with found user.
    */
-  @SuppressWarnings("NullableProblems")
   @Override
-  Optional<User> findById(Long id);
+  @NonNull
+  Optional<User> findById(@NonNull Long id);
 
   /**
    * Method for finding a user by his email in the database.

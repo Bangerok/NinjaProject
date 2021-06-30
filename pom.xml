@@ -38,6 +38,12 @@
     </developer>
   </developers>
 
+  <properties>
+    <sonar.projectKey>Bangerok_NinjaProject</sonar.projectKey>
+    <sonar.organization>bangerok</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+  </properties>
+
   <profiles>
     <profile>
       <id>all</id>
