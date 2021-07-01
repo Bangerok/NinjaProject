@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<!--suppress HtmlRequiredLangAttribute, CheckEmptyScriptTag -->
-<html xmlns:th="http://www.thymeleaf.org">
-<!--suppress HtmlRequiredTitleElement -->
+<!--suppress CheckEmptyScriptTag, ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+  <title>Confirmation Email Template</title>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
 </head>
 <body>
-<!--/*@thymesVar id="text" type="java.lang.String"*/-->
-<span th:text="${text}"/>
-<!--/*@thymesVar id="token" type="java.lang.String"*/-->
-<a th:href="@{http://localhost:3000(confirmEmailToken=${token})}">
-  <!--/*@thymesVar id="urlName" type="java.lang.String"*/-->
-  <span th:text="${urlName}"/>
-</a>
+  <span th:text="${text}"/>
+  <a th:href="@{http://localhost:3000(confirmEmailToken=${token})}">
+    <span th:text="${urlName}"/>
+  </a>
 </body>
 </html>
