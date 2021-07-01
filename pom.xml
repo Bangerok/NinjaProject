@@ -43,7 +43,7 @@
     <sonar.moduleKey>${artifactId}</sonar.moduleKey>
     <sonar.organization>bangerok</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.java.sources>src/main/java,src/main/resources</sonar.java.sources>
+    <sonar.sources>src/main/java,src/main/resources</sonar.sources>
     <sonar.java.binaries>target/classes</sonar.java.binaries>
   </properties>
 
