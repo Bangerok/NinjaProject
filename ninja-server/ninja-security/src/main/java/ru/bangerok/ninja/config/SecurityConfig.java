@@ -13,6 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.bangerok.ninja.security.CustomUserDetailsService;
 import ru.bangerok.ninja.security.RestAuthenticationEntryPoint;
 import ru.bangerok.ninja.security.TokenAuthenticationFilter;
@@ -67,7 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
         .and()
-        .csrf().disable()
+        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
         .formLogin().disable()
         .httpBasic().disable()
         .exceptionHandling(e -> e.authenticationEntryPoint(new RestAuthenticationEntryPoint()))
@@ -81,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .deleteCookies("JSESSIONID")
             .invalidateHttpSession(true)
             .logoutSuccessHandler(oauth2LogoutSuccessHandler)
+            .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
             .permitAll()
         )
         .oauth2Login(o -> o
