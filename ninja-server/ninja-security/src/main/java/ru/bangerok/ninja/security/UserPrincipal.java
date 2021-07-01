@@ -48,12 +48,12 @@ public class UserPrincipal implements OAuth2User, UserDetails {
    */
   public static UserPrincipal create(User user) {
     var authorities = new ArrayList<GrantedAuthority>();
-    for (var role : user.getRoles()) {
+    user.getRoles().forEach(role -> {
       authorities.add(new SimpleGrantedAuthority(role.getValue().getName()));
-      for (var privilege : role.getPrivileges()) {
-        authorities.add(new SimpleGrantedAuthority(privilege.getName()));
-      }
-    }
+      role.getPrivileges().stream()
+          .map(privilege -> new SimpleGrantedAuthority(privilege.getName()))
+          .forEach(authorities::add);
+    });
 
     return new UserPrincipal(user, authorities);
   }

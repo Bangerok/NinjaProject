@@ -1,6 +1,8 @@
 package ru.bangerok.ninja.util;
 
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +17,9 @@ import org.springframework.util.SerializationUtils;
  * @since 0.3.0
  */
 public class CookieUtils {
+
+  private static final List<String> WHITE_LIST =
+      Arrays.asList("oauth2_auth_request", "redirect_uri");
 
   private CookieUtils() {
     throw new IllegalStateException("Utility class");
@@ -67,15 +72,13 @@ public class CookieUtils {
   public static void deleteCookie(HttpServletRequest request, HttpServletResponse response,
                                   String name) {
     var cookies = request.getCookies();
-    if (cookies != null && cookies.length > 0) {
-      for (var cookie : cookies) {
-        if (cookie.getName().equals(name)) {
-          cookie.setValue("");
-          cookie.setPath("/");
-          cookie.setMaxAge(0);
-          response.addCookie(cookie);
-        }
-      }
+    if (cookies != null && cookies.length > 0 && WHITE_LIST.contains(name)) {
+      Arrays.stream(cookies).filter(cookie -> cookie.getName().equals(name)).forEach(cookie -> {
+        cookie.setValue("");
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+      });
     }
   }
 
