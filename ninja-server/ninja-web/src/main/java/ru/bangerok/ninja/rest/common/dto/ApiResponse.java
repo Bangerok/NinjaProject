@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.rest.payload.response;
+package ru.bangerok.ninja.rest.common.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;

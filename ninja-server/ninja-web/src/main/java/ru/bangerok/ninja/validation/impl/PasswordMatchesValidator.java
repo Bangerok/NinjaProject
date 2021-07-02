@@ -2,7 +2,7 @@ package ru.bangerok.ninja.validation.impl;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
+import ru.bangerok.ninja.rest.controllers.auth.dto.RegisterDto;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
 import ru.bangerok.ninja.validation.annotation.single.Match;
 
@@ -29,7 +29,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
    */
   @Override
   public boolean isValid(Object obj, ConstraintValidatorContext context) {
-    var registerRequest = (RegisterRequest) obj;
+    var registerRequest = (RegisterDto) obj;
     var result = registerRequest.password()
         .equals(registerRequest.matchingPassword());
     if (!result) {

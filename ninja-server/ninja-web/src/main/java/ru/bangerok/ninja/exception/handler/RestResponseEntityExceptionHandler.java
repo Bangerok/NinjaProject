@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ru.bangerok.ninja.exception.resource.ResourceAlreadyExistException;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
-import ru.bangerok.ninja.rest.payload.response.ApiResponse;
+import ru.bangerok.ninja.rest.common.dto.ApiResponse;
 
 /**
  * Exception java class for catching and handling all errors thrown by controllers.

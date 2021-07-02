@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.rest.payload.request;
+package ru.bangerok.ninja.rest.controllers.auth.dto;
 
 /**
  * <p> Payload java record for parsing authorization request data into rest method parameters. </p>
@@ -6,7 +6,7 @@ package ru.bangerok.ninja.rest.payload.request;
  * @author v.kuznetsov
  * @since 0.3.0
  */
-public record LoginRequest(
+public record LoginDto(
     // Private field containing the user's email when authorizing from the client.
     String email,
 

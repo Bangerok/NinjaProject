@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.event.OnRegistrationCompleteEvent;
 import ru.bangerok.ninja.persistence.model.user.User;
 import ru.bangerok.ninja.persistence.model.views.Views;
-import ru.bangerok.ninja.rest.payload.request.LoginRequest;
-import ru.bangerok.ninja.rest.payload.request.RegisterRequest;
-import ru.bangerok.ninja.rest.payload.response.ApiResponse;
+import ru.bangerok.ninja.rest.common.dto.ApiResponse;
+import ru.bangerok.ninja.rest.controllers.auth.dto.LoginDto;
+import ru.bangerok.ninja.rest.controllers.auth.dto.RegisterDto;
 import ru.bangerok.ninja.security.CurrentUser;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.AuthService;
@@ -69,7 +69,7 @@ public class AuthController {
    * @return {@link ApiResponse} with authentication token.
    */
   @PatchMapping("/login")
-  public ApiResponse authenticateUser(@RequestBody LoginRequest loginReq) {
+  public ApiResponse authenticateUser(@RequestBody LoginDto loginReq) {
     var token = authService.creatingTokenForAuthUser(loginReq.email(), loginReq.password());
     return new ApiResponse(token);
   }
@@ -81,7 +81,7 @@ public class AuthController {
    * @return {@link ApiResponse} with information about successful registration.
    */
   @PostMapping("/register")
-  public ApiResponse registerUser(@Valid @RequestBody RegisterRequest regReq) {
+  public ApiResponse registerUser(@Valid @RequestBody RegisterDto regReq) {
     var registered = authService.registerNewUserAccount(
         regReq.email(), regReq.name(), regReq.password()
     );

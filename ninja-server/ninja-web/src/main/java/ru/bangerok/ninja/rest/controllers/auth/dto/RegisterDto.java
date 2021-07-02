@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.rest.payload.request;
+package ru.bangerok.ninja.rest.controllers.auth.dto;
 
 import javax.validation.constraints.NotNull;
 import ru.bangerok.ninja.validation.annotation.PasswordMatches;
@@ -9,11 +9,11 @@ import ru.bangerok.ninja.validation.annotation.single.Match;
 /**
  * <p> Payload java record for parsing registration request data into rest method parameters. </p>
  *
- * @author v.kuznetsov
- * @since 0.3.0
+ * @author v.kuznetsov.
+ * @since 0.3.0.
  */
 @PasswordMatches()
-public record RegisterRequest(
+public record RegisterDto(
     // Private field containing the username when registering from a client.
     @NotNull(message = "errors.invalid.empty.username")
     String name,

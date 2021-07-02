@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.bangerok.ninja.persistence.model.user.UserSetting;
 import ru.bangerok.ninja.persistence.model.views.Views;
+import ru.bangerok.ninja.rest.controllers.user.dto.UserSettingDto;
+import ru.bangerok.ninja.rest.controllers.user.mapper.UserSettingsMapper;
 import ru.bangerok.ninja.security.CurrentUser;
 import ru.bangerok.ninja.security.UserPrincipal;
 import ru.bangerok.ninja.service.AuthService;
@@ -32,6 +34,7 @@ public class UserSettingsController {
 
   private final AuthService userService;
   private final UserSettingService userSettingService;
+  private final UserSettingsMapper mapper;
 
   /**
    * Rest request method called by the client to get the user's application settings.
@@ -48,32 +51,33 @@ public class UserSettingsController {
   /**
    * Rest request method called by the client to save the new setting of the user's application.
    *
-   * @param userSetting   new setting data.
-   * @param userPrincipal setting user.
+   * @param userSettingDto new setting data.
+   * @param userPrincipal  setting user.
    * @return new user setting.
    */
   @PostMapping
   @JsonView(Views.UserSettingsData.class)
   public UserSetting create(
-      @RequestBody UserSetting userSetting,
+      @RequestBody UserSettingDto userSettingDto,
       @CurrentUser UserPrincipal userPrincipal
   ) {
-    return userSettingService.create(userSetting, userService.getCurrentUser(userPrincipal));
+    return userSettingService.create(mapper.toEntity(userSettingDto),
+        userService.getCurrentUser(userPrincipal));
   }
 
   /**
    * Rest request method called by the client to update the setting of the user's application.
    *
    * @param userSettingFromDb old setting data.
-   * @param userSetting       setting new data
+   * @param userSettingDto    setting new data
    * @return updated user setting.
    */
   @PutMapping("/{id}")
   @JsonView(Views.UserSettingsData.class)
   public UserSetting update(
       @PathVariable("id") UserSetting userSettingFromDb,
-      @RequestBody UserSetting userSetting
+      @RequestBody UserSettingDto userSettingDto
   ) {
-    return userSettingService.update(userSettingFromDb, userSetting);
+    return userSettingService.update(userSettingFromDb, mapper.toEntity(userSettingDto));
   }
 }
