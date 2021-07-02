@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<!--suppress CheckEmptyScriptTag, ThymeleafVariablesResolveInspection -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Confirmation Email Template</title>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+</head>
+<body>
+  <span th:text="${text}"/>
+  <a th:href="@{http://localhost:3000(confirmEmailToken=${token})}">
+    <span th:text="${urlName}"/>
+  </a>
+</body>
+</html>
