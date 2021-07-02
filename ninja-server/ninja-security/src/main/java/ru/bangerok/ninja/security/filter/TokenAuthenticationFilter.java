@@ -1,4 +1,4 @@
-package ru.bangerok.ninja.security;
+package ru.bangerok.ninja.security.filter;
 
 import java.io.IOException;
 import javax.servlet.FilterChain;
@@ -13,6 +13,8 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import ru.bangerok.ninja.exception.resource.ResourceNotFoundException;
+import ru.bangerok.ninja.security.CustomUserDetailsService;
+import ru.bangerok.ninja.security.TokenProvider;
 
 /**
  * <p> The class that is used to read the JWT authentication token from the request, validate it

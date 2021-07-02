@@ -13,11 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import ru.bangerok.ninja.security.CustomUserDetailsService;
 import ru.bangerok.ninja.security.RestAuthenticationEntryPoint;
-import ru.bangerok.ninja.security.TokenAuthenticationFilter;
+import ru.bangerok.ninja.security.filter.TokenAuthenticationFilter;
 import ru.bangerok.ninja.security.oauth2.CustomOauth2UserService;
 import ru.bangerok.ninja.security.oauth2.HttpCookieOauth2AuthorizationRequestRepository;
 import ru.bangerok.ninja.security.oauth2.Oauth2AuthenticationFailureHandler;
@@ -69,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
         .and()
-        .csrf().csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()).and()
+        .csrf().disable()
         .formLogin().disable()
         .httpBasic().disable()
         .exceptionHandling(e -> e.authenticationEntryPoint(new RestAuthenticationEntryPoint()))

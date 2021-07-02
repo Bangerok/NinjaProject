@@ -1,5 +1,3 @@
-// noinspection JSValidateJSDoc
-
 import axios from 'axios';
 import store from '../store/store';
 
@@ -14,7 +12,7 @@ const LOADING = "setLoading";
  * @param params request parameters.
  * @param data request data for processing on the server.
  * @param additionalHeaders additional request headers.
- * @return {AxiosPromise} with a response from the server.
+ * @return AxiosPromise with a response from the server.
  */
 function request(method, url, params, data, additionalHeaders) {
   let axiosConfig = {
@@ -64,7 +62,7 @@ function request(method, url, params, data, additionalHeaders) {
  *
  * @param url request address.
  * @param params request parameters.
- * @return {AxiosPromise} with a response from the server.
+ * @return AxiosPromise with a response from the server.
  */
 function get(url, params) {
   return request('get', url, params, null, null);
@@ -76,7 +74,7 @@ function get(url, params) {
  * @param url request address.
  * @param data request data for processing on the server.
  * @param params url params.
- * @return {AxiosPromise} with a response from the server.
+ * @return AxiosPromise with a response from the server.
  */
 function post(url, data, params) {
   data = data || {};
@@ -89,7 +87,7 @@ function post(url, data, params) {
  * @param url request address.
  * @param data request data for processing on the server.
  * @param params url params.
- * @return {AxiosPromise} with a response from the server.
+ * @return AxiosPromise with a response from the server.
  */
 function put(url, data, params) {
   data = data || {};
@@ -102,7 +100,7 @@ function put(url, data, params) {
  * @param url request address.
  * @param data request data for processing on the server.
  * @param params url params.
- * @return {AxiosPromise} with a response from the server.
+ * @return AxiosPromise with a response from the server.
  */
 function patch(url, data, params) {
   data = data || {};

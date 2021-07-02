@@ -5,12 +5,12 @@
   <parent>
     <artifactId>ninja-project</artifactId>
     <groupId>ru.bangerok</groupId>
-    <version>0.5.14</version>
+    <version>0.6.3</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ninja-server</artifactId>
-  <version>0.5.14</version>
+  <version>0.6.3</version>
   <packaging>pom</packaging>
   <name>ninja-server</name>
 
@@ -21,61 +21,11 @@
     <module>ninja-web</module>
   </modules>
 
-  <properties>
-    <!-- Compiler -->
-    <java.version>16</java.version>
-    <maven.compiler.source>${java.version}</maven.compiler.source>
-    <maven.compiler.target>${java.version}</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
-    <!-- Dependencies -->
-    <jsoup.version>1.13.1</jsoup.version>
-    <jjwt.version>0.9.1</jjwt.version>
-    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-    <passay.version>1.0</passay.version>
-    <guava.version>r05</guava.version>
-    <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-    <lombok.version>1.18.20</lombok.version>
-    <jakarta.validation.version>2.0.2</jakarta.validation.version>
-    <jackson-annotation.version>2.12.3</jackson-annotation.version>
-    <validation-api.version>2.0.1.Final</validation-api.version>
-
-    <!-- Plugins -->
-    <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
-    <puppycrawl.checkstyle.version>8.43</puppycrawl.checkstyle.version>
-
-    <!-- Modules -->
-    <ninja.version>0.5.14</ninja.version>
-  </properties>
-
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-checkstyle-plugin</artifactId>
-        <version>${checkstyle-plugin.version}</version>
-        <dependencies>
-          <dependency>
-            <groupId>com.puppycrawl.tools</groupId>
-            <artifactId>checkstyle</artifactId>
-            <version>${puppycrawl.checkstyle.version}</version>
-          </dependency>
-        </dependencies>
-        <configuration>
-          <configLocation>google-check-style.xml</configLocation>
-          <violationSeverity>warning</violationSeverity>
-          <consoleOutput>true</consoleOutput>
-          <includeTestSourceDirectory>true</includeTestSourceDirectory>
-        </configuration>
-        <executions>
-          <execution>
-            <id>validate</id>
-            <phase>validate</phase>
-            <goals>
-              <goal>check</goal>
-            </goals>
-          </execution>
-        </executions>
       </plugin>
     </plugins>
   </build>

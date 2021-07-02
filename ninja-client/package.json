@@ -1,6 +1,6 @@
 {
   "name": "ninja-client",
-  "version": "0.5.14",
+  "version": "0.6.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",

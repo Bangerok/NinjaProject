@@ -5,12 +5,12 @@
   <parent>
     <artifactId>ninja-server</artifactId>
     <groupId>ru.bangerok</groupId>
-    <version>0.5.14</version>
+    <version>0.6.3</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ninja-core</artifactId>
-  <version>0.5.14</version>
+  <version>0.6.3</version>
   <packaging>jar</packaging>
   <name>ninja-core</name>
 
@@ -32,14 +32,12 @@
     <dependency>
       <groupId>org.thymeleaf</groupId>
       <artifactId>thymeleaf-spring5</artifactId>
-      <version>${thymeleaf.version}</version>
     </dependency>
 
     <!-- Ninja modules -->
     <dependency>
       <groupId>ru.bangerok</groupId>
       <artifactId>ninja-database</artifactId>
-      <version>0.5.14</version>
     </dependency>
   </dependencies>
 </project>

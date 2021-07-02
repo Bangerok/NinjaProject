@@ -12,7 +12,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>ru.bangerok</groupId>
   <artifactId>ninja-project</artifactId>
-  <version>0.5.14</version>
+  <version>0.6.3</version>
   <packaging>pom</packaging>
 
   <description>
@@ -38,15 +38,6 @@
     </developer>
   </developers>
 
-  <properties>
-    <sonar.projectKey>Bangerok_NinjaProject</sonar.projectKey>
-    <sonar.moduleKey>${artifactId}</sonar.moduleKey>
-    <sonar.organization>bangerok</sonar.organization>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.sources>src/main/java,src/main/resources</sonar.sources>
-    <sonar.java.binaries>target/classes</sonar.java.binaries>
-  </properties>
-
   <profiles>
     <profile>
       <id>all</id>
@@ -59,4 +50,236 @@
       </modules>
     </profile>
   </profiles>
+
+  <properties>
+    <!-- Ninja Modules -->
+    <ninja-project.version>0.6.3</ninja-project.version>
+
+    <!-- Compiler -->
+    <java.version>16</java.version>
+    <maven.compiler.source>${java.version}</maven.compiler.source>
+    <maven.compiler.target>${java.version}</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!-- Dependencies -->
+    <jsoup.version>1.13.1</jsoup.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+    <passay.version>1.0</passay.version>
+    <guava.version>r05</guava.version>
+    <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
+    <lombok.version>1.18.20</lombok.version>
+    <jakarta.validation.version>2.0.2</jakarta.validation.version>
+    <jackson-annotation.version>2.12.3</jackson-annotation.version>
+    <validation-api.version>2.0.1.Final</validation-api.version>
+
+    <!-- Plugins -->
+    <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
+    <puppycrawl.checkstyle.version>8.43</puppycrawl.checkstyle.version>
+    <mapstruct.version>1.4.2.Final</mapstruct.version>
+    <lombok-mapstruct.version>0.1.0</lombok-mapstruct.version>
+    <frontend-maven.version>1.12.0</frontend-maven.version>
+    <node.version>v14.17.0</node.version>
+    <npm.version>7.18.1</npm.version>
+
+    <!-- Sonar Cloud -->
+    <sonar.projectKey>Bangerok_NinjaProject</sonar.projectKey>
+    <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+    <sonar.organization>bangerok</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.sources>src/main/java,src/main/resources</sonar.sources>
+    <sonar.java.binaries>target/classes</sonar.java.binaries>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Thymeleaf Engine for spring -->
+      <dependency>
+        <groupId>org.thymeleaf</groupId>
+        <artifactId>thymeleaf-spring5</artifactId>
+        <version>${thymeleaf.version}</version>
+      </dependency>
+
+      <!-- Lombok -->
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>${lombok.version}</version>
+      </dependency>
+
+      <!-- Jackson View -->
+      <dependency>
+        <groupId>com.fasterxml.jackson.core</groupId>
+        <artifactId>jackson-annotations</artifactId>
+        <version>${jackson-annotation.version}</version>
+      </dependency>
+
+      <!-- Validation annotation -->
+      <dependency>
+        <groupId>javax.validation</groupId>
+        <artifactId>validation-api</artifactId>
+        <version>${validation-api.version}</version>
+      </dependency>
+
+      <!-- JWT supported -->
+      <dependency>
+        <groupId>io.jsonwebtoken</groupId>
+        <artifactId>jjwt</artifactId>
+        <version>${jjwt.version}</version>
+      </dependency>
+
+      <!-- Hibernate annotations for validation -->
+      <dependency>
+        <groupId>org.hibernate.validator</groupId>
+        <artifactId>hibernate-validator</artifactId>
+        <version>${hibernate-validator.version}</version>
+      </dependency>
+
+      <!-- Password validation -->
+      <dependency>
+        <groupId>org.passay</groupId>
+        <artifactId>passay</artifactId>
+        <version>${passay.version}</version>
+      </dependency>
+
+      <!-- Mapstruct -->
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>org.mapstruct</groupId>
+        <artifactId>mapstruct-processor</artifactId>
+        <version>${mapstruct.version}</version>
+      </dependency>
+
+      <!-- Ninja modules -->
+      <dependency>
+        <groupId>ru.bangerok</groupId>
+        <artifactId>ninja-database</artifactId>
+        <version>${ninja-project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ru.bangerok</groupId>
+        <artifactId>ninja-core</artifactId>
+        <version>${ninja-project.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>ru.bangerok</groupId>
+        <artifactId>ninja-security</artifactId>
+        <version>${ninja-project.version}</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${checkstyle-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${puppycrawl.checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+          <configuration>
+            <configLocation>google-check-style.xml</configLocation>
+            <violationSeverity>warning</violationSeverity>
+            <consoleOutput>true</consoleOutput>
+            <includeTestSourceDirectory>true</includeTestSourceDirectory>
+          </configuration>
+          <executions>
+            <execution>
+              <id>validate</id>
+              <phase>initialize</phase>
+              <goals>
+                <goal>check</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <configuration>
+            <annotationProcessorPaths>
+              <path>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct-processor</artifactId>
+                <version>${mapstruct.version}</version>
+              </path>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+              </path>
+              <path>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok-mapstruct-binding</artifactId>
+                <version>${lombok-mapstruct.version}</version>
+              </path>
+            </annotationProcessorPaths>
+            <compilerArgs>
+              <compilerArg>
+                -Amapstruct.defaultComponentModel=spring
+              </compilerArg>
+            </compilerArgs>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+
+        <plugin>
+          <groupId>com.github.eirslett</groupId>
+          <artifactId>frontend-maven-plugin</artifactId>
+          <version>${frontend-maven.version}</version>
+          <executions>
+            <execution>
+              <id>install node and npm</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>install-node-and-npm</goal>
+              </goals>
+              <configuration>
+                <nodeVersion>${node.version}</nodeVersion>
+                <npmVersion>${npm.version}</npmVersion>
+              </configuration>
+            </execution>
+            <execution>
+              <id>npm install</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>npm</goal>
+              </goals>
+              <configuration>
+                <arguments>install</arguments>
+              </configuration>
+            </execution>
+            <execution>
+              <id>npm run lint</id>
+              <phase>validate</phase>
+              <goals>
+                <goal>npm</goal>
+              </goals>
+              <configuration>
+                <arguments>run lint</arguments>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 </project>

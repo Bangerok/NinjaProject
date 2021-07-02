@@ -1,0 +1,14 @@
+name: Build Schedule
+
+on:
+  schedule:
+    - cron: "0 11 * * *"
+
+jobs:
+  build:
+    name: code checking
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Check with Maven
+      run: mvn -B clean checkstyle:check

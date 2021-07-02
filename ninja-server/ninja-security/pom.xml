@@ -5,12 +5,12 @@
   <parent>
     <artifactId>ninja-server</artifactId>
     <groupId>ru.bangerok</groupId>
-    <version>0.5.14</version>
+    <version>0.6.3</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <artifactId>ninja-security</artifactId>
-  <version>0.5.14</version>
+  <version>0.6.3</version>
   <packaging>jar</packaging>
   <name>ninja-security</name>
 
@@ -38,7 +38,6 @@
       <optional>true</optional>
     </dependency>
 
-
     <!-- HTTP -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -49,14 +48,12 @@
     <dependency>
       <groupId>io.jsonwebtoken</groupId>
       <artifactId>jjwt</artifactId>
-      <version>${jjwt.version}</version>
     </dependency>
 
     <!-- Ninja Modules -->
     <dependency>
       <groupId>ru.bangerok</groupId>
       <artifactId>ninja-core</artifactId>
-      <version>0.5.14</version>
     </dependency>
   </dependencies>
 </project>
