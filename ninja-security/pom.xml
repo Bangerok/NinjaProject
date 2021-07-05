@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>ninja-server</artifactId>
+    <groupId>ru.bangerok.enterprise</groupId>
+    <version>0.6.4</version>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>ninja-security</artifactId>
+  <version>0.6.4</version>
+  <name>NinjaSecurity</name>
+  <description>Security module.</description>
+
+  <dependencies>
+    <!-- Spring Boot Security -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-client</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.security</groupId>
+      <artifactId>spring-security-oauth2-jose</artifactId>
+    </dependency>
+
+    <!-- Spring Boot: configuration -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-configuration-processor</artifactId>
+      <optional>true</optional>
+    </dependency>
+
+    <!-- HTTP -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-tomcat</artifactId>
+    </dependency>
+
+    <!-- JWT supported -->
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt</artifactId>
+    </dependency>
+
+    <!-- Ninja Modules -->
+    <dependency>
+      <groupId>ru.bangerok.enterprise</groupId>
+      <artifactId>ninja-core</artifactId>
+    </dependency>
+  </dependencies>
+</project>

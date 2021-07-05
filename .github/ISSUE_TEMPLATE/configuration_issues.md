@@ -1,9 +1,9 @@
 ---
 name: Configuration issues
 about: Various suggestions for configuring the project
-title: "[CONFIGURATION] Short name of the new configuration."
-labels: configuration
-assignees: Bangerok
+title: '[CONFIGURATION] Short name of the new configuration.'
+labels: 'type: maintenance, status: backlog, priority: low'
+assignees: 'Bangerok'
 
 ---
 

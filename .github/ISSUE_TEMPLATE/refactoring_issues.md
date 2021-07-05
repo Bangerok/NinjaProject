@@ -1,8 +1,8 @@
 ---
 name: Refactoring issues
 about: Optimization, improvement and formatting of the code
-title: "[REFACTORING] Short title of refactoring works."
-labels: refactoring
+title: '[REFACTORING] Short title of refactoring works.'
+labels: 'type: maintenance, status: backlog, priority: low'
 assignees: Bangerok
 
 ---

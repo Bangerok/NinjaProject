@@ -1,9 +1,9 @@
 ---
 name: Feature request
 about: Suggest an idea for this project
-title: "[FEATURE] Functionality short name."
-labels: development
-assignees: Bangerok
+title: '[FEATURE] Functionality short name.'
+labels: 'type: enhancement, status: backlog, priority: low'
+assignees: 'Bangerok'
 
 ---
 

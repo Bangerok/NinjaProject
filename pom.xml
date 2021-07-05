@@ -10,26 +10,23 @@
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>ru.bangerok</groupId>
-  <artifactId>ninja-project</artifactId>
-  <version>0.6.3</version>
+  <groupId>ru.bangerok.enterprise</groupId>
+  <artifactId>ninja-server</artifactId>
+  <version>0.6.4</version>
   <packaging>pom</packaging>
-
-  <description>
-    The main POM file that connects and configures the ninja project modules.
-  </description>
-
-  <url>https://github.com/Bangerok/NinjaProject</url>
+  <name>NinjaServer</name>
+  <description>The main POM file that connects and configures the ninja project modules.</description>
+  <url>https://github.com/NinjaEnterprise/Ninja</url>
 
   <organization>
-    <name>Vladislav Kuznetsov</name>
+    <name>Ninja Enterprise</name>
     <url>https://vk.com/vladislav_kuznetsov</url>
   </organization>
 
   <developers>
     <developer>
-      <id>bangerok</id>
-      <name>Vladislav</name>
+      <id>Bangerok</id>
+      <name>Vladislav [Bangerok] Kuznetsov</name>
       <email>kuznetsov.v.a.work@gmail.com</email>
       <timezone>+3</timezone>
       <roles>
@@ -45,15 +42,17 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
-        <module>ninja-client</module>
-        <module>ninja-server</module>
+        <module>ninja-core</module>
+        <module>ninja-database</module>
+        <module>ninja-security</module>
+        <module>ninja-web</module>
       </modules>
     </profile>
   </profiles>
 
   <properties>
     <!-- Ninja Modules -->
-    <ninja-project.version>0.6.3</ninja-project.version>
+    <ninja-project.version>0.6.4</ninja-project.version>
 
     <!-- Compiler -->
     <java.version>16</java.version>
@@ -78,14 +77,13 @@
     <puppycrawl.checkstyle.version>8.43</puppycrawl.checkstyle.version>
     <mapstruct.version>1.4.2.Final</mapstruct.version>
     <lombok-mapstruct.version>0.1.0</lombok-mapstruct.version>
-    <frontend-maven.version>1.12.0</frontend-maven.version>
-    <node.version>v14.17.0</node.version>
-    <npm.version>7.18.1</npm.version>
+    <spring-boot.version>2.5.1</spring-boot.version>
+    <maven-compiler.version>3.8.1</maven-compiler.version>
 
     <!-- Sonar Cloud -->
-    <sonar.projectKey>Bangerok_NinjaProject</sonar.projectKey>
+    <sonar.projectKey>NinjaEnterprise_Ninja</sonar.projectKey>
     <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
-    <sonar.organization>bangerok</sonar.organization>
+    <sonar.organization>ninja-enterprise</sonar.organization>
     <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     <sonar.sources>src/main/java,src/main/resources</sonar.sources>
     <sonar.java.binaries>target/classes</sonar.java.binaries>
@@ -157,19 +155,19 @@
 
       <!-- Ninja modules -->
       <dependency>
-        <groupId>ru.bangerok</groupId>
+        <groupId>ru.bangerok.enterprise</groupId>
         <artifactId>ninja-database</artifactId>
         <version>${ninja-project.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>ru.bangerok</groupId>
+        <groupId>ru.bangerok.enterprise</groupId>
         <artifactId>ninja-core</artifactId>
         <version>${ninja-project.version}</version>
       </dependency>
 
       <dependency>
-        <groupId>ru.bangerok</groupId>
+        <groupId>ru.bangerok.enterprise</groupId>
         <artifactId>ninja-security</artifactId>
         <version>${ninja-project.version}</version>
       </dependency>
@@ -177,6 +175,14 @@
   </dependencyManagement>
 
   <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-checkstyle-plugin</artifactId>
+        <version>${checkstyle-plugin.version}</version>
+      </plugin>
+    </plugins>
+
     <pluginManagement>
       <plugins>
         <plugin>
@@ -234,50 +240,6 @@
               </compilerArg>
             </compilerArgs>
           </configuration>
-        </plugin>
-
-        <plugin>
-          <groupId>org.springframework.boot</groupId>
-          <artifactId>spring-boot-maven-plugin</artifactId>
-        </plugin>
-
-        <plugin>
-          <groupId>com.github.eirslett</groupId>
-          <artifactId>frontend-maven-plugin</artifactId>
-          <version>${frontend-maven.version}</version>
-          <executions>
-            <execution>
-              <id>install node and npm</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>install-node-and-npm</goal>
-              </goals>
-              <configuration>
-                <nodeVersion>${node.version}</nodeVersion>
-                <npmVersion>${npm.version}</npmVersion>
-              </configuration>
-            </execution>
-            <execution>
-              <id>npm install</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>npm</goal>
-              </goals>
-              <configuration>
-                <arguments>install</arguments>
-              </configuration>
-            </execution>
-            <execution>
-              <id>npm run lint</id>
-              <phase>validate</phase>
-              <goals>
-                <goal>npm</goal>
-              </goals>
-              <configuration>
-                <arguments>run lint</arguments>
-              </configuration>
-            </execution>
-          </executions>
         </plugin>
       </plugins>
     </pluginManagement>

@@ -1,9 +1,9 @@
 ---
 name: Docs issues
 about: Improvements or additions to documentation
-title: "[DOCS] Short title of works on project documentation."
-labels: documentation
-assignees: Bangerok
+title: '[DOCS] Short title of works on project documentation.'
+labels: 'type: maintenance, status: backlog, priority: low'
+assignees: 'Bangerok'
 
 ---
 
